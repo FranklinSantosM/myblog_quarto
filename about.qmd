@@ -1,0 +1,47 @@
+---
+title: "Franklin Santos"
+image: fsm.png
+about:
+  template: trestles
+  image-width: 10em
+  image-shape: round 
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://facebook.com/agritechbolivia
+    - icon: facebook
+      text: facebook
+      href: https://linkedin.com
+    - icon: github
+      text: Github
+      href: https://github.com/FranklinSantosM
+---
+<style>
+body {
+text-align: justify}
+</style>
+
+## **Biography**
+Franklin Santos is plant and data scientist. He develops research work and data analysis. His research interests include plant and animal breeding. He directs a group of researchers and he is a undergraduate thesis advisor for the Agronomic Engineering Career at the Public University of El Alto.
+
+## **Education**
+* **Statistics with R** | 2020
+  - Duke University | [Coursera Specialization](http://coursera.org/verify/specialization/S4SMJQVSK3FV)
+* **Animal Breeding and Genetics** | 2020
+  - Wageningen University & Research | [edX Professional Certificate](https://credentials.edx.org/credentials/4988fa30ecac452593dfd51f9a0ab994/)
+* **Data Science** | 2020
+  - Johns Hopkins University | [Coursera Specialization](http://coursera.org/verify/specialization/RYJW3XRY9FYD)
+* **Agronomist Engineer, B.Sc.** | 2017
+  - El Alto Public University
+
+## **Experience**
+* **INIAF** | Research Technician | January 2018 - June 2020
+* **GAM-Licoma** | Director of Agricultural Development | June 2016 - Dec 2017
+* **INE** | Municipal Census Chief | August 2013 - November 2013
+
+## **Interests**
+* **Plant and Animal Breeding**
+* **Mentoring**
+* **Data Science**
+* **R programming**
+

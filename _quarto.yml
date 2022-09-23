@@ -1,0 +1,28 @@
+project:
+  type: website
+
+website:
+  title: "Franklin Santos"
+  site-url: https://www.franklinsantos.com
+  description: "Data Scientis"
+  navbar:
+    right:
+      - text: "About"
+        href: about.html
+      - text: "CV"
+        href: cv.pdf
+      - text: "Blog"
+        href: index.html
+      - icon: github
+        href: https://github.com/FranklinSantosM
+      - icon: twitter
+        href: https://twitter.com/FranklinSantosM
+      - icon: rss
+        href: index.xml
+format:
+  html:
+    theme: solar
+    css: styles.css
+
+editor: visual
+
