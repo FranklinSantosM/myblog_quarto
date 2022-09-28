@@ -23,6 +23,12 @@ format:
   html:
     theme: solar
     css: styles.css
-
+rss:
+  full_content: true
+collections:
+  posts:
+    share: [twitter, facebook, linkedin]
+    citation: true
+    feed_items_max: 10
 editor: visual
 
