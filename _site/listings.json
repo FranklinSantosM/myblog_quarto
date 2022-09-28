@@ -1,18 +1,12 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/Blog.html",
     "items": [
       "/posts/componentes_principales/index.html",
       "/posts/anova/index.html",
-      "/posts/Analisis_correspondencia/index.html"
-    ]
-  },
-  {
-    "listing": "/Blog.html",
-    "items": [
-      "/posts/anova/index.html",
       "/posts/Analisis_correspondencia/index.html",
       "/about.html",
+      "/posts/tidyexam/index.html",
       "/index.html"
     ]
   }
