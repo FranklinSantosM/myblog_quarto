@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.franklinsantos.com/posts/post-with-code/index.html</loc>
-    <lastmod>2022-09-28T12:19:03.043Z</lastmod>
+    <loc>https://www.franklinsantos.com/posts/Analisis_correspondencia/index.html</loc>
+    <lastmod>2022-09-28T19:04:36.350Z</lastmod>
   </url>
   <url>
-    <loc>https://www.franklinsantos.com/posts/welcome/index.html</loc>
-    <lastmod>2022-09-28T12:19:04.017Z</lastmod>
+    <loc>https://www.franklinsantos.com/posts/anova/index.html</loc>
+    <lastmod>2022-09-28T18:58:29.008Z</lastmod>
   </url>
   <url>
     <loc>https://www.franklinsantos.com/index.html</loc>
-    <lastmod>2022-09-28T12:19:04.388Z</lastmod>
+    <lastmod>2022-09-28T19:10:31.724Z</lastmod>
   </url>
   <url>
     <loc>https://www.franklinsantos.com/about.html</loc>
-    <lastmod>2022-09-28T12:19:04.705Z</lastmod>
+    <lastmod>2022-09-28T18:58:29.686Z</lastmod>
   </url>
   <url>
     <loc>https://www.franklinsantos.com/Blog.html</loc>
-    <lastmod>2022-09-28T12:19:05.026Z</lastmod>
+    <lastmod>2022-09-28T18:58:30.011Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.franklinsantos.com/posts/componentes_principales/index.html</loc>
+    <lastmod>2022-09-28T19:10:31.256Z</lastmod>
   </url>
 </urlset>

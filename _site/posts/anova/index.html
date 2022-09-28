@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Franklin Santos">
+<meta name="dcterms.date" content="2020-11-15">
+<meta name="description" content="La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.">
+
+<title>Franklin Santos - Análisis de Varianza y Prueba de Promedios en R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Franklin Santos</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv.pdf">CV</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Blog</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/FranklinSantosM"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/FranklinSantosM"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Análisis de Varianza y Prueba de Promedios en R</h1>
+                  <div>
+        <div class="description">
+          <p>La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.</p>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">ANOVA</div>
+                <div class="quarto-category">Post hoc</div>
+                <div class="quarto-category">Inferencial Statistic</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <a href="https://franklinsantos.com">Franklin Santos</a> <a href="https://orcid.org/0000-0002-7509-2910" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              AgriTech Bolivia
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 15, 2020</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>El análisis de varianza es una prueba estadística para determinar si dos o más medias poblacionales son diferentes entre si. En otras palabras, se usa para comparar dos o más grupos para ver si son significativamente diferentes.</p>
+<p>En el resto del post lo comentaremos desde un punto de vista más práctico y en particular abordaremos los siguientes puntos:</p>
+<ul>
+<li>el objetivo del análisis de varianza y cuándo debe usarse</li>
+<li>cómo realizar el ANVA en R</li>
+<li>cómo interpretar los resultados del ANVA</li>
+<li>comprender la noción de prueba de promedios e interpretar los resultados</li>
+<li>cómo visualizar los resultados de ANVA y pruebas de promedio</li>
+</ul>
+</section>
+<section id="datos" class="level2">
+<h2 class="anchored" data-anchor-id="datos">Datos</h2>
+<p>El dato que se utilizará es <code>iris</code>, que se encuentra en la base de datos de R. Estos datos como tratamientos tienen tres especies (<code>setosa</code>, <code>versicolor</code> y <code>virginica</code>) y cuatro variables (<code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code> y <code>Petal.Width</code>) cuantitativas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#paquetes R a utilizar</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easyanova)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La librería de <code>easyanova</code> es un paquete para realizar análisis de experimentos agrícolas y animales. Las funciones de esta librería son fáciles de usar. Realiza análisis en varios diseños, con datos balanceados y no balanceados.</p>
+<p>Salida de datos a utilizar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#datos</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# … with 140 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inspección de datos</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Sepal.Width, <span class="at">color =</span> Species) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(p)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-ce796eba51cdec99cccc" style="width:100%;height:464px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ce796eba51cdec99cccc">{"x":{"data":[{"x":[0.955489985272288,0.69596754796803,0.872744095139205,1.37154724691063,1.18982841782272,1.18485031872988,1.07471461687237,0.671208545938134,0.796806747838855,1.09080755598843,0.715368576161563,1.10857377462089,1.16407545655966,1.00408339891583,0.960473902523518,1.24924752898514,0.929630785994232,0.965769836120307,0.873710967600346,1.05325581096113,0.722965094447136,1.19477898329496,0.732604693621397,0.956151522882283,1.39326435122639,0.870359304361045,0.795355080068111,1.17964635770768,1.07724730297923,1.3198099186644,0.846006971411407,0.728493247553706,1.08080704305321,1.07816332317889,1.18180160243064,1.02003907039762,1.29900873694569,0.79017689768225,0.690972563065589,0.653491246700287,1.26049577575177,0.835418589785695,0.675010156445205,0.683341466076672,1.28932571411133,1.06717066187412,0.797120808809996,0.617270628735423,1.03881051000208,0.849415248073637],"y":[3.50631731214002,3.03980338184163,3.21122351035476,3.06824044775218,3.63001142516732,3.91672568790615,3.42521944174543,3.42616622693837,2.88369217891246,3.09003512697294,3.68191356532276,3.43563361115754,2.99185226591304,2.97288805555552,3.98301889160648,4.38861818104982,3.90696409191936,3.51318989928812,3.78660068098456,3.78366718813777,3.36926085611805,3.68536903968081,3.57256909949705,3.27290266914293,3.40810191255063,3.02165879512206,3.3640852092579,3.51783674919978,3.4154662810266,3.23335809247568,3.07524983061478,3.37908992584795,4.0917848127149,4.23337861601263,3.08799442054704,3.17795460540801,3.53284207388759,3.58455985810608,2.98055924767628,3.37001699445769,3.53115693381056,2.27903330076486,3.1826905830577,3.52962481902912,3.77750206869096,3.0158647843264,3.83037431018427,3.21043754372746,3.71425311816856,3.29103707348928],"text":["Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.6<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.9<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 2.9<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.7<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.9<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.7<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.6<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.3<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.6<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 2.3<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.7<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.3<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.98575436025858,1.65704542603344,1.69643614850938,1.88404482025653,1.79750677160919,2.32684564273804,2.0777678783983,2.37648473586887,1.62379084415734,1.87750804964453,2.27994336057454,2.06168957278132,2.1593329584226,2.35229795239866,1.61459012553096,2.25976224914193,2.27587170954794,2.22675132192671,1.85142534039915,2.343130579032,2.18243980668485,2.09703622534871,2.35282220784575,2.37990624327213,1.92539692092687,1.85408688466996,1.85520363114774,2.00358609389514,2.25428008548915,1.64764319453388,1.87784673944116,2.10629031900316,1.72818292677402,2.08411338180304,1.67119427248836,1.70073127727956,1.72040430326015,2.29853434115648,1.86684809494764,1.92762438151985,1.64678645189852,1.7544084765017,1.66083756908774,1.76239741202444,1.99948426485062,2.03867296241224,2.23486524950713,2.29505056161433,2.2780677171424,2.18210489097983],"y":[3.22673038149253,3.21740653986111,3.11246656320989,2.31395376263186,2.81461090203375,2.7715633392334,3.26894200617447,2.37512286137789,2.87120203921571,2.67804366024211,2.00165280859917,3.03360419228673,2.21060016524047,2.91426240833476,2.8617695113644,3.12927222000435,2.98976560164243,2.69149581743404,2.20722408877686,2.51943185236305,3.17729272313416,2.79292995044962,2.50693609600887,2.80453233862296,2.88101563656703,2.96651865307242,2.82820373006165,3.02139394303784,2.91122639821842,2.62594658061862,2.4161018198356,2.43595328439027,2.70208153298125,2.67285722168163,3.03371463483199,3.39820732880384,3.09429406447336,2.33641918918118,2.98153216639534,2.46690946148708,2.6315272217989,2.96977794157341,2.62984454257414,2.2778191251494,2.7097911686264,2.98477831603959,2.93264201844111,2.88861168203875,2.48453970937058,2.82303074650466],"text":["Species: versicolor<br />Sepal.Width: 3.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.1<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.1<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.6<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.1<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.6<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.6<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3.31285714171827,2.96917729191482,3.12584995962679,3.03489196468145,2.91164683084935,3.02871746439487,3.23502848669887,2.8387076633051,3.13417286574841,2.88790512364358,2.96452687084675,2.66100040748715,3.23082562536001,3.26379421446472,2.82367673106492,2.78372948337346,3.36439338531345,3.18961681779474,3.01165460590273,2.62015309631825,2.99721660185605,3.16076059751213,2.82472273241729,3.21496488675475,3.12446528244764,3.33240485824645,3.06299204565585,3.04099519737065,2.99668236542493,2.87690150272101,2.89335476253182,3.32206505872309,3.10044552125037,2.89112205728888,3.08990203253925,3.13904165718704,2.65614640507847,2.98130898699164,2.67316546346992,2.8970636934042,2.68859927561134,3.19041553400457,3.22391232866794,3.08675300162286,2.6807563258335,2.89315888341516,2.88883519656956,3.03150648195297,2.82114773932844,3.30126214101911],"y":[3.29702186102048,2.71418977934867,2.97998535593972,2.86967911580577,2.99293436808512,2.99792596561834,2.50288478374481,2.92031901147217,2.46463713280857,3.57038165098056,3.21803815329447,2.70059397779405,3.00064153965563,2.51488465702161,2.8024927120842,3.16376272052526,3.01438315687701,3.76381353907287,2.63757625982165,2.18149897512049,3.23106089988723,2.83001978378743,2.76637466538697,2.67490342603996,3.29247707050294,3.20540515540168,2.76055101186037,3.03242176936939,2.82961036030203,3.0015026877448,2.8062324882485,3.80438729433343,2.76052807467058,2.76543769592419,2.56257939739153,2.97139225639403,3.39768541567028,3.08581962963566,3.02142047701403,3.12112854130566,3.06640320904553,3.10401457170025,2.68075296983123,3.20875245833769,3.32209550116211,2.9787341620028,2.50897728884593,3.03706670355052,3.38377638354897,3.03615347370505],"text":["Species: virginica<br />Sepal.Width: 3.3<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.9<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.9<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.6<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.6<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.3<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.6<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.4<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.3<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.4<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":43.1050228310502},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["setosa","versicolor","virginica"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["setosa","versicolor","virginica"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.88230453997664,4.50796644967236],"tickmode":"array","ticktext":["2.0","2.5","3.0","3.5","4.0","4.5"],"tickvals":[2,2.5,3,3.5,4,4.5],"categoryorder":"array","categoryarray":["2.0","2.5","3.0","3.5","4.0","4.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Sepal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1c672f0bc001":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"1c672f0bc001","visdat":{"1c672f0bc001":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="objetivo-del-anva" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-del-anva">Objetivo del ANVA</h2>
+<p>Como se mencionó en la introducción, el ANVA se usa para comparar grupos (en la práctica, 3 o más grupos). De manera más general, se utiliza para:</p>
+<ul>
+<li>estudiar si las mediciones son similares en diferentes modalidades (también llamadas niveles o tratamientos en el contexto de ANVA) de una variable categórica</li>
+<li>comparar el impacto de los diferentes niveles de una variable categórica sobre una variable cuantitativa</li>
+<li>explicar una variable cuantitativa basada en una variable cualitativa</li>
+</ul>
+</section>
+<section id="supuestos-subyacentes-de-anva" class="level2">
+<h2 class="anchored" data-anchor-id="supuestos-subyacentes-de-anva">Supuestos subyacentes de ANVA</h2>
+<p>Como ocurre con muchas pruebas estadísticas, hay algunas suposiciones que deben cumplirse para poder interpretar los resultados. Cuando no se cumplen uno o varios supuestos, aunque técnicamente es posible realizar estas pruebas, sería incorrecto interpretar los resultados y confiar en las conclusiones.</p>
+<section id="tipo-de-variable" class="level3">
+<h3 class="anchored" data-anchor-id="tipo-de-variable">1. Tipo de variable</h3>
+<p>Las variables dependientes <code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code> y <code>Petal.Width</code> es una variable <strong>cuantitativa</strong> y la variable independiente <code>Species</code> es <strong>cualitativa</strong> (con 3 niveles correspondientes a las 3 especies). Así que tenemos una combinación de los dos tipos de variables y se cumple este supuesto.</p>
+</section>
+<section id="independencia" class="level3">
+<h3 class="anchored" data-anchor-id="independencia">2. Independencia</h3>
+<p>Se asume la independencia de las observaciones ya que los datos se han recopilado de una parte de la población seleccionada al azar y las mediciones dentro y entre las 3 muestras no están relacionadas.</p>
+<p>El supuesto de independencia se verifica con mayor frecuencia con base en el diseño del experimento y en el buen control de las condiciones experimentales, como es el caso aquí. Sin embargo, si realmente desea probarlo de manera más formal, puede probarlo mediante una prueba estadística: la prueba de Durbin-Watson (en R: <code>durbinWatsonTest(res_lm)</code> donde <code>res_lm</code> es un modelo lineal). La hipótesis nula de esta prueba especifica un coeficiente de autocorrelación = 0, mientras que la hipótesis alternativa especifica un coeficiente de autocorrelación ≠ 0.</p>
+</section>
+<section id="normalidad" class="level3">
+<h3 class="anchored" data-anchor-id="normalidad">3. Normalidad</h3>
+<p>Recuerde que la <strong>normalidad</strong> de los residuos se puede probar visualmente mediante un histograma y un gráfico QQ, y/o formalmente mediante una prueba de normalidad (prueba de Shapiro-Wilk, por ejemplo).</p>
+<p>Antes de verificar el supuesto de normalidad, primero debemos calcular el ANVA. Luego guardamos los resultados en <code>res_aov</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>res_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Sepal.Width <span class="sc">~</span> Species,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ahora podemos comprobar la normalidad visualmente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)) <span class="co"># combine plots</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(res_aov<span class="sc">$</span>residuals)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ-plot</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(res_aov<span class="sc">$</span>residuals,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="cn">FALSE</span> <span class="co"># id = FALSE to remove point identification</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>A partir del histograma y el gráfico QQ anteriores, ya podemos ver que el supuesto de normalidad parece cumplirse. De hecho, el histograma forma aproximadamente una curva de campana, lo que indica que los residuos siguen una distribución normal. Además, los puntos en las gráficas QQ siguen aproximadamente la línea recta y la mayoría de ellos están dentro de las bandas de confianza, lo que también indica que los residuos siguen aproximadamente una distribución normal.</p>
+<p>Algunos investigadores se detienen aquí y asumen que se cumple la normalidad, mientras que otros también prueban la suposición a través de una prueba estadística formal. Es su elección probarlo <em>(i)</em> solo visualmente, <em>(ii)</em> solo a través de una prueba de normalidad, o <em>(iii)</em> tanto visualmente como a través de una prueba de normalidad. Sin embargo, tenga en cuenta los dos puntos siguientes:</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>ANVA es bastante robusto a pequeñas desviaciones de la normalidad. Esto significa que no es un problema (desde la perspectiva de la interpretación de los resultados de ANVA) si un pequeño número de puntos se desvía ligeramente de la normalidad,</li>
+<li>Las pruebas de normalidad son a veces bastante conservadoras, lo que significa que la hipótesis nula de normalidad puede rechazarse debido a una desviación limitada de la normalidad. Este es especialmente el caso con muestras grandes, ya que la potencia de la prueba aumenta con el tamaño de la muestra.</li>
+</ol>
+</blockquote>
+<p>En la práctica, se tiende a preferir el (i) enfoque visual solamente, pero nuevamente, esto es una cuestión de elección personal y también depende del contexto del análisis. Tambien, puede utilizar la prueba de Shapiro-Wilk o la prueba de Kolmogorov-Smirnov, entre otras.</p>
+</section>
+<section id="igualdad-de-varianzas---homogeneidad" class="level3">
+<h3 class="anchored" data-anchor-id="igualdad-de-varianzas---homogeneidad">4. Igualdad de varianzas - homogeneidad</h3>
+<p>Suponiendo que los residuos siguen una distribución normal, ahora es el momento de comprobar si las varianzas son iguales entre especies o no. El resultado tendrá un impacto en si usamos el ANVA o la prueba de Welch.</p>
+<p>Esto se puede verificar nuevamente visualmente, a través de una gráfica de caja o gráfica de puntos, o más formalmente a través de una prueba estadística (la prueba de Levene, entre otras).</p>
+<p>Visualmente tenemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Width <span class="sc">~</span> Species,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dotplot</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dotplot</span>(Sepal.Width <span class="sc">~</span> Species,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Tanto la gráfica de boxplot como la gráfica de puntos muestran una variación similar para las diferentes especies. En el boxplot, esto se puede ver por el hecho de que las cajas y los bigotes tienen un tamaño comparable para todas las especies. Hay un par de valores atípicos como lo muestran los puntos fuera de los bigotes, pero esto no cambia el hecho de que la dispersión es más o menos la misma entre las diferentes especies.</p>
+<p>En la gráfica de puntos, esto se puede ver por el hecho de que los puntos para las 3 especies tienen más o menos el mismo rango, un signo de la dispersión y, por lo tanto, la varianza es similar.</p>
+<p>Al igual que el supuesto de normalidad, si cree que el enfoque visual no es suficiente, puede probar formalmente la igualdad de las varianzas con una prueba de <em>Levene</em> o de <em>Bartlett</em>. Observe que la prueba de Levene es menos sensible a las desviaciones de la distribución normal que la prueba de Bartlett.</p>
+<p>Las hipótesis nula y alternativa para ambas pruebas son:</p>
+<ul>
+<li>H0: las variaciones son iguales</li>
+<li>H1: al menos una varianza es diferente</li>
+</ul>
+<p>En R, la prueba de Levene se puede realizar gracias a la función <code>leveneTest()</code> del paquete <code>{car}</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's test</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(Sepal.Width <span class="sc">~</span> Species,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+       Df F value Pr(&gt;F)
+group   2  0.5902 0.5555
+      147               </code></pre>
+</div>
+</div>
+<p>Siendo el <em>p</em>-valor mayor que el nivel de significancia de 0.05, no rechazamos la hipótesis nula, por lo que no podemos rechazar la hipótesis de que las varianzas son iguales entre especies (<em>p</em>-valor = 0.556).</p>
+<p>Este resultado también está en línea con el enfoque visual, por lo que la homogeneidad de las variaciones se cumple tanto visual como formalmente.</p>
+</section>
+</section>
+<section id="análisis-de-varianza-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-de-varianza-en-r">Análisis de varianza en R</h2>
+<p>El ANVA puede ayudarnos a hacer inferencias sobre la población dada la muestra en cuestión y ayudarnos a responder la pregunta de investigación “¿Existe diferencia en ancho de sépalo para las 3 especies?”.</p>
+<p>El ANVA en R se puede realizar de varias formas, de las cuales tres se presentan a continuación:</p>
+<p>a). Con la función <code>oneway.test()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># primer metodo:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(Sepal.Width <span class="sc">~</span> Species,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span> <span class="co"># asumiendo varianzas iguales</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-way analysis of means
+
+data:  Sepal.Width and Species
+F = 49.16, num df = 2, denom df = 147, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>b). Con las funciones de <code>summary()</code> y <code>aov()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2nd method:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>res_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Sepal.Width <span class="sc">~</span> Species,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+Species       2  11.35   5.672   49.16 &lt;2e-16 ***
+Residuals   147  16.96   0.115                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Como puede ver en los dos resultados anteriores, la estadística de prueba (F = en el primer método y el valor F en el segundo) y el <em>p</em>-valor (<em>p</em>-valor en el primer método y Pr (&gt; F) en el segundo) son exactamente iguales para ambos métodos, lo que significa que en caso de variaciones iguales, los resultados y las conclusiones no cambiarán.</p>
+<p>La ventaja del primer método es que es fácil cambiar del ANVA (utilizado cuando las variaciones son iguales) a la prueba de Welch (utilizado cuando las variaciones son desiguales). Esto se puede hacer reemplazando <code>nvar.equal = TRUE</code> por <code>var.equal = FALSE</code>, como se presenta a continuación:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(Sepal.Width <span class="sc">~</span> Species,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">FALSE</span> <span class="co"># asumiendo variaciones desiguales</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-way analysis of means (not assuming equal variances)
+
+data:  Sepal.Width and Species
+F = 45.012, num df = 2.000, denom df = 97.402, p-value = 1.433e-14</code></pre>
+</div>
+</div>
+<p>Sin embargo, la ventaja del segundo método es que:</p>
+<ul>
+<li>Se imprime la tabla ANVA completa (con grados de libertad, cuadrados medios, etc.), lo que puede ser de interés en algunos casos (teóricos).</li>
+<li>los resultados del ANVA (<code>res_aov</code>) se pueden guardar para su uso posterior (especialmente útil para pruebas de promedio)</li>
+</ul>
+<section id="interpretaciones-de-los-resultados-del-anva" class="level3">
+<h3 class="anchored" data-anchor-id="interpretaciones-de-los-resultados-del-anva">Interpretaciones de los resultados del ANVA</h3>
+<p>Dado que el p-valor es menor que 0.05, rechazamos la hipótesis nula, por lo que rechazamos la hipótesis de que todas las medias son iguales. Por tanto, podemos concluir que al menos una especie es diferente a las otras en términos del ancho de sépalo (<em>p</em>-valor &lt;2.2e-16).</p>
+</section>
+<section id="que-sigue" class="level3">
+<h3 class="anchored" data-anchor-id="que-sigue">¿Que sigue?</h3>
+<p>Si <strong>no se rechaza la hipótesis nula</strong> (<em>p</em>-valor ≥ 0,05), significa que no rechazamos la hipótesis de que todos los grupos son iguales. El ANVA más o menos se detiene aquí. Por supuesto, se pueden realizar otros tipos de análisis, pero, dados los datos disponibles, no pudimos probar que al menos un grupo fuera diferente, por lo que generalmente no avanzamos más con el ANVA.</p>
+<p>Por el contrario, <em>si y solo si</em> se <strong>rechaza la hipótesis nula</strong> (como es nuestro caso ya que el <em>p</em>-valor &lt; 0.05), probamos que al menos un grupo es diferente. Podemos decidir detenernos aquí si solo estamos interesados en probar si todas las especies son iguales en términos de ancho de sépalo.</p>
+<p>Pero la mayoría de las veces, cuando demostramos gracias a un ANVA que al menos un grupo es diferente, también nos interesa saber cuál es diferente. Para probar esto, necesitamos usar otros tipos de prueba, denominados pruebas de promedio o pruebas de comparación múltiple por pares. Esta familia de pruebas estadísticas es el tema de las siguientes secciones.</p>
+</section>
+</section>
+<section id="pruebas-de-promedio-en-r-y-su-interpretación" class="level2">
+<h2 class="anchored" data-anchor-id="pruebas-de-promedio-en-r-y-su-interpretación">Pruebas de promedio en R y su interpretación</h2>
+<p>Las pruebas de promedio son una familia de pruebas estadísticas, por lo que hay varias. Las más utilizadas son las pruebas <strong>Tukey HSD</strong> y <strong>Dunnett</strong>:</p>
+<ul>
+<li>Tukey HSD se utiliza para comparar <strong>todos los grupos</strong> entre sí (por lo que todas las posibles comparaciones de 2 grupos).</li>
+<li>Dunnett se utiliza para hacer comparaciones con un <strong>grupo de referencia</strong>. Por ejemplo, considere 2 grupos de tratamiento y un grupo de control. Si solo desea comparar los 2 grupos de tratamiento con respecto al grupo de control y no desea comparar los 2 grupos de tratamiento entre sí, se prefiere la prueba de Dunnett.</li>
+</ul>
+<p>Ambas pruebas se presentan en las siguientes secciones.</p>
+<section id="prueba-de-tukey-hsd" class="level3">
+<h3 class="anchored" data-anchor-id="prueba-de-tukey-hsd">Prueba de Tukey HSD</h3>
+<p>En nuestro caso, dado que no existe una especie de “referencia” y nos interesa comparar todas las especies, vamos a utilizar la prueba de Tukey HSD.</p>
+<p>En R, la prueba de Tukey HSD se realiza de la siguiente manera. Aquí es donde el <em>segundo método</em> para realizar el ANVA resulta útil porque los resultados (<code>res_aov</code>) se reutilizan para la prueba de promedios:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba de Tukey HSD:</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>post_test <span class="ot">&lt;-</span> <span class="fu">glht</span>(res_aov,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">Species =</span> <span class="st">"Tukey"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(post_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: aov(formula = Sepal.Width ~ Species, data = iris)
+
+Linear Hypotheses:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+versicolor - setosa == 0    -0.65800    0.06794  -9.685  &lt; 1e-04 ***
+virginica - setosa == 0     -0.45400    0.06794  -6.683  &lt; 1e-04 ***
+virginica - versicolor == 0  0.20400    0.06794   3.003  0.00871 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Adjusted p values reported -- single-step method)</code></pre>
+</div>
+</div>
+<p>En el resultado de la prueba Tukey HSD, nos interesa la tabla que se muestra después de las <code>Hipótesis lineales</code>: más precisamente, en la primera y última columna de la tabla. La primera columna muestra las comparaciones que se han realizado; la última columna (<code>Pr(&gt;|t|)</code>) muestra los <em>p</em>-valores ajustados para cada comparación (con la hipótesis nula siendo los dos grupos iguales y la hipótesis alternativa siendo los dos grupos diferentes).</p>
+<p>Son estos <em>p</em>-valores ajustados los que se utilizan para probar si dos grupos son significativamente diferentes o no. En nuestro ejemplo, probamos:</p>
+<ol type="1">
+<li>versicolor vs setosa (línea <code>versicolor - setosa == 0</code>)</li>
+<li>virginica vs setosa (línea <code>virginica - setosa == 0</code>)</li>
+<li>virginica vs versicolor (línea <code>virginica - versicolor == 0</code>)</li>
+</ol>
+<p>Los tres p-valores son menores que 0.05, por lo que rechazamos la hipótesis nula para todas las comparaciones, lo que significa que todas las especies son <strong>significativamente diferentes</strong> en términos de ancho de sépalo.</p>
+<p>Tenga en cuenta que la prueba Tukey HSD también se puede realizar en R con la función <code>TukeyHSD()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(res_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = Sepal.Width ~ Species, data = iris)
+
+$Species
+                       diff         lwr        upr     p adj
+versicolor-setosa    -0.658 -0.81885528 -0.4971447 0.0000000
+virginica-setosa     -0.454 -0.61485528 -0.2931447 0.0000000
+virginica-versicolor  0.204  0.04314472  0.3648553 0.0087802</code></pre>
+</div>
+</div>
+<p>Con este código, es la columna <code>p adj</code> (también la última columna) la que interesa. Tenga en cuenta que las conclusiones son las mismas que las anteriores: todas las especies son significativamente diferentes en términos de ancho de sépalo.</p>
+</section>
+</section>
+<section id="visualización-de-anva-y-pruebas-de-promedio" class="level2">
+<h2 class="anchored" data-anchor-id="visualización-de-anva-y-pruebas-de-promedio">Visualización de ANVA y pruebas de promedio</h2>
+<p>Para realizar de forma más fácil un análisis de varianza, se puede usar la librería <code>easyanova</code> para analizar diferentes diseños experimentales.</p>
+<section id="análisis-de-varianza-con-easyanova" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-de-varianza-con-easyanova">Análisis de varianza con <code>easyanova</code></h3>
+<p>Para proceder con ANVA los datos de <code>iris</code> se selecciona y ordena para dar uso con el paquete <code>easyanova</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fsdata <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Species, Sepal.Width)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(fsdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 2
+   Species Sepal.Width
+   &lt;fct&gt;         &lt;dbl&gt;
+ 1 setosa          3.5
+ 2 setosa          3  
+ 3 setosa          3.2
+ 4 setosa          3.1
+ 5 setosa          3.6
+ 6 setosa          3.9
+ 7 setosa          3.4
+ 8 setosa          3.4
+ 9 setosa          2.9
+10 setosa          3.1
+# … with 140 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Análisis de varianza para DCA</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> <span class="fu">ea1</span>(<span class="at">data =</span> fsdata, <span class="co"># Base de datos</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">design =</span> <span class="dv">1</span>, <span class="co"># Diseño experimental: 1=DCA, 2=DBCA, etc.</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="co"># Probabilidad estadística</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>r1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`Analysis of variance`
+            df type I SS mean square F value    p&gt;F
+treatments   2   11.3449      5.6725   49.16 &lt;0.001
+Residuals  147   16.9620      0.1154       -      -
+
+$Means
+   treatment  mean standard.error tukey snk duncan t scott_knott
+1     setosa 3.428          0.048     a   a      a a           a
+2  virginica 2.974          0.048     b   b      b b           b
+3 versicolor 2.770          0.048     c   c      c c           c
+
+$`Multiple comparison test`
+                    pair contrast p(tukey) p(snk) p(duncan)   p(t)
+1     setosa - virginica    0.454   0.0000 0.0000    0.0000 0.0000
+2    setosa - versicolor    0.658   0.0000 0.0000    0.0000 0.0000
+3 virginica - versicolor    0.204   0.0087 0.0031    0.0031 0.0031
+
+$`Residual analysis`
+$`Residual analysis`$`residual analysis`
+                               values
+p.value Shapiro-Wilk test      0.3230
+p.value Bartlett test          0.3515
+coefficient of variation (%)  11.1100
+first value most discrepant   42.0000
+second value most discrepant  16.0000
+third value most discrepant  118.0000
+
+$`Residual analysis`$residuals
+     1      2      3      4      5      6      7      8      9     10     11 
+ 0.072 -0.428 -0.228 -0.328  0.172  0.472 -0.028 -0.028 -0.528 -0.328  0.272 
+    12     13     14     15     16     17     18     19     20     21     22 
+-0.028 -0.428 -0.428  0.572  0.972  0.472  0.072  0.372  0.372 -0.028  0.272 
+    23     24     25     26     27     28     29     30     31     32     33 
+ 0.172 -0.128 -0.028 -0.428 -0.028  0.072 -0.028 -0.228 -0.328 -0.028  0.672 
+    34     35     36     37     38     39     40     41     42     43     44 
+ 0.772 -0.328 -0.228  0.072  0.172 -0.428 -0.028  0.072 -1.128 -0.228  0.072 
+    45     46     47     48     49     50     51     52     53     54     55 
+ 0.372 -0.428  0.372 -0.228  0.272 -0.128  0.430  0.430  0.330 -0.470  0.030 
+    56     57     58     59     60     61     62     63     64     65     66 
+ 0.030  0.530 -0.370  0.130 -0.070 -0.770  0.230 -0.570  0.130  0.130  0.330 
+    67     68     69     70     71     72     73     74     75     76     77 
+ 0.230 -0.070 -0.570 -0.270  0.430  0.030 -0.270  0.030  0.130  0.230  0.030 
+    78     79     80     81     82     83     84     85     86     87     88 
+ 0.230  0.130 -0.170 -0.370 -0.370 -0.070 -0.070  0.230  0.630  0.330 -0.470 
+    89     90     91     92     93     94     95     96     97     98     99 
+ 0.230 -0.270 -0.170  0.230 -0.170 -0.470 -0.070  0.230  0.130  0.130 -0.270 
+   100    101    102    103    104    105    106    107    108    109    110 
+ 0.030  0.326 -0.274  0.026 -0.074  0.026  0.026 -0.474 -0.074 -0.474  0.626 
+   111    112    113    114    115    116    117    118    119    120    121 
+ 0.226 -0.274  0.026 -0.474 -0.174  0.226  0.026  0.826 -0.374 -0.774  0.226 
+   122    123    124    125    126    127    128    129    130    131    132 
+-0.174 -0.174 -0.274  0.326  0.226 -0.174  0.026 -0.174  0.026 -0.174  0.826 
+   133    134    135    136    137    138    139    140    141    142    143 
+-0.174 -0.174 -0.374  0.026  0.426  0.126  0.026  0.126  0.126  0.126 -0.274 
+   144    145    146    147    148    149    150 
+ 0.226  0.326  0.026 -0.474  0.026  0.426  0.026 
+
+$`Residual analysis`$`standardized residuals`
+          1           2           3           4           5           6 
+ 0.21339641 -1.26852308 -0.67575529 -0.97213918  0.50978030  1.39893200 
+          7           8           9          10          11          12 
+-0.08298749 -0.08298749 -1.56490698 -0.97213918  0.80616420 -0.08298749 
+         13          14          15          16          17          18 
+-1.26852308 -1.26852308  1.69531589  2.88085148  1.39893200  0.21339641 
+         19          20          21          22          23          24 
+ 1.10254810  1.10254810 -0.08298749  0.80616420  0.50978030 -0.37937139 
+         25          26          27          28          29          30 
+-0.08298749 -1.26852308 -0.08298749  0.21339641 -0.08298749 -0.67575529 
+         31          32          33          34          35          36 
+-0.97213918 -0.08298749  1.99169979  2.28808369 -0.97213918 -0.67575529 
+         37          38          39          40          41          42 
+ 0.21339641  0.50978030 -1.26852308 -0.08298749  0.21339641 -3.34321036 
+         43          44          45          46          47          48 
+-0.67575529  0.21339641  1.10254810 -1.26852308  1.10254810 -0.67575529 
+         49          50          51          52          53          54 
+ 0.80616420 -0.37937139  1.27445076  1.27445076  0.97806686 -1.39300432 
+         55          56          57          58          59          60 
+ 0.08891517  0.08891517  1.57083466 -1.09662042  0.38529907 -0.20746873 
+         61          62          63          64          65          66 
+-2.28215601  0.68168296 -1.68938822  0.38529907  0.38529907  0.97806686 
+         67          68          69          70          71          72 
+ 0.68168296 -0.20746873 -1.68938822 -0.80023652  1.27445076  0.08891517 
+         73          74          75          76          77          78 
+-0.80023652  0.08891517  0.38529907  0.68168296  0.08891517  0.68168296 
+         79          80          81          82          83          84 
+ 0.38529907 -0.50385263 -1.09662042 -1.09662042 -0.20746873 -0.20746873 
+         85          86          87          88          89          90 
+ 0.68168296  1.86721855  0.97806686 -1.39300432  0.68168296 -0.80023652 
+         91          92          93          94          95          96 
+-0.50385263  0.68168296 -0.50385263 -1.39300432 -0.20746873  0.68168296 
+         97          98          99         100         101         102 
+ 0.38529907  0.38529907 -0.80023652  0.08891517  0.96621151 -0.81209188 
+        103         104         105         106         107         108 
+ 0.07705981 -0.21932408  0.07705981  0.07705981 -1.40485967 -0.21932408 
+        109         110         111         112         113         114 
+-1.40485967  1.85536320  0.66982761 -0.81209188  0.07705981 -1.40485967 
+        115         116         117         118         119         120 
+-0.51570798  0.66982761  0.07705981  2.44813099 -1.10847578 -2.29401137 
+        121         122         123         124         125         126 
+ 0.66982761 -0.51570798 -0.51570798 -0.81209188  0.96621151  0.66982761 
+        127         128         129         130         131         132 
+-0.51570798  0.07705981 -0.51570798  0.07705981 -0.51570798  2.44813099 
+        133         134         135         136         137         138 
+-0.51570798 -0.51570798 -1.10847578  0.07705981  1.26259540  0.37344371 
+        139         140         141         142         143         144 
+ 0.07705981  0.37344371  0.37344371  0.37344371 -0.81209188  0.66982761 
+        145         146         147         148         149         150 
+ 0.96621151  0.07705981 -1.40485967  0.07705981  1.26259540  0.07705981 </code></pre>
+</div>
+</div>
+<p>En la salida se puede observar el resultado de <code>análisis de varianza</code>, <code>prueba de promedios</code> y <code>comparación múltiple de medias</code>. Estas salidas son muy fáciles de obtener y poder interpretar las mismas. Asimismo, se puede verificar la <code>normalidad</code> y <code>coeficiente de variación</code> de los datos.</p>
+</section>
+<section id="visualización-de-la-prueba-de-promedios" class="level3">
+<h3 class="anchored" data-anchor-id="visualización-de-la-prueba-de-promedios">Visualización de la prueba de promedios</h3>
+<p>Si está interesado en incluir resultados de ANVA y pruebas de promedio directamente en los boxplot, aquí hay un fragmento de código que puede ser de su interés:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#paquete para p-valor en la visualización de prueba de promedios</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> iris</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Editar desde aquí</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">names</span>(dat) <span class="sc">==</span> <span class="st">"Species"</span>) <span class="co">#variable de agrupación</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">names</span>(dat) <span class="sc">==</span> <span class="st">"Sepal.Width"</span>) </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#variables para la prueba de promedios</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>          <span class="co">#| names(dat) == "Sepal.Length"</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>          <span class="co">#| names(dat) == "Petal.Length"</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>          <span class="co">#| names(dat) == "Petal.Width")</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>method1 <span class="ot">&lt;-</span> <span class="st">"anova"</span> <span class="co"># Una de "anova" o "kruskal.test"</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>method2 <span class="ot">&lt;-</span> <span class="st">"t.test"</span> <span class="co"># Una de "wilcox.test" o "t.test"</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>my_comparisons <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"setosa"</span>, <span class="st">"versicolor"</span>), </span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(<span class="st">"setosa"</span>, <span class="st">"virginica"</span>), </span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(<span class="st">"versicolor"</span>, <span class="st">"virginica"</span>)) </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co"># comparaciones para pruebas de promedio</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Editar hasta aquí</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit at your own risk</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> y) {</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> x) {</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">ggboxplot</span>(dat,</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">colnames</span>(dat[j]), <span class="at">y =</span> <span class="fu">colnames</span>(dat[i]),</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="fu">colnames</span>(dat[j]),</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend =</span> <span class="st">"none"</span>,</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">palette =</span> <span class="st">"npg"</span>,</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">add =</span> <span class="st">"jitter"</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>      p <span class="sc">+</span> <span class="fu">stat_compare_means</span>(<span class="fu">aes</span>(</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> <span class="fu">paste0</span>(..method.., <span class="st">", p-value = "</span>, ..p.format..)),</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">method =</span> method1, <span class="at">label.y =</span> <span class="fu">max</span>(dat[, i], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> my_comparisons, </span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> method2, <span class="at">label =</span> <span class="st">"p.format"</span>) </span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>      <span class="co"># remove if p-value of ANOVA or Kruskal-Wallis test &gt;= alpha</span></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Otra opción de gráfica para observar la significancia entre las medias de cada par de especies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparisons</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> fsdata <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise_t_test</span>(</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    Sepal.Width <span class="sc">~</span> Species, <span class="at">pool.sd =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.adjust.method =</span> <span class="st">"none"</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization: box plots with p-values</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> pwc <span class="sc">%&gt;%</span> <span class="fu">add_xy_position</span>(<span class="at">x =</span> <span class="st">"Species"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggboxplot</span>(fsdata, <span class="at">x =</span> <span class="st">"Species"</span>, <span class="at">y =</span> <span class="st">"Sepal.Width"</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"Species"</span>, </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend =</span> <span class="st">"none"</span>, </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">add =</span> <span class="st">"jitter"</span>) <span class="sc">+</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_pvalue_manual</span>(pwc, <span class="at">hide.ns =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
+<p>La figura de prueba de promedios es muy buena opción para incluir en la sección de resultados de los reportes de investigación. La figura incluye el resultado de p-valor del análisis de varianza, además, p-valor para la comparación de medias entre especies o tratamientos de la investigación.</p>
+</section>
+<section id="referencias" class="level2">
+<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
+<ol type="1">
+<li>R bloggers 2020. <a href="https://www.r-bloggers.com/2020/10/anova-in-r/">ANOVA in R</a></li>
+<li>Soetewey A. 2020. <a href="https://towardsdatascience.com/how-to-do-a-t-test-or-anova-for-many-variables-at-once-in-r-and-communicate-the-results-in-a-6defaa712e5">How to do a t-test or ANOVA for more than one variable at once in R</a></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
