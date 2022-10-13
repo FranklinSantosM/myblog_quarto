@@ -124,5 +124,12 @@
     "title": "Posts",
     "section": "",
     "text": "El análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.\n\n\n\n\n\n\nDec 15, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\nLa figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.\n\n\n\n\n\n\nNov 15, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\nAnálisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R.\n\n\n\n\n\n\nNov 7, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\n\n\n\n\nEs un ejemplo de caso extraido del libro R4DS.\n\n\n\n\n\n\nOct 31, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Franklin Santos",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\nBiplot\n\n\nComponentes Principales\n\n\nCorrelation\n\n\n\nEl análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables…\n\n\n\nFranklin Santos\n\n\nDec 15, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nANOVA\n\n\nPost hoc\n\n\nInferencial Statistic\n\n\n\nLa figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.\n\n\n\nFranklin Santos\n\n\nNov 15, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nChi-cuadrado\n\n\nBiplot\n\n\nComponentes Principales\n\n\n\nAnálisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate…\n\n\n\nFranklin Santos\n\n\nNov 7, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Science\n\n\nTidy Data\n\n\nTidyverse\n\n\n\nEs un ejemplo de caso extraido del libro R4DS.\n\n\n\nFranklin Santos\n\n\nOct 31, 2020\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

@@ -9,5 +9,14 @@
       "/posts/tidyexam/index.html",
       "/index.html"
     ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/componentes_principales/index.html",
+      "/posts/anova/index.html",
+      "/posts/Analisis_correspondencia/index.html",
+      "/posts/tidyexam/index.html"
+    ]
   }
 ]
