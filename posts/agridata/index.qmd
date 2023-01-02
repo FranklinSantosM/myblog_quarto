@@ -1,0 +1,296 @@
+---
+title: "Análisis de datos experimentales agrícolas"
+description: |
+  Uso de datos agrícolas y metodologias básicas para un tesista o investigador despues de haber culminado la etapa de campo.
+categories: [agridata, data science, bioinformatic]
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: AgriTech Bolivia
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2023-01-01"
+image: featured.png
+citation: true
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+# Introducción
+El análisis de datos es una etapa esencial en el proceso de investigación y consiste en examinar y analizar los datos recopilados de manera detallada para extraer información y obtener conclusiones relevantes en función a los objetivos de la investigación. Para realizar el análisis de datos, se pueden utilizar diferentes herramientas y técnicas, generalmente se construyen tablas y figuras. Estos resultados son usados para tomar decisiones y formular conclusiones sobre los datos, y también pueden ser utilizados para mejorar y optimizar procesos y sistemas. El análisis de datos es importante ya que permite a los investigadores obtener una visión más profunda y detallada de los datos y tomar decisiones más informadas y precisas.
+
+La etapa de análisis de datos puede resultar un reto difícil para un recien egresado o tesista. Esto debido a la falta de experiencia o conocimiento en el uso de herramientas y técnicas de análisis de datos. Debido a ello, queremos facilitar algunas herramientas de análisis, al mismo tiempo, se pretende que los interesados puedan entrenarse en el uso de R. Ya que esta herramienta estadística ofrece un sin fin de paquetes que nos ayudan a realizar los análisis de manera sencilla pero de mucha categoría científica.
+
+# Análisis de datos
+
+## Librerias
+
+```{r}
+#| warning: false
+#| echo: false
+library(tidyverse)
+library(metan)
+library(flextable)
+library(kableExtra)
+```
+
+
+## Base de datos
+
+Para esta oportunidad daremos uso de la base de datos de `iris`. Estos datos estarán disponibles al momento de instalar R.
+
+```{r}
+#| echo: false
+#datos originales
+head(iris)
+data = iris %>% # Asignando a una variable
+  dplyr::select("Species", #Ordenando los datos
+                everything())
+head(data)
+```
+
+## Análisis descriptivo
+
+Generalmente se puede presentar en una tabla los resultados descriptivos.
+
+```{r}
+#| echo: false
+desc_stat(data,
+          stats = c("mean, se, kurt, skew, min, max")) %>%
+  kbl()%>%
+  kable_paper()%>%
+  scroll_box(width = "500px", height = "200px")
+```
+
+La otra opción podría ser una figura `boxplot`
+
+```{r}
+#| echo: false
+p1 = ggplot(data = data,
+       aes(x=Species,
+           y=Sepal.Length,
+           color=Species)) +
+  geom_boxplot() +
+  geom_jitter() +
+  stat_summary(fun = "mean", geom = "point", color = "black") +
+  theme_classic() +
+  theme(legend.position = "") +
+  labs(x="Especies",
+       y="Longitud de sépalo (mm)") 
+  
+p2 = ggplot(data = data,
+       aes(x=Species,
+           y=Sepal.Width,
+           color=Species)) +
+  geom_boxplot() +
+  geom_jitter() +
+  stat_summary(fun = "mean", geom = "point", color = "black") +
+  theme_classic() +
+  theme(legend.position = "") +
+  labs(x="Especies",
+       y="Ancho de sépalo (mm)") 
+  
+p3 = ggplot(data = data,
+       aes(x=Species,
+           y=Petal.Length,
+           color=Species)) +
+  geom_boxplot() +
+  geom_jitter() +
+  stat_summary(fun = "mean", geom = "point", color = "black") +
+  theme_classic() +
+  theme(legend.position = "") +
+  labs(x="Especies",
+       y="Longitud de Pétalo (mm)") 
+
+p4 = ggplot(data = data,
+       aes(x=Species,
+           y=Petal.Width,
+           color=Species)) +
+  geom_boxplot() +
+  geom_jitter() +
+  stat_summary(fun = "mean", geom = "point", color = "black") +
+  theme_classic() +
+  theme(legend.position = "") +
+  labs(x="Especies",
+       y="Ancho de pétalo (mm)") 
+
+arrange_ggplot(p1, p2, p3, p4,
+               ncol = 2,
+               tag_levels = "a")
+```
+
+## Análisis de varianza
+
+
+```{r}
+#| echo: false
+#Assign column names
+cols = names(data)[2:ncol(data)]
+
+```
+
+Generalmente en la mayoría de las tesis se presenta cada ANOVA para cada variable, la cual no es muy redundante en todo el documento. Además, en las revistas científicas de impacto, este tipo de tablas no es permitido si se tiene varias variables.
+
+```{r}
+#| echo: false
+#Analysis of variance model
+aov.model = lapply(cols, FUN = function(x)
+  aov(reformulate(termlabels = "Species",
+                  response = x),
+      data = data))
+anova(aov.model[[2]])
+```
+
+```{r}
+#| echo: false
+# print df, MS and P-value
+final1 = anova(aov.model[[1]])[,c(1,3,5)]
+
+# Getting rownames
+rnames = rownames(final1)
+
+#setting column names
+colnames(final1) = c("DF", "MS", "P-value")
+colnames(final1)[2] = cols[1]
+
+# Rounding values to 2 decimal place
+final1 = as.data.frame(round(final1, digits = 2))
+
+# Assign asterisks according to p values
+final1$sign[final1$`P-value` < 0.05] = "*"
+final1$sign[final1$`P-value` < 0.01] = "**"
+final1$sign[final1$`P-value` > 0.05] = "ns"
+
+# Merge MS and significance column together
+final1[[2]] = paste(final1[[2]], ifelse(is.na(final1[[4]]), "", final1[[4]]))
+
+# Delete extra column from anova
+final1 = final1[-c(3,4)]%>%
+  rownames_to_column(var = "FV")%>%
+  as_tibble()
+
+```
+
+
+```{r}
+#| echo: false
+# print df, MS and P-value
+final = anova(aov.model[[2]])[,c(1,3,5)]
+
+# Getting rownames
+rnames = rownames(final)
+
+#setting column names
+colnames(final) = c("DF", "MS", "P-value")
+colnames(final)[2] = cols[2]
+
+# Rounding values to 2 decimal place
+final = as.data.frame(round(final, digits = 2))
+
+# Assign asterisks according to p values
+final$sign[final$`P-value` < 0.05] = "*"
+final$sign[final$`P-value` < 0.01] = "**"
+final$sign[final$`P-value` > 0.05] = "ns"
+
+# Merge MS and significance column together
+final[[2]] = paste(final[[2]], ifelse(is.na(final[[4]]), "", final[[4]]))
+
+# Delete extra column from anova
+final = final[-c(3,4)]%>%
+  rownames_to_column(var = "FV")%>%
+  as_tibble()
+
+```
+
+```{r}
+#| echo: false
+# print df, MS and P-value
+final3 = anova(aov.model[[3]])[,c(1,3,5)]
+
+# Getting rownames
+rnames = rownames(final3)
+
+#setting column names
+colnames(final3) = c("DF", "MS", "P-value")
+colnames(final3)[2] = cols[3]
+
+# Rounding values to 2 decimal place
+final3 = as.data.frame(round(final3, digits = 2))
+
+# Assign asterisks according to p values
+final3$sign[final3$`P-value` < 0.05] = "*"
+final3$sign[final3$`P-value` < 0.01] = "**"
+final3$sign[final3$`P-value` > 0.05] = "ns"
+
+# Merge MS and significance column together
+final3[[2]] = paste(final3[[2]], ifelse(is.na(final3[[4]]), "", final3[[4]]))
+
+# Delete extra column from anova
+final3 = final3[-c(3,4)]%>%
+  rownames_to_column(var = "FV")%>%
+  as_tibble()
+
+```
+
+
+```{r}
+#| echo: false
+# print df, MS and P-value
+final4 = anova(aov.model[[4]])[,c(1,3,5)]
+
+# Getting rownames
+rnames = rownames(final4)
+
+#setting column names
+colnames(final4) = c("DF", "MS", "P-value")
+colnames(final4)[2] = cols[4]
+
+# Rounding values to 2 decimal place
+final4 = as.data.frame(round(final4, digits = 2))
+
+# Assign asterisks according to p values
+final4$sign[final4$`P-value` < 0.05] = "*"
+final4$sign[final4$`P-value` < 0.01] = "**"
+final4$sign[final4$`P-value` > 0.05] = "ns"
+
+# Merge MS and significance column together
+final4[[2]] = paste(final4[[2]], ifelse(is.na(final4[[4]]), "", final4[[4]]))
+
+# Delete extra column from anova
+final4 = final4[-c(3,4)]%>%
+  rownames_to_column(var = "FV")%>%
+  as_tibble()
+
+```
+
+Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística. 
+
+```{r}
+#| echo: false
+# Join Data
+j1 = inner_join(final1, final, by = "FV")%>%
+  select(-"DF.y")
+j2 = left_join(final3, final4, by = "FV")%>%
+  select(-"DF.x",-"DF.y")
+jfinal = left_join(j1, j2, by = "FV") %>%
+  rename(DF = DF.x)
+jfinal 
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+

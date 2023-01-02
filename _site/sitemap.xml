@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.franklinsantos.com/posts/Analisis_correspondencia/index.html</loc>
+    <lastmod>2022-12-26T20:44:52.520Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.franklinsantos.com/posts/componentes_principales/index.html</loc>
+    <lastmod>2022-12-26T20:44:53.193Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.franklinsantos.com/posts/agridata/index.html</loc>
+    <lastmod>2023-01-02T13:43:01.988Z</lastmod>
+  </url>
+  <url>
     <loc>https://www.franklinsantos.com/posts/tidyexam/index.html</loc>
-    <lastmod>2022-09-28T21:45:06.368Z</lastmod>
+    <lastmod>2022-12-26T20:44:54.605Z</lastmod>
   </url>
   <url>
     <loc>https://www.franklinsantos.com/posts/anova/index.html</loc>
-    <lastmod>2022-09-28T21:45:03.544Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.franklinsantos.com/about.html</loc>
-    <lastmod>2022-09-28T21:45:03.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.franklinsantos.com/Blog.html</loc>
-    <lastmod>2022-09-28T21:45:04.279Z</lastmod>
+    <lastmod>2022-12-26T20:44:55.373Z</lastmod>
   </url>
   <url>
     <loc>https://www.franklinsantos.com/index.html</loc>
-    <lastmod>2022-10-13T21:04:05.017Z</lastmod>
+    <lastmod>2023-01-02T13:43:00.882Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.franklinsantos.com/about.html</loc>
+    <lastmod>2022-12-26T20:44:56.049Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.franklinsantos.com/Blog.html</loc>
+    <lastmod>2022-12-26T20:44:56.430Z</lastmod>
   </url>
 </urlset>

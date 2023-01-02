@@ -9,8 +9,188 @@
 <link>https://www.franklinsantos.com/index.html</link>
 <atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.2.218</generator>
+<lastBuildDate>Sun, 01 Jan 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Análisis de datos experimentales agrícolas</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://www.franklinsantos.com/posts/agridata/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="introducción" class="level1">
+<h1>Introducción</h1>
+<p>El análisis de datos es una etapa esencial en el proceso de investigación y consiste en examinar y analizar los datos recopilados de manera detallada para extraer información y obtener conclusiones relevantes en función a los objetivos de la investigación. Para realizar el análisis de datos, se pueden utilizar diferentes herramientas y técnicas, generalmente se construyen tablas y figuras. Estos resultados son usados para tomar decisiones y formular conclusiones sobre los datos, y también pueden ser utilizados para mejorar y optimizar procesos y sistemas. El análisis de datos es importante ya que permite a los investigadores obtener una visión más profunda y detallada de los datos y tomar decisiones más informadas y precisas.</p>
+<p>La etapa de análisis de datos puede resultar un reto difícil para un recien egresado o tesista. Esto debido a la falta de experiencia o conocimiento en el uso de herramientas y técnicas de análisis de datos. Debido a ello, queremos facilitar algunas herramientas de análisis, al mismo tiempo, se pretende que los interesados puedan entrenarse en el uso de R. Ya que esta herramienta estadística ofrece un sin fin de paquetes que nos ayudan a realizar los análisis de manera sencilla pero de mucha categoría científica.</p>
+</section>
+<section id="análisis-de-datos" class="level1">
+<h1>Análisis de datos</h1>
+<section id="librerias" class="level2">
+<h2 class="anchored" data-anchor-id="librerias">Librerias</h2>
+<div class="cell">
+
+</div>
+</section>
+<section id="base-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="base-de-datos">Base de datos</h2>
+<p>Para esta oportunidad daremos uso de la base de datos de <code>iris</code>. Estos datos estarán disponibles al momento de instalar R.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+1  setosa          5.1         3.5          1.4         0.2
+2  setosa          4.9         3.0          1.4         0.2
+3  setosa          4.7         3.2          1.3         0.2
+4  setosa          4.6         3.1          1.5         0.2
+5  setosa          5.0         3.6          1.4         0.2
+6  setosa          5.4         3.9          1.7         0.4</code></pre>
+</div>
+</div>
+</section>
+<section id="análisis-descriptivo" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-descriptivo">Análisis descriptivo</h2>
+<p>Generalmente se puede presentar en una tabla los resultados descriptivos.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:500px; "><table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> variable </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> mean </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> se </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> kurt </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> skew </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> min </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> max </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Petal.Length </td>
+   <td style="text-align:right;"> 3.7580 </td>
+   <td style="text-align:right;"> 0.1441 </td>
+   <td style="text-align:right;"> -1.4021 </td>
+   <td style="text-align:right;"> -0.2749 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 6.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Petal.Width </td>
+   <td style="text-align:right;"> 1.1993 </td>
+   <td style="text-align:right;"> 0.0622 </td>
+   <td style="text-align:right;"> -1.3406 </td>
+   <td style="text-align:right;"> -0.1030 </td>
+   <td style="text-align:right;"> 0.1 </td>
+   <td style="text-align:right;"> 2.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sepal.Length </td>
+   <td style="text-align:right;"> 5.8433 </td>
+   <td style="text-align:right;"> 0.0676 </td>
+   <td style="text-align:right;"> -0.5521 </td>
+   <td style="text-align:right;"> 0.3149 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 7.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sepal.Width </td>
+   <td style="text-align:right;"> 3.0573 </td>
+   <td style="text-align:right;"> 0.0356 </td>
+   <td style="text-align:right;"> 0.2282 </td>
+   <td style="text-align:right;"> 0.3190 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 4.4 </td>
+  </tr>
+</tbody>
+</table></div>
+
+</div>
+</div>
+<p>La otra opción podría ser una figura <code>boxplot</code></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.franklinsantos.com/posts/agridata/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="análisis-de-varianza" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-de-varianza">Análisis de varianza</h2>
+<div class="cell">
+
+</div>
+<p>Generalmente en la mayoría de las tesis se presenta cada ANOVA para cada variable, la cual no es muy redundante en todo el documento. Además, en las revistas científicas de impacto, este tipo de tablas no es permitido si se tiene varias variables.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Sepal.Width
+           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+Species     2 11.345  5.6725   49.16 &lt; 2.2e-16 ***
+Residuals 147 16.962  0.1154                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<p>Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  FV           DF Sepal.Length Sepal.Width Petal.Length Petal.Width
+  &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;      
+1 Species       2 "31.61 **"   "5.67 **"   "218.55 **"  "40.21 **" 
+2 Residuals   147 "0.27 "      "0.12 "     "0.19 "      "0.04 "    </code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+  author = {Franklin Santos},
+  title = {Análisis de Datos Experimentales Agrícolas},
+  date = {2023-01-01},
+  url = {https://www.franklinsantos.com/posts/agridata},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
+Franklin Santos. 2023. <span>“Análisis de Datos Experimentales
+Agrícolas.”</span> January 1, 2023. <a href="https://www.franklinsantos.com/posts/agridata">https://www.franklinsantos.com/posts/agridata</a>.
+</div></div></section></div> ]]></description>
+  <category>agridata</category>
+  <category>data science</category>
+  <category>bioinformatic</category>
+  <guid>https://www.franklinsantos.com/posts/agridata/index.html</guid>
+  <pubDate>Sun, 01 Jan 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://www.franklinsantos.com/posts/agridata/featured.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>Análisis de Componentes Principales</title>
   <dc:creator>Franklin Santos</dc:creator>
@@ -564,227 +744,7 @@ virginica-versicolor  0.204  0.04314472  0.3648553 0.0087802</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">r1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code><?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  Analysis of variance`
+<pre><code>$`Analysis of variance`
             df type I SS mean square F value    p&gt;F
 treatments   2   11.3449      5.6725   49.16 &lt;0.001
 Residuals  147   16.9620      0.1154       -      -
@@ -795,894 +755,14 @@ $Means
 2  virginica 2.974          0.048     b   b      b b           b
 3 versicolor 2.770          0.048     c   c      c c           c
 
-<?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  Multiple comparison test`
+$`Multiple comparison test`
                     pair contrast p(tukey) p(snk) p(duncan)   p(t)
 1     setosa - virginica    0.454   0.0000 0.0000    0.0000 0.0000
 2    setosa - versicolor    0.658   0.0000 0.0000    0.0000 0.0000
 3 virginica - versicolor    0.204   0.0087 0.0031    0.0031 0.0031
 
-<?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  Residual analysis`
-<?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  Residual analysis`<?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  residual analysis`
+$`Residual analysis`
+$`Residual analysis`$`residual analysis`
                                values
 p.value Shapiro-Wilk test      0.3230
 p.value Bartlett test          0.3515
@@ -1691,227 +771,7 @@ first value most discrepant   42.0000
 second value most discrepant  16.0000
 third value most discrepant  118.0000
 
-<?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  Residual analysis`$residuals
+$`Residual analysis`$residuals
      1      2      3      4      5      6      7      8      9     10     11 
  0.072 -0.428 -0.228 -0.328  0.172  0.472 -0.028 -0.028 -0.528 -0.328  0.272 
     12     13     14     15     16     17     18     19     20     21     22 
@@ -1941,447 +801,7 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
    144    145    146    147    148    149    150 
  0.226  0.326  0.026 -0.474  0.026  0.426  0.026 
 
-<?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  Residual analysis`<?xml version="1.0" encoding="UTF-8"?>
-<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
-      xmlns:media="http://search.yahoo.com/mrss/" 
-      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
-      xmlns:dc="http://purl.org/dc/elements/1.1/" 
-      version="2.0">
-<channel>
-<title>Franklin Santos</title>
-<link>https://www.franklinsantos.com/index.html</link>
-<atom:link href="https://www.franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Data Scientis</description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Tue, 15 Dec 2020 04:00:00 GMT</lastBuildDate>
-<item>
-  <title>Análisis de Componentes Principales</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/componentes_principales/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
-<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
-<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
-<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
-<blockquote class="blockquote">
-<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
-</blockquote>
-<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
-<blockquote class="blockquote">
-<ul>
-<li>identificar patrones ocultos en un conjunto de datos,</li>
-<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
-<li>identificar variables correlacionadas</li>
-</ul>
-</blockquote>
-</section>
-<section id="metodología-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
-<p>Instale los dos paquetes de la siguiente manera:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
-</div>
-<p>Cargar paquetes en R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-</div>
-<section id="cargando-datos" class="level3">
-<h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
-<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
-</div>
-<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
-SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
-CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
-BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
-YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
-</div>
-</div>
-</section>
-<section id="código-r" class="level3">
-<h3 class="anchored" data-anchor-id="código-r">Código R</h3>
-<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<ul>
-<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
-<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
-<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
-<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
-</ul>
-</blockquote>
-<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
-</blockquote>
-</section>
-<section id="extraiga-y-visualice-valores-propiosvarianzas" class="level3">
-<h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
-<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       eigenvalue variance.percent cumulative.variance.percent
-Dim.1   4.1242133        41.242133                    41.24213
-Dim.2   1.8385309        18.385309                    59.62744
-Dim.3   1.2391403        12.391403                    72.01885
-Dim.4   0.8194402         8.194402                    80.21325
-Dim.5   0.7015528         7.015528                    87.22878
-Dim.6   0.4228828         4.228828                    91.45760
-Dim.7   0.3025817         3.025817                    94.48342
-Dim.8   0.2744700         2.744700                    97.22812
-Dim.9   0.1552169         1.552169                    98.78029
-Dim.10  0.1219710         1.219710                   100.00000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La suma de todos los valores propios da una varianza total de 10.</p>
-<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
-<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
-<blockquote class="blockquote">
-<ul>
-<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
-<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
-</ul>
-</blockquote>
-<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
-<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
-</section>
-<section id="gráfica-círculo-de-correlación" class="level3">
-<h3 class="anchored" data-anchor-id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
-<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
-<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
-<span id="cb13-5">             )</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>Las variables correlacionadas positivamente se agrupan.</li>
-<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
-<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
-</ul>
-</section>
-<section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
-<h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
-<blockquote class="blockquote">
-<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
-</blockquote>
-</section>
-<section id="biplot" class="level3">
-<h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
-<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<p><img src="https://www.franklinsantos.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
-<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
-<ul>
-<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
-<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
-</ul>
-<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
-</section>
-</section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
-
-
-</section>
-
- ]]></description>
-  <category>Biplot</category>
-  <category>Componentes Principales</category>
-  <category>Correlation</category>
-  <guid>https://www.franklinsantos.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantos.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
-</item>
-<item>
-  <title>Análisis de Varianza y Prueba de Promedios en R</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantos.com/posts/anova/index.html</link>
-  standardized residuals`
+$`Residual analysis`$`standardized residuals`
           1           2           3           4           5           6 
  0.21339641 -1.26852308 -0.67575529 -0.97213918  0.50978030  1.39893200 
           7           8           9          10          11          12 
