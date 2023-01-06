@@ -21,7 +21,7 @@ website:
         href: index.xml
 format:
   html:
-    theme: solar
+    theme: Flatly
     css: styles.css
 rss:
   full_content: true

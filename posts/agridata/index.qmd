@@ -12,6 +12,8 @@ author:
 date: "2023-01-01"
 image: featured.png
 citation: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{=html}
@@ -20,8 +22,8 @@ body {
 text-align: justify}
 </style>
 ```
-
 # Introducción
+
 El análisis de datos es una etapa esencial en el proceso de investigación y consiste en examinar y analizar los datos recopilados de manera detallada para extraer información y obtener conclusiones relevantes en función a los objetivos de la investigación. Para realizar el análisis de datos, se pueden utilizar diferentes herramientas y técnicas, generalmente se construyen tablas y figuras. Estos resultados son usados para tomar decisiones y formular conclusiones sobre los datos, y también pueden ser utilizados para mejorar y optimizar procesos y sistemas. El análisis de datos es importante ya que permite a los investigadores obtener una visión más profunda y detallada de los datos y tomar decisiones más informadas y precisas.
 
 La etapa de análisis de datos puede resultar un reto difícil para un recien egresado o tesista. Esto debido a la falta de experiencia o conocimiento en el uso de herramientas y técnicas de análisis de datos. Debido a ello, queremos facilitar algunas herramientas de análisis, al mismo tiempo, se pretende que los interesados puedan entrenarse en el uso de R. Ya que esta herramienta estadística ofrece un sin fin de paquetes que nos ayudan a realizar los análisis de manera sencilla pero de mucha categoría científica.
@@ -38,7 +40,6 @@ library(metan)
 library(flextable)
 library(kableExtra)
 ```
-
 
 ## Base de datos
 
@@ -62,9 +63,9 @@ Generalmente se puede presentar en una tabla los resultados descriptivos.
 #| echo: false
 desc_stat(data,
           stats = c("mean, se, kurt, skew, min, max")) %>%
-  kbl()%>%
-  kable_paper()%>%
-  scroll_box(width = "500px", height = "200px")
+  round_cols() %>%
+  kbl(caption = "Análisis descriptivo")%>%
+  kable_classic(full_width = F, html_font = "Cambria")
 ```
 
 La otra opción podría ser una figura `boxplot`
@@ -126,7 +127,6 @@ arrange_ggplot(p1, p2, p3, p4,
 
 ## Análisis de varianza
 
-
 ```{r}
 #| echo: false
 #Assign column names
@@ -175,7 +175,6 @@ final1 = final1[-c(3,4)]%>%
   as_tibble()
 
 ```
-
 
 ```{r}
 #| echo: false
@@ -237,7 +236,6 @@ final3 = final3[-c(3,4)]%>%
 
 ```
 
-
 ```{r}
 #| echo: false
 # print df, MS and P-value
@@ -268,7 +266,7 @@ final4 = final4[-c(3,4)]%>%
 
 ```
 
-Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística. 
+Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística.
 
 ```{r}
 #| echo: false
@@ -279,12 +277,89 @@ j2 = left_join(final3, final4, by = "FV")%>%
   select(-"DF.x",-"DF.y")
 jfinal = left_join(j1, j2, by = "FV") %>%
   rename(DF = DF.x)
-jfinal 
+jfinal %>%
+  kbl(caption = "Análisis de varianza")%>%
+  kable_classic(full_width = F, html_font = "Cambria")
   
 ```
 
+Una vez identificada las diferencias estadisticas se procede a realizar pruebas de promedio para seleccionar genotipos sobresalientes.
+
+```{r}
+library(emmeans)
+anova1 = aov(Sepal.Length ~ Species, data = data)
+anova2 = aov(Sepal.Width ~ Species, data = data)
+anova3 = aov(Petal.Length ~ Species, data = data)
+anova4 = aov(Petal.Width ~ Species, data = data)
+#comparacion de medias
+medias1 = emmeans(anova1, ~Species)
+medias2 = emmeans(anova2, ~Species)
+medias3 = emmeans(anova3, ~Species)
+medias4 = emmeans(anova4, ~Species)
+pwpm(medias1)
+
+pwpp(medias1)
+```
+
+Hay otra manera de representar comparaciones graficamente
+
+```{r}
+# set a theme plot
+my_theme = theme_bw()+
+  theme(legend.title = element_blank(),
+        axis.title = element_text(color = "black"),
+        axis.text = element_text(colour = "black"),
+        panel.grid.minor = element_blank())
+```
 
 
+```{r}
+p1 = plot(medias1,
+     CIs = FALSE,
+     comparisons = TRUE,
+     xlab = "Mean",
+     ylab = "Treatments") +
+  geom_vline(xintercept = mean(data$Sepal.Length)) +
+  my_theme
+
+p2 = plot(medias2,
+     CIs = FALSE,
+     comparisons = TRUE,
+     xlab = "Mean",
+     ylab = "Treatments") +
+  geom_vline(xintercept = mean(data$Sepal.Width)) +
+  my_theme
+
+p3 = plot(medias3,
+     CIs = FALSE,
+     comparisons = TRUE,
+     xlab = "Mean",
+     ylab = "Treatments") +
+  geom_vline(xintercept = mean(data$Petal.Length)) +
+  my_theme
+
+p4 = plot(medias4,
+     CIs = FALSE,
+     comparisons = TRUE,
+     xlab = "Mean",
+     ylab = "Treatments") +
+  geom_vline(xintercept = mean(data$Sepal.Width)) +
+  my_theme
+
+arrange_ggplot((p1 + p2 + p3 + p4),
+               nrow = 2,
+               heights = c(0.6, 1),
+               tag_levels = "a",
+               guides = "collect")
+              
+```
+
+```{r}
+# Utilizando paquete AgroR
+library(AgroR)
+with(data,
+     DIC(Species, Sepal.Length))
+```
 
 
 
