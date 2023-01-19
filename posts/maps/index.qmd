@@ -1,0 +1,61 @@
+---
+title: "Mapas de Bolivia"
+description: |
+  Vamos a generar mapas de Bolivia.
+categories: [maps, Bolivia, bioinformatic]
+author:
+  - name: Franklin Santos
+    url: https://franklinsantosm.com
+    affiliation: AgriTech Bolivia
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2023-02-01"
+image: map.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+# Mapas
+
+## Introduccion
+
+El paquete `rnaturalearth` es una herramienta excelente para mantener y facilitar la interacción con los datos cartográficos de [Natural Earth](https://www.naturalearthdata.com/). Para producir mapas con `ggplot2`, se necesitan los siguientes paquetes.
+
+```{r}
+library(tidyverse)
+library(rnaturalearth)
+```
+
+```{r}
+#| out-width: "100%"
+# America del sur
+sam = ne_countries(continent = "south america",
+                   returnclass = "sf",
+                   scale = 50)
+p1 = ggplot() +
+  geom_sf(data = sam, fill = "white") +
+  theme_light() +
+  xlim(c(-90, -35))
+
+# Imagen de Bolivia y destacar La Paz
+
+bolivia = ne_states(country = "bolivia", returnclass = "sf") %>%
+  mutate(scat = ifelse(postal == "LP", "La Paz", "Otros"))
+
+p2 = 
+  p1 +
+  geom_sf(data = bolivia, aes(fill = scat))
+p2
+```
+
+
+
+

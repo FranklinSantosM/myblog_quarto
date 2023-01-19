@@ -3,7 +3,7 @@ project:
 
 website:
   title: "Franklin Santos"
-  site-url: https://www.franklinsantos.com
+  site-url: https://www.franklinsantosm.com
   description: "Data Scientis"
   navbar:
     right:
@@ -13,6 +13,8 @@ website:
         href: cv.pdf
       - text: "Blog"
         href: index.html
+      - text: "Blog+"
+        href: https://franklinsantosm.netlify.app/blog.html
       - icon: github
         href: https://github.com/FranklinSantosM
       - icon: twitter

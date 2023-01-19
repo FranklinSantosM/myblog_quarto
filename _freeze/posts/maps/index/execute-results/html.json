@@ -1,0 +1,16 @@
+{
+  "hash": "a0c74f6b9d370db713f6619a23508142",
+  "result": {
+    "markdown": "---\ntitle: \"Mapas de Bolivia\"\ndescription: |\n  Vamos a generar mapas de Bolivia.\ncategories: [maps, Bolivia, bioinformatic]\nauthor:\n  - name: Franklin Santos\n    url: https://franklinsantosm.com\n    affiliation: AgriTech Bolivia\n    orcid: 0000-0002-7509-2910\n    email: franklin25santos@gmail.com\ndate: \"2023-02-01\"\nimage: map.png\ncitation: true\neditor_options: \n  chunk_output_type: console\n---\n\n```{=html}\n<style>\nbody {\ntext-align: justify}\n</style>\n```\n\n\n# Mapas\n\n## Introduccion\n\nEl paquete `rnaturalearth` es una herramienta excelente para mantener y facilitar la interacción con los datos cartográficos de [Natural Earth](https://www.naturalearthdata.com/). Para producir mapas con `ggplot2`, se necesitan los siguientes paquetes.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──\n✔ ggplot2 3.4.0      ✔ purrr   1.0.0 \n✔ tibble  3.1.8      ✔ dplyr   1.0.10\n✔ tidyr   1.2.1      ✔ stringr 1.5.0 \n✔ readr   2.1.3      ✔ forcats 0.5.2 \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n```\n:::\n\n```{.r .cell-code}\nlibrary(rnaturalearth)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# America del sur\nsam = ne_countries(continent = \"south america\",\n                   returnclass = \"sf\",\n                   scale = 50)\np1 = ggplot() +\n  geom_sf(data = sam, fill = \"white\") +\n  theme_light() +\n  xlim(c(-90, -35))\n\n# Imagen de Bolivia y destacar La Paz\n\nbolivia = ne_states(country = \"bolivia\", returnclass = \"sf\") %>%\n  mutate(scat = ifelse(postal == \"LP\", \"La Paz\", \"Otros\"))\n\np2 = \n  p1 +\n  geom_sf(data = bolivia, aes(fill = scat))\np2\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=100%}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/maps/index.html",
       "/posts/agridata/index.html",
       "/posts/componentes_principales/index.html",
       "/posts/anova/index.html",
@@ -17,6 +18,7 @@
       "/posts/Analisis_correspondencia/index.html",
       "/posts/agridata/index.html",
       "/about.html",
+      "/posts/maps/index.html",
       "/posts/tidyexam/index.html",
       "/index.html"
     ]
