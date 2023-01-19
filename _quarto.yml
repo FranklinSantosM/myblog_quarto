@@ -15,6 +15,8 @@ website:
         href: index.html
       - text: "Blog+"
         href: https://franklinsantosm.netlify.app/blog.html
+      - text: "Journal Club"
+        href: https://agritechjc.netlify.app/ 
       - icon: github
         href: https://github.com/FranklinSantosM
       - icon: twitter
