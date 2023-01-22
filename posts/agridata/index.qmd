@@ -5,7 +5,7 @@ description: |
 categories: [agridata, data science, bioinformatic]
 author:
   - name: Franklin Santos
-    url: https://franklinsantos.com
+    url: https://franklinsantosm.com
     affiliation: AgriTech Bolivia
     orcid: 0000-0002-7509-2910
     email: franklin25santos@gmail.com
@@ -39,6 +39,7 @@ library(tidyverse)
 library(metan)
 library(flextable)
 library(kableExtra)
+library(factoextra)
 ```
 
 ## Base de datos
@@ -286,6 +287,7 @@ jfinal %>%
 Una vez identificada las diferencias estadisticas se procede a realizar pruebas de promedio para seleccionar genotipos sobresalientes.
 
 ```{r}
+#| echo: false
 library(emmeans)
 anova1 = aov(Sepal.Length ~ Species, data = data)
 anova2 = aov(Sepal.Width ~ Species, data = data)
@@ -304,6 +306,7 @@ pwpp(medias1)
 Hay otra manera de representar comparaciones graficamente
 
 ```{r}
+#| echo: false
 # set a theme plot
 my_theme = theme_bw()+
   theme(legend.title = element_blank(),
@@ -313,7 +316,8 @@ my_theme = theme_bw()+
 ```
 
 
-```{r}
+```{r fig.width=11, fig.height=5}
+#| echo: false
 p1 = plot(medias1,
      CIs = FALSE,
      comparisons = TRUE,
@@ -347,19 +351,100 @@ p4 = plot(medias4,
   my_theme
 
 arrange_ggplot((p1 + p2 + p3 + p4),
-               nrow = 2,
-               heights = c(0.6, 1),
+               nrow = 1,
+               #heights = c(0.6, 1),
                tag_levels = "a",
                guides = "collect")
               
 ```
 
 ```{r}
+#| echo: false
 # Utilizando paquete AgroR
 library(AgroR)
 with(data,
      DIC(Species, Sepal.Length))
 ```
+
+## Análisis multivariado
+
+```{r}
+#| echo: false
+df = data %>%
+  means_by(Species)%>%
+  round_cols()%>%
+  column_to_rownames("Species")
+```
+
+```{r}
+#| echo: false
+mgidi_species = mgidi(df,                         # a two-way table
+              SI = 50)                    # select two treatments
+```
+
+```{r fig.width=10}
+#| echo: false
+#Plot the MGIDI index
+p_ind_species = 
+  plot(mgidi_species,
+       SI = 50,
+       radar = FALSE,
+       x.lab = "Species",
+       y.lab = "MGIDI index") +
+  my_theme +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom")
+```
+
+```{r warning=FALSE, message=FALSE, fig.height=8, fig.width=5}
+#| echo: false
+# The strengths and weaknesses view
+p_cont_species =
+  plot(mgidi_species,
+       type = "contribution", # Get the proportion plot
+       genotypes = "all", # All treatment (selected treatment are plotted by default)
+       title = "") +
+  my_theme +
+  theme(legend.position = "bottom")
+```
+
+```{r}
+#| echo: false
+# PCA
+
+pca_species = prcomp(df, scale. = TRUE)
+factors = 
+  mgidi_species$sel_dif %>%
+  select(VAR, Factor)
+factors = 
+  data.frame(VAR = names(df)) %>%
+  left_join(factors)
+
+pca = 
+  fviz_pca_biplot(pca_species,
+                  repel = TRUE,
+                  col.var = factors$Factor) +
+  labs(color = "") +
+  my_theme +
+  theme(legend.position = "bottom")
+
+```
+
+```{r fig.width=11, fig.height=5}
+#| echo: false
+# Save the plot
+arrange_ggplot(p_ind_species,
+               p_cont_species,
+               pca,
+               ncol = 3,
+               tag_levels = "a")
+```
+
+
+
+
+
+
 
 
 

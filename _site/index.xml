@@ -6,15 +6,15 @@
       version="2.0">
 <channel>
 <title>Franklin Santos</title>
-<link>https://www.franklinsantosm.com/index.html</link>
-<atom:link href="https://www.franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://franklinsantosm.com/index.html</link>
+<atom:link href="https://franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
 <generator>quarto-1.2.269</generator>
 <lastBuildDate>Wed, 01 Feb 2023 08:00:00 GMT</lastBuildDate>
 <item>
   <title>Mapas de Bolivia</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantosm.com/posts/maps/index.html</link>
+  <link>https://franklinsantosm.com/posts/maps/index.html</link>
   <description><![CDATA[ 
 
 
@@ -63,7 +63,7 @@ text-align: justify}
 <span id="cb4-17">  <span class="fu" style="color: #4758AB;">geom_sf</span>(<span class="at" style="color: #657422;">data =</span> bolivia, <span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">fill =</span> scat))</span>
 <span id="cb4-18">p2</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/maps/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="https://franklinsantosm.com/posts/maps/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 
@@ -85,14 +85,14 @@ Franklin Santos. 2023. <span>“Mapas de Bolivia.”</span> February 1,
   <category>maps</category>
   <category>Bolivia</category>
   <category>bioinformatic</category>
-  <guid>https://www.franklinsantosm.com/posts/maps/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/maps/index.html</guid>
   <pubDate>Wed, 01 Feb 2023 08:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantosm.com/posts/maps/map.png" medium="image" type="image/png" height="112" width="144"/>
+  <media:content url="https://franklinsantosm.com/posts/maps/map.png" medium="image" type="image/png" height="112" width="144"/>
 </item>
 <item>
   <title>Análisis de datos experimentales agrícolas</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantosm.com/posts/agridata/index.html</link>
+  <link>https://franklinsantosm.com/posts/agridata/index.html</link>
   <description><![CDATA[ 
 
 
@@ -203,7 +203,7 @@ text-align: justify}
 <p>La otra opción podría ser una figura <code>boxplot</code></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -277,17 +277,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Una vez identificada las diferencias estadisticas se procede a realizar pruebas de promedio para seleccionar genotipos sobresalientes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;">library</span>(emmeans)</span>
-<span id="cb4-2">anova1 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">aov</span>(Sepal.Length <span class="sc" style="color: #5E5E5E;">~</span> Species, <span class="at" style="color: #657422;">data =</span> data)</span>
-<span id="cb4-3">anova2 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">aov</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species, <span class="at" style="color: #657422;">data =</span> data)</span>
-<span id="cb4-4">anova3 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">aov</span>(Petal.Length <span class="sc" style="color: #5E5E5E;">~</span> Species, <span class="at" style="color: #657422;">data =</span> data)</span>
-<span id="cb4-5">anova4 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">aov</span>(Petal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species, <span class="at" style="color: #657422;">data =</span> data)</span>
-<span id="cb4-6"><span class="co" style="color: #5E5E5E;">#comparacion de medias</span></span>
-<span id="cb4-7">medias1 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">emmeans</span>(anova1, <span class="sc" style="color: #5E5E5E;">~</span>Species)</span>
-<span id="cb4-8">medias2 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">emmeans</span>(anova2, <span class="sc" style="color: #5E5E5E;">~</span>Species)</span>
-<span id="cb4-9">medias3 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">emmeans</span>(anova3, <span class="sc" style="color: #5E5E5E;">~</span>Species)</span>
-<span id="cb4-10">medias4 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">emmeans</span>(anova4, <span class="sc" style="color: #5E5E5E;">~</span>Species)</span>
-<span id="cb4-11"><span class="fu" style="color: #4758AB;">pwpm</span>(medias1)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           setosa versicolor virginica
 setosa     [5.01]     &lt;.0001    &lt;.0001
@@ -299,65 +288,20 @@ Upper triangle: P values   adjust = "tukey"
 Diagonal: [Estimates] (emmean) 
 Lower triangle: Comparisons (estimate)   earlier vs. later</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;">pwpp</span>(medias1)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Hay otra manera de representar comparaciones graficamente</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;"># set a theme plot</span></span>
-<span id="cb7-2">my_theme <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">theme_bw</span>()<span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb7-3">  <span class="fu" style="color: #4758AB;">theme</span>(<span class="at" style="color: #657422;">legend.title =</span> <span class="fu" style="color: #4758AB;">element_blank</span>(),</span>
-<span id="cb7-4">        <span class="at" style="color: #657422;">axis.title =</span> <span class="fu" style="color: #4758AB;">element_text</span>(<span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"black"</span>),</span>
-<span id="cb7-5">        <span class="at" style="color: #657422;">axis.text =</span> <span class="fu" style="color: #4758AB;">element_text</span>(<span class="at" style="color: #657422;">colour =</span> <span class="st" style="color: #20794D;">"black"</span>),</span>
-<span id="cb7-6">        <span class="at" style="color: #657422;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;">element_blank</span>())</span></code></pre></div>
+
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">p1 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">plot</span>(medias1,</span>
-<span id="cb8-2">     <span class="at" style="color: #657422;">CIs =</span> <span class="cn" style="color: #8f5902;">FALSE</span>,</span>
-<span id="cb8-3">     <span class="at" style="color: #657422;">comparisons =</span> <span class="cn" style="color: #8f5902;">TRUE</span>,</span>
-<span id="cb8-4">     <span class="at" style="color: #657422;">xlab =</span> <span class="st" style="color: #20794D;">"Mean"</span>,</span>
-<span id="cb8-5">     <span class="at" style="color: #657422;">ylab =</span> <span class="st" style="color: #20794D;">"Treatments"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-6">  <span class="fu" style="color: #4758AB;">geom_vline</span>(<span class="at" style="color: #657422;">xintercept =</span> <span class="fu" style="color: #4758AB;">mean</span>(data<span class="sc" style="color: #5E5E5E;">$</span>Sepal.Length)) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-7">  my_theme</span>
-<span id="cb8-8"></span>
-<span id="cb8-9">p2 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">plot</span>(medias2,</span>
-<span id="cb8-10">     <span class="at" style="color: #657422;">CIs =</span> <span class="cn" style="color: #8f5902;">FALSE</span>,</span>
-<span id="cb8-11">     <span class="at" style="color: #657422;">comparisons =</span> <span class="cn" style="color: #8f5902;">TRUE</span>,</span>
-<span id="cb8-12">     <span class="at" style="color: #657422;">xlab =</span> <span class="st" style="color: #20794D;">"Mean"</span>,</span>
-<span id="cb8-13">     <span class="at" style="color: #657422;">ylab =</span> <span class="st" style="color: #20794D;">"Treatments"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-14">  <span class="fu" style="color: #4758AB;">geom_vline</span>(<span class="at" style="color: #657422;">xintercept =</span> <span class="fu" style="color: #4758AB;">mean</span>(data<span class="sc" style="color: #5E5E5E;">$</span>Sepal.Width)) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-15">  my_theme</span>
-<span id="cb8-16"></span>
-<span id="cb8-17">p3 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">plot</span>(medias3,</span>
-<span id="cb8-18">     <span class="at" style="color: #657422;">CIs =</span> <span class="cn" style="color: #8f5902;">FALSE</span>,</span>
-<span id="cb8-19">     <span class="at" style="color: #657422;">comparisons =</span> <span class="cn" style="color: #8f5902;">TRUE</span>,</span>
-<span id="cb8-20">     <span class="at" style="color: #657422;">xlab =</span> <span class="st" style="color: #20794D;">"Mean"</span>,</span>
-<span id="cb8-21">     <span class="at" style="color: #657422;">ylab =</span> <span class="st" style="color: #20794D;">"Treatments"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-22">  <span class="fu" style="color: #4758AB;">geom_vline</span>(<span class="at" style="color: #657422;">xintercept =</span> <span class="fu" style="color: #4758AB;">mean</span>(data<span class="sc" style="color: #5E5E5E;">$</span>Petal.Length)) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-23">  my_theme</span>
-<span id="cb8-24"></span>
-<span id="cb8-25">p4 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">plot</span>(medias4,</span>
-<span id="cb8-26">     <span class="at" style="color: #657422;">CIs =</span> <span class="cn" style="color: #8f5902;">FALSE</span>,</span>
-<span id="cb8-27">     <span class="at" style="color: #657422;">comparisons =</span> <span class="cn" style="color: #8f5902;">TRUE</span>,</span>
-<span id="cb8-28">     <span class="at" style="color: #657422;">xlab =</span> <span class="st" style="color: #20794D;">"Mean"</span>,</span>
-<span id="cb8-29">     <span class="at" style="color: #657422;">ylab =</span> <span class="st" style="color: #20794D;">"Treatments"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-30">  <span class="fu" style="color: #4758AB;">geom_vline</span>(<span class="at" style="color: #657422;">xintercept =</span> <span class="fu" style="color: #4758AB;">mean</span>(data<span class="sc" style="color: #5E5E5E;">$</span>Sepal.Width)) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb8-31">  my_theme</span>
-<span id="cb8-32"></span>
-<span id="cb8-33"><span class="fu" style="color: #4758AB;">arrange_ggplot</span>((p1 <span class="sc" style="color: #5E5E5E;">+</span> p2 <span class="sc" style="color: #5E5E5E;">+</span> p3 <span class="sc" style="color: #5E5E5E;">+</span> p4),</span>
-<span id="cb8-34">               <span class="at" style="color: #657422;">nrow =</span> <span class="dv" style="color: #AD0000;">2</span>,</span>
-<span id="cb8-35">               <span class="at" style="color: #657422;">heights =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="fl" style="color: #AD0000;">0.6</span>, <span class="dv" style="color: #AD0000;">1</span>),</span>
-<span id="cb8-36">               <span class="at" style="color: #657422;">tag_levels =</span> <span class="st" style="color: #20794D;">"a"</span>,</span>
-<span id="cb8-37">               <span class="at" style="color: #657422;">guides =</span> <span class="st" style="color: #20794D;">"collect"</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1056"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;"># Utilizando paquete AgroR</span></span>
-<span id="cb9-2"><span class="fu" style="color: #4758AB;">library</span>(AgroR)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'AgroR'</code></pre>
@@ -367,8 +311,6 @@ Attaching package: 'AgroR'</code></pre>
 
     desc</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;">with</span>(data,</span>
-<span id="cb12-2">     <span class="fu" style="color: #4758AB;">DIC</span>(Species, Sepal.Length))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 -----------------------------------------------------------------
@@ -443,10 +385,74 @@ setosa     5.006      c</code></pre>
 Your analysis is not valid, suggests using a non-parametric test and try to transform the data</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="análisis-multivariado" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-multivariado">Análisis multivariado</h2>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-------------------------------------------------------------------------------
+Principal Component Analysis
+-------------------------------------------------------------------------------
+# A tibble: 4 × 4
+  PC    Eigenvalues `Variance (%)` `Cum. variance (%)`
+  &lt;chr&gt;       &lt;dbl&gt;          &lt;dbl&gt;               &lt;dbl&gt;
+1 PC1          3.67          91.8                 91.8
+2 PC2          0.33           8.19               100  
+3 PC3          0              0                  100  
+4 PC4          0              0                  100  
+-------------------------------------------------------------------------------
+Factor Analysis - factorial loadings after rotation-
+-------------------------------------------------------------------------------
+# A tibble: 4 × 4
+  VAR            FA1 Communality Uniquenesses
+  &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+1 Sepal.Length  0.98        0.96         0.04
+2 Sepal.Width  -0.86        0.74         0.26
+3 Petal.Length  1           0.99         0.01
+4 Petal.Width   0.99        0.97         0.03
+-------------------------------------------------------------------------------
+Comunalit Mean: 0.9180692 
+-------------------------------------------------------------------------------
+Selection differential 
+-------------------------------------------------------------------------------
+# A tibble: 4 × 8
+  VAR          Factor    Xo    Xs     SD SDperc sense     goal
+  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+1 Sepal.Length FA1     5.85  6.26  0.418   7.16 increase   100
+2 Sepal.Width  FA1     3.06  2.87 -0.187  -6.11 increase     0
+3 Petal.Length FA1     3.76  4.90  1.15   30.6  increase   100
+4 Petal.Width  FA1     1.20  1.68  0.477  39.6  increase   100
+------------------------------------------------------------------------------
+Selected genotypes
+-------------------------------------------------------------------------------
+versicolor virginica
+-------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "VAR"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="1056"></p>
 </div>
 </div>
 
@@ -458,24 +464,24 @@ Your analysis is not valid, suggests using a non-parametric test and try to tran
   author = {Franklin Santos},
   title = {Análisis de Datos Experimentales Agrícolas},
   date = {2023-01-01},
-  url = {https://www.franklinsantosm.com/posts/agridata},
+  url = {https://franklinsantosm.com/posts/agridata},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
 Franklin Santos. 2023. <span>“Análisis de Datos Experimentales
-Agrícolas.”</span> January 1, 2023. <a href="https://www.franklinsantosm.com/posts/agridata">https://www.franklinsantosm.com/posts/agridata</a>.
+Agrícolas.”</span> January 1, 2023. <a href="https://franklinsantosm.com/posts/agridata">https://franklinsantosm.com/posts/agridata</a>.
 </div></div></section></div> ]]></description>
   <category>agridata</category>
   <category>data science</category>
   <category>bioinformatic</category>
-  <guid>https://www.franklinsantosm.com/posts/agridata/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/agridata/index.html</guid>
   <pubDate>Sun, 01 Jan 2023 08:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantosm.com/posts/agridata/plot.png" medium="image" type="image/png" height="47" width="144"/>
+  <media:content url="https://franklinsantosm.com/posts/agridata/plot.png" medium="image" type="image/png" height="47" width="144"/>
 </item>
 <item>
   <title>Análisis de Componentes Principales</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantosm.com/posts/componentes_principales/index.html</link>
+  <link>https://franklinsantosm.com/posts/componentes_principales/index.html</link>
   <description><![CDATA[ 
 
 
@@ -586,7 +592,7 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
 <span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>La suma de todos los valores propios da una varianza total de 10.</p>
@@ -612,7 +618,7 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
 <span id="cb13-5">             )</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
@@ -628,12 +634,12 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
 <span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
 <span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
@@ -648,7 +654,7 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
 <span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
@@ -671,14 +677,14 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
   <category>Biplot</category>
   <category>Componentes Principales</category>
   <category>Correlation</category>
-  <guid>https://www.franklinsantosm.com/posts/componentes_principales/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/componentes_principales/index.html</guid>
   <pubDate>Tue, 15 Dec 2020 08:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantosm.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
+  <media:content url="https://franklinsantosm.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
 </item>
 <item>
   <title>Análisis de Varianza y Prueba de Promedios en R</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantosm.com/posts/anova/index.html</link>
+  <link>https://franklinsantosm.com/posts/anova/index.html</link>
   <description><![CDATA[ 
 
 
@@ -794,7 +800,7 @@ text-align: justify}
 <span id="cb6-8">  <span class="at" style="color: #657422;">id =</span> <span class="cn" style="color: #8f5902;">FALSE</span> <span class="co" style="color: #5E5E5E;"># id = FALSE to remove point identification</span></span>
 <span id="cb6-9">)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>A partir del histograma y el gráfico QQ anteriores, ya podemos ver que el supuesto de normalidad parece cumplirse. De hecho, el histograma forma aproximadamente una curva de campana, lo que indica que los residuos siguen una distribución normal. Además, los puntos en las gráficas QQ siguen aproximadamente la línea recta y la mayoría de ellos están dentro de las bandas de confianza, lo que también indica que los residuos siguen aproximadamente una distribución normal.</p>
@@ -818,7 +824,7 @@ text-align: justify}
 <span id="cb7-3">  <span class="at" style="color: #657422;">data =</span> iris</span>
 <span id="cb7-4">)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
@@ -828,7 +834,7 @@ text-align: justify}
 <span id="cb8-4">  <span class="at" style="color: #657422;">data =</span> iris</span>
 <span id="cb8-5">)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Tanto la gráfica de boxplot como la gráfica de puntos muestran una variación similar para las diferentes especies. En el boxplot, esto se puede ver por el hecho de que las cajas y los bigotes tienen un tamaño comparable para todas las especies. Hay un par de valores atípicos como lo muestran los puntos fuera de los bigotes, pero esto no cambia el hecho de que la dispersión es más o menos la misma entre las diferentes especies.</p>
@@ -1021,7 +1027,7 @@ virginica-versicolor  0.204  0.04314472  0.3648553 0.0087802</code></pre>
 <span id="cb23-4">          <span class="at" style="color: #657422;">design =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="co" style="color: #5E5E5E;"># Diseño experimental: 1=DCA, 2=DBCA, etc.</span></span>
 <span id="cb23-5">          <span class="at" style="color: #657422;">alpha =</span> <span class="fl" style="color: #AD0000;">0.05</span>) <span class="co" style="color: #5E5E5E;"># Probabilidad estadística</span></span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">r1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1181,7 +1187,7 @@ $`Residual analysis`$`standardized residuals`
 <span id="cb26-38">  }</span>
 <span id="cb26-39">}</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Otra opción de gráfica para observar la significancia entre las medias de cada par de especies.</p>
@@ -1202,7 +1208,7 @@ $`Residual analysis`$`standardized residuals`
 <span id="cb27-14">          <span class="at" style="color: #657422;">add =</span> <span class="st" style="color: #20794D;">"jitter"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
 <span id="cb27-15">  <span class="fu" style="color: #4758AB;">stat_pvalue_manual</span>(pwc, <span class="at" style="color: #657422;">hide.ns =</span> <span class="cn" style="color: #8f5902;">TRUE</span>) </span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1225,14 +1231,14 @@ $`Residual analysis`$`standardized residuals`
   <category>ANOVA</category>
   <category>Post hoc</category>
   <category>Inferencial Statistic</category>
-  <guid>https://www.franklinsantosm.com/posts/anova/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/anova/index.html</guid>
   <pubDate>Sun, 15 Nov 2020 08:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantosm.com/posts/anova/featured.png" medium="image" type="image/png" height="118" width="144"/>
+  <media:content url="https://franklinsantosm.com/posts/anova/featured.png" medium="image" type="image/png" height="118" width="144"/>
 </item>
 <item>
   <title>Análisis de correspondencia con R</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantosm.com/posts/Analisis_correspondencia/index.html</link>
+  <link>https://franklinsantosm.com/posts/Analisis_correspondencia/index.html</link>
   <description><![CDATA[ 
 
 
@@ -1310,7 +1316,7 @@ Holidays      0           1       6     153</code></pre>
 <span id="cb4-5"><span class="fu" style="color: #4758AB;">balloonplot</span>(<span class="fu" style="color: #4758AB;">t</span>(dt), <span class="at" style="color: #657422;">main =</span><span class="st" style="color: #20794D;">"housetasks"</span>, <span class="at" style="color: #657422;">xlab =</span><span class="st" style="color: #20794D;">""</span>, <span class="at" style="color: #657422;">ylab=</span><span class="st" style="color: #20794D;">""</span>,</span>
 <span id="cb4-6">            <span class="at" style="color: #657422;">label =</span> <span class="cn" style="color: #8f5902;">FALSE</span>, <span class="at" style="color: #657422;">show.margins =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
@@ -1475,7 +1481,7 @@ Tenga en cuenta
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.ca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="callout-note callout callout-style-simple callout-captioned">
@@ -1517,7 +1523,7 @@ Según (M. T. Bendixen 1995):
 <div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.ca) <span class="sc" style="color: #5E5E5E;">+</span></span>
 <span id="cb20-2">  <span class="fu" style="color: #4758AB;">geom_hline</span>(<span class="at" style="color: #657422;">yintercept=</span><span class="fl" style="color: #AD0000;">33.33</span>, <span class="at" style="color: #657422;">linetype=</span><span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">color=</span><span class="st" style="color: #20794D;">"red"</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Según el gráfico anterior, solo las dimensiones 1 y 2 deben usarse en la solución. La dimensión 3 explica sólo el 11,4% de la inercia total, que está por debajo del valor propio medio (33,33%) y es demasiado poco para guardarlo para un análisis más detallado.</p>
@@ -1533,7 +1539,7 @@ Según (M. T. Bendixen 1995):
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="co" style="color: #5E5E5E;"># repel= TRUE para evitar la superposición de texto (lenta si tiene muchos puntos)</span></span>
 <span id="cb21-2"><span class="fu" style="color: #4758AB;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico anterior se llama gráfico simétrico y muestra un patrón global dentro de los datos. Las filas están representadas por puntos azules y las columnas por triángulos rojos.</p>
@@ -1581,7 +1587,7 @@ Este gráfico muestra que:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="fu" style="color: #4758AB;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -1633,7 +1639,7 @@ Note
 <span id="cb23-2">               <span class="at" style="color: #657422;">map =</span><span class="st" style="color: #20794D;">"rowprincipal"</span>, <span class="at" style="color: #657422;">arrow =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="cn" style="color: #8f5902;">TRUE</span>, <span class="cn" style="color: #8f5902;">TRUE</span>),</span>
 <span id="cb23-3">               <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Usamos el argumento flechas, que es un vector de dos lógicas que especifican si la gráfica debe contener puntos (<code>FALSE</code>, predeterminado) o flechas (<code>TRUE</code>). El primer valor establece las filas y el segundo valor establece el columnas.</p>
@@ -1653,7 +1659,7 @@ Note
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;">map =</span><span class="st" style="color: #20794D;">"colgreen"</span>, <span class="at" style="color: #657422;">arrow =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="cn" style="color: #8f5902;">TRUE</span>, <span class="cn" style="color: #8f5902;">FALSE</span>),</span>
 <span id="cb24-2">               <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://www.franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>En el gráfico anterior, la posición de los puntos del perfil de la columna no cambia con respecto a la del biplot convencional. Sin embargo, las distancias de los puntos de fila desde el origen de la gráfica están relacionadas con sus contribuciones al mapa de factores bidimensionales.</p>
@@ -1731,14 +1737,14 @@ November 7, 2020. <a href="https://www.franklinsantosm.com/posts/Analisis_corres
   <category>Chi-cuadrado</category>
   <category>Biplot</category>
   <category>Componentes Principales</category>
-  <guid>https://www.franklinsantosm.com/posts/Analisis_correspondencia/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/Analisis_correspondencia/index.html</guid>
   <pubDate>Sat, 07 Nov 2020 08:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantosm.com/posts/Analisis_correspondencia/featured.png" medium="image" type="image/png" height="118" width="144"/>
+  <media:content url="https://franklinsantosm.com/posts/Analisis_correspondencia/featured.png" medium="image" type="image/png" height="118" width="144"/>
 </item>
 <item>
   <title>Ordenar datos con el paquete Tidyverse</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://www.franklinsantosm.com/posts/tidyexam/index.html</link>
+  <link>https://franklinsantosm.com/posts/tidyexam/index.html</link>
   <description><![CDATA[ 
 
 
@@ -1988,9 +1994,9 @@ text-align: justify}
   <category>Data Science</category>
   <category>Tidy Data</category>
   <category>Tidyverse</category>
-  <guid>https://www.franklinsantosm.com/posts/tidyexam/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/tidyexam/index.html</guid>
   <pubDate>Sat, 31 Oct 2020 07:00:00 GMT</pubDate>
-  <media:content url="https://www.franklinsantosm.com/posts/tidyexam/featured.png" medium="image" type="image/png" height="67" width="144"/>
+  <media:content url="https://franklinsantosm.com/posts/tidyexam/featured.png" medium="image" type="image/png" height="67" width="144"/>
 </item>
 </channel>
 </rss>
