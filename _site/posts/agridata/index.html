@@ -208,24 +208,7 @@ text-align: justify}
 <h2 class="anchored" data-anchor-id="base-de-datos">Base de datos</h2>
 <p>Para esta oportunidad daremos uso de la base de datos de <code>iris</code>. Estos datos estarán disponibles al momento de instalar R.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Species Sepal.Length Sepal.Width Petal.Length Petal.Width
-1  setosa          5.1         3.5          1.4         0.2
-2  setosa          4.9         3.0          1.4         0.2
-3  setosa          4.7         3.2          1.3         0.2
-4  setosa          4.6         3.1          1.5         0.2
-5  setosa          5.0         3.6          1.4         0.2
-6  setosa          5.4         3.9          1.7         0.4</code></pre>
-</div>
+
 </div>
 </section>
 <section id="análisis-descriptivo" class="level2">
@@ -366,20 +349,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Una vez identificada las diferencias estadisticas se procede a realizar pruebas de promedio para seleccionar genotipos sobresalientes.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>           setosa versicolor virginica
-setosa     [5.01]     &lt;.0001    &lt;.0001
-versicolor -0.930     [5.94]    &lt;.0001
-virginica  -1.582     -0.652    [6.59]
 
-Row and column labels: Species
-Upper triangle: P values   adjust = "tukey"
-Diagonal: [Estimates] (emmean) 
-Lower triangle: Comparisons (estimate)   earlier vs. later</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 <p>Hay otra manera de representar comparaciones graficamente</p>
 <div class="cell">
@@ -390,15 +360,10 @@ Lower triangle: Comparisons (estimate)   earlier vs. later</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1056"></p>
 </div>
 </div>
+<p>Tambien existe otra opción con el paquete <code>AgroR</code></p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'AgroR'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:dplyr':
-
-    desc</code></pre>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -406,35 +371,23 @@ Attaching package: 'AgroR'</code></pre>
 Normality of errors
 -----------------------------------------------------------------
                          Method Statistic   p.value
- Shapiro-Wilk normality test(W) 0.9878974 0.2188639</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered normal</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
+ Shapiro-Wilk normality test(W) 0.9878974 0.2188639
+
+
 -----------------------------------------------------------------
 Homogeneity of Variances
 -----------------------------------------------------------------
                               Method Statistic      p.value
- Bartlett test(Bartlett's K-squared)   16.0057 0.0003345076</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>As the calculated p-value is less than the 5% significance level, H0 is rejected.Therefore, the variances are not homogeneous</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
+ Bartlett test(Bartlett's K-squared)   16.0057 0.0003345076
+
+
 -----------------------------------------------------------------
 Independence from errors
 -----------------------------------------------------------------
                  Method Statistic   p.value
- Durbin-Watson test(DW)  2.043002 0.5401261</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered independent</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
+ Durbin-Watson test(DW)  2.043002 0.5401261
+
+
 -----------------------------------------------------------------
 Additional Information
 -----------------------------------------------------------------
@@ -450,13 +403,10 @@ Analysis of Variance
 -----------------------------------------------------------------
            Df   Sum Sq    Mean.Sq  F value        Pr(F)
 trat        2 63.21213 31.6060667 119.2645 1.669669e-31
-Residuals 147 38.95620  0.2650082                      </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>As the calculated p-value, it is less than the 5% significance level.The hypothesis H0 of equality of means is rejected. Therefore, at least two treatments differ</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
+Residuals 147 38.95620  0.2650082                      
+
+
+
 
 -----------------------------------------------------------------
 Multiple Comparison Test: Tukey HSD
@@ -465,16 +415,6 @@ Multiple Comparison Test: Tukey HSD
 virginica  6.588      a
 versicolor 5.936      b
 setosa     5.006      c</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Your analysis is not valid, suggests using a non-parametric test and try to transform the data</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid" width="672"></p>
@@ -487,44 +427,68 @@ Your analysis is not valid, suggests using a non-parametric test and try to tran
 
 </div>
 <div class="cell">
+
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 -------------------------------------------------------------------------------
 Principal Component Analysis
 -------------------------------------------------------------------------------
-# A tibble: 4 × 4
-  PC    Eigenvalues `Variance (%)` `Cum. variance (%)`
-  &lt;chr&gt;       &lt;dbl&gt;          &lt;dbl&gt;               &lt;dbl&gt;
-1 PC1          3.67          91.8                 91.8
-2 PC2          0.33           8.19               100  
-3 PC3          0              0                  100  
-4 PC4          0              0                  100  
+# A tibble: 22 × 4
+   PC    Eigenvalues `Variance (%)` `Cum. variance (%)`
+   &lt;chr&gt;       &lt;dbl&gt;          &lt;dbl&gt;               &lt;dbl&gt;
+ 1 PC1         14.2            64.4                64.4
+ 2 PC2          5.24           23.8                88.2
+ 3 PC3          2.58           11.8               100  
+ 4 PC4          0               0                 100  
+ 5 PC5          0               0                 100  
+ 6 PC6          0               0                 100  
+ 7 PC7          0               0                 100  
+ 8 PC8          0               0                 100  
+ 9 PC9          0               0                 100  
+10 PC10         0               0                 100  
+# … with 12 more rows
 -------------------------------------------------------------------------------
 Factor Analysis - factorial loadings after rotation-
 -------------------------------------------------------------------------------
-# A tibble: 4 × 4
-  VAR            FA1 Communality Uniquenesses
-  &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
-1 Sepal.Length  0.98        0.96         0.04
-2 Sepal.Width  -0.86        0.74         0.26
-3 Petal.Length  1           0.99         0.01
-4 Petal.Width   0.99        0.97         0.03
+# A tibble: 22 × 6
+   VAR     FA1   FA2   FA3 Communality Uniquenesses
+   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+ 1 NNCF  -0.72 -0.67 -0.17           1            0
+ 2 WNCF  -0.65 -0.75 -0.14           1            0
+ 3 AWNCF  0.63  0.49  0.6            1            0
+ 4 WUE    1     0.04  0.03           1            0
+ 5 NDBF  -0.11  0.07 -0.99           1            0
+ 6 NDFF  -0.16 -0.24 -0.96           1            0
+ 7 NDBH  -0.17  0.07 -0.98           1            0
+ 8 PHYL   0.6   0.79 -0.12           1            0
+ 9 TA     0.84  0.1   0.54           1            0
+10 NCF   -0.84 -0.42 -0.35           1            0
+# … with 12 more rows
 -------------------------------------------------------------------------------
-Comunalit Mean: 0.9180692 
+Comunalit Mean: 1 
 -------------------------------------------------------------------------------
 Selection differential 
 -------------------------------------------------------------------------------
-# A tibble: 4 × 8
-  VAR          Factor    Xo    Xs     SD SDperc sense     goal
-  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
-1 Sepal.Length FA1     5.85  6.26  0.418   7.16 increase   100
-2 Sepal.Width  FA1     3.06  2.87 -0.187  -6.11 increase     0
-3 Petal.Length FA1     3.76  4.90  1.15   30.6  increase   100
-4 Petal.Width  FA1     1.20  1.68  0.477  39.6  increase   100
+# A tibble: 22 × 8
+   VAR    Factor       Xo       Xs        SD  SDperc sense     goal
+   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+ 1 NNCF   FA1        7.20     7.86    0.650    9.02  increase   100
+ 2 AWNCF  FA1        8.74     8.70   -0.0425  -0.486 increase     0
+ 3 WUE    FA1      116.     101.    -15.0    -12.9   increase     0
+ 4 TA     FA1        1.42     1.35   -0.0700  -4.93  increase     0
+ 5 NCF    FA1       23.5     25.0     1.52     6.48  increase   100
+ 6 TNF    FA1       30.7     32.8     2.16     7.04  increase   100
+ 7 WCF    FA1      359.     395.     36.9     10.3   increase   100
+ 8 TWF    FA1      413.     442.     29.1      7.05  increase   100
+ 9 FY     FA1    30957.   33137.   2180.       7.04  increase   100
+10 TSS_TA FA1        5.39     5.66    0.268    4.96  increase   100
+# … with 12 more rows
 ------------------------------------------------------------------------------
 Selected genotypes
 -------------------------------------------------------------------------------
-versicolor virginica
+NAC_CAM IMP_ALB
 -------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
@@ -541,7 +505,7 @@ versicolor virginica
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="1056"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="1056"></p>
 </div>
 </div>
 

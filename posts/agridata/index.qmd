@@ -10,7 +10,7 @@ author:
     orcid: 0000-0002-7509-2910
     email: franklin25santos@gmail.com
 date: "2023-01-01"
-image: plot.png
+image: pic.png
 citation: true
 editor_options: 
   chunk_output_type: console
@@ -22,6 +22,8 @@ body {
 text-align: justify}
 </style>
 ```
+
+
 # Introducción
 
 El análisis de datos es una etapa esencial en el proceso de investigación y consiste en examinar y analizar los datos recopilados de manera detallada para extraer información y obtener conclusiones relevantes en función a los objetivos de la investigación. Para realizar el análisis de datos, se pueden utilizar diferentes herramientas y técnicas, generalmente se construyen tablas y figuras. Estos resultados son usados para tomar decisiones y formular conclusiones sobre los datos, y también pueden ser utilizados para mejorar y optimizar procesos y sistemas. El análisis de datos es importante ya que permite a los investigadores obtener una visión más profunda y detallada de los datos y tomar decisiones más informadas y precisas.
@@ -36,10 +38,11 @@ La etapa de análisis de datos puede resultar un reto difícil para un recien eg
 #| warning: false
 #| echo: false
 library(tidyverse)
-library(metan)
-library(flextable)
-library(kableExtra)
-library(factoextra)
+library(metan)     #Multivariate analysis
+library(flextable) #Manipulate table
+library(kableExtra) #Table formar
+library(factoextra) #Principal component
+library(rio)        #Import data
 ```
 
 ## Base de datos
@@ -49,11 +52,11 @@ Para esta oportunidad daremos uso de la base de datos de `iris`. Estos datos est
 ```{r}
 #| echo: false
 #datos originales
-head(iris)
+#head(iris)
 data = iris %>% # Asignando a una variable
   dplyr::select("Species", #Ordenando los datos
                 everything())
-head(data)
+
 ```
 
 ## Análisis descriptivo
@@ -124,6 +127,8 @@ p4 = ggplot(data = data,
 arrange_ggplot(p1, p2, p3, p4,
                ncol = 2,
                tag_levels = "a")
+
+ggsave("figs/fig1.pdf", width = 10, height = 5)
 ```
 
 ## Análisis de varianza
@@ -298,9 +303,9 @@ medias1 = emmeans(anova1, ~Species)
 medias2 = emmeans(anova2, ~Species)
 medias3 = emmeans(anova3, ~Species)
 medias4 = emmeans(anova4, ~Species)
-pwpm(medias1)
+#pwpm(medias1)
 
-pwpp(medias1)
+#pwpp(medias1)
 ```
 
 Hay otra manera de representar comparaciones graficamente
@@ -358,35 +363,52 @@ arrange_ggplot((p1 + p2 + p3 + p4),
               
 ```
 
+Tambien existe otra opción con el paquete `AgroR`
+
 ```{r}
 #| echo: false
+#| warning: false
+#| message: false
 # Utilizando paquete AgroR
 library(AgroR)
-with(data,
+anva = with(data,
      DIC(Species, Sepal.Length))
 ```
 
 ## Análisis multivariado
 
+
 ```{r}
 #| echo: false
-df = data %>%
-  means_by(Species)%>%
+# data for example
+df = import("https://bit.ly/strawberry_data", setclass = "tbl")%>%
+         metan::as_factor(1:4)
+```
+
+
+```{r}
+#| echo: false
+df_ori_cul = df %>%
+  means_by(ORI, CUL)%>%
+  concatenate(ORI, CUL, new_var = TRAT, .after = CUL)%>%
+  remove_cols(ORI, CUL) %>%
   round_cols()%>%
-  column_to_rownames("Species")
+  column_to_rownames("TRAT")
+
+
 ```
 
 ```{r}
 #| echo: false
-mgidi_species = mgidi(df,                         # a two-way table
+mgidi_cul_ori = mgidi(df_ori_cul,                         # a two-way table
               SI = 50)                    # select two treatments
 ```
 
 ```{r fig.width=10}
 #| echo: false
 #Plot the MGIDI index
-p_ind_species = 
-  plot(mgidi_species,
+p_ind_cult_ori = 
+  plot(mgidi_cul_ori,
        SI = 50,
        radar = FALSE,
        x.lab = "Species",
@@ -399,8 +421,8 @@ p_ind_species =
 ```{r warning=FALSE, message=FALSE, fig.height=8, fig.width=5}
 #| echo: false
 # The strengths and weaknesses view
-p_cont_species =
-  plot(mgidi_species,
+p_cont_cul_ori =
+  plot(mgidi_cul_ori,
        type = "contribution", # Get the proportion plot
        genotypes = "all", # All treatment (selected treatment are plotted by default)
        title = "") +
@@ -411,17 +433,16 @@ p_cont_species =
 ```{r}
 #| echo: false
 # PCA
-
-pca_species = prcomp(df, scale. = TRUE)
+pca_cul_ori = prcomp(df_ori_cul, scale. = TRUE)
 factors = 
-  mgidi_species$sel_dif %>%
+  mgidi_cul_ori$sel_dif %>%
   select(VAR, Factor)
 factors = 
-  data.frame(VAR = names(df)) %>%
+  data.frame(VAR = names(df_ori_cul)) %>%
   left_join(factors)
 
 pca = 
-  fviz_pca_biplot(pca_species,
+  fviz_pca_biplot(pca_cul_ori,
                   repel = TRUE,
                   col.var = factors$Factor) +
   labs(color = "") +
@@ -433,11 +454,13 @@ pca =
 ```{r fig.width=11, fig.height=5}
 #| echo: false
 # Save the plot
-arrange_ggplot(p_ind_species,
-               p_cont_species,
+arrange_ggplot(p_ind_cult_ori,
+               p_cont_cul_ori,
                pca,
                ncol = 3,
                tag_levels = "a")
+
+
 ```
 
 
