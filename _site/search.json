@@ -186,7 +186,7 @@
     "href": "index.html",
     "title": "Franklin Santos",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nMapas de Bolivia\n\n\n\nmaps\n\n\nBolivia\n\n\nbioinformatic\n\n\n\nVamos a generar mapas de Bolivia.\n\n\n\nFranklin Santos\n\n\nFeb 1, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de datos experimentales agrícolas\n\n\n\nagridata\n\n\ndata science\n\n\nbioinformatic\n\n\n\nUso de datos agrícolas y metodologias básicas para un tesista o investigador despues de haber culminado la etapa de campo.\n\n\n\nFranklin Santos\n\n\nJan 1, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de Componentes Principales\n\n\n\nBiplot\n\n\nComponentes Principales\n\n\nCorrelation\n\n\n\nEl análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables…\n\n\n\nFranklin Santos\n\n\nDec 15, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de Varianza y Prueba de Promedios en R\n\n\n\nANOVA\n\n\nPost hoc\n\n\nInferencial Statistic\n\n\n\nLa figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.\n\n\n\nFranklin Santos\n\n\nNov 15, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de correspondencia con R\n\n\n\nChi-cuadrado\n\n\nBiplot\n\n\nComponentes Principales\n\n\n\nAnálisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate…\n\n\n\nFranklin Santos\n\n\nNov 7, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrdenar datos con el paquete Tidyverse\n\n\n\nData Science\n\n\nTidy Data\n\n\nTidyverse\n\n\n\nEs un ejemplo de caso extraido del libro R4DS.\n\n\n\nFranklin Santos\n\n\nOct 31, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nInteligencia artificial en la agricultura\n\n\n\nAI\n\n\nArtificial Intelligence\n\n\nAgriculture\n\n\n\nLa inteligencia artificial (IA) es una tecnología emergente que ha revolucionado muchas industrias, incluyendo la industria agrícola. Con la aplicación de la IA en la…\n\n\n\nFranklin Santos\n\n\nMar 15, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMapas de Bolivia\n\n\n\nmaps\n\n\nBolivia\n\n\nbioinformatic\n\n\n\nVamos a generar mapas de Bolivia.\n\n\n\nFranklin Santos\n\n\nFeb 1, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de datos experimentales agrícolas\n\n\n\nagridata\n\n\ndata science\n\n\nbioinformatic\n\n\n\nUso de datos agrícolas y metodologias básicas para un tesista o investigador despues de haber culminado la etapa de campo.\n\n\n\nFranklin Santos\n\n\nJan 1, 2023\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de Componentes Principales\n\n\n\nBiplot\n\n\nComponentes Principales\n\n\nCorrelation\n\n\n\nEl análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables…\n\n\n\nFranklin Santos\n\n\nDec 15, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de Varianza y Prueba de Promedios en R\n\n\n\nANOVA\n\n\nPost hoc\n\n\nInferencial Statistic\n\n\n\nLa figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.\n\n\n\nFranklin Santos\n\n\nNov 15, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de correspondencia con R\n\n\n\nChi-cuadrado\n\n\nBiplot\n\n\nComponentes Principales\n\n\n\nAnálisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate…\n\n\n\nFranklin Santos\n\n\nNov 7, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrdenar datos con el paquete Tidyverse\n\n\n\nData Science\n\n\nTidy Data\n\n\nTidyverse\n\n\n\nEs un ejemplo de caso extraido del libro R4DS.\n\n\n\nFranklin Santos\n\n\nOct 31, 2020\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -222,5 +222,61 @@
     "title": "Posts",
     "section": "",
     "text": "Análisis de Componentes Principales\n\n\n\n\n\nEl análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.\n\n\n\n\n\n\nDec 15, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\nAnálisis de Varianza y Prueba de Promedios en R\n\n\n\n\n\nLa figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.\n\n\n\n\n\n\nNov 15, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\nAnálisis de correspondencia con R\n\n\n\n\n\nAnálisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R.\n\n\n\n\n\n\nNov 7, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\nAnálisis de datos experimentales agrícolas\n\n\n\n\n\nUso de datos agrícolas y metodologias básicas para un tesista o investigador despues de haber culminado la etapa de campo.\n\n\n\n\n\n\nJan 1, 2023\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\nFranklin Santos\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nMapas de Bolivia\n\n\n\n\n\nVamos a generar mapas de Bolivia.\n\n\n\n\n\n\nFeb 1, 2023\n\n\nFranklin Santos\n\n\n\n\n\n\n  \n\n\n\n\nOrdenar datos con el paquete Tidyverse\n\n\n\n\n\nEs un ejemplo de caso extraido del libro R4DS.\n\n\n\n\n\n\nOct 31, 2020\n\n\nFranklin Santos\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/Surface Response/index.html",
+    "href": "posts/Surface Response/index.html",
+    "title": "Superficies de respuesta",
+    "section": "",
+    "text": "Los diseños experimentales de superficie de respuesta y el análisis de sus resultados están orientados a determinar la combinación óptima de factores que nos permita obtener la mejor respuesta dentro de la región experimental. Como mejor respuesta podemos referirnos a un máximo o a un mínimo dependiendo de nuestros objetivos.\nEs recomendable que los diseños de superficie de respuesta se realicen una vez hayamos determinado previamente qué factores tienen un efecto significativo sobre la respuesta. Esto puede hacerse mediante un diseño fraccionado.\nLas superficies de respuesta son herramientas útiles en ensayos de manejo agronómico. Estas superficies muestran cómo una variable de interés, como el rendimiento de un cultivo, responde a diferentes niveles de una o más variables de manejo, como la cantidad de fertilizante aplicado o el momento de la siembra.\nLas superficies de respuesta se construyen utilizando datos de ensayos de campo, en los que se evalúan diferentes niveles de la variable de manejo de interés. Por ejemplo, se podría evaluar el efecto de diferentes niveles de fertilización en el rendimiento de un cultivo. Para cada nivel de fertilización, se mide el rendimiento del cultivo y se registra en una tabla de datos.\nUna vez que se tienen los datos, se pueden graficar en una superficie de respuesta. En este tipo de gráfico, los niveles de la variable de manejo se representan en los ejes x e y, mientras que el rendimiento del cultivo se representa en el eje z. La superficie resultante muestra cómo el rendimiento del cultivo cambia en función de los niveles de la variable de manejo.\nLas superficies de respuesta son útiles para optimizar el manejo agronómico, ya que permiten identificar los niveles óptimos de las variables de manejo para maximizar el rendimiento del cultivo. Por ejemplo, la superficie de respuesta podría mostrar que el rendimiento del cultivo es máximo cuando se aplica una cantidad específica de fertilizante. Al conocer esta información, los agricultores pueden ajustar su manejo para maximizar el rendimiento y reducir los costos de producción."
+  },
+  {
+    "objectID": "posts/Surface Response/index.html#generación-de-diseños-de-superficie-con-el-paquete-rsm",
+    "href": "posts/Surface Response/index.html#generación-de-diseños-de-superficie-con-el-paquete-rsm",
+    "title": "Superficies de respuesta",
+    "section": "Generación de diseños de superficie con el paquete rsm",
+    "text": "Generación de diseños de superficie con el paquete rsm\nLa generación de este tipo de diseños es bastante sencilla con el paquete rsm. Si desea ver la funcionalidad completa de este paquete pulse en el siguiente enlace: paquete rsm. También existe un documento con varios ejemplos en el siguiente enlace: ejemplos con rsm."
+  },
+  {
+    "objectID": "posts/AI/index.html",
+    "href": "posts/AI/index.html",
+    "title": "Inteligencia artificial en la agricultura",
+    "section": "",
+    "text": "La inteligencia artificial es la capacidad de una máquina o sistema de software para realizar tareas que normalmente requerirían inteligencia humana, como el aprendizaje, la percepción, el razonamiento y la toma de decisiones. La IA puede ser utilizada en una amplia variedad de aplicaciones, desde el reconocimiento de imágenes hasta la automatización de procesos."
+  },
+  {
+    "objectID": "posts/AI/index.html#el-estado-del-arte-de-la-ia",
+    "href": "posts/AI/index.html#el-estado-del-arte-de-la-ia",
+    "title": "Inteligencia artificial en la agricultura",
+    "section": "El estado del arte de la IA",
+    "text": "El estado del arte de la IA\nEn la actualidad, la IA se encuentra en un estado avanzado de desarrollo. Los sistemas de IA están mejorando rápidamente y se están utilizando en una amplia variedad de aplicaciones, incluyendo la medicina, el transporte, la banca y la industria agrícola."
+  },
+  {
+    "objectID": "posts/AI/index.html#desafíos-y-oportunidades-futuras",
+    "href": "posts/AI/index.html#desafíos-y-oportunidades-futuras",
+    "title": "Inteligencia artificial en la agricultura",
+    "section": "Desafíos y oportunidades futuras",
+    "text": "Desafíos y oportunidades futuras\nA pesar del progreso significativo, todavía hay desafíos que se deben abordar en la aplicación de la IA en la agricultura. Algunos de estos desafíos incluyen la falta de datos de calidad y la resistencia de los agricultores a adoptar nuevas tecnologías. Sin embargo, la oportunidad de mejorar la producción y la sostenibilidad agrícola mediante la aplicación de la IA sigue siendo significativa."
+  },
+  {
+    "objectID": "posts/AI/index.html#habilidades-en-programación-y-ciencia-de-datos-para-ingenieros-agrónomos",
+    "href": "posts/AI/index.html#habilidades-en-programación-y-ciencia-de-datos-para-ingenieros-agrónomos",
+    "title": "Inteligencia artificial en la agricultura",
+    "section": "Habilidades en programación y ciencia de datos para ingenieros agrónomos",
+    "text": "Habilidades en programación y ciencia de datos para ingenieros agrónomos\nLos ingenieros agrónomos pueden mejorar su trabajo en la agronomía aprendiendo habilidades en programación y ciencia de datos. Estas habilidades incluyen aprender los fundamentos de programación, lenguajes de programación populares, realizar cursos en línea o presenciales, trabajar en proyectos prácticos y participar en eventos y comunidades de programación y ciencia de datos."
+  },
+  {
+    "objectID": "posts/AI/index.html#la-aplicación-de-la-ia-en-la-agricultura",
+    "href": "posts/AI/index.html#la-aplicación-de-la-ia-en-la-agricultura",
+    "title": "Inteligencia artificial en la agricultura",
+    "section": "La aplicación de la IA en la agricultura",
+    "text": "La aplicación de la IA en la agricultura\nLa aplicación de la IA en la agricultura puede proporcionar soluciones para mejorar la producción, la calidad y la sostenibilidad de los cultivos. Algunas de las aplicaciones de la IA en la agricultura incluyen el análisis de datos agrícolas para la toma de decisiones, la automatización de procesos agrícolas, el monitoreo y la detección de enfermedades en los cultivos, la identificación de plagas y la predicción de la calidad de los cultivos."
+  },
+  {
+    "objectID": "posts/AI/index.html#conclusión",
+    "href": "posts/AI/index.html#conclusión",
+    "title": "Inteligencia artificial en la agricultura",
+    "section": "Conclusión",
+    "text": "Conclusión\nLa IA es una tecnología emergente que tiene el potencial de revolucionar la forma en que se aborda la producción agrícola. Los ingenieros agrónomos pueden mejorar su trabajo en la agronomía aprendiendo habilidades en programación y ciencia de datos, lo que les permitirá aprovechar la IA para mejorar la producción, la calidad y la sostenibilidad de los cultivos. A medida que la tecnología continúa avanzando, es probable que veamos aún más aplicaciones de la IA en la industria agrícola."
   }
 ]

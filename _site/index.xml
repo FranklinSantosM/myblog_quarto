@@ -9,8 +9,66 @@
 <link>https://franklinsantosm.com/index.html</link>
 <atom:link href="https://franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
-<generator>quarto-1.2.269</generator>
-<lastBuildDate>Wed, 01 Feb 2023 08:00:00 GMT</lastBuildDate>
+<generator>quarto-1.2.335</generator>
+<lastBuildDate>Wed, 15 Mar 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Inteligencia artificial en la agricultura</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://franklinsantosm.com/posts/AI/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="qué-es-la-inteligencia-artificial" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-la-inteligencia-artificial">¿Qué es la inteligencia artificial?</h2>
+<p>La inteligencia artificial es la capacidad de una máquina o sistema de software para realizar tareas que normalmente requerirían inteligencia humana, como el aprendizaje, la percepción, el razonamiento y la toma de decisiones. La IA puede ser utilizada en una amplia variedad de aplicaciones, desde el reconocimiento de imágenes hasta la automatización de procesos.</p>
+</section>
+<section id="el-estado-del-arte-de-la-ia" class="level2">
+<h2 class="anchored" data-anchor-id="el-estado-del-arte-de-la-ia">El estado del arte de la IA</h2>
+<p>En la actualidad, la IA se encuentra en un estado avanzado de desarrollo. Los sistemas de IA están mejorando rápidamente y se están utilizando en una amplia variedad de aplicaciones, incluyendo la medicina, el transporte, la banca y la industria agrícola.</p>
+</section>
+<section id="desafíos-y-oportunidades-futuras" class="level2">
+<h2 class="anchored" data-anchor-id="desafíos-y-oportunidades-futuras">Desafíos y oportunidades futuras</h2>
+<p>A pesar del progreso significativo, todavía hay desafíos que se deben abordar en la aplicación de la IA en la agricultura. Algunos de estos desafíos incluyen la falta de datos de calidad y la resistencia de los agricultores a adoptar nuevas tecnologías. Sin embargo, la oportunidad de mejorar la producción y la sostenibilidad agrícola mediante la aplicación de la IA sigue siendo significativa.</p>
+</section>
+<section id="habilidades-en-programación-y-ciencia-de-datos-para-ingenieros-agrónomos" class="level2">
+<h2 class="anchored" data-anchor-id="habilidades-en-programación-y-ciencia-de-datos-para-ingenieros-agrónomos">Habilidades en programación y ciencia de datos para ingenieros agrónomos</h2>
+<p>Los ingenieros agrónomos pueden mejorar su trabajo en la agronomía aprendiendo habilidades en programación y ciencia de datos. Estas habilidades incluyen aprender los fundamentos de programación, lenguajes de programación populares, realizar cursos en línea o presenciales, trabajar en proyectos prácticos y participar en eventos y comunidades de programación y ciencia de datos.</p>
+</section>
+<section id="la-aplicación-de-la-ia-en-la-agricultura" class="level2">
+<h2 class="anchored" data-anchor-id="la-aplicación-de-la-ia-en-la-agricultura">La aplicación de la IA en la agricultura</h2>
+<p>La aplicación de la IA en la agricultura puede proporcionar soluciones para mejorar la producción, la calidad y la sostenibilidad de los cultivos. Algunas de las aplicaciones de la IA en la agricultura incluyen el análisis de datos agrícolas para la toma de decisiones, la automatización de procesos agrícolas, el monitoreo y la detección de enfermedades en los cultivos, la identificación de plagas y la predicción de la calidad de los cultivos.</p>
+</section>
+<section id="conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
+<p>La IA es una tecnología emergente que tiene el potencial de revolucionar la forma en que se aborda la producción agrícola. Los ingenieros agrónomos pueden mejorar su trabajo en la agronomía aprendiendo habilidades en programación y ciencia de datos, lo que les permitirá aprovechar la IA para mejorar la producción, la calidad y la sostenibilidad de los cultivos. A medida que la tecnología continúa avanzando, es probable que veamos aún más aplicaciones de la IA en la industria agrícola.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+  author = {Franklin Santos},
+  title = {Inteligencia Artificial En La Agricultura},
+  date = {2023-03-15},
+  url = {https://franklinsantosm.com/posts/AI},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
+Franklin Santos. 2023. <span>“Inteligencia Artificial En La
+Agricultura.”</span> March 15, 2023. <a href="https://franklinsantosm.com/posts/AI">https://franklinsantosm.com/posts/AI</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>Artificial Intelligence</category>
+  <category>Agriculture</category>
+  <guid>https://franklinsantosm.com/posts/AI/index.html</guid>
+  <pubDate>Wed, 15 Mar 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://franklinsantosm.com/posts/AI/ai.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Mapas de Bolivia</title>
   <dc:creator>Franklin Santos</dc:creator>
@@ -86,7 +144,7 @@ Franklin Santos. 2023. <span>“Mapas de Bolivia.”</span> February 1,
   <category>Bolivia</category>
   <category>bioinformatic</category>
   <guid>https://franklinsantosm.com/posts/maps/index.html</guid>
-  <pubDate>Wed, 01 Feb 2023 08:00:00 GMT</pubDate>
+  <pubDate>Wed, 01 Feb 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/maps/map.png" medium="image" type="image/png" height="112" width="144"/>
 </item>
 <item>
@@ -439,7 +497,7 @@ Agrícolas.”</span> January 1, 2023. <a href="https://franklinsantosm.com/post
   <category>data science</category>
   <category>bioinformatic</category>
   <guid>https://franklinsantosm.com/posts/agridata/index.html</guid>
-  <pubDate>Sun, 01 Jan 2023 08:00:00 GMT</pubDate>
+  <pubDate>Sun, 01 Jan 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/agridata/pic.png" medium="image" type="image/png" height="65" width="144"/>
 </item>
 <item>
@@ -642,7 +700,7 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
   <category>Componentes Principales</category>
   <category>Correlation</category>
   <guid>https://franklinsantosm.com/posts/componentes_principales/index.html</guid>
-  <pubDate>Tue, 15 Dec 2020 08:00:00 GMT</pubDate>
+  <pubDate>Tue, 15 Dec 2020 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
 </item>
 <item>
@@ -1196,7 +1254,7 @@ $`Residual analysis`$`standardized residuals`
   <category>Post hoc</category>
   <category>Inferencial Statistic</category>
   <guid>https://franklinsantosm.com/posts/anova/index.html</guid>
-  <pubDate>Sun, 15 Nov 2020 08:00:00 GMT</pubDate>
+  <pubDate>Sun, 15 Nov 2020 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/anova/featured.png" medium="image" type="image/png" height="118" width="144"/>
 </item>
 <item>
@@ -1702,7 +1760,7 @@ November 7, 2020. <a href="https://franklinsantosm.com/posts/Analisis_correspond
   <category>Biplot</category>
   <category>Componentes Principales</category>
   <guid>https://franklinsantosm.com/posts/Analisis_correspondencia/index.html</guid>
-  <pubDate>Sat, 07 Nov 2020 08:00:00 GMT</pubDate>
+  <pubDate>Sat, 07 Nov 2020 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/Analisis_correspondencia/featured.png" medium="image" type="image/png" height="118" width="144"/>
 </item>
 <item>
@@ -1959,7 +2017,7 @@ text-align: justify}
   <category>Tidy Data</category>
   <category>Tidyverse</category>
   <guid>https://franklinsantosm.com/posts/tidyexam/index.html</guid>
-  <pubDate>Sat, 31 Oct 2020 07:00:00 GMT</pubDate>
+  <pubDate>Sat, 31 Oct 2020 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/tidyexam/featured.png" medium="image" type="image/png" height="67" width="144"/>
 </item>
 </channel>
