@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/julia/index.html",
       "/posts/AI/index.html",
       "/posts/maps/index.html",
       "/posts/agridata/index.html",
