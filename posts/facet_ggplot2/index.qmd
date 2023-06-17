@@ -1,0 +1,123 @@
+---
+title: "ggplot2: facet_wrap, facet_grid"
+description: |
+  facet_grid y facet_wrap son funciones poderosas de ggplot2 que permiten dividir un gráfico en múltiples paneles según variables categóricas. Estas funciones son útiles para explorar la relación entre variables en diferentes subconjuntos de datos y ayudan a visualizar patrones y tendencias de manera más efectiva.
+categories: [ggplot2, facet_wrap, facet_grid]
+author:
+  - name: Franklin Santos
+    url: https://franklinsantosm.com
+    affiliation: AgriTech Bolivia
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2023-05-15"
+image: ggp.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+## Introducción
+
+`ggplot2` es un paquete de visualización de datos en R que utiliza la gramática de gráficos para crear gráficos flexibles y de alta calidad. Con su sintaxis intuitiva, amplias opciones de personalización y variedad de gráficos predefinidos, `ggplot2` se ha convertido en una herramienta popular y poderosa para la visualización de datos en la comunidad de R.
+
+
+`facet_grid` y `facet_wrap` son dos funciones en el paquete `ggplot2` de R que permiten dividir un gráfico en múltiples paneles según las variables de una o varias variables categóricas. Estas funciones son especialmente útiles cuando se desea explorar la relación entre variables en diferentes subconjuntos de datos.
+
+## Facet wrap
+
+```{r}
+library(ggplot2)
+mpg2 <- subset(mpg, cyl != 5 & drv %in% c("4", "f") & class != "2seater")
+base <- ggplot(mpg2, aes(displ, hwy)) + 
+  geom_blank() + 
+  xlab(NULL) + 
+  ylab(NULL)
+
+base + facet_wrap(~class, ncol = 3)
+base + facet_wrap(~class, ncol = 3, as.table = FALSE)
+```
+
+
+```{r}
+base + facet_wrap(~class, nrow = 3)
+base + facet_wrap(~class, nrow = 3, dir = "v")
+```
+
+## Facet grid
+
+```{r}
+base + facet_grid(. ~ cyl)
+```
+
+-   `facet_grid()` dispone los gráficos en una cuadrícula 2D, definida por una fórmula:
+
+`. ~ a` distribuye los valores de `a` a través de las columnas. Esta dirección facilita las comparaciones de la posición y, porque las escalas verticales están alineadas.
+
+```{r}
+base + facet_grid(. ~ cyl)
+```
+
+-   `b ~ .` reparte los valores de `b` por las filas. Esta dirección facilita la comparación de la posición x porque las escalas horizontales están alineadas. Esto la hace especialmente útil para comparar distribuciones.
+
+
+```{r}
+base + facet_grid(drv ~ .)
+```
+
+-   `b ~ a` distribuye `a` a lo largo de las columnas y `b` a lo largo de las filas. Normalmente querrás poner la variable con el mayor número de niveles en las columnas, para aprovechar la relación de aspecto de tu pantalla.
+
+```{r}
+base + facet_grid(drv ~ cyl)
+```
+
+Puede utilizar múltiples variables en las filas o columnas, "sumándolas", por ejemplo `a + b ~ c + d`. Las variables que aparecen juntas en las filas o columnas están anidadas en el sentido de que sólo las combinaciones que aparecen en los datos aparecerán en el gráfico. Las variables que se especifican en filas y columnas se cruzarán: se mostrarán todas las combinaciones, incluidas las que no aparecían en el conjunto de datos original: esto puede dar lugar a paneles vacíos.
+
+```{r}
+
+# Simulación de datos
+set.seed(4)
+x <- runif(500)
+y <- 4 * x ^ 2 + rnorm(length(x), sd = 5)
+grupo1 <- ifelse(x < 0.4, "G1", ifelse(x < 0.6, "G2", ifelse(x < 0.8, "G3", "G4")))
+grupo2 <- ifelse(y < 0.5, "A", "B")
+x <- x + runif(length(x), -0.5, 0.5)
+
+# Data frame
+df <- data.frame(x = x, y = y, grupo1 = grupo1, grupo2 = grupo2)
+
+# Matriz de gráficos
+ggplot(df, aes(x = x, y = y, color = grupo1)) +
+  geom_point(show.legend = FALSE) +
+  facet_grid(grupo1 ~ grupo2, scales = "free") 
+
+```
+
+
+## Controlando escalas 
+
+```{r}
+economics_long
+ggplot(economics_long, aes(date, value)) + 
+  geom_line() + 
+  facet_wrap(~variable, scales = "free_y", ncol = 1)
+```
+
+```{r}
+mpg2$model <- reorder(mpg2$model, mpg2$cty)
+mpg2$manufacturer <- reorder(mpg2$manufacturer, -mpg2$cty)
+
+ggplot(mpg2, aes(cty, model)) + 
+  geom_point() + 
+  facet_grid(manufacturer ~ ., scales = "free", space = "free") +
+  theme(strip.text.y = element_text(angle = 0))
+```
+
+
+

@@ -9,8 +9,503 @@
 <link>https://franklinsantosm.com/index.html</link>
 <atom:link href="https://franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
-<generator>quarto-1.2.335</generator>
-<lastBuildDate>Tue, 25 Apr 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.353</generator>
+<lastBuildDate>Mon, 15 May 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>ggplot2: facet_wrap, facet_grid</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://franklinsantosm.com/posts/facet_ggplot2/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p><code>ggplot2</code> es un paquete de visualización de datos en R que utiliza la gramática de gráficos para crear gráficos flexibles y de alta calidad. Con su sintaxis intuitiva, amplias opciones de personalización y variedad de gráficos predefinidos, <code>ggplot2</code> se ha convertido en una herramienta popular y poderosa para la visualización de datos en la comunidad de R.</p>
+<p><code>facet_grid</code> y <code>facet_wrap</code> son dos funciones en el paquete <code>ggplot2</code> de R que permiten dividir un gráfico en múltiples paneles según las variables de una o varias variables categóricas. Estas funciones son especialmente útiles cuando se desea explorar la relación entre variables en diferentes subconjuntos de datos.</p>
+</section>
+<section id="facet-wrap" class="level2">
+<h2 class="anchored" data-anchor-id="facet-wrap">Facet wrap</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb1-2">mpg2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">subset</span>(mpg, cyl <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> drv <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"4"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"f"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> class <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2seater"</span>)</span>
+<span id="cb1-3">base <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(mpg2, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(displ, hwy)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb1-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_blank</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb1-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">xlab</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb1-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ylab</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>class, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>class, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">as.table =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>class, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>class, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dir =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"v"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="facet-grid" class="level2">
+<h2 class="anchored" data-anchor-id="facet-grid">Facet grid</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_grid</span>(. <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> cyl)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><code>facet_grid()</code> dispone los gráficos en una cuadrícula 2D, definida por una fórmula:</li>
+</ul>
+<p><code>. ~ a</code> distribuye los valores de <code>a</code> a través de las columnas. Esta dirección facilita las comparaciones de la posición y, porque las escalas verticales están alineadas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_grid</span>(. <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> cyl)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><code>b ~ .</code> reparte los valores de <code>b</code> por las filas. Esta dirección facilita la comparación de la posición x porque las escalas horizontales están alineadas. Esto la hace especialmente útil para comparar distribuciones.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_grid</span>(drv <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> .)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><code>b ~ a</code> distribuye <code>a</code> a lo largo de las columnas y <code>b</code> a lo largo de las filas. Normalmente querrás poner la variable con el mayor número de niveles en las columnas, para aprovechar la relación de aspecto de tu pantalla.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_grid</span>(drv <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> cyl)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Puede utilizar múltiples variables en las filas o columnas, “sumándolas”, por ejemplo <code>a + b ~ c + d</code>. Las variables que aparecen juntas en las filas o columnas están anidadas en el sentido de que sólo las combinaciones que aparecen en los datos aparecerán en el gráfico. Las variables que se especifican en filas y columnas se cruzarán: se mostrarán todas las combinaciones, incluidas las que no aparecían en el conjunto de datos original: esto puede dar lugar a paneles vacíos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Simulación de datos</span></span>
+<span id="cb9-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span>
+<span id="cb9-3">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">500</span>)</span>
+<span id="cb9-4">y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(x), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span>
+<span id="cb9-5">grupo1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G1"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G2"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G3"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G4"</span>)))</span>
+<span id="cb9-6">grupo2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span>)</span>
+<span id="cb9-7">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(x), <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>)</span>
+<span id="cb9-8"></span>
+<span id="cb9-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Data frame</span></span>
+<span id="cb9-10">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">grupo1 =</span> grupo1, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">grupo2 =</span> grupo2)</span>
+<span id="cb9-11"></span>
+<span id="cb9-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Matriz de gráficos</span></span>
+<span id="cb9-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(df, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> y, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> grupo1)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.legend =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_grid</span>(grupo1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> grupo2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scales =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free"</span>) </span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="controlando-escalas" class="level2">
+<h2 class="anchored" data-anchor-id="controlando-escalas">Controlando escalas</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">economics_long</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,870 × 4
+   date       variable value  value01
+   &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 1967-07-01 pce       507. 0       
+ 2 1967-08-01 pce       510. 0.000265
+ 3 1967-09-01 pce       516. 0.000762
+ 4 1967-10-01 pce       512. 0.000471
+ 5 1967-11-01 pce       517. 0.000916
+ 6 1967-12-01 pce       525. 0.00157 
+ 7 1968-01-01 pce       531. 0.00207 
+ 8 1968-02-01 pce       534. 0.00230 
+ 9 1968-03-01 pce       544. 0.00322 
+10 1968-04-01 pce       544  0.00319 
+# ℹ 2,860 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(economics_long, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(date, value)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb12-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb12-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>variable, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scales =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free_y"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">mpg2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>model <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">reorder</span>(mpg2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>model, mpg2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>cty)</span>
+<span id="cb13-2">mpg2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>manufacturer <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">reorder</span>(mpg2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>manufacturer, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>mpg2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>cty)</span>
+<span id="cb13-3"></span>
+<span id="cb13-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(mpg2, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(cty, model)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb13-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb13-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_grid</span>(manufacturer <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> ., <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scales =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">space =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb13-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">strip.text.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">angle =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+  author = {Santos, Franklin},
+  title = {Ggplot2: Facet\_wrap, Facet\_grid},
+  date = {2023-05-15},
+  url = {https://franklinsantosm.com/posts/facet_ggplot2},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
+Santos, Franklin. 2023. <span>“Ggplot2: Facet_wrap, Facet_grid.”</span>
+May 15, 2023. <a href="https://franklinsantosm.com/posts/facet_ggplot2">https://franklinsantosm.com/posts/facet_ggplot2</a>.
+</div></div></section></div> ]]></description>
+  <category>ggplot2</category>
+  <category>facet_wrap</category>
+  <category>facet_grid</category>
+  <guid>https://franklinsantosm.com/posts/facet_ggplot2/index.html</guid>
+  <pubDate>Mon, 15 May 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://franklinsantosm.com/posts/facet_ggplot2/ggp.png" medium="image" type="image/png" height="103" width="144"/>
+</item>
 <item>
   <title>JULIA: Lenguaje de programación del futuro</title>
   <dc:creator>Franklin Santos</dc:creator>
@@ -156,7 +651,9 @@ text-align: justify}
 <h2 class="anchored" data-anchor-id="introduccion">Introduccion</h2>
 <p>El paquete <code>rnaturalearth</code> es una herramienta excelente para mantener y facilitar la interacción con los datos cartográficos de <a href="https://www.naturalearthdata.com/">Natural Earth</a>. Para producir mapas con <code>ggplot2</code>, se necesitan los siguientes paquetes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ✔ ggplot2 3.4.0      ✔ purrr   1.0.0 
@@ -167,26 +664,120 @@ text-align: justify}
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;">library</span>(rnaturalearth)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(rnaturalearth)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;"># America del sur</span></span>
-<span id="cb4-2">sam <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">ne_countries</span>(<span class="at" style="color: #657422;">continent =</span> <span class="st" style="color: #20794D;">"south america"</span>,</span>
-<span id="cb4-3">                   <span class="at" style="color: #657422;">returnclass =</span> <span class="st" style="color: #20794D;">"sf"</span>,</span>
-<span id="cb4-4">                   <span class="at" style="color: #657422;">scale =</span> <span class="dv" style="color: #AD0000;">50</span>)</span>
-<span id="cb4-5">p1 <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">ggplot</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb4-6">  <span class="fu" style="color: #4758AB;">geom_sf</span>(<span class="at" style="color: #657422;">data =</span> sam, <span class="at" style="color: #657422;">fill =</span> <span class="st" style="color: #20794D;">"white"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb4-7">  <span class="fu" style="color: #4758AB;">theme_light</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb4-8">  <span class="fu" style="color: #4758AB;">xlim</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">90</span>, <span class="sc" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">35</span>))</span>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># America del sur</span></span>
+<span id="cb4-2">sam <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ne_countries</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">continent =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"south america"</span>,</span>
+<span id="cb4-3">                   <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">returnclass =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sf"</span>,</span>
+<span id="cb4-4">                   <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scale =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>)</span>
+<span id="cb4-5">p1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_sf</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> sam, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_light</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">xlim</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">90</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35</span>))</span>
 <span id="cb4-9"></span>
-<span id="cb4-10"><span class="co" style="color: #5E5E5E;"># Imagen de Bolivia y destacar La Paz</span></span>
+<span id="cb4-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Imagen de Bolivia y destacar La Paz</span></span>
 <span id="cb4-11"></span>
-<span id="cb4-12">bolivia <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">ne_states</span>(<span class="at" style="color: #657422;">country =</span> <span class="st" style="color: #20794D;">"bolivia"</span>, <span class="at" style="color: #657422;">returnclass =</span> <span class="st" style="color: #20794D;">"sf"</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb4-13">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">scat =</span> <span class="fu" style="color: #4758AB;">ifelse</span>(postal <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"LP"</span>, <span class="st" style="color: #20794D;">"La Paz"</span>, <span class="st" style="color: #20794D;">"Otros"</span>))</span>
+<span id="cb4-12">bolivia <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ne_states</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">country =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bolivia"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">returnclass =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sf"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb4-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scat =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(postal <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LP"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"La Paz"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Otros"</span>))</span>
 <span id="cb4-14"></span>
-<span id="cb4-15">p2 <span class="ot" style="color: #003B4F;">=</span> </span>
-<span id="cb4-16">  p1 <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb4-17">  <span class="fu" style="color: #4758AB;">geom_sf</span>(<span class="at" style="color: #657422;">data =</span> bolivia, <span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">fill =</span> scat))</span>
+<span id="cb4-15">p2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> </span>
+<span id="cb4-16">  p1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_sf</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> bolivia, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> scat))</span>
 <span id="cb4-18">p2</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/maps/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" style="width:100.0%"></p>
@@ -603,12 +1194,28 @@ text-align: justify}
 <h2 class="anchored" data-anchor-id="metodología-de-análisis">Metodología de análisis</h2>
 <p>Instale los dos paquetes de la siguiente manera:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">install.packages</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>, <span class="st" style="color: #20794D;">"factoextra"</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FactoMineR"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"factoextra"</span>))</span></code></pre></div>
 </div>
 <p>Cargar paquetes en R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FactoMineR"</span>)</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"factoextra"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: ggplot2</code></pre>
 </div>
@@ -620,14 +1227,44 @@ text-align: justify}
 <h3 class="anchored" data-anchor-id="cargando-datos">Cargando datos</h3>
 <p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;">data</span>(decathlon2)</span>
-<span id="cb5-2"><span class="co" style="color: #5E5E5E;">#head(decathlon2)</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(decathlon2)</span>
+<span id="cb5-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#head(decathlon2)</span></span></code></pre></div>
 </div>
 <p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
-<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">23</span>, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">10</span>]</span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;">1</span><span class="sc" style="color: #5E5E5E;">:</span><span class="dv" style="color: #AD0000;">7</span>], <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#seleccionamos 27 filas y las primeras 10 variables</span></span>
+<span id="cb6-2">decathlon2.active <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> decathlon2[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">23</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>]</span>
+<span id="cb6-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(decathlon2.active[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>], <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
 SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
@@ -641,7 +1278,21 @@ YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre
 <h3 class="anchored" data-anchor-id="código-r">Código R</h3>
 <p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">PCA</span>(X, <span class="at" style="color: #657422;">scale.unit =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ncp =</span> <span class="dv" style="color: #AD0000;">5</span>, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">PCA</span>(X, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scale.unit =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncp =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">graph =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </div>
 <blockquote class="blockquote">
 <ul>
@@ -653,8 +1304,20 @@ YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre
 </blockquote>
 <p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FactoMineR"</span>)</span>
+<span id="cb9-2">res.pca <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">PCA</span>(decathlon2.active, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">graph =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
@@ -664,8 +1327,12 @@ YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre
 <h3 class="anchored" data-anchor-id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
 <p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;"># Extraer valores propios/varianzas</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;">get_eig</span>(res.pca)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Extraer valores propios/varianzas</span></span>
+<span id="cb10-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_eig</span>(res.pca)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       eigenvalue variance.percent cumulative.variance.percent
 Dim.1   4.1242133        41.242133                    41.24213
@@ -679,8 +1346,24 @@ Dim.8   0.2744700         2.744700                    97.22812
 Dim.9   0.1552169         1.552169                    98.78029
 Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;"># Visualizar valores propios/variaciones</span></span>
-<span id="cb12-2"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Visualizar valores propios/variaciones</span></span>
+<span id="cb12-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_screeplot</span>(res.pca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">addlabels =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -702,10 +1385,34 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
 <p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Control variable colors using their contributions</span></span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;">col.var=</span><span class="st" style="color: #20794D;">"contrib"</span>,</span>
-<span id="cb13-3">             <span class="at" style="color: #657422;">gradient.cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"#00AFBB"</span>, <span class="st" style="color: #20794D;">"#E7B800"</span>, <span class="st" style="color: #20794D;">"#FC4E07"</span>),</span>
-<span id="cb13-4">             <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># Avoid text overlapping</span></span>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Control variable colors using their contributions</span></span>
+<span id="cb13-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_pca_var</span>(res.pca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.var=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"contrib"</span>,</span>
+<span id="cb13-3">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gradient.cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#00AFBB"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#E7B800"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FC4E07"</span>),</span>
+<span id="cb13-4">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Avoid text overlapping</span></span>
 <span id="cb13-5">             )</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
@@ -721,13 +1428,45 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <section id="contribucion-de-las-variables-a-los-ejes-principales" class="level3">
 <h3 class="anchored" data-anchor-id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC1</span></span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Contributions of variables to PC1</span></span>
+<span id="cb14-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">choice =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axes =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">top =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># Contributions of variables to PC2</span></span>
-<span id="cb15-2"><span class="fu" style="color: #4758AB;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;">choice =</span> <span class="st" style="color: #20794D;">"var"</span>, <span class="at" style="color: #657422;">axes =</span> <span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">top =</span> <span class="dv" style="color: #AD0000;">10</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Contributions of variables to PC2</span></span>
+<span id="cb15-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_contrib</span>(res.pca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">choice =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axes =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">top =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -741,8 +1480,16 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
 <p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;"># Biplot of individuals and variables</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Biplot of individuals and variables</span></span>
+<span id="cb16-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_pca_biplot</span>(res.pca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -800,20 +1547,40 @@ text-align: justify}
 <h2 class="anchored" data-anchor-id="datos">Datos</h2>
 <p>El dato que se utilizará es <code>iris</code>, que se encuentra en la base de datos de R. Estos datos como tratamientos tienen tres especies (<code>setosa</code>, <code>versicolor</code> y <code>virginica</code>) y cuatro variables (<code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code> y <code>Petal.Width</code>) cuantitativas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;">#paquetes R a utilizar</span></span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;">library</span>(easyanova)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;">library</span>(car)</span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;">library</span>(lattice)</span>
-<span id="cb1-6"><span class="fu" style="color: #4758AB;">library</span>(multcomp)</span>
-<span id="cb1-7"><span class="fu" style="color: #4758AB;">library</span>(ggpubr)</span>
-<span id="cb1-8"><span class="fu" style="color: #4758AB;">library</span>(rstatix)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#paquetes R a utilizar</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(easyanova)</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(car)</span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(lattice)</span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(multcomp)</span>
+<span id="cb1-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggpubr)</span>
+<span id="cb1-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(rstatix)</span></code></pre></div>
 </div>
 <p>La librería de <code>easyanova</code> es un paquete para realizar análisis de experimentos agrícolas y animales. Las funciones de esta librería son fáciles de usar. Realiza análisis en varios diseños, con datos balanceados y no balanceados.</p>
 <p>Salida de datos a utilizar:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;">#datos</span></span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">tibble</span>(iris)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#datos</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(iris)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 150 × 5
    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -832,14 +1599,48 @@ text-align: justify}
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;">#inspección de datos</span></span>
-<span id="cb4-2">p <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">ggplot</span>(iris) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb4-3">  <span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> Species, <span class="at" style="color: #657422;">y =</span> Sepal.Width, <span class="at" style="color: #657422;">color =</span> Species) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb4-4">  <span class="fu" style="color: #4758AB;">geom_jitter</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb4-5">  <span class="fu" style="color: #4758AB;">theme</span>(<span class="at" style="color: #657422;">legend.position =</span> <span class="st" style="color: #20794D;">"none"</span>)</span>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#inspección de datos</span></span>
+<span id="cb4-2">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(iris) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> Species, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> Sepal.Width, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> Species) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_jitter</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>)</span>
 <span id="cb4-6"></span>
-<span id="cb4-7"><span class="fu" style="color: #4758AB;">library</span>(plotly)</span>
-<span id="cb4-8">fig <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">ggplotly</span>(p)</span>
+<span id="cb4-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(plotly)</span>
+<span id="cb4-8">fig <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplotly</span>(p)</span>
 <span id="cb4-9"></span>
 <span id="cb4-10">fig</span></code></pre></div>
 <div class="cell-output-display">
@@ -874,20 +1675,58 @@ text-align: justify}
 <p>Recuerde que la <strong>normalidad</strong> de los residuos se puede probar visualmente mediante un histograma y un gráfico QQ, y/o formalmente mediante una prueba de normalidad (prueba de Shapiro-Wilk, por ejemplo).</p>
 <p>Antes de verificar el supuesto de normalidad, primero debemos calcular el ANVA. Luego guardamos los resultados en <code>res_aov</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">res_aov <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">aov</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species,</span>
-<span id="cb5-2">  <span class="at" style="color: #657422;">data =</span> iris</span>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">res_aov <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aov</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species,</span>
+<span id="cb5-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris</span>
 <span id="cb5-3">)</span></code></pre></div>
 </div>
 <p>Ahora podemos comprobar la normalidad visualmente:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;">par</span>(<span class="at" style="color: #657422;">mfrow =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>)) <span class="co" style="color: #5E5E5E;"># combine plots</span></span>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mfrow =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># combine plots</span></span>
 <span id="cb6-2"></span>
-<span id="cb6-3"><span class="co" style="color: #5E5E5E;"># histogram</span></span>
-<span id="cb6-4"><span class="fu" style="color: #4758AB;">hist</span>(res_aov<span class="sc" style="color: #5E5E5E;">$</span>residuals)</span>
+<span id="cb6-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># histogram</span></span>
+<span id="cb6-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">hist</span>(res_aov<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>residuals)</span>
 <span id="cb6-5"></span>
-<span id="cb6-6"><span class="co" style="color: #5E5E5E;"># QQ-plot</span></span>
-<span id="cb6-7"><span class="fu" style="color: #4758AB;">qqPlot</span>(res_aov<span class="sc" style="color: #5E5E5E;">$</span>residuals,</span>
-<span id="cb6-8">  <span class="at" style="color: #657422;">id =</span> <span class="cn" style="color: #8f5902;">FALSE</span> <span class="co" style="color: #5E5E5E;"># id = FALSE to remove point identification</span></span>
+<span id="cb6-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># QQ-plot</span></span>
+<span id="cb6-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">qqPlot</span>(res_aov<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>residuals,</span>
+<span id="cb6-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">id =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># id = FALSE to remove point identification</span></span>
 <span id="cb6-9">)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
@@ -909,19 +1748,35 @@ text-align: justify}
 <p>Esto se puede verificar nuevamente visualmente, a través de una gráfica de caja o gráfica de puntos, o más formalmente a través de una prueba estadística (la prueba de Levene, entre otras).</p>
 <p>Visualmente tenemos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;"># Boxplot</span></span>
-<span id="cb7-2"><span class="fu" style="color: #4758AB;">boxplot</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species,</span>
-<span id="cb7-3">  <span class="at" style="color: #657422;">data =</span> iris</span>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Boxplot</span></span>
+<span id="cb7-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">boxplot</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species,</span>
+<span id="cb7-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris</span>
 <span id="cb7-4">)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;"># Dotplot</span></span>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Dotplot</span></span>
 <span id="cb8-2"></span>
-<span id="cb8-3"><span class="fu" style="color: #4758AB;">dotplot</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species,</span>
-<span id="cb8-4">  <span class="at" style="color: #657422;">data =</span> iris</span>
+<span id="cb8-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dotplot</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species,</span>
+<span id="cb8-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris</span>
 <span id="cb8-5">)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
@@ -937,10 +1792,18 @@ text-align: justify}
 </ul>
 <p>En R, la prueba de Levene se puede realizar gracias a la función <code>leveneTest()</code> del paquete <code>{car}</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;"># Levene's test</span></span>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Levene's test</span></span>
 <span id="cb9-2"></span>
-<span id="cb9-3"><span class="fu" style="color: #4758AB;">leveneTest</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species,</span>
-<span id="cb9-4">  <span class="at" style="color: #657422;">data =</span> iris</span>
+<span id="cb9-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">leveneTest</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species,</span>
+<span id="cb9-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris</span>
 <span id="cb9-5">)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
@@ -959,10 +1822,24 @@ group   2  0.5902 0.5555
 <p>El ANVA en R se puede realizar de varias formas, de las cuales tres se presentan a continuación:</p>
 <p>a). Con la función <code>oneway.test()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;"># primer metodo:</span></span>
-<span id="cb11-2"><span class="fu" style="color: #4758AB;">oneway.test</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species,</span>
-<span id="cb11-3">  <span class="at" style="color: #657422;">data =</span> iris,</span>
-<span id="cb11-4">  <span class="at" style="color: #657422;">var.equal =</span> <span class="cn" style="color: #8f5902;">TRUE</span> <span class="co" style="color: #5E5E5E;"># asumiendo varianzas iguales</span></span>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># primer metodo:</span></span>
+<span id="cb11-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">oneway.test</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species,</span>
+<span id="cb11-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris,</span>
+<span id="cb11-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">var.equal =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># asumiendo varianzas iguales</span></span>
 <span id="cb11-5">)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -974,12 +1851,24 @@ F = 49.16, num df = 2, denom df = 147, p-value &lt; 2.2e-16</code></pre>
 </div>
 <p>b). Con las funciones de <code>summary()</code> y <code>aov()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># 2nd method:</span></span>
-<span id="cb13-2">res_aov <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">aov</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species,</span>
-<span id="cb13-3">  <span class="at" style="color: #657422;">data =</span> iris</span>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2nd method:</span></span>
+<span id="cb13-2">res_aov <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aov</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species,</span>
+<span id="cb13-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris</span>
 <span id="cb13-4">)</span>
 <span id="cb13-5"></span>
-<span id="cb13-6"><span class="fu" style="color: #4758AB;">summary</span>(res_aov)</span></code></pre></div>
+<span id="cb13-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(res_aov)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
 Species       2  11.35   5.672   49.16 &lt;2e-16 ***
@@ -991,9 +1880,21 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Como puede ver en los dos resultados anteriores, la estadística de prueba (F = en el primer método y el valor F en el segundo) y el <em>p</em>-valor (<em>p</em>-valor en el primer método y Pr (&gt; F) en el segundo) son exactamente iguales para ambos métodos, lo que significa que en caso de variaciones iguales, los resultados y las conclusiones no cambiarán.</p>
 <p>La ventaja del primer método es que es fácil cambiar del ANVA (utilizado cuando las variaciones son iguales) a la prueba de Welch (utilizado cuando las variaciones son desiguales). Esto se puede hacer reemplazando <code>nvar.equal = TRUE</code> por <code>var.equal = FALSE</code>, como se presenta a continuación:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;">oneway.test</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species,</span>
-<span id="cb15-2">  <span class="at" style="color: #657422;">data =</span> iris,</span>
-<span id="cb15-3">  <span class="at" style="color: #657422;">var.equal =</span> <span class="cn" style="color: #8f5902;">FALSE</span> <span class="co" style="color: #5E5E5E;"># asumiendo variaciones desiguales</span></span>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">oneway.test</span>(Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species,</span>
+<span id="cb15-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> iris,</span>
+<span id="cb15-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">var.equal =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># asumiendo variaciones desiguales</span></span>
 <span id="cb15-4">)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1032,11 +1933,27 @@ F = 45.012, num df = 2.000, denom df = 97.402, p-value = 1.433e-14</code></pre>
 <p>En nuestro caso, dado que no existe una especie de “referencia” y nos interesa comparar todas las especies, vamos a utilizar la prueba de Tukey HSD.</p>
 <p>En R, la prueba de Tukey HSD se realiza de la siguiente manera. Aquí es donde el <em>segundo método</em> para realizar el ANVA resulta útil porque los resultados (<code>res_aov</code>) se reutilizan para la prueba de promedios:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="co" style="color: #5E5E5E;"># Prueba de Tukey HSD:</span></span>
-<span id="cb17-2">post_test <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">glht</span>(res_aov,</span>
-<span id="cb17-3">  <span class="at" style="color: #657422;">linfct =</span> <span class="fu" style="color: #4758AB;">mcp</span>(<span class="at" style="color: #657422;">Species =</span> <span class="st" style="color: #20794D;">"Tukey"</span>)</span>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Prueba de Tukey HSD:</span></span>
+<span id="cb17-2">post_test <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glht</span>(res_aov,</span>
+<span id="cb17-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linfct =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mcp</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Species =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Tukey"</span>)</span>
 <span id="cb17-4">)</span>
-<span id="cb17-5"><span class="fu" style="color: #4758AB;">summary</span>(post_test)</span></code></pre></div>
+<span id="cb17-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(post_test)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Simultaneous Tests for General Linear Hypotheses
@@ -1066,7 +1983,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <p>Los tres p-valores son menores que 0.05, por lo que rechazamos la hipótesis nula para todas las comparaciones, lo que significa que todas las especies son <strong>significativamente diferentes</strong> en términos de ancho de sépalo.</p>
 <p>Tenga en cuenta que la prueba Tukey HSD también se puede realizar en R con la función <code>TukeyHSD()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;">TukeyHSD</span>(res_aov)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TukeyHSD</span>(res_aov)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -1090,9 +2009,19 @@ virginica-versicolor  0.204  0.04314472  0.3648553 0.0087802</code></pre>
 <h3 class="anchored" data-anchor-id="análisis-de-varianza-con-easyanova">Análisis de varianza con <code>easyanova</code></h3>
 <p>Para proceder con ANVA los datos de <code>iris</code> se selecciona y ordena para dar uso con el paquete <code>easyanova</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">fsdata <span class="ot" style="color: #003B4F;">&lt;-</span> iris <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb21-2">  dplyr<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">select</span>(Species, Sepal.Width)</span>
-<span id="cb21-3"><span class="fu" style="color: #4758AB;">tibble</span>(fsdata)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">fsdata <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> iris <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb21-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(Species, Sepal.Width)</span>
+<span id="cb21-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(fsdata)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 150 × 2
    Species Sepal.Width
@@ -1111,11 +2040,33 @@ virginica-versicolor  0.204  0.04314472  0.3648553 0.0087802</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="co" style="color: #5E5E5E;"># Análisis de varianza para DCA</span></span>
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Análisis de varianza para DCA</span></span>
 <span id="cb23-2"></span>
-<span id="cb23-3">r1 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">ea1</span>(<span class="at" style="color: #657422;">data =</span> fsdata, <span class="co" style="color: #5E5E5E;"># Base de datos</span></span>
-<span id="cb23-4">          <span class="at" style="color: #657422;">design =</span> <span class="dv" style="color: #AD0000;">1</span>, <span class="co" style="color: #5E5E5E;"># Diseño experimental: 1=DCA, 2=DBCA, etc.</span></span>
-<span id="cb23-5">          <span class="at" style="color: #657422;">alpha =</span> <span class="fl" style="color: #AD0000;">0.05</span>) <span class="co" style="color: #5E5E5E;"># Probabilidad estadística</span></span></code></pre></div>
+<span id="cb23-3">r1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ea1</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> fsdata, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Base de datos</span></span>
+<span id="cb23-4">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">design =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Diseño experimental: 1=DCA, 2=DBCA, etc.</span></span>
+<span id="cb23-5">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Probabilidad estadística</span></span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1237,42 +2188,192 @@ $`Residual analysis`$`standardized residuals`
 <h3 class="anchored" data-anchor-id="visualización-de-la-prueba-de-promedios">Visualización de la prueba de promedios</h3>
 <p>Si está interesado en incluir resultados de ANVA y pruebas de promedio directamente en los boxplot, aquí hay un fragmento de código que puede ser de su interés:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="co" style="color: #5E5E5E;">#paquete para p-valor en la visualización de prueba de promedios</span></span>
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#paquete para p-valor en la visualización de prueba de promedios</span></span>
 <span id="cb26-2"></span>
-<span id="cb26-3">dat <span class="ot" style="color: #003B4F;">&lt;-</span> iris</span>
-<span id="cb26-4"><span class="co" style="color: #5E5E5E;"># Editar desde aquí</span></span>
-<span id="cb26-5">x <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">which</span>(<span class="fu" style="color: #4758AB;">names</span>(dat) <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Species"</span>) <span class="co" style="color: #5E5E5E;">#variable de agrupación</span></span>
-<span id="cb26-6">y <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">which</span>(<span class="fu" style="color: #4758AB;">names</span>(dat) <span class="sc" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">"Sepal.Width"</span>) </span>
-<span id="cb26-7"><span class="co" style="color: #5E5E5E;">#variables para la prueba de promedios</span></span>
-<span id="cb26-8">          <span class="co" style="color: #5E5E5E;">#| names(dat) == "Sepal.Length"</span></span>
-<span id="cb26-9">          <span class="co" style="color: #5E5E5E;">#| names(dat) == "Petal.Length"</span></span>
-<span id="cb26-10">          <span class="co" style="color: #5E5E5E;">#| names(dat) == "Petal.Width")</span></span>
-<span id="cb26-11">method1 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"anova"</span> <span class="co" style="color: #5E5E5E;"># Una de "anova" o "kruskal.test"</span></span>
-<span id="cb26-12">method2 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"t.test"</span> <span class="co" style="color: #5E5E5E;"># Una de "wilcox.test" o "t.test"</span></span>
-<span id="cb26-13">my_comparisons <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">list</span>(<span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"setosa"</span>, <span class="st" style="color: #20794D;">"versicolor"</span>), </span>
-<span id="cb26-14">                       <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"setosa"</span>, <span class="st" style="color: #20794D;">"virginica"</span>), </span>
-<span id="cb26-15">                       <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"versicolor"</span>, <span class="st" style="color: #20794D;">"virginica"</span>)) </span>
-<span id="cb26-16"><span class="co" style="color: #5E5E5E;"># comparaciones para pruebas de promedio</span></span>
-<span id="cb26-17"><span class="co" style="color: #5E5E5E;"># Editar hasta aquí</span></span>
+<span id="cb26-3">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> iris</span>
+<span id="cb26-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Editar desde aquí</span></span>
+<span id="cb26-5">x <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">which</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">names</span>(dat) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Species"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#variable de agrupación</span></span>
+<span id="cb26-6">y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">which</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">names</span>(dat) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sepal.Width"</span>) </span>
+<span id="cb26-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#variables para la prueba de promedios</span></span>
+<span id="cb26-8">          <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#| names(dat) == "Sepal.Length"</span></span>
+<span id="cb26-9">          <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#| names(dat) == "Petal.Length"</span></span>
+<span id="cb26-10">          <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#| names(dat) == "Petal.Width")</span></span>
+<span id="cb26-11">method1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"anova"</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Una de "anova" o "kruskal.test"</span></span>
+<span id="cb26-12">method2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"t.test"</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Una de "wilcox.test" o "t.test"</span></span>
+<span id="cb26-13">my_comparisons <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"setosa"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"versicolor"</span>), </span>
+<span id="cb26-14">                       <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"setosa"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"virginica"</span>), </span>
+<span id="cb26-15">                       <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"versicolor"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"virginica"</span>)) </span>
+<span id="cb26-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># comparaciones para pruebas de promedio</span></span>
+<span id="cb26-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Editar hasta aquí</span></span>
 <span id="cb26-18"></span>
-<span id="cb26-19"><span class="co" style="color: #5E5E5E;"># Edit at your own risk</span></span>
-<span id="cb26-20"><span class="cf" style="color: #003B4F;">for</span> (i <span class="cf" style="color: #003B4F;">in</span> y) {</span>
-<span id="cb26-21">  <span class="cf" style="color: #003B4F;">for</span> (j <span class="cf" style="color: #003B4F;">in</span> x) {</span>
-<span id="cb26-22">    p <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">ggboxplot</span>(dat,</span>
-<span id="cb26-23">      <span class="at" style="color: #657422;">x =</span> <span class="fu" style="color: #4758AB;">colnames</span>(dat[j]), <span class="at" style="color: #657422;">y =</span> <span class="fu" style="color: #4758AB;">colnames</span>(dat[i]),</span>
-<span id="cb26-24">      <span class="at" style="color: #657422;">color =</span> <span class="fu" style="color: #4758AB;">colnames</span>(dat[j]),</span>
-<span id="cb26-25">      <span class="at" style="color: #657422;">legend =</span> <span class="st" style="color: #20794D;">"none"</span>,</span>
-<span id="cb26-26">      <span class="at" style="color: #657422;">palette =</span> <span class="st" style="color: #20794D;">"npg"</span>,</span>
-<span id="cb26-27">      <span class="at" style="color: #657422;">add =</span> <span class="st" style="color: #20794D;">"jitter"</span></span>
+<span id="cb26-19"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Edit at your own risk</span></span>
+<span id="cb26-20"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> y) {</span>
+<span id="cb26-21">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> (j <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> x) {</span>
+<span id="cb26-22">    p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggboxplot</span>(dat,</span>
+<span id="cb26-23">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(dat[j]), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(dat[i]),</span>
+<span id="cb26-24">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(dat[j]),</span>
+<span id="cb26-25">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>,</span>
+<span id="cb26-26">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">palette =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"npg"</span>,</span>
+<span id="cb26-27">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">add =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"jitter"</span></span>
 <span id="cb26-28">    )</span>
-<span id="cb26-29">    <span class="fu" style="color: #4758AB;">print</span>(</span>
-<span id="cb26-30">      p <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">stat_compare_means</span>(<span class="fu" style="color: #4758AB;">aes</span>(</span>
-<span id="cb26-31">        <span class="at" style="color: #657422;">label =</span> <span class="fu" style="color: #4758AB;">paste0</span>(..method.., <span class="st" style="color: #20794D;">", p-value = "</span>, ..p.format..)),</span>
-<span id="cb26-32">        <span class="at" style="color: #657422;">method =</span> method1, <span class="at" style="color: #657422;">label.y =</span> <span class="fu" style="color: #4758AB;">max</span>(dat[, i], <span class="at" style="color: #657422;">na.rm =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span>
+<span id="cb26-29">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(</span>
+<span id="cb26-30">      p <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stat_compare_means</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(</span>
+<span id="cb26-31">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(..method.., <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">", p-value = "</span>, ..p.format..)),</span>
+<span id="cb26-32">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> method1, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(dat[, i], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
 <span id="cb26-33">      )</span>
-<span id="cb26-34">      <span class="sc" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;">stat_compare_means</span>(<span class="at" style="color: #657422;">comparisons =</span> my_comparisons, </span>
-<span id="cb26-35">                           <span class="at" style="color: #657422;">method =</span> method2, <span class="at" style="color: #657422;">label =</span> <span class="st" style="color: #20794D;">"p.format"</span>) </span>
-<span id="cb26-36">      <span class="co" style="color: #5E5E5E;"># remove if p-value of ANOVA or Kruskal-Wallis test &gt;= alpha</span></span>
+<span id="cb26-34">      <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stat_compare_means</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">comparisons =</span> my_comparisons, </span>
+<span id="cb26-35">                           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> method2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"p.format"</span>) </span>
+<span id="cb26-36">      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># remove if p-value of ANOVA or Kruskal-Wallis test &gt;= alpha</span></span>
 <span id="cb26-37">    )</span>
 <span id="cb26-38">  }</span>
 <span id="cb26-39">}</span></code></pre></div>
@@ -1282,21 +2383,81 @@ $`Residual analysis`$`standardized residuals`
 </div>
 <p>Otra opción de gráfica para observar la significancia entre las medias de cada par de especies.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="co" style="color: #5E5E5E;"># pairwise comparisons</span></span>
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># pairwise comparisons</span></span>
 <span id="cb27-2"></span>
-<span id="cb27-3">pwc <span class="ot" style="color: #003B4F;">&lt;-</span> fsdata <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb27-4">  <span class="fu" style="color: #4758AB;">pairwise_t_test</span>(</span>
-<span id="cb27-5">    Sepal.Width <span class="sc" style="color: #5E5E5E;">~</span> Species, <span class="at" style="color: #657422;">pool.sd =</span> <span class="cn" style="color: #8f5902;">FALSE</span>,</span>
-<span id="cb27-6">    <span class="at" style="color: #657422;">p.adjust.method =</span> <span class="st" style="color: #20794D;">"none"</span></span>
+<span id="cb27-3">pwc <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> fsdata <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb27-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pairwise_t_test</span>(</span>
+<span id="cb27-5">    Sepal.Width <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Species, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pool.sd =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,</span>
+<span id="cb27-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">p.adjust.method =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span></span>
 <span id="cb27-7">    )</span>
 <span id="cb27-8"></span>
-<span id="cb27-9"><span class="co" style="color: #5E5E5E;"># Visualization: box plots with p-values</span></span>
-<span id="cb27-10">pwc <span class="ot" style="color: #003B4F;">&lt;-</span> pwc <span class="sc" style="color: #5E5E5E;">%&gt;%</span> <span class="fu" style="color: #4758AB;">add_xy_position</span>(<span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">"Species"</span>)</span>
-<span id="cb27-11"><span class="fu" style="color: #4758AB;">ggboxplot</span>(fsdata, <span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">"Species"</span>, <span class="at" style="color: #657422;">y =</span> <span class="st" style="color: #20794D;">"Sepal.Width"</span>,</span>
-<span id="cb27-12">          <span class="at" style="color: #657422;">color =</span> <span class="st" style="color: #20794D;">"Species"</span>, </span>
-<span id="cb27-13">          <span class="at" style="color: #657422;">legend =</span> <span class="st" style="color: #20794D;">"none"</span>, </span>
-<span id="cb27-14">          <span class="at" style="color: #657422;">add =</span> <span class="st" style="color: #20794D;">"jitter"</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb27-15">  <span class="fu" style="color: #4758AB;">stat_pvalue_manual</span>(pwc, <span class="at" style="color: #657422;">hide.ns =</span> <span class="cn" style="color: #8f5902;">TRUE</span>) </span></code></pre></div>
+<span id="cb27-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Visualization: box plots with p-values</span></span>
+<span id="cb27-10">pwc <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> pwc <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_xy_position</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Species"</span>)</span>
+<span id="cb27-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggboxplot</span>(fsdata, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Species"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sepal.Width"</span>,</span>
+<span id="cb27-12">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Species"</span>, </span>
+<span id="cb27-13">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>, </span>
+<span id="cb27-14">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">add =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"jitter"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb27-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stat_pvalue_manual</span>(pwc, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hide.ns =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) </span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1349,14 +2510,20 @@ text-align: justify}
 <h2 class="anchored" data-anchor-id="procedimiento-computacional-en-r">Procedimiento computacional en R</h2>
 <p>Cargar paquetes</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(FactoMineR)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(factoextra)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(FactoMineR)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(factoextra)</span></code></pre></div>
 </div>
 <section id="formato-de-datos" class="level3">
 <h3 class="anchored" data-anchor-id="formato-de-datos">Formato de datos</h3>
 <p>Los datos deben ser una tabla de contingencia (resultados de tablas cruzadas). Usaremos los conjuntos de datos de demostración de tareas domésticas disponibles en el paquete factoextra R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">data</span>(housetasks)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(housetasks)</span></code></pre></div>
 </div>
 <p>Los datos son una tabla de contingencia que contiene 13 tareas del hogar y su reparto en la pareja:</p>
 <ul>
@@ -1399,12 +2566,48 @@ Holidays      0           1       6     153</code></pre>
 </ul>
 <p>El análisis de datos exploratorios y la visualización de tablas de contingencia se cubrieron en nuestro artículo anterior: <a href="htpp:/">Prueba de independencia de chi-cuadrado</a> en R. Brevemente, la tabla de contingencia se puede visualizar utilizando las funciones <code>balloonplot()</code> [paquete gplots] y <code>mosaicplot()</code> [paquete graphics]:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;">library</span>(gplots)</span>
-<span id="cb4-2"><span class="co" style="color: #5E5E5E;">#1. Convierte el dato como una tabla</span></span>
-<span id="cb4-3">dt <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">as.table</span>(<span class="fu" style="color: #4758AB;">as.matrix</span>(housetasks))</span>
-<span id="cb4-4"><span class="co" style="color: #5E5E5E;"># 2. Graph</span></span>
-<span id="cb4-5"><span class="fu" style="color: #4758AB;">balloonplot</span>(<span class="fu" style="color: #4758AB;">t</span>(dt), <span class="at" style="color: #657422;">main =</span><span class="st" style="color: #20794D;">"housetasks"</span>, <span class="at" style="color: #657422;">xlab =</span><span class="st" style="color: #20794D;">""</span>, <span class="at" style="color: #657422;">ylab=</span><span class="st" style="color: #20794D;">""</span>,</span>
-<span id="cb4-6">            <span class="at" style="color: #657422;">label =</span> <span class="cn" style="color: #8f5902;">FALSE</span>, <span class="at" style="color: #657422;">show.margins =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(gplots)</span>
+<span id="cb4-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#1. Convierte el dato como una tabla</span></span>
+<span id="cb4-3">dt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.table</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.matrix</span>(housetasks))</span>
+<span id="cb4-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2. Graph</span></span>
+<span id="cb4-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">balloonplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">t</span>(dt), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"housetasks"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>,</span>
+<span id="cb4-6">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.margins =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1424,7 +2627,11 @@ Tip
 </div>
 <p>Para una tabla de contingencia pequeña, puede utilizar la prueba de chi-cuadrado para evaluar si existe una dependencia significativa entre las categorías de filas y columnas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">chisq <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">chisq.test</span>(housetasks)</span>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">chisq <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">chisq.test</span>(housetasks)</span>
 <span id="cb5-2">chisq</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1452,7 +2659,13 @@ X-squared = 1944.5, df = 36, p-value &lt; 2.2e-16</code></pre>
 <h3 class="anchored" data-anchor-id="código-r-para-calcular-ca-analisis-de-correspondencia">Código R para calcular CA (Analisis de Correspondencia)</h3>
 <p>Se puede utilizar la función <code>CA()</code> [<em>paquete FactoMiner</em>]. Un formato simplificado es:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode fs code-with-copy"><code class="sourceCode fsharp"><span id="cb7-1">CA<span class="op" style="color: #5E5E5E;">(</span>X, ncp = <span class="dv" style="color: #AD0000;">5</span>, graph = TRUE<span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode fs code-with-copy"><code class="sourceCode fsharp"><span id="cb7-1">CA<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>X, ncp = <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, graph = TRUE<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <blockquote class="blockquote">
 <ul>
@@ -1463,13 +2676,29 @@ X-squared = 1944.5, df = 36, p-value &lt; 2.2e-16</code></pre>
 </blockquote>
 <p>Para calcular el análisis de correspondencia, escriba esto:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"FactoMineR"</span>)</span>
-<span id="cb8-2"><span class="co" style="color: #5E5E5E;">#housetasks es nuestro marco de datos</span></span>
-<span id="cb8-3">res.ca <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">CA</span>(housetasks, <span class="at" style="color: #657422;">graph =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FactoMineR"</span>)</span>
+<span id="cb8-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#housetasks es nuestro marco de datos</span></span>
+<span id="cb8-3">res.ca <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">CA</span>(housetasks, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">graph =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
 </div>
 <p>La salida de la función <code>CA()</code> es una lista que incluye:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;">print</span>(res.ca)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(res.ca)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>**Results of the Correspondence Analysis (CA)**
 The row variable has  13  categories; the column variable has 4 categories
@@ -1515,20 +2744,56 @@ The chi square of independence between the two variables is equal to 1944.456 (p
 <p>En nuestro ejemplo, la asociación es muy significativa (chi-cuadrado: 1944,456, p = 0).</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;"># Chi-square statistics</span></span>
-<span id="cb11-2">chi2 <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fl" style="color: #AD0000;">1944.456</span></span>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Chi-square statistics</span></span>
+<span id="cb11-2">chi2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1944.456</span></span>
 <span id="cb11-3">chi2</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1944.456</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># Degree of freedom</span></span>
-<span id="cb13-2">df <span class="ot" style="color: #003B4F;">&lt;-</span> (<span class="fu" style="color: #4758AB;">nrow</span>(housetasks) <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span>) <span class="sc" style="color: #5E5E5E;">*</span> (<span class="fu" style="color: #4758AB;">ncol</span>(housetasks) <span class="sc" style="color: #5E5E5E;">-</span> <span class="dv" style="color: #AD0000;">1</span>)</span>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Degree of freedom</span></span>
+<span id="cb13-2">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(housetasks) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ncol</span>(housetasks) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
 <span id="cb13-3">df</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 36</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;"># P-value</span></span>
-<span id="cb15-2">pval <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">pchisq</span>(chi2, <span class="at" style="color: #657422;">df =</span> df, <span class="at" style="color: #657422;">lower.tail =</span> <span class="cn" style="color: #8f5902;">FALSE</span>)</span>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># P-value</span></span>
+<span id="cb15-2">pval <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pchisq</span>(chi2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">df =</span> df, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lower.tail =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
 <span id="cb15-3">pval</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
@@ -1539,8 +2804,16 @@ The chi square of independence between the two variables is equal to 1944.456 (p
 <h3 class="anchored" data-anchor-id="valores-propiosvarianzas">Valores propios/Varianzas</h3>
 <p>Recuerde que examinamos los valores propios para determinar el número de ejes a considerar. Los valores propios y la proporción de varianzas retenidas por los diferentes ejes se pueden extraer utilizando la función <code>get_eigenvalue()</code> [paquete <em>factoextra</em>]. Los <em>valores propios</em> son grandes para el primer eje y pequeños para el eje siguiente.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;">library</span>(<span class="st" style="color: #20794D;">"factoextra"</span>)</span>
-<span id="cb17-2">eig.val <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">get_eigenvalue</span>(res.ca)</span>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"factoextra"</span>)</span>
+<span id="cb17-2">eig.val <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_eigenvalue</span>(res.ca)</span>
 <span id="cb17-3">eig.val</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      eigenvalue variance.percent cumulative.variance.percent
@@ -1569,7 +2842,21 @@ Tenga en cuenta
 <p>Un método alternativo para determinar el número de dimensiones es mirar una gráfica de <code>Scree Plot</code>, que es el diagrama de valores propios/varianzas ordenados de mayor a menor. El número de componentes se determina en el punto, más allá del cual los valores propios restantes son todos relativamente pequeños y de tamaño comparable.</p>
 <p>El gráfico <code>Scree plot</code> se puede realizar usando la función <code>fviz_eig()</code> o <code>fviz_screeplot()</code> del paquete <code>factoextra</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.ca, <span class="at" style="color: #657422;">addlabels =</span> <span class="cn" style="color: #8f5902;">TRUE</span>, <span class="at" style="color: #657422;">ylim =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">0</span>, <span class="dv" style="color: #AD0000;">50</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_screeplot</span>(res.ca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">addlabels =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1610,8 +2897,26 @@ Según (M. T. Bendixen 1995):
 </div>
 <p>El código R a continuación, dibuja el gráfico de pantalla con una línea discontinua roja que especifica el valor propio promedio:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="fu" style="color: #4758AB;">fviz_screeplot</span>(res.ca) <span class="sc" style="color: #5E5E5E;">+</span></span>
-<span id="cb20-2">  <span class="fu" style="color: #4758AB;">geom_hline</span>(<span class="at" style="color: #657422;">yintercept=</span><span class="fl" style="color: #AD0000;">33.33</span>, <span class="at" style="color: #657422;">linetype=</span><span class="dv" style="color: #AD0000;">2</span>, <span class="at" style="color: #657422;">color=</span><span class="st" style="color: #20794D;">"red"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_screeplot</span>(res.ca) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb20-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_hline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yintercept=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">33.33</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1626,8 +2931,16 @@ Según (M. T. Bendixen 1995):
 <h3 class="anchored" data-anchor-id="biplot">Biplot</h3>
 <p>La función <code>fviz_ca_biplot()</code> del paquete <code>factoextra</code> se puede utilizar para dibujar el biplot de las variables de filas y columnas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="co" style="color: #5E5E5E;"># repel= TRUE para evitar la superposición de texto (lenta si tiene muchos puntos)</span></span>
-<span id="cb21-2"><span class="fu" style="color: #4758AB;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># repel= TRUE para evitar la superposición de texto (lenta si tiene muchos puntos)</span></span>
+<span id="cb21-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1675,7 +2988,13 @@ Este gráfico muestra que:
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="fu" style="color: #4758AB;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1725,9 +3044,27 @@ Note
 </ul>
 <p>El siguiente código R dibuja un <em>biplot asimétrico</em> estándar:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="fu" style="color: #4758AB;">fviz_ca_biplot</span>(res.ca,</span>
-<span id="cb23-2">               <span class="at" style="color: #657422;">map =</span><span class="st" style="color: #20794D;">"rowprincipal"</span>, <span class="at" style="color: #657422;">arrow =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="cn" style="color: #8f5902;">TRUE</span>, <span class="cn" style="color: #8f5902;">TRUE</span>),</span>
-<span id="cb23-3">               <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_ca_biplot</span>(res.ca,</span>
+<span id="cb23-2">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">map =</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rowprincipal"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">arrow =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb23-3">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1746,8 +3083,26 @@ Note
 <p>En primer lugar, hay que decidir si analizar las contribuciones de filas o columnas a la definición de los ejes.</p>
 <p>En nuestro ejemplo interpretaremos la contribución de las filas a los ejes. Se utiliza el argumento <code>map = "colgreen"</code>. En este caso, recuerde que las columnas están en coordenadas principales y las filas en coordenadas estándar multiplicadas por la raíz cuadrada de la masa. Para una fila dada, el cuadrado de la nueva coordenada en un eje i es exactamente la contribución de esta fila a la inercia del eje i.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;">map =</span><span class="st" style="color: #20794D;">"colgreen"</span>, <span class="at" style="color: #657422;">arrow =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="cn" style="color: #8f5902;">TRUE</span>, <span class="cn" style="color: #8f5902;">FALSE</span>),</span>
-<span id="cb24-2">               <span class="at" style="color: #657422;">repel =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_ca_biplot</span>(res.ca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">map =</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"colgreen"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">arrow =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>),</span>
+<span id="cb24-2">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1767,13 +3122,37 @@ Note
 <h3 class="anchored" data-anchor-id="descripción-de-las-dimensiones">Descripción de las dimensiones</h3>
 <p>Para identificar fácilmente los puntos de fila y columna que están más asociados con las dimensiones principales, puede usar la función <code>dimdesc()</code> [en FactoMineR]. Las variables de fila/columna se ordenan por sus coordenadas en la salida <code>dimdesc()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="co" style="color: #5E5E5E;"># Descripción de la dimensión</span></span>
-<span id="cb25-2">res.desc <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">dimdesc</span>(res.ca, <span class="at" style="color: #657422;">axes =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>,<span class="dv" style="color: #AD0000;">2</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Descripción de la dimensión</span></span>
+<span id="cb25-2">res.desc <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dimdesc</span>(res.ca, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axes =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span></code></pre></div>
 </div>
 <p>Descripción de la dimensión 1:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="co" style="color: #5E5E5E;"># Descripción de la dimensión 1 por puntos de fila</span></span>
-<span id="cb26-2"><span class="fu" style="color: #4758AB;">head</span>(res.desc[[<span class="dv" style="color: #AD0000;">1</span>]]<span class="sc" style="color: #5E5E5E;">$</span>row, <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Descripción de la dimensión 1 por puntos de fila</span></span>
+<span id="cb26-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(res.desc[[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>row, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                coord
 Laundry    -0.9918368
@@ -1781,8 +3160,18 @@ Main_meal  -0.8755855
 Dinner     -0.6925740
 Breakfeast -0.5086002</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="co" style="color: #5E5E5E;"># Descripción de la dimensión 1 por puntos de columna</span></span>
-<span id="cb28-2"><span class="fu" style="color: #4758AB;">head</span>(res.desc [[<span class="dv" style="color: #AD0000;">1</span>]]<span class="sc" style="color: #5E5E5E;">$</span>col, <span class="dv" style="color: #AD0000;">4</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Descripción de la dimensión 1 por puntos de columna</span></span>
+<span id="cb28-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(res.desc [[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>col, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  coord
 Wife        -0.83762154
@@ -1793,13 +3182,25 @@ Husband      1.16091847</code></pre>
 </div>
 <p>Descripción de la dimensión 2:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><span class="co" style="color: #5E5E5E;"># Descripción de la dimensión 2 por puntos de fila</span></span>
-<span id="cb30-2">res.desc[[<span class="dv" style="color: #AD0000;">2</span>]]<span class="sc" style="color: #5E5E5E;">$</span>fila</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Descripción de la dimensión 2 por puntos de fila</span></span>
+<span id="cb30-2">res.desc[[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fila</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><span class="co" style="color: #5E5E5E;"># Descripción de la dimensión 1 por puntos de columna</span></span>
-<span id="cb32-2">res.desc[[<span class="dv" style="color: #AD0000;">2</span>]]<span class="sc" style="color: #5E5E5E;">$</span>col</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Descripción de la dimensión 1 por puntos de columna</span></span>
+<span id="cb32-2">res.desc[[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>col</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 coord
 Jointly     -1.0265791
@@ -1855,13 +3256,21 @@ text-align: justify}
 <h3 class="anchored" data-anchor-id="cargar-el-paquete-tidyverse">Cargar el paquete <code>tidyverse</code></h3>
 <p>El primer paso es instalar el paquete <code>tidyverse</code> del CRAN de R. Posterior a esto es cargar el paquete en nuestra consola de R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
-<span id="cb1-2"><span class="co" style="color: #5E5E5E;">#En el paquete datos se encuentra la base de datos para este ejemplo</span></span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;">library</span>(datos)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#En el paquete datos se encuentra la base de datos para este ejemplo</span></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(datos)</span></code></pre></div>
 </div>
 <p>A continuación observación el estado de los datos de <code>oms</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">head</span>(oms)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(oms)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 60
   pais       iso2  iso3   anio nuevos_…¹ nuevo…² nuevo…³ nuevo…⁴ nuevo…⁵ nuevo…⁶
@@ -1888,12 +3297,34 @@ text-align: justify}
 <p>Necesitamos agrupar todas las columnas desde <code>nuevos_fpp_h014</code> hasta <code>recaidas_m65</code>. No sabemos aún qué representa esto, por lo que le daremos el nombre genérico de <code>"clave"</code>. Sabemos que las celdas representan la cuenta de casos, por lo que usaremos la variable <code>casos</code>.</p>
 <p>Existen múltiples valores faltantes en la representación actual, por lo que de momento usaremos <code>na.rm</code> para centrarnos en los valores que están presentes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">oms1 <span class="ot" style="color: #003B4F;">&lt;-</span> oms <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb4-2">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(</span>
-<span id="cb4-3">    <span class="at" style="color: #657422;">cols =</span> nuevos_fpp_h014<span class="sc" style="color: #5E5E5E;">:</span>nuevosrecaida_m65, </span>
-<span id="cb4-4">    <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"clave"</span>, </span>
-<span id="cb4-5">    <span class="at" style="color: #657422;">values_to =</span> <span class="st" style="color: #20794D;">"casos"</span>, </span>
-<span id="cb4-6">    <span class="at" style="color: #657422;">values_drop_na =</span> <span class="cn" style="color: #8f5902;">TRUE</span></span>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">oms1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> oms <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(</span>
+<span id="cb4-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> nuevos_fpp_h014<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>nuevosrecaida_m65, </span>
+<span id="cb4-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clave"</span>, </span>
+<span id="cb4-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"casos"</span>, </span>
+<span id="cb4-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_drop_na =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
 <span id="cb4-7">  )</span>
 <span id="cb4-8">oms1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1915,8 +3346,12 @@ text-align: justify}
 </div>
 <p>Para visualizar el conteo de valores en la nueva columna <code>clave</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">oms1 <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb6-2">  <span class="fu" style="color: #4758AB;">count</span>(clave)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">oms1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(clave)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 56 × 2
    clave               n
@@ -1960,8 +3395,24 @@ text-align: justify}
 </ul>
 <p>Necesitamos hacer un pequeño cambio al formato de los nombres de las columnas: desafortunadamente lo nombres de las columnas son ligeramente inconsistentes debido a que en lugar de <code>nuevos_recaida</code> tenemos <code>nuevosrecaida</code> (es difícil darse cuenta de esto en esta parte, pero si no lo arreglas habrá errores en los pasos siguientes). Para esto, la idea básica es bastante simple: reemplazar los caracteres <code>“nuevosrecaida”</code> por <code>“nuevos_recaida”</code>. Esto genera nombres de variables consistentes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">oms2 <span class="ot" style="color: #003B4F;">&lt;-</span> oms1 <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb8-2">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">clave =</span> stringr<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">str_replace</span>(clave, <span class="st" style="color: #20794D;">"nuevosrecaida"</span>, <span class="st" style="color: #20794D;">"nuevos_recaida"</span>))</span>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">oms2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> oms1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb8-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">clave =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(clave, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nuevosrecaida"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nuevos_recaida"</span>))</span>
 <span id="cb8-3">oms2</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 76,046 × 6
@@ -1982,8 +3433,26 @@ text-align: justify}
 </div>
 <p>Una vez reemplazado, nos facilita separar los valores en cada código aplicando <code>separate()</code> dos veces. La primera aplicación dividirá los códigos en cada <code>_</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">oms3 <span class="ot" style="color: #003B4F;">&lt;-</span> oms2 <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb10-2">  <span class="fu" style="color: #4758AB;">separate</span>(clave, <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"nuevos"</span>, <span class="st" style="color: #20794D;">"tipo"</span>, <span class="st" style="color: #20794D;">"sexo_edad"</span>), <span class="at" style="color: #657422;">sep =</span> <span class="st" style="color: #20794D;">"_"</span>)</span>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">oms3 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> oms2 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb10-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate</span>(clave, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nuevos"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tipo"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sexo_edad"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_"</span>)</span>
 <span id="cb10-3">oms3</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 76,046 × 8
@@ -2004,21 +3473,53 @@ text-align: justify}
 </div>
 <p>A continuación podemos eliminar la columna <code>nuevos</code>, ya que es constante en este dataset. Además eliminaremos <code>iso2</code> e <code>iso3</code> ya que son redundantes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">oms3 <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb12-2">  <span class="fu" style="color: #4758AB;">count</span>(nuevos)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">oms3 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb12-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(nuevos)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   nuevos     n
   &lt;chr&gt;  &lt;int&gt;
 1 nuevos 76046</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">oms4 <span class="ot" style="color: #003B4F;">&lt;-</span> oms3 <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb14-2">  <span class="fu" style="color: #4758AB;">select</span>(<span class="sc" style="color: #5E5E5E;">-</span>nuevos, <span class="sc" style="color: #5E5E5E;">-</span>iso2, <span class="sc" style="color: #5E5E5E;">-</span>iso3)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">oms4 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> oms3 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb14-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>nuevos, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>iso2, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>iso3)</span></code></pre></div>
 </div>
 <p>Luego separamos <code>sexo_edad</code> en <code>sexo</code> y <code>edad</code> dividiendo luego del primer carácter:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">oms5 <span class="ot" style="color: #003B4F;">&lt;-</span> oms4 <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb15-2">  <span class="fu" style="color: #4758AB;">separate</span>(sexo_edad, <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"sexo"</span>, <span class="st" style="color: #20794D;">"edad"</span>), <span class="at" style="color: #657422;">sep =</span> <span class="dv" style="color: #AD0000;">1</span>)</span>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">oms5 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> oms4 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb15-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate</span>(sexo_edad, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sexo"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"edad"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
 <span id="cb15-3">oms5</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 76,046 × 6
@@ -2044,16 +3545,88 @@ text-align: justify}
 <h2 class="anchored" data-anchor-id="resumen">Resumen</h2>
 <p>En la anterior sección se hizo el procedimiento de ordenación paso a paso, asignando los resultados intermedios a nuevas variables. Esta no es la forma típica de trabajo. En realidad, los códigos debería ser de manera incremental usando <code>pipes ("%&gt;%)</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">fsdata<span class="ot" style="color: #003B4F;">&lt;-</span> oms <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb17-2">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(</span>
-<span id="cb17-3">    <span class="at" style="color: #657422;">cols =</span> nuevos_fpp_h014<span class="sc" style="color: #5E5E5E;">:</span>nuevosrecaida_m65,</span>
-<span id="cb17-4">    <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"clave"</span>, </span>
-<span id="cb17-5">    <span class="at" style="color: #657422;">values_to =</span> <span class="st" style="color: #20794D;">"valor"</span>, </span>
-<span id="cb17-6">    <span class="at" style="color: #657422;">values_drop_na =</span> <span class="cn" style="color: #8f5902;">TRUE</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb17-7">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">clave =</span> stringr<span class="sc" style="color: #5E5E5E;">::</span><span class="fu" style="color: #4758AB;">str_replace</span>(clave, <span class="st" style="color: #20794D;">"nuevosrecaida"</span>, <span class="st" style="color: #20794D;">"nuevos_recaida"</span>)) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb17-8">  <span class="fu" style="color: #4758AB;">separate</span>(clave, <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"nuevos"</span>, <span class="st" style="color: #20794D;">"tipo"</span>, <span class="st" style="color: #20794D;">"sexo_edad"</span>)) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb17-9">  <span class="fu" style="color: #4758AB;">select</span>(<span class="sc" style="color: #5E5E5E;">-</span>nuevos, <span class="sc" style="color: #5E5E5E;">-</span>iso2, <span class="sc" style="color: #5E5E5E;">-</span>iso3) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
-<span id="cb17-10">  <span class="fu" style="color: #4758AB;">separate</span>(sexo_edad, <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"sexo"</span>, <span class="st" style="color: #20794D;">"edad"</span>), <span class="at" style="color: #657422;">sep =</span> <span class="dv" style="color: #AD0000;">1</span>)</span>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">fsdata<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> oms <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb17-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(</span>
+<span id="cb17-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> nuevos_fpp_h014<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>nuevosrecaida_m65,</span>
+<span id="cb17-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clave"</span>, </span>
+<span id="cb17-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"valor"</span>, </span>
+<span id="cb17-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_drop_na =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb17-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">clave =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(clave, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nuevosrecaida"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nuevos_recaida"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb17-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate</span>(clave, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nuevos"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tipo"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sexo_edad"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb17-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>nuevos, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>iso2, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>iso3) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb17-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate</span>(sexo_edad, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sexo"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"edad"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
 <span id="cb17-11">fsdata</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 76,046 × 6
