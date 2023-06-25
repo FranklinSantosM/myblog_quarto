@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/weather_mizque/index.html",
       "/posts/facet_ggplot2/index.html",
       "/posts/julia/index.html",
       "/posts/AI/index.html",

@@ -1,0 +1,199 @@
+---
+title: "Analisis de datos climaticos"
+description: |
+  Mostramos unas figuras relacionadas a datos climaticos, las cuales pueden ser utilizados para presentar en manuscritos.
+categories: [data science, weather analysis, plot]
+author:
+  - name: Franklin Santos
+    url: https://franklinsantosm.com
+    affiliation: AgriTech Bolivia
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2023-06-25"
+image: ai.webp
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+## Data
+
+```{r}
+library(readxl)
+df <- read_excel("/Users/franklin/Documents/R/myblog/posts/weather_mizque/dato_diarios.xlsx")
+
+```
+
+
+
+## analisis de temperatura
+
+```{r}
+#Real data Mizque
+library(metan)
+inspect(df, 2:14, plot = F)
+library(tidyverse)
+names(df)
+```
+
+## Rename variables
+
+```{r}
+newvar = c(PP = "Precipitación", 
+           Tmax = "\"Temperatura Máxima\"",
+           Tmin = "\"Temperatura Mínima\"",
+           Tmean = "\"Temperatura Media\"",
+           HRmax = "\"Humedad Relativa Máxima\"",
+           HRmin = "\"Humedad Relativa Mínima\"",
+           HRmean = "\"Humedad Relativa Media\"")
+```
+
+```{r}
+db = df%>%
+  rename(any_of(newvar))%>%
+  select(c(1,2,3, 8:14))%>%
+  mutate_if(is.character, as.numeric)%>%
+  mutate(mes = as.factor(mes), 
+         gestion = as.factor(gestion))%>%
+  mutate(mes=recode(mes, 
+                    '1'='Ene', 
+                    '2'='Feb',
+                    '3'='Mar',
+                    '4'='Abr',
+                    '5'='May',
+                    '6'='Jun',
+                    '7'='Jul',
+                    '8'='Ago',
+                    '9'='Sep',
+                    '10'='Oct',
+                    '11'='Nov',
+                    '12'='Dic'))
+db  
+```
+
+
+## plot temperature
+
+```{r}
+library(ggridges)
+
+my_theme <- 
+  theme_bw() +
+  theme(legend.title = element_blank(),
+        axis.title = element_text(color = "black"),
+        axis.text = element_text(color = "black"),
+        panel.grid.minor = element_blank())
+
+p1 = ggplot(
+  data = db,
+  aes(x = `Tmean`,
+      y = `mes`,
+      fill = after_stat(x))
+) +
+  geom_density_ridges_gradient(scale = 1.5, size = 0.1, 
+                               rel_min_height = 0.001) +
+  scale_fill_viridis_c(name = "Temp (ºC)", 
+                       direction = 1, option = "H") +
+  my_theme +
+  theme(legend.position = c(0.95, 0.4))+
+  labs(x="Temperatura promedio (ºC)", y = "Meses")
+
+p2 = ggplot(
+  data = db,
+  aes(x = `Tmin`,
+      y = `mes`,
+      fill = after_stat(x))
+) +
+  geom_density_ridges_gradient(scale = 1.5, size = 0.1, 
+                               rel_min_height = 0.001) +
+  scale_fill_viridis_c(name = "Temp (ºC)", 
+                       direction = 1, option = "H")+
+  my_theme+
+  theme(legend.position = c(0.9, 0.77))+
+  labs(x="Temperatura mínima (ºC)", y = "Meses")
+
+
+p3 = ggplot(
+  data = db,
+  aes(x = `Tmax`,
+      y = `mes`,
+      fill = after_stat(x))
+) +
+  geom_density_ridges_gradient(scale = 1.5, size = 0.1, 
+                               rel_min_height = 0.001) +
+  scale_fill_viridis_c(name = "Temp (ºC)", 
+                       direction = 1, option = "H") +
+  my_theme+
+  theme(legend.position = "")+
+  labs(x="Temperatura maxima (ºC)", y = "Meses")
+
+arrange_ggplot((p1),
+               (p2+p3),
+               nrow = 2,
+               tag_levels = "a")
+```
+
+
+## plot precipitation
+
+```{r}
+pp =db%>%
+  mutate(PP = na_if(PP, 0.0))%>%
+  ggplot(aes(x = mes,y = PP,
+             colour = mes
+             )) +
+  geom_boxplot(outlier.shape = NA)+
+  geom_jitter()+
+  my_theme+
+  theme(legend.position = "")+
+  labs(x="Meses", y = "Precipitacion (mm)")
+```
+
+
+## Humedad relativa plot
+
+```{r}
+fechas = df%>%
+  rename(any_of(newvar))%>%
+  select(c(1,2,3, 8:14))%>%
+  mutate_if(is.character, as.numeric)%>%
+  mutate(fecha = make_datetime(gestion,mes,dia))%>%
+  select(fecha,HRmin,HRmax, HRmean)
+fechas
+```
+
+
+```{r}
+HR = fechas%>%
+  ggplot(aes(x=fecha, y=HRmean))+
+  geom_line()+
+  my_theme+
+  labs(x="Meses", y = "Humedad relativa promedio (%)")
+HR
+```
+
+```{r, eval=FALSE}
+library(plotly)
+p = fechas%>%
+plot_ly(x=~fecha, y=~HRmean)%>%
+  add_lines()
+p
+```
+
+```{r}
+arrange_ggplot((pp),
+               (p1+HR),
+               nrow = 2,
+               tag_levels = "a")
+```
+
+
+    
+    
