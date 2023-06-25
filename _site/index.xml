@@ -1037,7 +1037,7 @@ June 25, 2023. <a href="https://franklinsantosm.com/posts/weather_mizque">https:
   <category>plot</category>
   <guid>https://franklinsantosm.com/posts/weather_mizque/index.html</guid>
   <pubDate>Sun, 25 Jun 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://franklinsantosm.com/posts/weather_mizque/ai.webp" medium="image" type="image/webp"/>
+  <media:content url="https://franklinsantosm.com/posts/weather_mizque/w.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>ggplot2: facet_wrap, facet_grid</title>

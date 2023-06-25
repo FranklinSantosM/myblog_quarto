@@ -10,7 +10,7 @@ author:
     orcid: 0000-0002-7509-2910
     email: franklin25santos@gmail.com
 date: "2023-06-25"
-image: ai.webp
+image: w.png
 citation: true
 editor_options: 
   chunk_output_type: console
