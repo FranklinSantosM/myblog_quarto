@@ -1,0 +1,118 @@
+---
+title: "Dumbbell plot: visualizar cambio en ggplot2"
+description: |
+  Una manera de comparar los cambios en una figura.
+categories: [data science, ggalt, dumbbell plot]
+author:
+  - name: Franklin Santos
+    url: https://franklinsantosm.com
+    affiliation: AgriTech Bolivia
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2023-07-20"
+image: change.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+## Introducción
+
+El gráfico de mancuernas es una visualización que muestra el cambio entre dos puntos de nuestros datos. Su nombre se debe a la forma de la mancuerna. Es una gran manera de mostrar los datos cambiantes entre dos puntos (piensa en el inicio y el final). Aquí podemos ver la mejora en el ahorro de combustible de los vehículos a lo largo del tiempo (entre 1999 y 2008). La mancuerna muestra el punto inicial (MPG en 1999) y el punto final (MPG en 2008).
+
+## Cargar librerias y datos
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(tidyquant)
+library(ggalt)
+
+# Data
+mpg
+
+```
+
+## Paso 1: Preparacion de datos
+
+```{r}
+#| message: false
+#| warning: false
+
+mpg_by_year_tbl = mpg %>%
+  select(hwy, year, model, class)%>%
+  pivot_wider(
+    names_from = year,
+    values_from = hwy,
+    id_cols = c(class, model),
+    values_fn = function(x) mean(x, na.rm = TRUE),
+    names_prefix = "year_"
+  )%>%
+  mutate(model = fct_reorder(model, year_2008))%>%
+  drop_na()
+```
+
+## Paso 2: Dumbbell plot base
+
+```{r}
+#| message: false
+#| warning: false
+
+# basic plot with ggalt
+g1 = mpg_by_year_tbl%>%
+  ggplot(aes(x = year_1999, xend = year_2008,
+             y = model, group = model))+
+  geom_dumbbell(
+    colour="#a3c4dc",
+    colour_xend = "#0e668b",
+    size=2.5,
+    dot_guide = TRUE,
+    dot_guide_size = 0.19,
+    dot_guide_colour = "grey60"
+  )
+
+g1
+```
+## Paso 3: Configurar con `ggplot`
+
+```{r}
+g2 = g1 +
+  labs(
+    title = "Cambio de vehiculos entre 1999 y 2008",
+    x="Fuel Economy (MPG)", y="Vehicle Model"
+)+
+  theme_tq()+
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(),
+    axis.ticks = element_blank(),
+    panel.border = element_blank()
+  )
+
+g2
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
