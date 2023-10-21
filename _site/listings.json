@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/agri_AI/index.html",
       "/posts/change_plot/index.html",
       "/posts/weather_mizque/index.html",
       "/posts/facet_ggplot2/index.html",
