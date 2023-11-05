@@ -21,6 +21,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/corrr/index.html",
       "/posts/agri_AI/index.html",
       "/posts/change_plot/index.html",
       "/posts/weather_mizque/index.html",
