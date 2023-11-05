@@ -15,33 +15,46 @@ about:
     - icon: github
       text: Github
       href: https://github.com/FranklinSantosM
+    - icon: orcid
+      text: Orcid
+      href: https://orcid.org/0000-0002-7509-2910
+    - icon: google-scholar
+      text: Google Schollar
+      href: https://scholar.google.com/citations?hl=en&user=e0Tt_lAAAAAJ
 ---
+
+```{=html}
 <style>
 body {
 text-align: justify}
 </style>
-
+```
 ## **Biography**
+
 Franklin Santos is plant and data scientist. He develops research work and data analysis. His research interests include plant and animal breeding. He directs a group of researchers and he is a undergraduate thesis advisor for the Agronomic Engineering Career at the Public University of El Alto.
 
 ## **Education**
-* **Statistics with R** | 2020
-  - Duke University | [Coursera Specialization](http://coursera.org/verify/specialization/S4SMJQVSK3FV)
-* **Animal Breeding and Genetics** | 2020
-  - Wageningen University & Research | [edX Professional Certificate](https://credentials.edx.org/credentials/4988fa30ecac452593dfd51f9a0ab994/)
-* **Data Science** | 2020
-  - Johns Hopkins University | [Coursera Specialization](http://coursera.org/verify/specialization/RYJW3XRY9FYD)
-* **Agronomist Engineer, B.Sc.** | 2017
-  - El Alto Public University
+
+-   **Statistics with R** \| 2020
+    -   Duke University \| [Coursera Specialization](http://coursera.org/verify/specialization/S4SMJQVSK3FV)
+-   **Animal Breeding and Genetics** \| 2020
+    -   Wageningen University & Research \| [edX Professional Certificate](https://credentials.edx.org/credentials/4988fa30ecac452593dfd51f9a0ab994/)
+-   **Data Science** \| 2020
+    -   Johns Hopkins University \| [Coursera Specialization](http://coursera.org/verify/specialization/RYJW3XRY9FYD)
+-   **Agronomist Engineer, B.Sc.** \| 2017
+    -   El Alto Public University
 
 ## **Experience**
-* **INIAF** | Research Technician | January 2018 - June 2020
-* **GAM-Licoma** | Director of Agricultural Development | June 2016 - Dec 2017
-* **INE** | Municipal Census Chief | August 2013 - November 2013
+
+-   **INIAF** \| Research and Technology Generation Professional\| February 2023 - to present
+-   **INIAF** \| Technical extensionist \| May 2022 - December 2022
+-   **INIAF** \| Research Technician \| January 2018 - June 2020
+-   **GAM-Licoma** \| Director of Agricultural Development \| June 2016 - Dec 2017
+-   **INE** \| Municipal Census Chief \| August 2013 - November 2013
 
 ## **Interests**
-* **Plant and Animal Breeding**
-* **Mentoring**
-* **Data Science**
-* **R programming**
 
+-   **Plant and Animal Breeding**
+-   **Mentoring**
+-   **Data Science**
+-   **R programming**

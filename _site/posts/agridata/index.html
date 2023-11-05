@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,7 +20,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -60,7 +60,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -82,51 +83,56 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">Franklin Santos</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../cv.pdf">
+    <a class="nav-link" href="../../cv.pdf" rel="" target="">
  <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://franklinsantosm.netlify.app/blog.html">
+    <a class="nav-link" href="https://franklinsantosm.netlify.app/blog.html" rel="" target="">
  <span class="menu-text">Blog+</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://agritechjc.netlify.app/">
+    <a class="nav-link" href="https://agritechjc.netlify.app/" rel="" target="">
  <span class="menu-text">Journal Club</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/FranklinSantosM"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://scholar.google.com/citations?hl=en&amp;user=e0Tt_lAAAAAJ" rel="" target=""><i class="bi bi-google-scholar" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/FranklinSantosM"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://github.com/FranklinSantosM" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="https://twitter.com/FranklinSantosM" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -154,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="quarto-title-meta-heading">Affiliation</div>
     
       <div class="quarto-title-meta-contents">
-      <a href="https://franklinsantosm.com">Franklin Santos</a> <a href="https://orcid.org/0000-0002-7509-2910" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+      <p class="author"><a href="https://franklinsantosm.com">Franklin Santos</a> <a href="https://orcid.org/0000-0002-7509-2910" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
     </div>
       <div class="quarto-title-meta-contents">
           <p class="affiliation">
@@ -200,75 +206,69 @@ text-align: justify}
 <h1>Análisis de datos</h1>
 <section id="librerias" class="level2">
 <h2 class="anchored" data-anchor-id="librerias">Librerias</h2>
-<div class="cell">
-
-</div>
 </section>
 <section id="base-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="base-de-datos">Base de datos</h2>
 <p>Para esta oportunidad daremos uso de la base de datos de <code>iris</code>. Estos datos estarán disponibles al momento de instalar R.</p>
-<div class="cell">
-
-</div>
 </section>
 <section id="análisis-descriptivo" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-descriptivo">Análisis descriptivo</h2>
 <p>Generalmente se puede presentar en una tabla los resultados descriptivos.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Análisis descriptivo</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> variable </th>
-   <th style="text-align:right;"> mean </th>
-   <th style="text-align:right;"> se </th>
-   <th style="text-align:right;"> kurt </th>
-   <th style="text-align:right;"> skew </th>
-   <th style="text-align:right;"> min </th>
-   <th style="text-align:right;"> max </th>
-  </tr>
- </thead>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">se</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">kurt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">skew</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">max</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Petal.Length </td>
-   <td style="text-align:right;"> 3.76 </td>
-   <td style="text-align:right;"> 0.14 </td>
-   <td style="text-align:right;"> -1.40 </td>
-   <td style="text-align:right;"> -0.27 </td>
-   <td style="text-align:right;"> 1.0 </td>
-   <td style="text-align:right;"> 6.9 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Petal.Width </td>
-   <td style="text-align:right;"> 1.20 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> -1.34 </td>
-   <td style="text-align:right;"> -0.10 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:right;"> 2.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sepal.Length </td>
-   <td style="text-align:right;"> 5.84 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> -0.55 </td>
-   <td style="text-align:right;"> 0.31 </td>
-   <td style="text-align:right;"> 4.3 </td>
-   <td style="text-align:right;"> 7.9 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sepal.Width </td>
-   <td style="text-align:right;"> 3.06 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.32 </td>
-   <td style="text-align:right;"> 2.0 </td>
-   <td style="text-align:right;"> 4.4 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Petal.Length</td>
+<td style="text-align: right;">3.76</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">-1.40</td>
+<td style="text-align: right;">-0.27</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">6.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Petal.Width</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.34</td>
+<td style="text-align: right;">-0.10</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">2.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sepal.Length</td>
+<td style="text-align: right;">5.84</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">-0.55</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">7.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sepal.Width</td>
+<td style="text-align: right;">3.06</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">4.4</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -281,9 +281,6 @@ text-align: justify}
 </section>
 <section id="análisis-de-varianza" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-de-varianza">Análisis de varianza</h2>
-<div class="cell">
-
-</div>
 <p>Generalmente en la mayoría de las tesis se presenta cada ANOVA para cada variable, la cual no es muy redundante en todo el documento. Además, en las revistas científicas de impacto, este tipo de tablas no es permitido si se tiene varias variables.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -297,64 +294,46 @@ Residuals 147 16.962  0.1154
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
 <p>Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Análisis de varianza</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> FV </th>
-   <th style="text-align:right;"> DF </th>
-   <th style="text-align:left;"> Sepal.Length </th>
-   <th style="text-align:left;"> Sepal.Width </th>
-   <th style="text-align:left;"> Petal.Length </th>
-   <th style="text-align:left;"> Petal.Width </th>
-  </tr>
- </thead>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">FV</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">DF</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Sepal.Length</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Sepal.Width</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Petal.Length</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Petal.Width</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Species </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> 31.61 ** </td>
-   <td style="text-align:left;"> 5.67 ** </td>
-   <td style="text-align:left;"> 218.55 ** </td>
-   <td style="text-align:left;"> 40.21 ** </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 147 </td>
-   <td style="text-align:left;"> 0.27 </td>
-   <td style="text-align:left;"> 0.12 </td>
-   <td style="text-align:left;"> 0.19 </td>
-   <td style="text-align:left;"> 0.04 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Species</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">31.61 **</td>
+<td style="text-align: left;">5.67 **</td>
+<td style="text-align: left;">218.55 **</td>
+<td style="text-align: left;">40.21 **</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: left;">0.27</td>
+<td style="text-align: left;">0.12</td>
+<td style="text-align: left;">0.19</td>
+<td style="text-align: left;">0.04</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p>Una vez identificada las diferencias estadisticas se procede a realizar pruebas de promedio para seleccionar genotipos sobresalientes.</p>
-<div class="cell">
-
-</div>
 <p>Hay otra manera de representar comparaciones graficamente</p>
-<div class="cell">
-
-</div>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1056"></p>
@@ -424,12 +403,6 @@ setosa     5.006      c</code></pre>
 <section id="análisis-multivariado" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-multivariado">Análisis multivariado</h2>
 <div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 -------------------------------------------------------------------------------
@@ -493,12 +466,6 @@ NAC_CAM IMP_ALB
 </div>
 </div>
 <div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining, by = "VAR"</code></pre>
 </div>
@@ -514,14 +481,14 @@ NAC_CAM IMP_ALB
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
-  author = {Franklin Santos},
+  author = {Santos, Franklin},
   title = {Análisis de Datos Experimentales Agrícolas},
   date = {2023-01-01},
   url = {https://franklinsantosm.com/posts/agridata},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Franklin Santos. 2023. <span>“Análisis de Datos Experimentales
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Santos, Franklin. 2023. <span>“Análisis de Datos Experimentales
 Agrícolas.”</span> January 1, 2023. <a href="https://franklinsantosm.com/posts/agridata">https://franklinsantosm.com/posts/agridata</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -666,9 +633,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -733,6 +714,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

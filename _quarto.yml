@@ -17,6 +17,8 @@ website:
         href: https://franklinsantosm.netlify.app/blog.html
       - text: "Journal Club"
         href: https://agritechjc.netlify.app/ 
+      - icon: google-scholar
+        href: https://scholar.google.com/citations?hl=en&user=e0Tt_lAAAAAJ
       - icon: github
         href: https://github.com/FranklinSantosM
       - icon: twitter

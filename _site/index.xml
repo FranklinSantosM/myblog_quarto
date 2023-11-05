@@ -1934,14 +1934,14 @@ text-align: justify}
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
-  author = {Franklin Santos},
+  author = {Santos, Franklin},
   title = {JULIA: {Lenguaje} de Programación Del Futuro},
   date = {2023-04-25},
   url = {https://franklinsantosm.com/posts/julia},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
-Franklin Santos. 2023. <span>“JULIA: Lenguaje de Programación Del
+Santos, Franklin. 2023. <span>“JULIA: Lenguaje de Programación Del
 Futuro.”</span> April 25, 2023. <a href="https://franklinsantosm.com/posts/julia">https://franklinsantosm.com/posts/julia</a>.
 </div></div></section></div> ]]></description>
   <category>julia</category>
@@ -1992,14 +1992,14 @@ text-align: justify}
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
-  author = {Franklin Santos},
+  author = {Santos, Franklin},
   title = {Inteligencia Artificial En La Agricultura},
   date = {2023-03-15},
   url = {https://franklinsantosm.com/posts/AI},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
-Franklin Santos. 2023. <span>“Inteligencia Artificial En La
+Santos, Franklin. 2023. <span>“Inteligencia Artificial En La
 Agricultura.”</span> March 15, 2023. <a href="https://franklinsantosm.com/posts/AI">https://franklinsantosm.com/posts/AI</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
@@ -2166,14 +2166,14 @@ font-style: inherit;">fill =</span> scat))</span>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
-  author = {Franklin Santos},
+  author = {Santos, Franklin},
   title = {Mapas de {Bolivia}},
   date = {2023-02-01},
   url = {https://franklinsantosm.com/posts/maps},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
-Franklin Santos. 2023. <span>“Mapas de Bolivia.”</span> February 1,
+Santos, Franklin. 2023. <span>“Mapas de Bolivia.”</span> February 1,
 2023. <a href="https://franklinsantosm.com/posts/maps">https://franklinsantosm.com/posts/maps</a>.
 </div></div></section></div> ]]></description>
   <category>maps</category>
@@ -2205,75 +2205,69 @@ text-align: justify}
 <h1>Análisis de datos</h1>
 <section id="librerias" class="level2">
 <h2 class="anchored" data-anchor-id="librerias">Librerias</h2>
-<div class="cell">
-
-</div>
 </section>
 <section id="base-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="base-de-datos">Base de datos</h2>
 <p>Para esta oportunidad daremos uso de la base de datos de <code>iris</code>. Estos datos estarán disponibles al momento de instalar R.</p>
-<div class="cell">
-
-</div>
 </section>
 <section id="análisis-descriptivo" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-descriptivo">Análisis descriptivo</h2>
 <p>Generalmente se puede presentar en una tabla los resultados descriptivos.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Análisis descriptivo</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> variable </th>
-   <th style="text-align:right;"> mean </th>
-   <th style="text-align:right;"> se </th>
-   <th style="text-align:right;"> kurt </th>
-   <th style="text-align:right;"> skew </th>
-   <th style="text-align:right;"> min </th>
-   <th style="text-align:right;"> max </th>
-  </tr>
- </thead>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">se</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">kurt</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">skew</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">max</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Petal.Length </td>
-   <td style="text-align:right;"> 3.76 </td>
-   <td style="text-align:right;"> 0.14 </td>
-   <td style="text-align:right;"> -1.40 </td>
-   <td style="text-align:right;"> -0.27 </td>
-   <td style="text-align:right;"> 1.0 </td>
-   <td style="text-align:right;"> 6.9 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Petal.Width </td>
-   <td style="text-align:right;"> 1.20 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> -1.34 </td>
-   <td style="text-align:right;"> -0.10 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:right;"> 2.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sepal.Length </td>
-   <td style="text-align:right;"> 5.84 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> -0.55 </td>
-   <td style="text-align:right;"> 0.31 </td>
-   <td style="text-align:right;"> 4.3 </td>
-   <td style="text-align:right;"> 7.9 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sepal.Width </td>
-   <td style="text-align:right;"> 3.06 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.32 </td>
-   <td style="text-align:right;"> 2.0 </td>
-   <td style="text-align:right;"> 4.4 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Petal.Length</td>
+<td style="text-align: right;">3.76</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">-1.40</td>
+<td style="text-align: right;">-0.27</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">6.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Petal.Width</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-1.34</td>
+<td style="text-align: right;">-0.10</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">2.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sepal.Length</td>
+<td style="text-align: right;">5.84</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">-0.55</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">7.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sepal.Width</td>
+<td style="text-align: right;">3.06</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">4.4</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -2286,9 +2280,6 @@ text-align: justify}
 </section>
 <section id="análisis-de-varianza" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-de-varianza">Análisis de varianza</h2>
-<div class="cell">
-
-</div>
 <p>Generalmente en la mayoría de las tesis se presenta cada ANOVA para cada variable, la cual no es muy redundante en todo el documento. Además, en las revistas científicas de impacto, este tipo de tablas no es permitido si se tiene varias variables.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -2302,64 +2293,46 @@ Residuals 147 16.962  0.1154
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
 <p>Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Análisis de varianza</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> FV </th>
-   <th style="text-align:right;"> DF </th>
-   <th style="text-align:left;"> Sepal.Length </th>
-   <th style="text-align:left;"> Sepal.Width </th>
-   <th style="text-align:left;"> Petal.Length </th>
-   <th style="text-align:left;"> Petal.Width </th>
-  </tr>
- </thead>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">FV</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">DF</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Sepal.Length</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Sepal.Width</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Petal.Length</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Petal.Width</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Species </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> 31.61 ** </td>
-   <td style="text-align:left;"> 5.67 ** </td>
-   <td style="text-align:left;"> 218.55 ** </td>
-   <td style="text-align:left;"> 40.21 ** </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 147 </td>
-   <td style="text-align:left;"> 0.27 </td>
-   <td style="text-align:left;"> 0.12 </td>
-   <td style="text-align:left;"> 0.19 </td>
-   <td style="text-align:left;"> 0.04 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Species</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">31.61 **</td>
+<td style="text-align: left;">5.67 **</td>
+<td style="text-align: left;">218.55 **</td>
+<td style="text-align: left;">40.21 **</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: left;">0.27</td>
+<td style="text-align: left;">0.12</td>
+<td style="text-align: left;">0.19</td>
+<td style="text-align: left;">0.04</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p>Una vez identificada las diferencias estadisticas se procede a realizar pruebas de promedio para seleccionar genotipos sobresalientes.</p>
-<div class="cell">
-
-</div>
 <p>Hay otra manera de representar comparaciones graficamente</p>
-<div class="cell">
-
-</div>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1056"></p>
@@ -2429,12 +2402,6 @@ setosa     5.006      c</code></pre>
 <section id="análisis-multivariado" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-multivariado">Análisis multivariado</h2>
 <div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 -------------------------------------------------------------------------------
@@ -2498,12 +2465,6 @@ NAC_CAM IMP_ALB
 </div>
 </div>
 <div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining, by = "VAR"</code></pre>
 </div>
@@ -2519,14 +2480,14 @@ NAC_CAM IMP_ALB
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
-  author = {Franklin Santos},
+  author = {Santos, Franklin},
   title = {Análisis de Datos Experimentales Agrícolas},
   date = {2023-01-01},
   url = {https://franklinsantosm.com/posts/agridata},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
-Franklin Santos. 2023. <span>“Análisis de Datos Experimentales
+Santos, Franklin. 2023. <span>“Análisis de Datos Experimentales
 Agrícolas.”</span> January 1, 2023. <a href="https://franklinsantosm.com/posts/agridata">https://franklinsantosm.com/posts/agridata</a>.
 </div></div></section></div> ]]></description>
   <category>agridata</category>
@@ -3989,12 +3950,12 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -4018,12 +3979,12 @@ data:  housetasks
 X-squared = 1944.5, df = 36, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 
 </div>
 </div>
@@ -4202,12 +4163,12 @@ Dim.3  0.1270484         11.39509                   100.00000</code></pre>
 <p>Los <em>valores propios</em> corresponden a la cantidad de información retenida por cada eje. Las dimensiones se ordenan de forma decreciente y se enumeran de acuerdo con la cantidad de variación explicada en la solución. La dimensión 1 explica la mayor variación en la solución, seguida de la dimensión 2 y así sucesivamente.</p>
 <p>El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 48,69% más 39,91% es igual a 88,6% y así sucesivamente. Por lo tanto, aproximadamente el 88,6% de la variación se explica por las dos primeras dimensiones.</p>
 <p>Los valores propios se pueden utilizar para determinar el número de ejes que se deben retener. No existe una “regla general” para elegir el número de dimensiones que se deben mantener para la interpretación de los datos. Depende de la pregunta de investigación y la necesidad del investigador. Por ejemplo, si está satisfecho con el 80% de las variaciones totales explicadas, utilice la cantidad de dimensiones necesarias para lograrlo.</p>
-<div class="callout-note callout callout-style-simple callout-captioned">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tenga en cuenta
 </div>
 </div>
@@ -4238,12 +4199,12 @@ font-style: inherit;">50</span>))</span></code></pre></div>
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="callout-note callout callout-style-simple callout-captioned">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Consideración
 </div>
 </div>
@@ -4259,12 +4220,12 @@ Consideración
 <li>Asimismo, el eje promedio debe representar <code>1/(ncol(housetasks)-1) = 1/3 = 33,33%</code> en términos de las 4 columnas.</li>
 </ul>
 </blockquote>
-<div class="callout-note callout callout-style-simple callout-captioned">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Según (M. T. Bendixen 1995):
 </div>
 </div>
@@ -4324,12 +4285,12 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </div>
 <p>El gráfico anterior se llama gráfico simétrico y muestra un patrón global dentro de los datos. Las filas están representadas por puntos azules y las columnas por triángulos rojos.</p>
 <p>La distancia entre cualquier punto de fila o columna da una medida de su similitud (o disimilitud). Los puntos de fila con un perfil similar se cierran en el mapa de factores. Lo mismo es válido para los puntos de columna.</p>
-<div class="callout-note callout callout-style-simple callout-captioned">
+<div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Este gráfico muestra que:
 </div>
 </div>
@@ -4351,12 +4312,12 @@ Este gráfico muestra que:
 <section id="biplot-simétrico" class="level4">
 <h4 class="anchored" data-anchor-id="biplot-simétrico">Biplot simétrico</h4>
 <p>Como se mencionó anteriormente, el gráfico estándar del análisis de correspondencia es un biplot simétrico en el que tanto las filas (puntos azules) como las columnas (triángulos rojos) se representan en el mismo espacio utilizando las coordenadas principales. Estas coordenadas representan los perfiles de fila y columna. En este caso, solo se puede interpretar realmente la distancia entre puntos de fila o la distancia entre puntos de columna.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 
 </div>
 </div>
@@ -4376,12 +4337,12 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -4592,15 +4553,15 @@ Husband      0.6019199</code></pre>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2020,
-  author = {Franklin Santos},
+  author = {Santos, Franklin},
   title = {Análisis de Correspondencia Con {R}},
   date = {2020-11-07},
   url = {https://franklinsantosm.com/posts/Analisis_correspondencia},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2020" class="csl-entry quarto-appendix-citeas">
-Franklin Santos. 2020. <span>“Análisis de Correspondencia Con R.”</span>
-November 7, 2020. <a href="https://franklinsantosm.com/posts/Analisis_correspondencia">https://franklinsantosm.com/posts/Analisis_correspondencia</a>.
+Santos, Franklin. 2020. <span>“Análisis de Correspondencia Con
+R.”</span> November 7, 2020. <a href="https://franklinsantosm.com/posts/Analisis_correspondencia">https://franklinsantosm.com/posts/Analisis_correspondencia</a>.
 </div></div></section></div> ]]></description>
   <category>Chi-cuadrado</category>
   <category>Biplot</category>
