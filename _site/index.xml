@@ -10,7 +10,448 @@
 <atom:link href="https://franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Wed, 20 Sep 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 24 Oct 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Unveiling the Power of Completely Randomized Design (CRD) in Crop Science Experiments</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://franklinsantosm.com/posts/crd/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="unveiling-the-power-of-completely-randomized-design-crd-in-crop-science-experiments" class="level1">
+<h1>Unveiling the Power of Completely Randomized Design (CRD) in Crop Science Experiments</h1>
+<p>In the vast expanse of crop science, where precision and reliability are paramount, the choice of experimental design plays a pivotal role in unlocking the secrets of optimal crop growth. Among the arsenal of experimental methodologies, the Completely Randomized Design (CRD) emerges as a beacon of simplicity and statistical robustness. In this blog, we embark on a journey into the realm of CRD, unraveling its principles, applications, and the advantages it brings to the forefront of crop science research.</p>
+<section id="understanding-crd-a-statistical-marvel" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-crd-a-statistical-marvel"><strong>Understanding CRD: A Statistical Marvel</strong></h2>
+<p><strong>What is Completely Randomized Design (CRD)?</strong></p>
+<p>CRD is a statistical method that serves as a robust tool for comparing the effects of different treatments on a single factor within crop experiments. It operates on the principle of randomness, ensuring that each experimental unit has an equal and unbiased chance of receiving any treatment. This randomization process is pivotal, eradicating potential biases and attributing observed crop responses solely to the applied treatments.</p>
+<p><strong>When to Use CRD:</strong></p>
+<p>CRD finds its niche in situations where experimental units are relatively homogenous, and there are no discernible patterns of variability within the experimental area. It is particularly valuable in small-scale or preliminary studies, where the primary objective is to gather initial data, identify trends, and pave the way for more intricate experimental designs.</p>
+</section>
+<section id="conducting-a-crd-experiment-steps-unveiled" class="level2">
+<h2 class="anchored" data-anchor-id="conducting-a-crd-experiment-steps-unveiled"><strong>Conducting a CRD Experiment: Steps Unveiled</strong></h2>
+<ol type="1">
+<li><strong>Define the Research Question and Identify Treatments:</strong>
+<ul>
+<li>Begin by articulating the research question you aim to answer. Identify the treatments relevant to the research question, laying the groundwork for a focused and purposeful experiment.</li>
+</ul></li>
+<li><strong>Prepare the Experimental Area:</strong>
+<ul>
+<li>Select a uniform experimental site, ensuring consistency in soil conditions, topography, and other relevant factors. Divide the area into individual experimental units of equal size to maintain comparability.</li>
+</ul></li>
+<li><strong>Label the Experimental Units:</strong>
+<ul>
+<li>Assign unique identifiers to each experimental unit. This step facilitates tracking and systematic data recording throughout the experiment.</li>
+</ul></li>
+<li><strong>Randomly Assign Treatments:</strong>
+<ul>
+<li>Utilize a random number generator or a randomizing device to assign treatments to experimental units. This step ensures an unbiased distribution of treatments, a key feature of CRD.</li>
+</ul></li>
+<li><strong>Apply Treatments:</strong>
+<ul>
+<li>Implement the assigned treatments to the respective experimental units. Keep accurate records of application dates, quantities, and methods to maintain precision in data collection.</li>
+</ul></li>
+<li><strong>Collect Data:</strong>
+<ul>
+<li>Regularly monitor the experimental units, collecting pertinent data on crop growth, yield, and any other relevant parameters. Consistent and systematic data collection is crucial for the success of the experiment.</li>
+</ul></li>
+<li><strong>Analyze the Data:</strong>
+<ul>
+<li>Employ appropriate statistical methods to analyze the collected data. Determine whether there are significant differences in crop responses among the different treatment groups, providing valuable insights into the effectiveness of each treatment.</li>
+</ul></li>
+</ol>
+</section>
+<section id="advantages-of-crd-unraveling-simplicity-and-robustness" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-crd-unraveling-simplicity-and-robustness"><strong>Advantages of CRD: Unraveling Simplicity and Robustness</strong></h2>
+<p><strong>Simplicity:</strong> CRD’s conceptual straightforwardness and ease of implementation make it accessible to researchers of varying experience levels. Its simplicity is a virtue that expedites the experimental process without compromising reliability.</p>
+<p><strong>Flexibility:</strong> CRD’s adaptability shines through, accommodating a wide range of experimental setups. This flexibility allows researchers to explore various factors and treatment combinations, offering versatility in experimental design.</p>
+<p><strong>Statistical Efficiency:</strong> By providing a statistically sound basis for comparing treatments, CRD ensures that conclusions drawn from the experiment are valid and reliable. This statistical efficiency is critical for making informed decisions based on experimental outcomes.</p>
+<p><strong>Wide Applicability:</strong> CRD’s versatility extends across different crop types and experimental environments, making it a valuable tool for crop scientists working in diverse agricultural landscapes.</p>
+</section>
+<section id="applications-of-crd-in-crop-science-navigating-agricultural-frontiers" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-crd-in-crop-science-navigating-agricultural-frontiers"><strong>Applications of CRD in Crop Science: Navigating Agricultural Frontiers</strong></h2>
+<p>CRD has found widespread application in various facets of crop science research, including:</p>
+<ul>
+<li><strong>Evaluating Fertilizer Effectiveness:</strong>
+<ul>
+<li>CRD is instrumental in assessing the impact of different fertilizer rates and application methods on crop yield and nutrient utilization efficiency.</li>
+</ul></li>
+<li><strong>Comparing Crop Varieties:</strong>
+<ul>
+<li>Researchers leverage CRD to compare the performance of various crop varieties under different environmental conditions, aiding in the selection of optimal cultivars.</li>
+</ul></li>
+<li><strong>Optimizing Irrigation Practices:</strong>
+<ul>
+<li>CRD facilitates investigations into the effects of different irrigation regimes on crop yield and water use efficiency, contributing to water conservation efforts.</li>
+</ul></li>
+<li><strong>Exploring Tillage Practices:</strong>
+<ul>
+<li>Researchers delve into the effects of different tillage practices on soil health and crop productivity, using CRD as a systematic approach to experimentation.</li>
+</ul></li>
+</ul>
+<p>In essence, CRD serves as a linchpin for crop scientists, offering a systematic and statistically sound approach to experimentation. Through its application, researchers generate reliable data that not only informs agricultural practices but also contributes to the broader understanding of crop dynamics, fostering innovation and sustainability in the realm of crop science.</p>
+<p>The fields of green are not just a canvas for growth; they are a stage for scientific inquiry, and CRD takes center stage in unraveling the intricacies of crop science.</p>
+</section>
+</section>
+<section id="mastering-completely-randomized-design-crd-analysis-with-agror-package" class="level1">
+<h1>Mastering Completely Randomized Design (CRD) Analysis with AgroR package</h1>
+<p>Conducting a thorough analysis of Completely Randomized Design (CRD) experiments in crop science can be a powerful tool for understanding treatment effects. Utilizing the AgroR package in R, you can navigate through the analysis seamlessly. Follow these steps to unlock meaningful insights from your CRD data:</p>
+<section id="step-1-set-the-stage-with-agror" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-set-the-stage-with-agror"><strong>Step 1: Set the Stage with AgroR</strong></h2>
+<section id="install-and-load-the-agror-package" class="level3">
+<h3 class="anchored" data-anchor-id="install-and-load-the-agror-package">Install and Load the AgroR Package</h3>
+<p>Begin by installing the AgroR package using the following R command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"AgroR"</span>)</span></code></pre></div>
+</div>
+<p>After installation, load the package into your R session with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(AgroR)</span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="step-2-prepare-your-data-for-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-prepare-your-data-for-analysis"><strong>Step 2: Prepare Your Data for Analysis</strong></h2>
+<p>Ensure your CRD data is well-organized in a data frame with the following structure:</p>
+<ul>
+<li>Each row represents an experimental unit.</li>
+<li>The first column contains treatment assignments (e.g., “Treatment 1”, “Treatment 2”, etc.).</li>
+<li>Subsequent columns hold measured values for each experimental unit and response variable (e.g., yield, plant height).</li>
+</ul>
+</section>
+<section id="step-3-unveil-patterns-with-analysis-of-variance-anova" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-unveil-patterns-with-analysis-of-variance-anova"><strong>Step 3: Unveil Patterns with Analysis of Variance (ANOVA)</strong></h2>
+<p>Utilize the <code>DIC</code> function to perform ANOVA on your CRD data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(pomegranate)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(pomegranate, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">DIC</span>(trat, WL, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Weight loss (%)"</span>)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># tukey</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Normality of errors
+-----------------------------------------------------------------
+                         Method Statistic   p.value
+ Shapiro-Wilk normality test(W) 0.9448293 0.2087967</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered normal</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Homogeneity of Variances
+-----------------------------------------------------------------
+                              Method Statistic   p.value
+ Bartlett test(Bartlett's K-squared)  8.568274 0.1275737</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level,hypothesis H0 is not rejected. Therefore, the variances can be considered homogeneous</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Independence from errors
+-----------------------------------------------------------------
+                 Method Statistic   p.value
+ Durbin-Watson test(DW)  2.104821 0.1924474</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered independent</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Additional Information
+-----------------------------------------------------------------
+
+CV (%) =  10.84
+MStrat/MST =  0.92
+Mean =  2.2596
+Median =  2.225
+Possible outliers =  No discrepant point
+
+-----------------------------------------------------------------
+Analysis of Variance
+-----------------------------------------------------------------
+          Df   Sum Sq    Mean.Sq  F value        Pr(F)
+Treatment  5 3.692121 0.73842417 12.31191 2.723541e-05
+Residuals 18 1.079575 0.05997639                      </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value, it is less than the 5% significance level.The hypothesis H0 of equality of means is rejected. Therefore, at least two treatments differ</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+-----------------------------------------------------------------
+Multiple Comparison Test: Tukey HSD
+-----------------------------------------------------------------
+     resp groups
+T5 2.6375      a
+T4 2.6200      a
+T3 2.6175      a
+T6 2.1625     ab
+T1 1.8425      b
+T2 1.6775      b</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>use <code>mcomp</code> to multiple comparison test (Tukey (default), LSD, Scott-Knott and Duncan)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(pomegranate, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">DIC</span>(trat, WL, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mcomp =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"duncan"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Weight loss (%)"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Normality of errors
+-----------------------------------------------------------------
+                         Method Statistic   p.value
+ Shapiro-Wilk normality test(W) 0.9448293 0.2087967</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered normal</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Homogeneity of Variances
+-----------------------------------------------------------------
+                              Method Statistic   p.value
+ Bartlett test(Bartlett's K-squared)  8.568274 0.1275737</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level,hypothesis H0 is not rejected. Therefore, the variances can be considered homogeneous</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Independence from errors
+-----------------------------------------------------------------
+                 Method Statistic   p.value
+ Durbin-Watson test(DW)  2.104821 0.1924474</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered independent</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Additional Information
+-----------------------------------------------------------------
+
+CV (%) =  10.84
+MStrat/MST =  0.92
+Mean =  2.2596
+Median =  2.225
+Possible outliers =  No discrepant point
+
+-----------------------------------------------------------------
+Analysis of Variance
+-----------------------------------------------------------------
+          Df   Sum Sq    Mean.Sq  F value        Pr(F)
+Treatment  5 3.692121 0.73842417 12.31191 2.723541e-05
+Residuals 18 1.079575 0.05997639                      </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value, it is less than the 5% significance level.The hypothesis H0 of equality of means is rejected. Therefore, at least two treatments differ</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+-----------------------------------------------------------------
+Multiple Comparison Test: Duncan
+-----------------------------------------------------------------
+     resp groups
+T5 2.6375      a
+T4 2.6200      a
+T3 2.6175      a
+T6 2.1625      b
+T1 1.8425     bc
+T2 1.6775      c</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>chart type: Graph type (columns, boxes or segments)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(pomegranate, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">DIC</span>(trat, WL, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"point"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Weight loss (%)"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Normality of errors
+-----------------------------------------------------------------
+                         Method Statistic   p.value
+ Shapiro-Wilk normality test(W) 0.9448293 0.2087967</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered normal</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Homogeneity of Variances
+-----------------------------------------------------------------
+                              Method Statistic   p.value
+ Bartlett test(Bartlett's K-squared)  8.568274 0.1275737</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level,hypothesis H0 is not rejected. Therefore, the variances can be considered homogeneous</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Independence from errors
+-----------------------------------------------------------------
+                 Method Statistic   p.value
+ Durbin-Watson test(DW)  2.104821 0.1924474</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value is greater than the 5% significance level, hypothesis H0 is not rejected. Therefore, errors can be considered independent</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------
+Additional Information
+-----------------------------------------------------------------
+
+CV (%) =  10.84
+MStrat/MST =  0.92
+Mean =  2.2596
+Median =  2.225
+Possible outliers =  No discrepant point
+
+-----------------------------------------------------------------
+Analysis of Variance
+-----------------------------------------------------------------
+          Df   Sum Sq    Mean.Sq  F value        Pr(F)
+Treatment  5 3.692121 0.73842417 12.31191 2.723541e-05
+Residuals 18 1.079575 0.05997639                      </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>As the calculated p-value, it is less than the 5% significance level.The hypothesis H0 of equality of means is rejected. Therefore, at least two treatments differ</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+-----------------------------------------------------------------
+Multiple Comparison Test: Tukey HSD
+-----------------------------------------------------------------
+     resp groups
+T5 2.6375      a
+T4 2.6200      a
+T3 2.6175      a
+T6 2.1625     ab
+T1 1.8425      b
+T2 1.6775      b</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="step-4-decode-and-conclude" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-decode-and-conclude"><strong>Step 4: Decode and Conclude</strong></h2>
+<section id="interpret-the-crd-results" class="level3">
+<h3 class="anchored" data-anchor-id="interpret-the-crd-results">Interpret the CRD Results</h3>
+<p>Based on ANOVA p-values and multiple comparisons, identify significant differences in the response variable among treatments.</p>
+<p>If differences are detected, pinpoint the treatment combinations responsible for those variations.</p>
+<p>Consider the biological implications of observed differences and draw conclusions about treatment effects on the response variable.</p>
+<p>By systematically following these steps, you’ll harness the analytical prowess of AgroR and CRD, unraveling the intricacies of your crop science experiments with precision and confidence.</p>
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+  author = {Santos, Franklin},
+  title = {Unveiling the {Power} of {Completely} {Randomized} {Design}
+    {(CRD)} in {Crop} {Science} {Experiments}},
+  date = {2023-10-24},
+  url = {https://franklinsantosm.com/posts/crd},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
+Santos, Franklin. 2023. <span>“Unveiling the Power of Completely
+Randomized Design (CRD) in Crop Science Experiments.”</span> October 24,
+2023. <a href="https://franklinsantosm.com/posts/crd">https://franklinsantosm.com/posts/crd</a>.
+</div></div></section></div> ]]></description>
+  <category>crd</category>
+  <category>agroR package</category>
+  <category>Experimental Design</category>
+  <guid>https://franklinsantosm.com/posts/crd/index.html</guid>
+  <pubDate>Tue, 24 Oct 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://franklinsantosm.com/posts/crd/cr.png" medium="image" type="image/png" height="103" width="144"/>
+</item>
 <item>
   <title>The corrr package in R: A powerful tool for exploring correlations</title>
   <dc:creator>Franklin Santos</dc:creator>
