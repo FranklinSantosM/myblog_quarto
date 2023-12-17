@@ -10,7 +10,747 @@
 <atom:link href="https://franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Tue, 24 Oct 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 29 Nov 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>FAMD - Factor Analysis of Mixed Data in R</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://franklinsantosm.com/posts/MDA/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Factor Analysis of Mixed Data (FAMD) is a powerful statistical technique used to analyze datasets that contain both numerical and categorical variables. It extends traditional factor analysis to handle mixed data types, providing a comprehensive understanding of the underlying structure of complex datasets. In this blog post, we will delve into the essentials of FAMD, exploring its computation, R packages, data format, R code, visualization, and interpretation.</p>
+</section>
+<section id="computation" class="level2">
+<h2 class="anchored" data-anchor-id="computation">Computation</h2>
+<p>FAMD combines multiple techniques, such as Principal Component Analysis (PCA) for numerical variables and Multiple Correspondence Analysis (MCA) for categorical variables. The integration of these methods allows FAMD to effectively capture the relationships between variables and reveal underlying patterns in mixed datasets.</p>
+<section id="r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="r-packages">R Packages</h3>
+<p>To perform FAMD in R, the <code>FactoMineR</code> and <code>factoextra</code> package are widely used and offers a dedicated function for FAMD. Ensure that you have the package installed by running:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FactoMineR"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"factoextra"</span>))</span></code></pre></div>
+</div>
+<p>load packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(FactoMineR)</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(factoextra)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+</div>
+</div>
+</section>
+<section id="data-format" class="level3">
+<h3 class="anchored" data-anchor-id="data-format">Data Format</h3>
+<p>Before applying FAMD, it’s crucial to prepare your data appropriately. Ensure that your dataset contains both numerical and categorical variables. Standardize numerical variables if necessary and encode categorical variables properly.</p>
+<p>We’ll use a subset of the <code>wine</code> data set available in <code>FactoMineR</code> package:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FactoMineR"</span>)</span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(wine)</span>
+<span id="cb5-3">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> wine[,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">16</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">22</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">29</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">28</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">31</span>)]</span>
+<span id="cb5-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(df[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>], <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Label Soil Plante Acidity Harmony Intensity Overall.quality
+2EL      Saumur Env1  2.000   2.107   3.143     2.857           3.393
+1CHA     Saumur Env1  2.000   2.107   2.964     2.893           3.214
+1FON Bourgueuil Env1  1.750   2.179   3.143     3.074           3.536
+1VAU     Chinon Env2  2.304   3.179   2.038     2.462           2.464</code></pre>
+</div>
+</div>
+<p>To see the structure of the data, type this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str</span>(df)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   21 obs. of  8 variables:
+ $ Label          : Factor w/ 3 levels "Saumur","Bourgueuil",..: 1 1 2 3 1 2 2 1 3 1 ...
+ $ Soil           : Factor w/ 4 levels "Reference","Env1",..: 2 2 2 3 1 1 1 2 2 3 ...
+ $ Plante         : num  2 2 1.75 2.3 1.76 ...
+ $ Acidity        : num  2.11 2.11 2.18 3.18 2.57 ...
+ $ Harmony        : num  3.14 2.96 3.14 2.04 3.64 ...
+ $ Intensity      : num  2.86 2.89 3.07 2.46 3.64 ...
+ $ Overall.quality: num  3.39 3.21 3.54 2.46 3.74 ...
+ $ Typical        : num  3.25 3.04 3.18 2.25 3.44 ...</code></pre>
+</div>
+</div>
+<p>The data contains 21 rows (wines, <code>individuals</code>) and 8 columns (<code>variables</code>):</p>
+<ul>
+<li>The first two columns are factors (<code>categorical variables</code>): <code>label</code> (Saumur, Bourgueil or Chinon) and <code>soil</code> (Reference, Env1, Env2 or Env4).</li>
+<li>The remaining columns are numeric (<code>continuous variables</code>).</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The goal of this study is to analyze the characteristics of the wines.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="r-code" class="level2">
+<h2 class="anchored" data-anchor-id="r-code">R Code</h2>
+<p>The function <code>FAMD()</code> [FactoMiner package] can be used to compute FAMD. A simplified format is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">FAMD</span> (base, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncp =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sup.var =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ind.sup =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">graph =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+</div>
+<ul>
+<li><code>base</code>: a data frame with n rows (individuals) and p columns (variables).</li>
+<li><code>ncp</code>: the number of dimensions kept in the results (by default 5)</li>
+<li><code>sup.var</code>: a vector indicating the indexes of the supplementary variables.</li>
+<li><code>ind.sup</code>: a vector indicating the indexes of the supplementary individuals.</li>
+<li><code>graph</code>: a logical value. If TRUE a graph is displayed.</li>
+</ul>
+<p>To compute FAMD, type this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(FactoMineR)</span>
+<span id="cb10-2">res.famd <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">FAMD</span>(df, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">graph =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
+</div>
+<p>The output of the <code>FAMD()</code> function is a list including:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(res.famd)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>*The results are available in the following objects:
+
+  name          description                             
+1 "$eig"        "eigenvalues and inertia"               
+2 "$var"        "Results for the variables"             
+3 "$ind"        "results for the individuals"           
+4 "$quali.var"  "Results for the qualitative variables" 
+5 "$quanti.var" "Results for the quantitative variables"</code></pre>
+</div>
+</div>
+<section id="visualization-and-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-and-interpretation">Visualization and Interpretation</h3>
+<p>We’ll use the following <strong><em>factoextra</em></strong> functions:</p>
+<ul>
+<li><code>get_eigenvalue(res.famd)</code>: Extract the eigenvalues/variances retained by each dimension (axis).</li>
+<li><code>fviz_eig(res.famd)</code>: Visualize the eigenvalues/variances.</li>
+<li><code>get_famd_ind(res.famd)</code>: Extract the results for individuals.</li>
+<li><code>get_famd_var(res.famd)</code>: Extract the results for quantitative and qualitative variables.</li>
+<li><code>fviz_famd_ind(res.famd)</code>, <code>fviz_famd_var(res.famd)</code>: Visualize the results for individuals and variables, respectively.</li>
+</ul>
+<p>In the next sections, we’ll illustrate each of these functions.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To help in the interpretation of FAMD, we highly recommend to read the interpretation of principal component analysis (Chapter (???)(principal-component-analysis)) and multiple correspondence analysis (Chapter (???)(multiple-correspondence-analysis)). Many of the graphs presented here have been already described in our previous chapters.</p>
+</div>
+</div>
+</section>
+<section id="eigenvalues-variances" class="level3">
+<h3 class="anchored" data-anchor-id="eigenvalues-variances">Eigenvalues / Variances</h3>
+<p>The proportion of variances retained by the different dimensions (axes) can be extracted using the function <code>get_eigenvalue()</code> [factoextra package] as follow:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"factoextra"</span>)</span>
+<span id="cb13-2">eig.val <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_eigenvalue</span>(res.famd)</span>
+<span id="cb13-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(eig.val)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      eigenvalue variance.percent cumulative.variance.percent
+Dim.1  4.8315174        43.922886                    43.92289
+Dim.2  1.8568797        16.880724                    60.80361
+Dim.3  1.5824794        14.386176                    75.18979
+Dim.4  1.1491200        10.446546                    85.63633
+Dim.5  0.6518053         5.925503                    91.56183</code></pre>
+</div>
+</div>
+<p>The function fviz_eig() or fviz_screeplot() [factoextra package] can be used to draw the scree plot (the percentages of inertia explained by each FAMD dimensions):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_screeplot</span>(res.famd)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="graph-of-variables" class="level3">
+<h3 class="anchored" data-anchor-id="graph-of-variables">Graph of Variables</h3>
+<section id="all-variables" class="level4">
+<h4 class="anchored" data-anchor-id="all-variables">All variables</h4>
+<p>The function <code>get_mfa_var()</code> [in <strong><em>factoextra</em></strong>] is used to extract the results for variables. By default, this function returns a list containing the coordinates, the cos2 and the contribution of all variables:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">var <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_famd_var</span>(res.famd)</span>
+<span id="cb16-2">var</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>FAMD results for variables 
+ ===================================================
+  Name       Description                      
+1 "$coord"   "Coordinates"                    
+2 "$cos2"    "Cos2, quality of representation"
+3 "$contrib" "Contributions"                  </code></pre>
+</div>
+</div>
+<p>The different components can be accessed as follow:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Coordinates of variables</span></span>
+<span id="cb18-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(var<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>coord)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    Dim.1       Dim.2       Dim.3       Dim.4        Dim.5
+Plante          0.7344160 0.060551966 0.105902048 0.004011299 0.0010340559
+Acidity         0.1732738 0.491118153 0.126394029 0.115376784 0.0045862935
+Harmony         0.8943968 0.023628146 0.040124469 0.003653813 0.0086624633
+Intensity       0.6991811 0.134639254 0.065382234 0.023214984 0.0064730431
+Overall.quality 0.9115699 0.005246728 0.009336677 0.005445276 0.0007961880
+Typical         0.7808611 0.027094327 0.001549791 0.083446627 0.0005912942</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Cos2: quality of representation on the factore map</span></span>
+<span id="cb20-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(var<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>cos2)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Dim.1        Dim.2        Dim.3        Dim.4        Dim.5
+Plante          0.53936692 3.666541e-03 1.121524e-02 1.609052e-05 1.069272e-06
+Acidity         0.03002381 2.411970e-01 1.597545e-02 1.331180e-02 2.103409e-05
+Harmony         0.79994566 5.582893e-04 1.609973e-03 1.335035e-05 7.503827e-05
+Intensity       0.48885427 1.812773e-02 4.274836e-03 5.389355e-04 4.190029e-05
+Overall.quality 0.83095973 2.752815e-05 8.717353e-05 2.965103e-05 6.339153e-07
+Typical         0.60974400 7.341026e-04 2.401853e-06 6.963340e-03 3.496288e-07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Contributions to the  dimensions</span></span>
+<span id="cb22-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(var<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>contrib)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    Dim.1      Dim.2      Dim.3      Dim.4      Dim.5
+Plante          15.200526  3.2609526 6.69215972  0.3490757 0.15864490
+Acidity          3.586323 26.4485720 7.98708850 10.0404466 0.70362936
+Harmony         18.511716  1.2724651 2.53554453  0.3179662 1.32899551
+Intensity       14.471254  7.2508336 4.13163258  2.0202401 0.99309457
+Overall.quality 18.867156  0.2825562 0.59000304  0.4738648 0.12215119
+Typical         16.161818  1.4591321 0.09793437  7.2617850 0.09071638</code></pre>
+</div>
+</div>
+<p>The following figure shows the correlation between variables - both quantitative and qualitative variables - and the principal dimensions, as well as, the contribution of variables to the dimensions 1 and 2. The following functions [in the factoextra package] are used:</p>
+<ul>
+<li><code>fviz_famd_var()</code> to plot both quantitative and qualitative variables</li>
+<li><code>fviz_contrib()</code> to visualize the contribution of variables to the principal dimensions</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Plot of variables</span></span>
+<span id="cb24-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_famd_var</span>(res.famd, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Contribution to the first dimension</span></span>
+<span id="cb25-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_contrib</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axes =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Contribution to the second dimension</span></span>
+<span id="cb26-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_contrib</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axes =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The red dashed line on the graph above indicates the expected average value, If the contributions were uniform. Read more in chapter (Chapter <span class="citation" data-cites="ref">@ref</span>(principal-component-analysis)).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>From the plots above, it can be seen that: - variables that contribute the most to the first dimension are: Overall.quality and Harmony. - variables that contribute the most to the second dimension are: Soil and Acidity.</p>
+</div>
+</div>
+</section>
+<section id="quantitative-variables" class="level4">
+<h4 class="anchored" data-anchor-id="quantitative-variables">Quantitative variables</h4>
+<p>To extract the results for quantitative variables, type this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1">quanti.var <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_famd_var</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quanti.var"</span>)</span>
+<span id="cb27-2">quanti.var</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>FAMD results for quantitative variables 
+ ===================================================
+  Name       Description                      
+1 "$coord"   "Coordinates"                    
+2 "$cos2"    "Cos2, quality of representation"
+3 "$contrib" "Contributions"                  </code></pre>
+</div>
+</div>
+<p>In this section, we’ll describe how to visualize quantitative variables. Additionally, we’ll show how to highlight variables according to either i) their quality of representation on the factor map or ii) their contributions to the dimensions.</p>
+<p>The R code below plots quantitative variables. We use repel = TRUE, to avoid text overlapping.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_famd_var</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quanti.var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>,</span>
+<span id="cb29-2">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.var =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Briefly, the graph of variables (correlation circle) shows the relationship between variables, the quality of the representation of variables, as well as, the correlation between variables and the dimensions. Read more at PCA (Chapter <span class="citation" data-cites="ref">@ref</span>(principal-component-analysis)), MCA (Chapter <span class="citation" data-cites="ref">@ref</span>(multiple-correspondence-analysis)) and MFA (Chapter <span class="citation" data-cites="ref">@ref</span>(multiple-factor-analysis)).</p>
+<p>The most contributing quantitative variables can be highlighted on the scatter plot using the argument <code>col.var = "contrib"</code>. This produces a gradient colors, which can be customized using the argument <code>gradient.cols</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_famd_var</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quanti.var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.var =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"contrib"</span>, </span>
+<span id="cb30-2">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gradient.cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#00AFBB"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#E7B800"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FC4E07"</span>),</span>
+<span id="cb30-3">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Similarly, you can highlight quantitative variables using their cos2 values representing the quality of representation on the factor map. If a variable is well represented by two dimensions, the sum of the cos2 is closed to one. For some of the items, more than 2 dimensions might be required to perfectly represent the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Color by cos2 values: quality on the factor map</span></span>
+<span id="cb31-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_famd_var</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quanti.var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.var =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cos2"</span>,</span>
+<span id="cb31-3">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gradient.cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#00AFBB"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#E7B800"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FC4E07"</span>), </span>
+<span id="cb31-4">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="graph-of-qualitative-variables" class="level4">
+<h4 class="anchored" data-anchor-id="graph-of-qualitative-variables">Graph of qualitative variables</h4>
+<p>Like quantitative variables, the results for qualitative variables can be extracted as follow:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1">quali.var <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_famd_var</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quali.var"</span>)</span>
+<span id="cb32-2">quali.var</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>FAMD results for qualitative variable categories 
+ ===================================================
+  Name       Description                      
+1 "$coord"   "Coordinates"                    
+2 "$cos2"    "Cos2, quality of representation"
+3 "$contrib" "Contributions"                  </code></pre>
+</div>
+</div>
+<p>To visualize qualitative variables, type this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_famd_var</span>(res.famd, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quali.var"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.var =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"contrib"</span>, </span>
+<span id="cb34-2">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gradient.cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#00AFBB"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#E7B800"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FC4E07"</span>)</span>
+<span id="cb34-3">             )</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The plot above shows the categories of the categorical variables.</p>
+</section>
+<section id="graph-of-individuals" class="level4">
+<h4 class="anchored" data-anchor-id="graph-of-individuals">Graph of individuals</h4>
+<p>To get the results for individuals, type this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1">ind <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_famd_ind</span>(res.famd)</span>
+<span id="cb35-2">ind</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>FAMD results for individuals 
+ ===================================================
+  Name       Description                      
+1 "$coord"   "Coordinates"                    
+2 "$cos2"    "Cos2, quality of representation"
+3 "$contrib" "Contributions"                  </code></pre>
+</div>
+</div>
+<p>To plot individuals, use the function <code>fviz_mfa_ind()</code> [in factoextra]. By default, individuals are colored in blue. However, like variables, it’s also possible to color individuals by their cos2 and contribution values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_famd_ind</span>(res.famd, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.ind =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cos2"</span>, </span>
+<span id="cb37-2">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gradient.cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#00AFBB"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#E7B800"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FC4E07"</span>),</span>
+<span id="cb37-3">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the plot above, the qualitative variable categories are shown in black. Env1, Env2, Env3 are the categories of the soil. Saumur, Bourgueuil and Chinon are the categories of the wine Label. If you don’t want to show them on the plot, use the argument <code>invisible = "quali.var"</code>.</p>
+</div>
+</div>
+<p>Individuals with similar profiles are close to each other on the factor map. For the interpretation, read more at Chapter <span class="citation" data-cites="ref">@ref</span>(multiple-correspondence-analysis) (MCA) and Chapter <span class="citation" data-cites="ref">@ref</span>(multiple-factor-analysis) (MFA).</p>
+<p>Note that, it’s possible to color the individuals using any of the qualitative variables in the initial data table. To do this, the argument <code>habillage</code> is used in the <code>fviz_famd_ind()</code> function. For example, if you want to color the wines according to the supplementary qualitative variable “Label”, type this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_mfa_ind</span>(res.famd, </span>
+<span id="cb38-2">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">habillage =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Label"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># color by groups </span></span>
+<span id="cb38-3">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">palette =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#00AFBB"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#E7B800"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FC4E07"</span>),</span>
+<span id="cb38-4">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">addEllipses =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ellipse.type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"confidence"</span>, </span>
+<span id="cb38-5">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Avoid text overlapping</span></span>
+<span id="cb38-6">             ) </span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If you want to color individuals using multiple categorical variables at the same time, use the function fviz_ellipses() [in factoextra] as follow:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_ellipses</span>(res.famd, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Label"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Soil"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `gather_()` was deprecated in tidyr 1.2.0.
+ℹ Please use `gather()` instead.
+ℹ The deprecated feature was likely used in the factoextra package.
+  Please report the issue at &lt;https://github.com/kassambara/factoextra/issues&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Alternatively, you can specify categorical variable indices:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fviz_ellipses</span>(res.famd, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"point"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Factor Analysis of Mixed Data (FAMD) is a versatile tool for analyzing datasets with a mix of numerical and categorical variables. Through the ‘FactoMineR’ package in R, users can seamlessly perform FAMD, gaining valuable insights into the underlying structure of their data. By visualizing eigenvalues, variable contributions, and individual distributions, researchers can interpret complex relationships and make informed decisions based on the extracted factors. Incorporate FAMD into your analytical toolkit to unlock the full potential of mixed data analysis.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+  author = {Santos, Franklin},
+  title = {FAMD - {Factor} {Analysis} of {Mixed} {Data} in {R}},
+  date = {2023-11-29},
+  url = {https://franklinsantosm.com/posts/MDA},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
+Santos, Franklin. 2023. <span>“FAMD - Factor Analysis of Mixed Data in
+R.”</span> November 29, 2023. <a href="https://franklinsantosm.com/posts/MDA">https://franklinsantosm.com/posts/MDA</a>.
+</div></div></section></div> ]]></description>
+  <category>FAMD</category>
+  <category>FactoMineR</category>
+  <category>factoextra</category>
+  <guid>https://franklinsantosm.com/posts/MDA/index.html</guid>
+  <pubDate>Wed, 29 Nov 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://franklinsantosm.com/posts/MDA/plot.png" medium="image" type="image/png" height="103" width="144"/>
+</item>
 <item>
   <title>Unveiling the Power of Completely Randomized Design (CRD) in Crop Science Experiments</title>
   <dc:creator>Franklin Santos</dc:creator>

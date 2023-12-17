@@ -21,6 +21,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/MDA/index.html",
       "/posts/crd/index.html",
       "/posts/corrr/index.html",
       "/posts/agri_AI/index.html",

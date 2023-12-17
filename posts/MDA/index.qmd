@@ -1,0 +1,289 @@
+---
+title: "FAMD - Factor Analysis of Mixed Data in R"
+description: |
+  Factor Analysis of Mixed Data (FAMD) is a powerful statistical technique used to analyze datasets that contain both numerical and categorical variables.
+categories: [FAMD, FactoMineR, factoextra]
+author:
+  - name: Franklin Santos
+    url: https://franklinsantosm.com
+    affiliation: AgriTech Bolivia
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2023-11-29"
+image: plot.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+
+## Introduction
+
+Factor Analysis of Mixed Data (FAMD) is a powerful statistical technique used to analyze datasets that contain both numerical and categorical variables. It extends traditional factor analysis to handle mixed data types, providing a comprehensive understanding of the underlying structure of complex datasets. In this blog post, we will delve into the essentials of FAMD, exploring its computation, R packages, data format, R code, visualization, and interpretation.
+
+## Computation
+
+FAMD combines multiple techniques, such as Principal Component Analysis (PCA) for numerical variables and Multiple Correspondence Analysis (MCA) for categorical variables. The integration of these methods allows FAMD to effectively capture the relationships between variables and reveal underlying patterns in mixed datasets.
+
+### R Packages
+
+To perform FAMD in R, the `FactoMineR` and `factoextra` package are widely used and offers a dedicated function for FAMD. Ensure that you have the package installed by running:
+
+
+```{r, eval=FALSE}
+install.packages(c("FactoMineR", "factoextra"))
+```
+
+load packages:
+
+```{r}
+library(FactoMineR)
+library(factoextra)
+```
+
+### Data Format
+
+Before applying FAMD, it's crucial to prepare your data appropriately. Ensure that your dataset contains both numerical and categorical variables. Standardize numerical variables if necessary and encode categorical variables properly.
+
+We’ll use a subset of the `wine` data set available in `FactoMineR` package:
+
+```{r}
+library("FactoMineR")
+data(wine)
+df <- wine[,c(1,2, 16, 22, 29, 28, 30,31)]
+head(df[, 1:7], 4)
+```
+
+To see the structure of the data, type this:
+
+```{r}
+str(df)
+```
+
+The data contains 21 rows (wines, `individuals`) and 8 columns (`variables`):
+
+- The first two columns are factors (`categorical variables`): `label` (Saumur, Bourgueil or Chinon) and `soil` (Reference, Env1, Env2 or Env4).
+- The remaining columns are numeric (`continuous variables`).
+
+::: callout-tip
+The goal of this study is to analyze the characteristics of the wines.
+:::
+
+## R Code
+
+The function `FAMD()` [FactoMiner package] can be used to compute FAMD. A simplified format is:
+
+```{r, eval=FALSE}
+FAMD (base, ncp = 5, sup.var = NULL, ind.sup = NULL, graph = TRUE)
+```
+
+- `base`: a data frame with n rows (individuals) and p columns (variables).
+- `ncp`: the number of dimensions kept in the results (by default 5)
+- `sup.var`: a vector indicating the indexes of the supplementary variables.
+- `ind.sup`: a vector indicating the indexes of the supplementary individuals.
+- `graph`: a logical value. If TRUE a graph is displayed.
+
+To compute FAMD, type this:
+
+```{r}
+library(FactoMineR)
+res.famd <- FAMD(df, graph = FALSE)
+```
+
+The output of the `FAMD()` function is a list including:
+
+```{r}
+print(res.famd)
+```
+
+### Visualization and Interpretation
+
+We’ll use the following ***factoextra*** functions:
+
+- `get_eigenvalue(res.famd)`: Extract the eigenvalues/variances retained by each dimension (axis).
+- `fviz_eig(res.famd)`: Visualize the eigenvalues/variances.
+- `get_famd_ind(res.famd)`: Extract the results for individuals.
+- `get_famd_var(res.famd)`: Extract the results for quantitative and qualitative variables.
+- `fviz_famd_ind(res.famd)`, `fviz_famd_var(res.famd)`: Visualize the results for individuals and variables, respectively.
+
+In the next sections, we’ll illustrate each of these functions.
+
+::: callout-tip
+To help in the interpretation of FAMD, we highly recommend to read the interpretation of principal component analysis (Chapter (???)(principal-component-analysis)) and multiple correspondence analysis (Chapter (???)(multiple-correspondence-analysis)). Many of the graphs presented here have been already described in our previous chapters.
+:::
+
+### Eigenvalues / Variances
+
+The proportion of variances retained by the different dimensions (axes) can be extracted using the function `get_eigenvalue()` [factoextra package] as follow:
+
+```{r}
+library("factoextra")
+eig.val <- get_eigenvalue(res.famd)
+head(eig.val)
+```
+
+The function fviz_eig() or fviz_screeplot() [factoextra package] can be used to draw the scree plot (the percentages of inertia explained by each FAMD dimensions):
+
+```{r}
+fviz_screeplot(res.famd)
+```
+
+### Graph of Variables
+
+#### All variables
+
+The function `get_mfa_var()` [in ***factoextra***] is used to extract the results for variables. By default, this function returns a list containing the coordinates, the cos2 and the contribution of all variables:
+
+
+```{r}
+var <- get_famd_var(res.famd)
+var
+```
+
+The different components can be accessed as follow:
+
+```{r}
+# Coordinates of variables
+head(var$coord)
+# Cos2: quality of representation on the factore map
+head(var$cos2)
+# Contributions to the  dimensions
+head(var$contrib)
+```
+
+The following figure shows the correlation between variables - both quantitative and qualitative variables - and the principal dimensions, as well as, the contribution of variables to the dimensions 1 and 2. The following functions [in the factoextra package] are used:
+
+- `fviz_famd_var()` to plot both quantitative and qualitative variables
+- `fviz_contrib()` to visualize the contribution of variables to the principal dimensions
+
+```{r}
+# Plot of variables
+fviz_famd_var(res.famd, repel = TRUE)
+# Contribution to the first dimension
+fviz_contrib(res.famd, "var", axes = 1)
+# Contribution to the second dimension
+fviz_contrib(res.famd, "var", axes = 2)
+```
+
+The red dashed line on the graph above indicates the expected average value, If the contributions were uniform. Read more in chapter (Chapter @ref(principal-component-analysis)).
+
+::: callout-tip
+From the plots above, it can be seen that:
+- variables that contribute the most to the first dimension are: Overall.quality and Harmony.
+- variables that contribute the most to the second dimension are: Soil and Acidity.
+:::
+
+#### Quantitative variables
+
+To extract the results for quantitative variables, type this:
+
+```{r}
+quanti.var <- get_famd_var(res.famd, "quanti.var")
+quanti.var
+```
+
+In this section, we’ll describe how to visualize quantitative variables. Additionally, we’ll show how to highlight variables according to either i) their quality of representation on the factor map or ii) their contributions to the dimensions.
+
+The R code below plots quantitative variables. We use repel = TRUE, to avoid text overlapping.
+
+```{r}
+fviz_famd_var(res.famd, "quanti.var", repel = TRUE,
+              col.var = "black")
+```
+
+Briefly, the graph of variables (correlation circle) shows the relationship between variables, the quality of the representation of variables, as well as, the correlation between variables and the dimensions. Read more at PCA (Chapter @ref(principal-component-analysis)), MCA (Chapter @ref(multiple-correspondence-analysis)) and MFA (Chapter @ref(multiple-factor-analysis)).
+
+The most contributing quantitative variables can be highlighted on the scatter plot using the argument `col.var = "contrib"`. This produces a gradient colors, which can be customized using the argument `gradient.cols`.
+
+```{r}
+fviz_famd_var(res.famd, "quanti.var", col.var = "contrib", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE)
+```
+
+Similarly, you can highlight quantitative variables using their cos2 values representing the quality of representation on the factor map. If a variable is well represented by two dimensions, the sum of the cos2 is closed to one. For some of the items, more than 2 dimensions might be required to perfectly represent the data.
+
+```{r}
+# Color by cos2 values: quality on the factor map
+fviz_famd_var(res.famd, "quanti.var", col.var = "cos2",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE)
+```
+
+
+#### Graph of qualitative variables
+
+Like quantitative variables, the results for qualitative variables can be extracted as follow:
+
+```{r}
+quali.var <- get_famd_var(res.famd, "quali.var")
+quali.var
+```
+
+To visualize qualitative variables, type this:
+
+```{r}
+fviz_famd_var(res.famd, "quali.var", col.var = "contrib", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07")
+             )
+```
+
+The plot above shows the categories of the categorical variables.
+
+#### Graph of individuals
+
+To get the results for individuals, type this:
+
+```{r}
+ind <- get_famd_ind(res.famd)
+ind
+```
+
+To plot individuals, use the function `fviz_mfa_ind()` [in factoextra]. By default, individuals are colored in blue. However, like variables, it’s also possible to color individuals by their cos2 and contribution values:
+
+```{r}
+fviz_famd_ind(res.famd, col.ind = "cos2", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE)
+```
+
+::: callout-tip
+In the plot above, the qualitative variable categories are shown in black. Env1, Env2, Env3 are the categories of the soil. Saumur, Bourgueuil and Chinon are the categories of the wine Label. If you don’t want to show them on the plot, use the argument `invisible = "quali.var"`.
+:::
+
+Individuals with similar profiles are close to each other on the factor map. For the interpretation, read more at Chapter @ref(multiple-correspondence-analysis) (MCA) and Chapter @ref(multiple-factor-analysis) (MFA).
+
+Note that, it’s possible to color the individuals using any of the qualitative variables in the initial data table. To do this, the argument `habillage` is used in the `fviz_famd_ind()` function. For example, if you want to color the wines according to the supplementary qualitative variable “Label”, type this:
+
+```{r}
+fviz_mfa_ind(res.famd, 
+             habillage = "Label", # color by groups 
+             palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+             addEllipses = TRUE, ellipse.type = "confidence", 
+             repel = TRUE # Avoid text overlapping
+             ) 
+```
+
+If you want to color individuals using multiple categorical variables at the same time, use the function fviz_ellipses() [in factoextra] as follow:
+
+```{r}
+fviz_ellipses(res.famd, c("Label", "Soil"), repel = TRUE)
+```
+
+Alternatively, you can specify categorical variable indices:
+
+```{r}
+fviz_ellipses(res.famd, 1:2, geom = "point")
+```
+
+
+## Summary
+
+Factor Analysis of Mixed Data (FAMD) is a versatile tool for analyzing datasets with a mix of numerical and categorical variables. Through the 'FactoMineR' package in R, users can seamlessly perform FAMD, gaining valuable insights into the underlying structure of their data. By visualizing eigenvalues, variable contributions, and individual distributions, researchers can interpret complex relationships and make informed decisions based on the extracted factors. Incorporate FAMD into your analytical toolkit to unlock the full potential of mixed data analysis.
