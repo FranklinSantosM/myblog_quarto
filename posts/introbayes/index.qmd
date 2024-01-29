@@ -1,0 +1,82 @@
+---
+title: "Explorando el Mundo de la Estadística: Frecuentista vs. Bayesiana"
+description: |
+  La estadística es el arte y la ciencia de extraer conocimiento a partir de datos, y dos enfoques principales han moldeado el campo a lo largo del tiempo: el frecuentista y el bayesiano.
+categories: [Bayesian, Statistic, Bayes]
+author:
+  - name: Franklin Santos
+    url: https://franklinsantosm.com
+    affiliation: AgriTech Bolivia
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2023-12-25"
+image: bayes.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+
+## Introducción
+
+La estadística es el arte y la ciencia de extraer conocimiento a partir de datos, y dos enfoques principales han moldeado el campo a lo largo del tiempo: el frecuentista y el bayesiano. En este viaje, exploraremos las profundidades de la estadística bayesiana, comparándola con su contraparte frecuentista y destacando las características distintivas de cada enfoque.
+
+## Estadística Bayesiana: Más que Probabilidades, Creencias en Acción
+
+La estadística bayesiana se basa en el teorema de Bayes, una herramienta poderosa que nos permite actualizar nuestras creencias a medida que nuevos datos emergen. En este enfoque, la probabilidad se interpreta como una medida subjetiva de creencia, lo que significa que incorporamos nuestro conocimiento previo (a priori) al análisis. Esta flexibilidad es clave, ya que nos permite abordar problemas con muestras pequeñas y aprovechar la información previa de manera efectiva.
+
+**El Teorema de Bayes en Acción:**
+
+$$
+P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}
+$$
+donde:
+
+- $P(H∣E)$ es la probabilidad posterior de la hipótesis $H$ dado el conjunto de evidencia $E$.
+- $P(E∣H)$ es la verosimilitud de la evidencia $E$ bajo la hipótesis $H$.
+- $P(H)$ es la probabilidad a priori de la hipótesis $H$.
+- $P(E)$ es la probabilidad marginal de la evidencia $E$.
+
+Este simple pero poderoso teorema nos guía en la actualización de nuestras creencias sobre una hipótesis $H$ dado un conjunto de evidencia $E$. Ahora, comparemos esto con el enfoque frecuentista.
+
+## Estadística Frecuentista: Frente a la Incertidumbre con la Variabilidad de los Datos
+
+Los estadísticos frecuentistas se centran en la frecuencia relativa de los eventos observados a lo largo del tiempo. La incertidumbre se maneja reconociendo la variabilidad inherente de los datos. Este enfoque es robusto y ha sido la columna vertebral de la estadística tradicional durante décadas.
+
+**Estimaciones Puntuales y Pruebas de Hipótesis:**
+
+Los frecuentistas tienden a buscar estimaciones puntuales y realizar pruebas de hipótesis para tomar decisiones. Sin embargo, este enfoque puede volverse limitado cuando se trata de manejar la incertidumbre de manera más integral.
+
+## ¿Dónde Reside la Diferencia?
+
+### 1. Incorporación de Información Previa
+
+**Bayesiana:** La información a priori se considera esencial. Antes de analizar los datos, se incorpora el conocimiento existente, lo que es especialmente útil en escenarios con muestras pequeñas.
+
+**Frecuentista:** No se utiliza información a priori. La inferencia se basa únicamente en los datos observados sin tener en cuenta conocimientos previos.
+
+### 2. Tamaño de la Muestra y Flexibilidad
+
+**Bayesiana:** Adaptable a tamaños de muestra variables, lo que permite realizar inferencias incluso con conjuntos de datos más pequeños.
+
+**Frecuentista:** A menudo requiere grandes muestras para producir estimaciones precisas y realizar pruebas de hipótesis robustas.
+
+### 3. Enfoque para la Toma de Decisiones
+
+**Bayesiana:** Ofrece distribuciones de probabilidad completas, permitiendo una toma de decisiones más informada bajo diversas condiciones de incertidumbre.
+
+**Frecuentista:** Se centra en estimaciones puntuales y pruebas de hipótesis, lo que podría no proporcionar una imagen completa de la incertidumbre.
+
+## Conclusion
+La estadística bayesiana ofrece una perspectiva moderna y flexible para el análisis de datos, permitiendo a los investigadores incorporar información previa de manera sistemática y actualizar sus creencias a medida que se obtiene nueva evidencia. Si bien tanto los métodos frecuentistas como los bayesianos tienen sus propias fortalezas y limitaciones, la elección entre ellos a menudo depende de la naturaleza de los datos y las preguntas de investigación específicas.
+
+En resumen, la estadística bayesiana nos invita a pensar en la probabilidad y la incertidumbre de una manera diferente, abriendo nuevas posibilidades para la exploración y el descubrimiento en el mundo de la estadística y la ciencia de datos.
+
+

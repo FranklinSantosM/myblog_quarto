@@ -9,8 +9,89 @@
 <link>https://franklinsantosm.com/index.html</link>
 <atom:link href="https://franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
-<generator>quarto-1.3.433</generator>
-<lastBuildDate>Wed, 29 Nov 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.450</generator>
+<lastBuildDate>Mon, 25 Dec 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Explorando el Mundo de la Estadística: Frecuentista vs. Bayesiana</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://franklinsantosm.com/posts/introbayes/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>La estadística es el arte y la ciencia de extraer conocimiento a partir de datos, y dos enfoques principales han moldeado el campo a lo largo del tiempo: el frecuentista y el bayesiano. En este viaje, exploraremos las profundidades de la estadística bayesiana, comparándola con su contraparte frecuentista y destacando las características distintivas de cada enfoque.</p>
+</section>
+<section id="estadística-bayesiana-más-que-probabilidades-creencias-en-acción" class="level2">
+<h2 class="anchored" data-anchor-id="estadística-bayesiana-más-que-probabilidades-creencias-en-acción">Estadística Bayesiana: Más que Probabilidades, Creencias en Acción</h2>
+<p>La estadística bayesiana se basa en el teorema de Bayes, una herramienta poderosa que nos permite actualizar nuestras creencias a medida que nuevos datos emergen. En este enfoque, la probabilidad se interpreta como una medida subjetiva de creencia, lo que significa que incorporamos nuestro conocimiento previo (a priori) al análisis. Esta flexibilidad es clave, ya que nos permite abordar problemas con muestras pequeñas y aprovechar la información previa de manera efectiva.</p>
+<p><strong>El Teorema de Bayes en Acción:</strong></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(H%7CE)%20=%20%5Cfrac%7BP(E%7CH)%20%5Ccdot%20P(H)%7D%7BP(E)%7D%0A"> donde:</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?P(H%E2%88%A3E)"> es la probabilidad posterior de la hipótesis <img src="https://latex.codecogs.com/png.latex?H"> dado el conjunto de evidencia <img src="https://latex.codecogs.com/png.latex?E">.</li>
+<li><img src="https://latex.codecogs.com/png.latex?P(E%E2%88%A3H)"> es la verosimilitud de la evidencia <img src="https://latex.codecogs.com/png.latex?E"> bajo la hipótesis <img src="https://latex.codecogs.com/png.latex?H">.</li>
+<li><img src="https://latex.codecogs.com/png.latex?P(H)"> es la probabilidad a priori de la hipótesis <img src="https://latex.codecogs.com/png.latex?H">.</li>
+<li><img src="https://latex.codecogs.com/png.latex?P(E)"> es la probabilidad marginal de la evidencia <img src="https://latex.codecogs.com/png.latex?E">.</li>
+</ul>
+<p>Este simple pero poderoso teorema nos guía en la actualización de nuestras creencias sobre una hipótesis <img src="https://latex.codecogs.com/png.latex?H"> dado un conjunto de evidencia <img src="https://latex.codecogs.com/png.latex?E">. Ahora, comparemos esto con el enfoque frecuentista.</p>
+</section>
+<section id="estadística-frecuentista-frente-a-la-incertidumbre-con-la-variabilidad-de-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="estadística-frecuentista-frente-a-la-incertidumbre-con-la-variabilidad-de-los-datos">Estadística Frecuentista: Frente a la Incertidumbre con la Variabilidad de los Datos</h2>
+<p>Los estadísticos frecuentistas se centran en la frecuencia relativa de los eventos observados a lo largo del tiempo. La incertidumbre se maneja reconociendo la variabilidad inherente de los datos. Este enfoque es robusto y ha sido la columna vertebral de la estadística tradicional durante décadas.</p>
+<p><strong>Estimaciones Puntuales y Pruebas de Hipótesis:</strong></p>
+<p>Los frecuentistas tienden a buscar estimaciones puntuales y realizar pruebas de hipótesis para tomar decisiones. Sin embargo, este enfoque puede volverse limitado cuando se trata de manejar la incertidumbre de manera más integral.</p>
+</section>
+<section id="dónde-reside-la-diferencia" class="level2">
+<h2 class="anchored" data-anchor-id="dónde-reside-la-diferencia">¿Dónde Reside la Diferencia?</h2>
+<section id="incorporación-de-información-previa" class="level3">
+<h3 class="anchored" data-anchor-id="incorporación-de-información-previa">1. Incorporación de Información Previa</h3>
+<p><strong>Bayesiana:</strong> La información a priori se considera esencial. Antes de analizar los datos, se incorpora el conocimiento existente, lo que es especialmente útil en escenarios con muestras pequeñas.</p>
+<p><strong>Frecuentista:</strong> No se utiliza información a priori. La inferencia se basa únicamente en los datos observados sin tener en cuenta conocimientos previos.</p>
+</section>
+<section id="tamaño-de-la-muestra-y-flexibilidad" class="level3">
+<h3 class="anchored" data-anchor-id="tamaño-de-la-muestra-y-flexibilidad">2. Tamaño de la Muestra y Flexibilidad</h3>
+<p><strong>Bayesiana:</strong> Adaptable a tamaños de muestra variables, lo que permite realizar inferencias incluso con conjuntos de datos más pequeños.</p>
+<p><strong>Frecuentista:</strong> A menudo requiere grandes muestras para producir estimaciones precisas y realizar pruebas de hipótesis robustas.</p>
+</section>
+<section id="enfoque-para-la-toma-de-decisiones" class="level3">
+<h3 class="anchored" data-anchor-id="enfoque-para-la-toma-de-decisiones">3. Enfoque para la Toma de Decisiones</h3>
+<p><strong>Bayesiana:</strong> Ofrece distribuciones de probabilidad completas, permitiendo una toma de decisiones más informada bajo diversas condiciones de incertidumbre.</p>
+<p><strong>Frecuentista:</strong> Se centra en estimaciones puntuales y pruebas de hipótesis, lo que podría no proporcionar una imagen completa de la incertidumbre.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>La estadística bayesiana ofrece una perspectiva moderna y flexible para el análisis de datos, permitiendo a los investigadores incorporar información previa de manera sistemática y actualizar sus creencias a medida que se obtiene nueva evidencia. Si bien tanto los métodos frecuentistas como los bayesianos tienen sus propias fortalezas y limitaciones, la elección entre ellos a menudo depende de la naturaleza de los datos y las preguntas de investigación específicas.</p>
+<p>En resumen, la estadística bayesiana nos invita a pensar en la probabilidad y la incertidumbre de una manera diferente, abriendo nuevas posibilidades para la exploración y el descubrimiento en el mundo de la estadística y la ciencia de datos.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+  author = {Santos, Franklin},
+  title = {Explorando El {Mundo} de La {Estadística:} {Frecuentista} Vs.
+    {Bayesiana}},
+  date = {2023-12-25},
+  url = {https://franklinsantosm.com/posts/introbayes},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
+Santos, Franklin. 2023. <span>“Explorando El Mundo de La Estadística:
+Frecuentista Vs. Bayesiana.”</span> December 25, 2023. <a href="https://franklinsantosm.com/posts/introbayes">https://franklinsantosm.com/posts/introbayes</a>.
+</div></div></section></div> ]]></description>
+  <category>Bayesian</category>
+  <category>Statistic</category>
+  <category>Bayes</category>
+  <guid>https://franklinsantosm.com/posts/introbayes/index.html</guid>
+  <pubDate>Mon, 25 Dec 2023 04:00:00 GMT</pubDate>
+  <media:content url="https://franklinsantosm.com/posts/introbayes/bayes.png" medium="image" type="image/png" height="93" width="144"/>
+</item>
 <item>
   <title>FAMD - Factor Analysis of Mixed Data in R</title>
   <dc:creator>Franklin Santos</dc:creator>
