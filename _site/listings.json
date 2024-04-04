@@ -21,6 +21,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/chile/index.html",
       "/posts/PB_AI/index.html",
       "/posts/introbayes/index.html",
       "/posts/MDA/index.html",
