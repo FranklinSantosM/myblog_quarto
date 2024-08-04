@@ -6,16 +6,250 @@
       version="2.0">
 <channel>
 <title>Franklin Santos</title>
-<link>https://franklinsantosm.com/index.html</link>
+<link>https://franklinsantosm.com/</link>
 <atom:link href="https://franklinsantosm.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data Scientis</description>
-<generator>quarto-1.3.450</generator>
-<lastBuildDate>Thu, 04 Apr 2024 03:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.555</generator>
+<lastBuildDate>Sun, 26 May 2024 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Enhancing Plant Breeding Precision with Row-Column Design</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://franklinsantosm.com/posts/row_column_design/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the realm of agricultural research, particularly plant breeding, precision is paramount. The quest to identify superior plant varieties requires experiments that can accurately attribute observed differences to genetic factors rather than environmental noise. This is where the <strong>row-column design</strong> comes into play, a sophisticated statistical methodology designed to enhance the reliability of field trials by controlling spatial variation.</p>
+</section>
+<section id="what-is-row-column-design" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-row-column-design">What is Row-Column Design?</h2>
+<p>At its core, a row-column design involves arranging experimental units into a grid of rows and columns. This organization allows researchers to control two sources of spatial variation simultaneously. Each cell in the grid, or plot, hosts a specific genotype (or treatment), which is randomly assigned to ensure unbiased results.</p>
+</section>
+<section id="why-is-it-important" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-it-important">Why is it Important?</h2>
+<p>Field trials often face the challenge of spatial heterogeneity—variations in soil fertility, moisture, sunlight, and other environmental conditions. These variations can introduce significant noise into the data, potentially obscuring true genetic differences. By accounting for variations along both rows and columns, the row-column design mitigates these effects, leading to more precise and reliable experimental outcomes.</p>
+</section>
+<section id="key-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-features">Key Features</h2>
+<ol type="1">
+<li><strong>Grid Layout</strong>: The field is divided into a systematic grid, creating rows and columns that structure the experimental units.</li>
+<li><strong>Randomization</strong>: Treatments are randomly assigned to each plot within the grid, minimizing bias.</li>
+<li><strong>Control of Variation</strong>:
+<ul>
+<li><strong>Row Effects</strong>: Horizontal variations such as soil fertility gradients or irrigation patterns.</li>
+<li><strong>Column Effects</strong>: Vertical variations such as different drainage conditions or sunlight exposure.</li>
+</ul></li>
+</ol>
+</section>
+<section id="advantages-of-row-column-design" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-row-column-design">Advantages of Row-Column Design</h2>
+<ul>
+<li><strong>Increased Precision</strong>: By controlling for two dimensions of variability, this design reduces experimental error, enhancing the accuracy of genotype evaluations.</li>
+<li><strong>Flexibility</strong>: Adaptable to fields with irregular shapes or non-uniform conditions, making it versatile for various agricultural scenarios.</li>
+<li><strong>Improved Accuracy</strong>: Better control of environmental variation ensures that performance differences are more accurately attributed to genetic factors.</li>
+</ul>
+</section>
+<section id="row-column-design-with-fieldhub-r-package" class="level2">
+<h2 class="anchored" data-anchor-id="row-column-design-with-fieldhub-r-package">Row-Column Design with FielDHub R Package</h2>
+<p>To facilitate the implementation and analysis of row-column designs, researchers can utilize the <strong>FieldHUB R package</strong>. FieldHUB is a powerful tool specifically developed for managing and analyzing field trial data. It provides a user-friendly interface and a suite of functions tailored to the unique needs of agricultural experiments.</p>
+<ul>
+<li><strong>Design Creation</strong>: FieldHUB allows researchers to easily set up row-column designs, specifying the number of rows and columns, and randomizing the assignment of treatments.</li>
+<li><strong>Data Management</strong>: The package streamlines data entry and management, ensuring that all experimental data are accurately recorded and organized.</li>
+<li><strong>Visualization</strong>: FieldHUB offers various visualization tools to help researchers understand spatial patterns and variations within their trials, aiding in the interpretation of results.</li>
+<li><strong>Statistical Analysis</strong>: Integrated with R’s robust statistical capabilities, FieldHUB can perform complex analyses, including mixed models and ANOVA, tailored to row-column designs.</li>
+</ul>
+<p>By leveraging the FieldHUB R package, researchers can enhance the efficiency and accuracy of their field trials, making the row-column design more accessible and practical for large-scale agricultural research.</p>
+<section id="using-the-fieldhub-function-row_column" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-fieldhub-function-row_column">Using the FielDHub function: <code>row_column()</code></h3>
+<p>First, you need to load the <code>FielDHub</code> package by typing</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#Install and load FielDHub package</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(FielDHub)</span></code></pre></div>
+</div>
+<p>Then, you can enter the information describing the above design like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">rcd <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">row_column</span>(</span>
+<span id="cb2-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">t =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">45</span>,</span>
+<span id="cb2-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrows =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,</span>
+<span id="cb2-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">r =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,</span>
+<span id="cb2-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">l =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, </span>
+<span id="cb2-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plotNumber =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">101</span>, </span>
+<span id="cb2-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">locationNames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"FARGO"</span>,</span>
+<span id="cb2-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">seed =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1244</span></span>
+<span id="cb2-9">)</span></code></pre></div>
+</div>
+<p>The description for the inputs that we used to generate the design,</p>
+<ul>
+<li><code>t = 45</code> is the number of treatments.</li>
+<li><code>nrows = 5</code> is the number of rows.</li>
+<li><code>r=3</code> is the number of reps</li>
+<li><code>l = 1</code> is the number of locations.</li>
+<li><code>plotNumber = 101</code> is the starting plot number.</li>
+<li><code>locationNames = "FARGO"</code> is an optional name for each location.</li>
+<li><code>seed = 1244</code> is the random seed to replicate identical randomizations.</li>
+</ul>
+<p>To print a summary of the information that is in the object <code>rcd</code>, we can use the generic function <code>print()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(rcd)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Resolvable Row-Column Design (Two-Step Optimization) 
+
+Efficiency of design: 
+   Level Blocks D-Efficiency A-Efficiency   A-Bound
+1    Rep      3    1.0000000    1.0000000 1.0000000
+2    Row     15    0.8940599    0.8767433 0.8842892
+3 Column     27    0.7912130    0.7623893 0.7674419
+
+Information on the design parameters: 
+List of 7
+ $ rows          : num 5
+ $ columns       : num 9
+ $ reps          : num 3
+ $ treatments    : num 45
+ $ locations     : num 1
+ $ location_names: chr "FARGO"
+ $ seed          : num 1244
+
+ 10 First observations of the data frame with the row_column field book: 
+   ID LOCATION PLOT REP ROW COLUMN ENTRY TREATMENT
+1   1    FARGO  101   1   1      1    30      G-30
+6   2    FARGO  102   1   1      2    41      G-41
+11  3    FARGO  103   1   1      3     5       G-5
+16  4    FARGO  104   1   1      4    39      G-39
+21  5    FARGO  105   1   1      5    22      G-22
+26  6    FARGO  106   1   1      6    44      G-44
+31  7    FARGO  107   1   1      7     9       G-9
+36  8    FARGO  108   1   1      8    36      G-36
+41  9    FARGO  109   1   1      9    11      G-11
+2  10    FARGO  110   1   2      1     6       G-6</code></pre>
+</div>
+</div>
+<p>The <code>row_column()</code> function returns a list consisting of all the information displayed in the output tabs in the FielDHub app: design information, plot layout, plot numbering, entries list, and field book. These are accessible by the <code>$</code> operator, i.e.&nbsp;<code>rcd$layoutRandom</code> or <code>rcd$fieldBook</code>.</p>
+<p><code>rcd$fieldBook</code> is a list containing information about every plot in the field, with information about the location of the plot and the treatment in each plot. As seen in the output below, the field book has columns for <code>ID</code>, <code>LOCATION</code>, <code>PLOT</code>, <code>REP</code>, <code>ROW</code>, <code>COLUMN</code>, <code>ENTRY</code>, and <code>TREATMENT</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">field_book <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rcd<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fieldBook</span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(rcd<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fieldBook, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID LOCATION PLOT REP ROW COLUMN ENTRY TREATMENT
+1   1    FARGO  101   1   1      1    30      G-30
+6   2    FARGO  102   1   1      2    41      G-41
+11  3    FARGO  103   1   1      3     5       G-5
+16  4    FARGO  104   1   1      4    39      G-39
+21  5    FARGO  105   1   1      5    22      G-22
+26  6    FARGO  106   1   1      6    44      G-44
+31  7    FARGO  107   1   1      7     9       G-9
+36  8    FARGO  108   1   1      8    36      G-36
+41  9    FARGO  109   1   1      9    11      G-11
+2  10    FARGO  110   1   2      1     6       G-6</code></pre>
+</div>
+</div>
+<p>For plotting the layout in function of the coordinates <code>ROW</code> and <code>COLUMN</code>, you can use the the generic function <code>plot()</code> as follows,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(rcd)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/row_column_design/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analytical-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="analytical-techniques">Analytical Techniques</h2>
+<p>The data from <code>row-column designs</code> are typically analyzed using mixed models or ANOVA, with row and column effects included as factors. Advanced statistical software like R (using packages such as <code>lme4</code>, <code>asreml</code>, <code>SpAtS</code>, and <code>statgenSTA</code>) and SAS provides robust tools for handling the complex data structures generated by these designs.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Row-column design stands as a critical tool for plant breeders, ensuring that the evaluation of new plant genotypes is as accurate and reliable as possible. By effectively controlling spatial variation in field trials, this design not only improves the precision of experimental results but also aids in the selection and development of superior plant varieties. As agriculture continues to evolve, methodologies like the row-column design will remain essential in advancing our understanding and cultivation of crops.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2024,
+  author = {Santos, Franklin},
+  title = {Enhancing {Plant} {Breeding} {Precision} with {Row-Column}
+    {Design}},
+  date = {2024-05-26},
+  url = {https://franklinsantosm.com/posts/row_column_design},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2024" class="csl-entry quarto-appendix-citeas">
+Santos, Franklin. 2024. <span>“Enhancing Plant Breeding Precision with
+Row-Column Design.”</span> May 26, 2024. <a href="https://franklinsantosm.com/posts/row_column_design">https://franklinsantosm.com/posts/row_column_design</a>.
+</div></div></section></div> ]]></description>
+  <category>Row-Column</category>
+  <category>Experimental Design</category>
+  <category>Plant Breeding</category>
+  <guid>https://franklinsantosm.com/posts/row_column_design/</guid>
+  <pubDate>Sun, 26 May 2024 04:00:00 GMT</pubDate>
+  <media:content url="https://franklinsantosm.com/posts/row_column_design/fs.png" medium="image" type="image/png" height="103" width="144"/>
+</item>
 <item>
   <title>Un Viaje de Sueños: Camino a la Universidad Austral de Chile</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/chile/index.html</link>
+  <link>https://franklinsantosm.com/posts/chile/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -30,7 +264,7 @@ text-align: justify}
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://franklinsantosm.com/posts/chile/img.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Franklin junto a Mustafa de Gambia</figcaption>
+<figcaption>Franklin junto a Mustafa de Gambia</figcaption>
 </figure>
 </div>
 </section>
@@ -44,7 +278,7 @@ text-align: justify}
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://franklinsantosm.com/posts/chile/qui.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Facultad de Ciencias, donde tendré clases de Bioinformática aplicada a la transcriptómica</figcaption>
+<figcaption>Facultad de Ciencias, donde tendré clases de Bioinformática aplicada a la transcriptómica</figcaption>
 </figure>
 </div>
 </section>
@@ -54,7 +288,7 @@ text-align: justify}
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://franklinsantosm.com/posts/chile/prof.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Prof.&nbsp;Daniela Bustos y Franklin Santos</figcaption>
+<figcaption>Prof.&nbsp;Daniela Bustos y Franklin Santos</figcaption>
 </figure>
 </div>
 </section>
@@ -74,7 +308,7 @@ text-align: justify}
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2024,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2024,
   author = {Santos, Franklin},
   title = {Un {Viaje} de {Sueños:} {Camino} a La {Universidad} {Austral}
     de {Chile}},
@@ -89,15 +323,16 @@ Universidad Austral de Chile.”</span> April 4, 2024. <a href="https://franklin
   <category>Scholarship</category>
   <category>Master Science</category>
   <category>AGCID Chile</category>
-  <guid>https://franklinsantosm.com/posts/chile/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/chile/</guid>
   <pubDate>Thu, 04 Apr 2024 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/chile/fs.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Exploring the Frontier: Artificial Intelligence in Molecular Plant Breeding Data Science</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/PB_AI/index.html</link>
+  <link>https://franklinsantosm.com/posts/PB_AI/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -133,7 +368,7 @@ text-align: justify}
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2024,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2024,
   author = {Santos, Franklin},
   title = {Exploring the {Frontier:} {Artificial} {Intelligence} in
     {Molecular} {Plant} {Breeding} {Data} {Science}},
@@ -149,15 +384,16 @@ Intelligence in Molecular Plant Breeding Data Science.”</span> January
   <category>AI</category>
   <category>Plant Breeding</category>
   <category>Genomic Selection</category>
-  <guid>https://franklinsantosm.com/posts/PB_AI/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/PB_AI/</guid>
   <pubDate>Thu, 25 Jan 2024 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/PB_AI/F1.png" medium="image" type="image/png" height="85" width="144"/>
 </item>
 <item>
   <title>Explorando el Mundo de la Estadística: Frecuentista vs. Bayesiana</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/introbayes/index.html</link>
+  <link>https://franklinsantosm.com/posts/introbayes/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -215,7 +451,7 @@ text-align: justify}
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Explorando El {Mundo} de La {Estadística:} {Frecuentista} Vs.
     {Bayesiana}},
@@ -230,15 +466,16 @@ Frecuentista Vs. Bayesiana.”</span> December 25, 2023. <a href="https://frankl
   <category>Bayesian</category>
   <category>Statistic</category>
   <category>Bayes</category>
-  <guid>https://franklinsantosm.com/posts/introbayes/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/introbayes/</guid>
   <pubDate>Mon, 25 Dec 2023 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/introbayes/bayes.png" medium="image" type="image/png" height="93" width="144"/>
 </item>
 <item>
   <title>FAMD - Factor Analysis of Mixed Data in R</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/MDA/index.html</link>
+  <link>https://franklinsantosm.com/posts/MDA/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -493,7 +730,11 @@ Dim.5  0.6518053         5.925503                    91.56183</code></pre>
 background-color: null;
 font-style: inherit;">fviz_screeplot</span>(res.famd)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -589,7 +830,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -604,7 +849,11 @@ font-style: inherit;">axes =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -619,7 +868,11 @@ font-style: inherit;">axes =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The red dashed line on the graph above indicates the expected average value, If the contributions were uniform. Read more in chapter (Chapter <span class="citation" data-cites="ref">@ref</span>(principal-component-analysis)).</p>
@@ -676,7 +929,11 @@ font-style: inherit;">col.var =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"black"</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Briefly, the graph of variables (correlation circle) shows the relationship between variables, the quality of the representation of variables, as well as, the correlation between variables and the dimensions. Read more at PCA (Chapter <span class="citation" data-cites="ref">@ref</span>(principal-component-analysis)), MCA (Chapter <span class="citation" data-cites="ref">@ref</span>(multiple-correspondence-analysis)) and MFA (Chapter <span class="citation" data-cites="ref">@ref</span>(multiple-factor-analysis)).</p>
@@ -708,7 +965,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Similarly, you can highlight quantitative variables using their cos2 values representing the quality of representation on the factor map. If a variable is well represented by two dimensions, the sum of the cos2 is closed to one. For some of the items, more than 2 dimensions might be required to perfectly represent the data.</p>
@@ -742,7 +1003,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -791,7 +1056,11 @@ background-color: null;
 font-style: inherit;">"#FC4E07"</span>)</span>
 <span id="cb34-3">             )</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The plot above shows the categories of the categorical variables.</p>
@@ -841,7 +1110,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -899,7 +1172,11 @@ background-color: null;
 font-style: inherit;"># Avoid text overlapping</span></span>
 <span id="cb38-6">             ) </span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>If you want to color individuals using multiple categorical variables at the same time, use the function fviz_ellipses() [in factoextra] as follow:</p>
@@ -924,7 +1201,11 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   Please report the issue at &lt;https://github.com/kassambara/factoextra/issues&gt;.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Alternatively, you can specify categorical variable indices:</p>
@@ -943,7 +1224,11 @@ font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"point"</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/MDA/index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -956,7 +1241,7 @@ font-style: inherit;">"point"</span>)</span></code></pre></div>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {FAMD - {Factor} {Analysis} of {Mixed} {Data} in {R}},
   date = {2023-11-29},
@@ -970,15 +1255,16 @@ R.”</span> November 29, 2023. <a href="https://franklinsantosm.com/posts/MDA">
   <category>FAMD</category>
   <category>FactoMineR</category>
   <category>factoextra</category>
-  <guid>https://franklinsantosm.com/posts/MDA/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/MDA/</guid>
   <pubDate>Wed, 29 Nov 2023 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/MDA/plot.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>Unveiling the Power of Completely Randomized Design (CRD) in Crop Science Experiments</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/crd/index.html</link>
+  <link>https://franklinsantosm.com/posts/crd/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1186,10 +1472,18 @@ T2 1.6775      b</code></pre>
 <pre><code></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>use <code>mcomp</code> to multiple comparison test (Tukey (default), LSD, Scott-Knott and Duncan)</p>
@@ -1280,10 +1574,18 @@ T2 1.6775      c</code></pre>
 <pre><code></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>chart type: Graph type (columns, boxes or segments)</p>
@@ -1374,10 +1676,18 @@ T2 1.6775      b</code></pre>
 <pre><code></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/crd/index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1395,7 +1705,7 @@ T2 1.6775      b</code></pre>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Unveiling the {Power} of {Completely} {Randomized} {Design}
     {(CRD)} in {Crop} {Science} {Experiments}},
@@ -1411,15 +1721,16 @@ Randomized Design (CRD) in Crop Science Experiments.”</span> October 24,
   <category>crd</category>
   <category>agroR package</category>
   <category>Experimental Design</category>
-  <guid>https://franklinsantosm.com/posts/crd/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/crd/</guid>
   <pubDate>Tue, 24 Oct 2023 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/crd/cr.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>The corrr package in R: A powerful tool for exploring correlations</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/corrr/index.html</link>
+  <link>https://franklinsantosm.com/posts/corrr/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1574,7 +1885,11 @@ font-style: inherit;">0.3</span>)</span></code></pre></div>
 • Missing treated using: 'pairwise.complete.obs'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/corrr/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/corrr/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The option <code>min_cor</code> indicates the required minimum correlation value for a correlation to be plotted.</p>
@@ -1609,7 +1924,11 @@ font-style: inherit;">7</span>)</span></code></pre></div>
 • Missing treated using: 'pairwise.complete.obs'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/corrr/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/corrr/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
@@ -1617,7 +1936,7 @@ font-style: inherit;">7</span>)</span></code></pre></div>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {The Corrr Package in {R:} {A} Powerful Tool for Exploring
     Correlations},
@@ -1632,15 +1951,16 @@ for Exploring Correlations.”</span> September 20, 2023. <a href="https://frank
   <category>correlation</category>
   <category>corrr package</category>
   <category>correlation plot</category>
-  <guid>https://franklinsantosm.com/posts/corrr/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/corrr/</guid>
   <pubDate>Wed, 20 Sep 2023 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/corrr/cor.png" medium="image" type="image/png" height="89" width="144"/>
 </item>
 <item>
   <title>La inteligencia artificial revoluciona la agricultura</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/agri_AI/index.html</link>
+  <link>https://franklinsantosm.com/posts/agri_AI/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1697,7 +2017,7 @@ text-align: justify}
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {La Inteligencia Artificial Revoluciona La Agricultura},
   date = {2023-08-30},
@@ -1711,15 +2031,16 @@ Agricultura.”</span> August 30, 2023. <a href="https://franklinsantosm.com/pos
   <category>AI</category>
   <category>agriculture</category>
   <category>artificial intelligence</category>
-  <guid>https://franklinsantosm.com/posts/agri_AI/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/agri_AI/</guid>
   <pubDate>Wed, 30 Aug 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/agri_AI/AI.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Dumbbell plot: visualizar cambio en ggplot2</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/change_plot/index.html</link>
+  <link>https://franklinsantosm.com/posts/change_plot/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1891,7 +2212,11 @@ font-style: inherit;">"grey60"</span></span>
 <span id="cb4-13"></span>
 <span id="cb4-14">g1</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/change_plot/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/change_plot/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1960,14 +2285,18 @@ font-style: inherit;">element_blank</span>()</span>
 <span id="cb5-14"></span>
 <span id="cb5-15">g2</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/change_plot/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/change_plot/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Dumbbell Plot: Visualizar Cambio En Ggplot2},
   date = {2023-07-20},
@@ -1981,15 +2310,16 @@ Ggplot2.”</span> July 20, 2023. <a href="https://franklinsantosm.com/posts/cha
   <category>data science</category>
   <category>ggalt</category>
   <category>dumbbell plot</category>
-  <guid>https://franklinsantosm.com/posts/change_plot/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/change_plot/</guid>
   <pubDate>Thu, 20 Jul 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/change_plot/change.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>Analisis de datos climaticos</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/weather_mizque/index.html</link>
+  <link>https://franklinsantosm.com/posts/weather_mizque/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2747,7 +3077,11 @@ font-style: inherit;">"a"</span>)</span></code></pre></div>
 <pre><code>Picking joint bandwidth of 1.2</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/weather_mizque/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/weather_mizque/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2931,7 +3265,11 @@ background-color: null;
 font-style: inherit;">"Humedad relativa promedio (%)"</span>)</span>
 <span id="cb31-6">HR</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/weather_mizque/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/weather_mizque/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -2988,14 +3326,18 @@ font-style: inherit;">"a"</span>)</span></code></pre></div>
 <pre><code>Picking joint bandwidth of 0.801</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/weather_mizque/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/weather_mizque/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Analisis de Datos Climaticos},
   date = {2023-06-25},
@@ -3009,15 +3351,16 @@ June 25, 2023. <a href="https://franklinsantosm.com/posts/weather_mizque">https:
   <category>data science</category>
   <category>weather analysis</category>
   <category>plot</category>
-  <guid>https://franklinsantosm.com/posts/weather_mizque/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/weather_mizque/</guid>
   <pubDate>Sun, 25 Jun 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/weather_mizque/w.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>ggplot2: facet_wrap, facet_grid</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/facet_ggplot2/index.html</link>
+  <link>https://franklinsantosm.com/posts/facet_ggplot2/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3101,7 +3444,11 @@ font-style: inherit;">ncol =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">base <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -3119,7 +3466,11 @@ font-style: inherit;">as.table =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -3135,7 +3486,11 @@ font-style: inherit;">nrow =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">base <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -3153,7 +3508,11 @@ font-style: inherit;">dir =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"v"</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3168,7 +3527,11 @@ font-style: inherit;">facet_grid</span>(. <span class="sc" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">~</span> cyl)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -3184,7 +3547,11 @@ font-style: inherit;">facet_grid</span>(. <span class="sc" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">~</span> cyl)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -3199,7 +3566,11 @@ font-style: inherit;">facet_grid</span>(drv <span class="sc" style="color: #5E5E
 background-color: null;
 font-style: inherit;">~</span> .)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -3214,7 +3585,11 @@ font-style: inherit;">facet_grid</span>(drv <span class="sc" style="color: #5E5E
 background-color: null;
 font-style: inherit;">~</span> cyl)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Puede utilizar múltiples variables en las filas o columnas, “sumándolas”, por ejemplo <code>a + b ~ c + d</code>. Las variables que aparecen juntas en las filas o columnas están anidadas en el sentido de que sólo las combinaciones que aparecen en los datos aparecerán en el gráfico. Las variables que se especifican en filas y columnas se cruzarán: se mostrarán todas las combinaciones, incluidas las que no aparecían en el conjunto de datos original: esto puede dar lugar a paneles vacíos.</p>
@@ -3365,7 +3740,11 @@ font-style: inherit;">scales =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"free"</span>) </span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3415,7 +3794,11 @@ font-style: inherit;">ncol =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -3483,14 +3866,18 @@ font-style: inherit;">angle =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/facet_ggplot2/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Ggplot2: Facet\_wrap, Facet\_grid},
   date = {2023-05-15},
@@ -3504,15 +3891,16 @@ May 15, 2023. <a href="https://franklinsantosm.com/posts/facet_ggplot2">https://
   <category>ggplot2</category>
   <category>facet_wrap</category>
   <category>facet_grid</category>
-  <guid>https://franklinsantosm.com/posts/facet_ggplot2/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/facet_ggplot2/</guid>
   <pubDate>Mon, 15 May 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/facet_ggplot2/ggp.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>JULIA: Lenguaje de programación del futuro</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/julia/index.html</link>
+  <link>https://franklinsantosm.com/posts/julia/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3558,7 +3946,7 @@ text-align: justify}
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {JULIA: {Lenguaje} de Programación Del Futuro},
   date = {2023-04-25},
@@ -3572,15 +3960,16 @@ Futuro.”</span> April 25, 2023. <a href="https://franklinsantosm.com/posts/jul
   <category>julia</category>
   <category>Artificial Intelligence</category>
   <category>Data Science</category>
-  <guid>https://franklinsantosm.com/posts/julia/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/julia/</guid>
   <pubDate>Tue, 25 Apr 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/julia/julia.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
   <title>Inteligencia artificial en la agricultura</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/AI/index.html</link>
+  <link>https://franklinsantosm.com/posts/AI/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3616,7 +4005,7 @@ text-align: justify}
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Inteligencia Artificial En La Agricultura},
   date = {2023-03-15},
@@ -3630,15 +4019,16 @@ Agricultura.”</span> March 15, 2023. <a href="https://franklinsantosm.com/post
   <category>AI</category>
   <category>Artificial Intelligence</category>
   <category>Agriculture</category>
-  <guid>https://franklinsantosm.com/posts/AI/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/AI/</guid>
   <pubDate>Wed, 15 Mar 2023 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/AI/ai.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Mapas de Bolivia</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/maps/index.html</link>
+  <link>https://franklinsantosm.com/posts/maps/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3782,7 +4172,11 @@ background-color: null;
 font-style: inherit;">fill =</span> scat))</span>
 <span id="cb4-18">p2</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/maps/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" style="width:100.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/maps/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 
@@ -3790,7 +4184,7 @@ font-style: inherit;">fill =</span> scat))</span>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Mapas de {Bolivia}},
   date = {2023-02-01},
@@ -3804,15 +4198,16 @@ Santos, Franklin. 2023. <span>“Mapas de Bolivia.”</span> February 1,
   <category>maps</category>
   <category>Bolivia</category>
   <category>bioinformatic</category>
-  <guid>https://franklinsantosm.com/posts/maps/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/maps/</guid>
   <pubDate>Wed, 01 Feb 2023 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/maps/map.png" medium="image" type="image/png" height="112" width="144"/>
 </item>
 <item>
   <title>Análisis de datos experimentales agrícolas</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/agridata/index.html</link>
+  <link>https://franklinsantosm.com/posts/agridata/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3840,7 +4235,7 @@ text-align: justify}
 <p>Generalmente se puede presentar en una tabla los resultados descriptivos.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Análisis descriptivo</caption>
 <thead>
 <tr class="header">
@@ -3899,7 +4294,11 @@ text-align: justify}
 <p>La otra opción podría ser una figura <code>boxplot</code></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3921,7 +4320,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Análisis de varianza</caption>
 <thead>
 <tr class="header">
@@ -3960,13 +4359,21 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Hay otra manera de representar comparaciones graficamente</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1056"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Tambien existe otra opción con el paquete <code>AgroR</code></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -4020,7 +4427,11 @@ versicolor 5.936      b
 setosa     5.006      c</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -4096,7 +4507,11 @@ NAC_CAM IMP_ALB
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="1056"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/agridata/index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
 </div>
 </div>
 
@@ -4104,7 +4519,7 @@ NAC_CAM IMP_ALB
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
   author = {Santos, Franklin},
   title = {Análisis de Datos Experimentales Agrícolas},
   date = {2023-01-01},
@@ -4118,15 +4533,16 @@ Agrícolas.”</span> January 1, 2023. <a href="https://franklinsantosm.com/post
   <category>agridata</category>
   <category>data science</category>
   <category>bioinformatic</category>
-  <guid>https://franklinsantosm.com/posts/agridata/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/agridata/</guid>
   <pubDate>Sun, 01 Jan 2023 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/agridata/pic.png" medium="image" type="image/png" height="65" width="144"/>
 </item>
 <item>
   <title>Análisis de Componentes Principales</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/componentes_principales/index.html</link>
+  <link>https://franklinsantosm.com/posts/componentes_principales/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4328,7 +4744,11 @@ font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">50</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>La suma de todos los valores propios da una varianza total de 10.</p>
@@ -4378,7 +4798,11 @@ background-color: null;
 font-style: inherit;"># Avoid text overlapping</span></span>
 <span id="cb13-5">             )</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
@@ -4410,7 +4834,11 @@ font-style: inherit;">top =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -4431,7 +4859,11 @@ font-style: inherit;">top =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
@@ -4454,7 +4886,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/componentes_principales/index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
@@ -4477,15 +4913,16 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   <category>Biplot</category>
   <category>Componentes Principales</category>
   <category>Correlation</category>
-  <guid>https://franklinsantosm.com/posts/componentes_principales/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/componentes_principales/</guid>
   <pubDate>Tue, 15 Dec 2020 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/componentes_principales/featured.png" medium="image" type="image/png" height="125" width="144"/>
 </item>
 <item>
   <title>Análisis de Varianza y Prueba de Promedios en R</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/anova/index.html</link>
+  <link>https://franklinsantosm.com/posts/anova/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4692,7 +5129,11 @@ background-color: null;
 font-style: inherit;"># id = FALSE to remove point identification</span></span>
 <span id="cb6-9">)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A partir del histograma y el gráfico QQ anteriores, ya podemos ver que el supuesto de normalidad parece cumplirse. De hecho, el histograma forma aproximadamente una curva de campana, lo que indica que los residuos siguen una distribución normal. Además, los puntos en las gráficas QQ siguen aproximadamente la línea recta y la mayoría de ellos están dentro de las bandas de confianza, lo que también indica que los residuos siguen aproximadamente una distribución normal.</p>
@@ -4724,7 +5165,11 @@ background-color: null;
 font-style: inherit;">data =</span> iris</span>
 <span id="cb7-4">)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -4742,7 +5187,11 @@ background-color: null;
 font-style: inherit;">data =</span> iris</span>
 <span id="cb8-5">)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Tanto la gráfica de boxplot como la gráfica de puntos muestran una variación similar para las diferentes especies. En el boxplot, esto se puede ver por el hecho de que las cajas y los bigotes tienen un tamaño comparable para todas las especies. Hay un par de valores atípicos como lo muestran los puntos fuera de los bigotes, pero esto no cambia el hecho de que la dispersión es más o menos la misma entre las diferentes especies.</p>
@@ -5031,7 +5480,11 @@ font-style: inherit;">0.05</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Probabilidad estadística</span></span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">r1</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -5341,7 +5794,11 @@ font-style: inherit;"># remove if p-value of ANOVA or Kruskal-Wallis test &gt;= 
 <span id="cb26-38">  }</span>
 <span id="cb26-39">}</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Otra opción de gráfica para observar la significancia entre las medias de cada par de especies.</p>
@@ -5422,7 +5879,11 @@ font-style: inherit;">hide.ns =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>) </span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/anova/index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -5445,15 +5906,16 @@ font-style: inherit;">TRUE</span>) </span></code></pre></div>
   <category>ANOVA</category>
   <category>Post hoc</category>
   <category>Inferencial Statistic</category>
-  <guid>https://franklinsantosm.com/posts/anova/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/anova/</guid>
   <pubDate>Sun, 15 Nov 2020 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/anova/featured.png" medium="image" type="image/png" height="118" width="144"/>
 </item>
 <item>
   <title>Análisis de correspondencia con R</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/Analisis_correspondencia/index.html</link>
+  <link>https://franklinsantosm.com/posts/Analisis_correspondencia/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -5572,7 +6034,11 @@ font-style: inherit;">show.margins =</span> <span class="cn" style="color: #8f59
 background-color: null;
 font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -5610,7 +6076,7 @@ X-squared = 1944.5, df = 36, p-value &lt; 2.2e-16</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5821,7 +6287,11 @@ font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">50</span>))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
@@ -5881,7 +6351,11 @@ font-style: inherit;">color=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"red"</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Según el gráfico anterior, solo las dimensiones 1 y 2 deben usarse en la solución. La dimensión 3 explica sólo el 11,4% de la inercia total, que está por debajo del valor propio medio (33,33%) y es demasiado poco para guardarlo para un análisis más detallado.</p>
@@ -5905,7 +6379,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El gráfico anterior se llama gráfico simétrico y muestra un patrón global dentro de los datos. Las filas están representadas por puntos azules y las columnas por triángulos rojos.</p>
@@ -5943,7 +6421,7 @@ Este gráfico muestra que:
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5959,7 +6437,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -6029,7 +6511,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Usamos el argumento flechas, que es un vector de dos lógicas que especifican si la gráfica debe contener puntos (<code>FALSE</code>, predeterminado) o flechas (<code>TRUE</code>). El primer valor establece las filas y el segundo valor establece el columnas.</p>
@@ -6067,7 +6553,11 @@ font-style: inherit;">repel =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantosm.com/posts/Analisis_correspondencia/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>En el gráfico anterior, la posición de los puntos del perfil de la columna no cambia con respecto a la del biplot convencional. Sin embargo, las distancias de los puntos de fila desde el origen de la gráfica están relacionadas con sus contribuciones al mapa de factores bidimensionales.</p>
@@ -6177,7 +6667,7 @@ Husband      0.6019199</code></pre>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2020,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2020,
   author = {Santos, Franklin},
   title = {Análisis de Correspondencia Con {R}},
   date = {2020-11-07},
@@ -6191,15 +6681,16 @@ R.”</span> November 7, 2020. <a href="https://franklinsantosm.com/posts/Analis
   <category>Chi-cuadrado</category>
   <category>Biplot</category>
   <category>Componentes Principales</category>
-  <guid>https://franklinsantosm.com/posts/Analisis_correspondencia/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/Analisis_correspondencia/</guid>
   <pubDate>Sat, 07 Nov 2020 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/Analisis_correspondencia/featured.png" medium="image" type="image/png" height="118" width="144"/>
 </item>
 <item>
   <title>Ordenar datos con el paquete Tidyverse</title>
   <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantosm.com/posts/tidyexam/index.html</link>
+  <link>https://franklinsantosm.com/posts/tidyexam/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -6620,7 +7111,7 @@ font-style: inherit;">1</span>)</span>
   <category>Data Science</category>
   <category>Tidy Data</category>
   <category>Tidyverse</category>
-  <guid>https://franklinsantosm.com/posts/tidyexam/index.html</guid>
+  <guid>https://franklinsantosm.com/posts/tidyexam/</guid>
   <pubDate>Sat, 31 Oct 2020 03:00:00 GMT</pubDate>
   <media:content url="https://franklinsantosm.com/posts/tidyexam/featured.png" medium="image" type="image/png" height="67" width="144"/>
 </item>

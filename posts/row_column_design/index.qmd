@@ -1,0 +1,125 @@
+---
+title: "Enhancing Plant Breeding Precision with Row-Column Design"
+description: |
+  Row-column design involves arranging experimental units into a grid of rows and columns.
+categories: [Row-Column, Experimental Design, Plant Breeding]
+author:
+  - name: Franklin Santos
+    url: https://www.franklinsantosm.com
+    affiliation: Universidad Austral de Chile
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2024-05-26"
+image: fs.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+## Introduction
+
+In the realm of agricultural research, particularly plant breeding, precision is paramount. The quest to identify superior plant varieties requires experiments that can accurately attribute observed differences to genetic factors rather than environmental noise. This is where the **row-column design** comes into play, a sophisticated statistical methodology designed to enhance the reliability of field trials by controlling spatial variation.
+
+## What is Row-Column Design?
+
+At its core, a row-column design involves arranging experimental units into a grid of rows and columns. This organization allows researchers to control two sources of spatial variation simultaneously. Each cell in the grid, or plot, hosts a specific genotype (or treatment), which is randomly assigned to ensure unbiased results.
+
+## Why is it Important?
+
+Field trials often face the challenge of spatial heterogeneity—variations in soil fertility, moisture, sunlight, and other environmental conditions. These variations can introduce significant noise into the data, potentially obscuring true genetic differences. By accounting for variations along both rows and columns, the row-column design mitigates these effects, leading to more precise and reliable experimental outcomes.
+
+## Key Features
+
+1. **Grid Layout**: The field is divided into a systematic grid, creating rows and columns that structure the experimental units.
+2. **Randomization**: Treatments are randomly assigned to each plot within the grid, minimizing bias.
+3. **Control of Variation**: 
+   - **Row Effects**: Horizontal variations such as soil fertility gradients or irrigation patterns.
+   - **Column Effects**: Vertical variations such as different drainage conditions or sunlight exposure.
+
+## Advantages of Row-Column Design
+
+- **Increased Precision**: By controlling for two dimensions of variability, this design reduces experimental error, enhancing the accuracy of genotype evaluations.
+- **Flexibility**: Adaptable to fields with irregular shapes or non-uniform conditions, making it versatile for various agricultural scenarios.
+- **Improved Accuracy**: Better control of environmental variation ensures that performance differences are more accurately attributed to genetic factors.
+
+## Row-Column Design with FielDHub R Package
+
+To facilitate the implementation and analysis of row-column designs, researchers can utilize the **FieldHUB R package**. FieldHUB is a powerful tool specifically developed for managing and analyzing field trial data. It provides a user-friendly interface and a suite of functions tailored to the unique needs of agricultural experiments.
+
+- **Design Creation**: FieldHUB allows researchers to easily set up row-column designs, specifying the number of rows and columns, and randomizing the assignment of treatments.
+- **Data Management**: The package streamlines data entry and management, ensuring that all experimental data are accurately recorded and organized.
+- **Visualization**: FieldHUB offers various visualization tools to help researchers understand spatial patterns and variations within their trials, aiding in the interpretation of results.
+- **Statistical Analysis**: Integrated with R's robust statistical capabilities, FieldHUB can perform complex analyses, including mixed models and ANOVA, tailored to row-column designs.
+
+By leveraging the FieldHUB R package, researchers can enhance the efficiency and accuracy of their field trials, making the row-column design more accessible and practical for large-scale agricultural research.
+
+### Using the FielDHub function: `row_column()`
+
+First, you need to load the `FielDHub` package by typing
+
+```{r}
+#Install and load FielDHub package
+library(FielDHub)
+```
+
+Then, you can enter the information describing the above design like this:
+
+```{r}
+rcd <- row_column(
+  t = 45,
+  nrows = 5,
+  r = 3,
+  l = 1, 
+  plotNumber = 101, 
+  locationNames = "FARGO",
+  seed = 1244
+)
+```
+
+The description for the inputs that we used to generate the design,
+
+- `t = 45` is the number of treatments.
+- `nrows = 5` is the number of rows.
+- `r=3` is the number of reps
+- `l = 1` is the number of locations.
+- `plotNumber = 101` is the starting plot number.
+- `locationNames = "FARGO"` is an optional name for each location.
+- `seed = 1244` is the random seed to replicate identical randomizations.
+
+To print a summary of the information that is in the object `rcd`, we can use the generic function `print()`.
+
+```{r}
+print(rcd)
+```
+
+The `row_column()` function returns a list consisting of all the information displayed in the output tabs in the FielDHub app: design information, plot layout, plot numbering, entries list, and field book. These are accessible by the `$` operator, i.e. `rcd$layoutRandom` or `rcd$fieldBook`.
+
+`rcd$fieldBook` is a list containing information about every plot in the field, with information about the location of the plot and the treatment in each plot. As seen in the output below, the field book has columns for `ID`, `LOCATION`, `PLOT`, `REP`, `ROW`, `COLUMN`, `ENTRY`, and `TREATMENT`.
+
+```{r}
+field_book <- rcd$fieldBook
+head(rcd$fieldBook, 10)
+```
+
+For plotting the layout in function of the coordinates `ROW` and `COLUMN`, you can use the the generic function `plot()` as follows,
+
+```{r}
+plot(rcd)
+```
+
+## Analytical Techniques
+
+The data from `row-column designs` are typically analyzed using mixed models or ANOVA, with row and column effects included as factors. Advanced statistical software like R (using packages such as `lme4`, `asreml`, `SpAtS`, and `statgenSTA`) and SAS provides robust tools for handling the complex data structures generated by these designs.
+
+
+
+## Conclusion
+
+Row-column design stands as a critical tool for plant breeders, ensuring that the evaluation of new plant genotypes is as accurate and reliable as possible. By effectively controlling spatial variation in field trials, this design not only improves the precision of experimental results but also aids in the selection and development of superior plant varieties. As agriculture continues to evolve, methodologies like the row-column design will remain essential in advancing our understanding and cultivation of crops.

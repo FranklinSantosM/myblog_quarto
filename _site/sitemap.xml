@@ -2,86 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://franklinsantosm.com/Blog.html</loc>
-    <lastmod>2023-11-05T16:05:12.025Z</lastmod>
+    <lastmod>2023-01-03T00:34:42.163Z</lastmod>
   </url>
   <url>
     <loc>https://franklinsantosm.com/index.html</loc>
-    <lastmod>2024-04-04T17:18:26.432Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/tidyexam/index.html</loc>
-    <lastmod>2024-04-04T16:49:28.569Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/facet_ggplot2/index.html</loc>
-    <lastmod>2023-11-05T16:05:06.006Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/weather_mizque/index.html</loc>
-    <lastmod>2023-11-05T16:05:04.529Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/agridata/index.html</loc>
-    <lastmod>2023-11-05T16:05:03.020Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/Analisis_correspondencia/index.html</loc>
-    <lastmod>2023-11-05T16:05:01.276Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/maps/index.html</loc>
-    <lastmod>2023-11-05T16:04:58.766Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/change_plot/index.html</loc>
-    <lastmod>2023-11-05T16:04:59.611Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/componentes_principales/index.html</loc>
-    <lastmod>2023-11-05T16:05:02.211Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/agri_AI/index.html</loc>
-    <lastmod>2024-04-04T16:50:03.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/AI/index.html</loc>
-    <lastmod>2024-04-04T16:49:44.018Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/julia/index.html</loc>
-    <lastmod>2024-04-04T16:49:50.638Z</lastmod>
+    <lastmod>2023-01-03T00:34:42.353Z</lastmod>
   </url>
   <url>
     <loc>https://franklinsantosm.com/posts/anova/index.html</loc>
-    <lastmod>2023-11-05T16:05:08.601Z</lastmod>
+    <lastmod>2023-01-03T00:34:42.355Z</lastmod>
   </url>
   <url>
-    <loc>https://franklinsantosm.com/about.html</loc>
-    <lastmod>2023-11-05T16:05:10.958Z</lastmod>
+    <loc>https://franklinsantosm.com/posts/row_column_design/index.html</loc>
+    <lastmod>2024-08-04T21:13:49.464Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/facet_ggplot2/index.html</loc>
+    <lastmod>2023-06-17T22:50:30.558Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/weather_mizque/index.html</loc>
+    <lastmod>2023-06-25T21:50:43.881Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/agri_AI/index.html</loc>
+    <lastmod>2023-10-21T18:00:46.109Z</lastmod>
   </url>
   <url>
     <loc>https://franklinsantosm.com/posts/corrr/index.html</loc>
-    <lastmod>2023-11-05T17:24:08.861Z</lastmod>
+    <lastmod>2023-11-05T17:24:04.493Z</lastmod>
   </url>
   <url>
-    <loc>https://franklinsantosm.com/posts/crd/index.html</loc>
-    <lastmod>2023-11-20T00:24:46.289Z</lastmod>
+    <loc>https://franklinsantosm.com/posts/componentes_principales/index.html</loc>
+    <lastmod>2023-01-03T00:34:42.356Z</lastmod>
   </url>
   <url>
-    <loc>https://franklinsantosm.com/posts/MDA/index.html</loc>
-    <lastmod>2023-12-17T21:47:26.498Z</lastmod>
-  </url>
-  <url>
-    <loc>https://franklinsantosm.com/posts/introbayes/index.html</loc>
-    <lastmod>2024-01-29T23:43:34.818Z</lastmod>
+    <loc>https://franklinsantosm.com/posts/change_plot/index.html</loc>
+    <lastmod>2023-07-29T20:53:35.843Z</lastmod>
   </url>
   <url>
     <loc>https://franklinsantosm.com/posts/PB_AI/index.html</loc>
-    <lastmod>2024-02-19T14:29:01.289Z</lastmod>
+    <lastmod>2024-02-19T14:28:59.785Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/maps/index.html</loc>
+    <lastmod>2023-01-08T20:05:53.261Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/introbayes/index.html</loc>
+    <lastmod>2024-01-29T23:43:33.121Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/Analisis_correspondencia/index.html</loc>
+    <lastmod>2023-01-03T00:34:42.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/crd/index.html</loc>
+    <lastmod>2023-11-20T00:24:39.638Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/agridata/index.html</loc>
+    <lastmod>2023-01-23T02:12:31.873Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/MDA/index.html</loc>
+    <lastmod>2023-12-17T21:47:17.593Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/AI/index.html</loc>
+    <lastmod>2023-04-02T15:12:13.018Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/julia/index.html</loc>
+    <lastmod>2023-04-30T16:34:20.554Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/posts/tidyexam/index.html</loc>
+    <lastmod>2023-01-03T00:34:42.357Z</lastmod>
   </url>
   <url>
     <loc>https://franklinsantosm.com/posts/chile/index.html</loc>
-    <lastmod>2024-04-04T17:18:23.655Z</lastmod>
+    <lastmod>2024-04-04T17:18:22.910Z</lastmod>
+  </url>
+  <url>
+    <loc>https://franklinsantosm.com/about.html</loc>
+    <lastmod>2023-11-05T14:33:42.367Z</lastmod>
   </url>
 </urlset>

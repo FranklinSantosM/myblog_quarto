@@ -8,12 +8,19 @@
       "/posts/Analisis_correspondencia/index.html",
       "/posts/agridata/index.html",
       "/posts/change_plot/index.html",
+      "/posts/row_column_design/index.html",
+      "/posts/introbayes/index.html",
+      "/posts/PB_AI/index.html",
+      "/posts/MDA/index.html",
       "/about.html",
       "/posts/AI/index.html",
       "/posts/julia/index.html",
       "/posts/agri_AI/index.html",
       "/posts/maps/index.html",
       "/posts/tidyexam/index.html",
+      "/posts/corrr/index.html",
+      "/posts/chile/index.html",
+      "/posts/crd/index.html",
       "/posts/facet_ggplot2/index.html",
       "/index.html"
     ]
@@ -21,6 +28,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/row_column_design/index.html",
       "/posts/chile/index.html",
       "/posts/PB_AI/index.html",
       "/posts/introbayes/index.html",
