@@ -1,0 +1,320 @@
+---
+title: "Diseño Completamente al Azar"
+description: |
+  El diseño más sencillo desde el punto de vista de la asignación de unidades experimentales a los tratamientos.
+categories: [RCD, Experimental Design, Plant Breeding]
+author:
+  - name: Franklin Santos
+    url: https://www.franklinsantosm.com
+    affiliation: Universidad Austral de Chile
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2024-06-12"
+image: fsm.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+## 1. Diseño completamente aleatorizado (DCA)
+
+El diseño más sencillo desde el punto de vista de la asignación de unidades experimentales a los tratamientos.
+
+#### **Supuestos:**
+
+ 1. Distribución normal de residuos
+ 2. Homogeneidad de varianzas
+ 3. Observaciones independientes 
+ 
+
+### **Ventajas:**
+
+ * Simplicidad
+ * Evita hacer suposiciones estadísticas dudosas.
+ * Pocas violaciones de los supuestos.
+ * El análisis estadístico es sencillo.
+
+### **Desventaja:**
+ 
+ * Falta de precisión o incapacidad para estimar con precisión los efectos del tratamiento.
+
+## Paquetes
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  multcomp,
+  multcompView,
+  tidyverse,
+  lme4)
+
+# handle function conflicts
+conflicts_prefer(dplyr::filter) 
+conflicts_prefer(dplyr::select)
+```
+
+## Base de datos
+
+Este ejemplo procede del "Ejemplo 4.3" del material didáctico "Métodos cuantitativos en biociencias (3402-420)" del [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). Considera los datos publicados en la p.52 de Mead, Curnow, y Hasted (2002) de un ensayo de rendimiento con melones. El ensayo tenía 4 variedades de melón (variedad). Cada variedad se probó en seis parcelas de campo. La asignación de los tratamientos (`variedades`) a las unidades experimentales (parcelas) fue completamente al azar. Así, el experimento se planteó como un diseño completamente aleatorizado (DCA).
+
+
+```{r}
+# data is available online:
+path <- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Mead1993.csv"
+
+dat <- read_csv(path) # use path from above
+head(dat)
+```
+
+
+### Formato
+
+Antes de nada, la variedad de columna debe codificarse como un factor, ya que R por defecto la codifica como una variable de carácter. Hay múltiples maneras de hacer esto - aquí hay dos:
+
+```{r}
+dat <- dat %>% 
+  mutate(variety = as.factor(variety))
+```
+
+```{r}
+dat <- dat %>% 
+  mutate(across(variety, ~ as.factor(.x)))
+```
+
+
+## Distribución de los tratamientos
+
+Dado que se trata de un experimento que se estableció con un determinado diseño experimental (= un diseño completamente aleatorizado; DCA) - tiene sentido obtener también un plano de campo. Esto se puede hacer a través de `desplot()` de {desplot}:
+
+```{r}
+desplot(
+  data = dat, 
+  flip = TRUE, # row 1 on top, not on bottom
+  form = variety ~ col + row, # fill color per variety
+  text = variety, # variety names per plot
+  cex = 1, # variety names: font size
+  main = "Field layout", # plot title
+  show.key = FALSE # hide legend 
+  )     
+```
+
+
+```{r}
+desplot(
+  data = dat, 
+  flip = TRUE, # row 1 on top, not on bottom
+  form = yield ~ col + row, # fill color per variety
+  text = variety, # variety names per plot
+  cex = 1, # variety names: font size
+  main = "Yield per plot", # plot title
+  show.key = FALSE # hide legend 
+  )     
+```
+
+## Modelo
+Por último, podemos decidir ajustar un modelo lineal con el rendimiento como variable de respuesta y efectos (fijos) de variedad.
+
+```{r}
+mod <- lm(yield ~ variety, data = dat)
+```
+
+## ANOVA
+
+Basándonos en nuestro modelo, podemos realizar un ANOVA:
+
+```{r}
+ANOVA <- anova(mod)
+ANOVA
+```
+
+
+## Comparación de medias
+Además de un ANOVA, también se pueden comparar las medias de rendimiento ajustadas entre variedades mediante pruebas post hoc (prueba t, prueba de Tukey, etc.).
+
+
+```{r}
+mean_comp <- mod %>% 
+  emmeans(specs = ~ variety) %>% # adj. mean per variety
+  cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
+
+mean_comp
+```
+
+
+Tenga en cuenta que si desea ver los contrastes/diferencias individuales subyacentes entre medias ajustadas, simplemente añada `details = TRUE` a la sentencia `cld()`. Además, consulte el artículo de resumen "Visualización compacta de letras".
+
+Por último, podemos crear un gráfico que muestre tanto los datos brutos como los resultados, es decir, las comparaciones de las medias ajustadas que se basan en el modelo lineal.
+
+```{r}
+my_caption <- "Los puntos negros representan los datos brutos. Los puntos rojos y las barras de error representan medias ajustadas con límites de confianza del 95% por variedad. Las medias seguidas de una letra común no son significativamente diferentes según la prueba de Tukey."
+
+ggplot() +
+  aes(x = variety) +
+  # black dots representing the raw data
+  geom_point(
+    data = dat,
+    aes(y = yield)
+  ) +
+  # red dots representing the adjusted means
+  geom_point(
+    data = mean_comp,
+    aes(y = emmean),
+    color = "red",
+    position = position_nudge(x = 0.1)
+  ) +
+  # red error bars representing the confidence limits of the adjusted means
+  geom_errorbar(
+    data = mean_comp,
+    aes(ymin = lower.CL, ymax = upper.CL),
+    color = "red",
+    width = 0.1,
+    position = position_nudge(x = 0.1)
+  ) +
+  # red letters 
+  geom_text(
+    data = mean_comp,
+    aes(y = emmean, label = str_trim(.group)),
+    color = "red",
+    position = position_nudge(x = 0.2),
+    hjust = 0
+  ) +
+  scale_x_discrete(
+    name = "Variety"
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  theme_classic() +
+  labs(caption = my_caption) +
+  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
+        plot.caption.position = "plot")
+```
+
+
+Para calcular la heredabilidad y los Best Linear Unbiased Estimators (BLUE) en R, puedes seguir los pasos que se detallan a continuación. Utilizaremos el paquete `lme4` para ajustar un modelo de efectos mixtos y obtener las estimaciones necesarias.
+
+## Cálculo de la Heredabilidad
+La heredabilidad en sentido amplio se puede estimar como la proporción de la varianza genética (entre variedades) sobre la varianza total (varianza genética + varianza residual). Para esto, ajustaremos un modelo mixto donde la variedad se considere como un efecto aleatorio.
+
+## Cálculo de BLUEs
+Los BLUEs se obtienen cuando tratamos los efectos de la variedad como fijos en un modelo lineal. En el contexto del diseño completamente aleatorizado (DCA), los BLUEs son simplemente las medias ajustadas (predicciones) para cada variedad.
+
+## Ejemplo
+
+```{r}
+# Ajustar el modelo mixto para calcular la heredabilidad
+library(lme4)
+
+mod_mixed <- lmer(yield ~ (1|variety), data = dat)
+
+# Resumen del modelo para obtener las varianzas
+summary(mod_mixed)
+
+# Extraer las varianzas para calcular la heredabilidad
+var_comp <- as.data.frame(VarCorr(mod_mixed))
+var_genetic <- var_comp$vcov[1]  # Varianza genética (entre variedades)
+var_residual <- var_comp$vcov[2] # Varianza residual
+
+# Calcular la heredabilidad en sentido amplio (H^2)
+H2 <- var_genetic / (var_genetic + var_residual)
+H2
+```
+
+### Calcular los BLUEs
+Si la variedad es un efecto fijo, los BLUEs coinciden con las medias ajustadas obtenidas en tu código anterior. Sin embargo, si quieres obtener los BLUEs explícitamente:
+
+```{r}
+# Ajustar un modelo con efectos fijos para la variedad
+mod_fixed <- lm(yield ~ variety, data = dat)
+
+# Obtener los BLUEs
+BLUEs <- emmeans(mod_fixed, ~ variety)
+BLUEs
+```
+
+### Adición de Heredabilidad y BLUEs al Gráfico
+
+Si deseas agregar la heredabilidad y los BLUEs al gráfico, puedes hacerlo de la siguiente manera:
+
+```{r}
+# Calcular heredabilidad y obtener BLUEs
+H2 <- round(H2, 2)
+
+# Calcular los BLUEs y las letras de Tukey
+BLUEs <- emmeans(mod_fixed, ~ variety) %>% 
+  cld(adjust = "Tukey", Letters = letters) %>% 
+  as.data.frame()
+
+# Añadir heredabilidad como un texto en el gráfico
+my_caption <- paste("Los puntos negros representan los datos brutos. Los puntos rojos y las barras de error representan medias ajustadas con límites de confianza del 95% por variedad. Las medias seguidas de una letra común no son significativamente diferentes según la prueba de Tukey.\nHeredabilidad: ", H2)
+
+# Crear el gráfico
+ggplot() +
+  aes(x = variety) +
+  # black dots representing the raw data
+  geom_point(
+    data = dat,
+    aes(y = yield)
+  ) +
+  # red dots representing the adjusted means
+  geom_point(
+    data = BLUEs,
+    aes(y = emmean),
+    color = "red",
+    position = position_nudge(x = 0.1)
+  ) +
+  # red error bars representing the confidence limits of the adjusted means
+  geom_errorbar(
+    data = BLUEs,
+    aes(ymin = lower.CL, ymax = upper.CL),
+    color = "red",
+    width = 0.1,
+    position = position_nudge(x = 0.1)
+  ) +
+  # red letters 
+  geom_text(
+    data = BLUEs,
+    aes(y = emmean, label = str_trim(.group)),
+    color = "red",
+    position = position_nudge(x = 0.2),
+    hjust = 0
+  ) +
+  scale_x_discrete(
+    name = "Variety"
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  theme_classic() +
+  labs(caption = my_caption) +
+  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
+        plot.caption.position = "plot")
+
+```
+
+Este código te permite visualizar las medias ajustadas junto con la heredabilidad calculada y los BLUEs.
+
+
+
+
+
+
+
+
+
+

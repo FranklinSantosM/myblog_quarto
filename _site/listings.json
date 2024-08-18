@@ -28,6 +28,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/conglomerados/index.html",
+      "/posts/dca/index.html",
       "/posts/row_column_design/index.html",
       "/posts/chile/index.html",
       "/posts/PB_AI/index.html",

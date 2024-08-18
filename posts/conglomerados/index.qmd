@@ -1,0 +1,261 @@
+---
+title: "Potato Diversity Analysis:A Step-by-Step Guide"
+description: |
+  Comprehensive approach to analyzing the genetic diversity of potato using various statistical and multivariate analysis methods in R.
+categories: [Diversity, multivariate, Plant Breeding]
+author:
+  - name: Franklin Santos
+    url: https://www.franklinsantosm.com
+    affiliation: Universidad Austral de Chile
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2024-07-28"
+image: fs.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+
+## Introduction
+
+In this article, we will delve into a comprehensive approach to analyzing the genetic diversity of potato using various statistical and multivariate analysis methods in R. The analysis encompasses techniques such as **k-means clustering**, **hierarchical clustering**, **DBSCAN**, and **Principal Component Analysis (PCA)**, supported by clear visualizations to facilitate the interpretation of results. This guide aims to provide a robust framework for researchers and practitioners working in the field of plant genetics and diversity analysis.
+
+## Data Loading and Preparation
+
+The first step in any analysis is to load and prepare the data. Here, we use R to read the data from an Excel file, select relevant columns, and scale the data. Scaling ensures that each variable contributes equally to the analysis, which is particularly important in clustering and PCA.
+
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(readxl)
+
+# Load the dataset from an Excel file
+df <- read_excel("/Users/franklin/Documents/R/myblog/posts/conglomerados/DATOS_R_JUAN JOSE.xlsx")
+head(df)
+
+# Column selection for the analysis (excluding TDS due to lack of variation)
+db <- df %>% 
+  select(2, 4, 15, 16, 19:21, 23:47)
+
+# Data preparation: remove non-numeric columns and scale the data
+sdf <- db %>% 
+  select(-2) %>% 
+  column_to_rownames("codigo_colecta")
+
+sdf <- scale(sdf)
+head(sdf)
+```
+
+## Clustering: K-means Method
+
+**K-means clustering** is a partitioning method that divides data into a predetermined number of clusters, minimizing the within-cluster variance. The following steps include determining the optimal number of clusters and performing the clustering analysis.
+
+### Determining the Optimal Number of Clusters
+
+Determining the optimal number of clusters is crucial for meaningful clustering. We employ several methods, including the **within-cluster sum of squares (WSS)**, **silhouette analysis**, and **Gap Statistic** to identify the most appropriate number of clusters for the dataset.
+
+```{r, warning=FALSE, message=FALSE}
+library(factoextra)
+
+# Compute distance matrix and visualize
+distance <- get_dist(sdf)
+fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))
+
+# Elbow method for WSS
+fviz_nbclust(sdf, kmeans, method = "wss")
+
+# Silhouette method
+fviz_nbclust(sdf, kmeans, method = "silhouette")
+
+# Gap Statistic
+library(cluster)
+set.seed(123)
+gap_stat <- clusGap(sdf, FUN = kmeans, nstart = 25, K.max = 10, B = 50)
+print(gap_stat, method = "firstmax")
+fviz_gap_stat(gap_stat)
+```
+
+The **WSS** method, often referred to as the "elbow method," helps to identify the point where the marginal gain in explanatory power diminishes significantly, indicating the optimal number of clusters. The **silhouette method** provides a measure of how similar an object is to its own cluster compared to other clusters. The **Gap Statistic** compares the total within intra-cluster variation for different numbers of clusters with their expected values under null reference distribution of the data.
+
+### Applying the K-means Algorithm
+
+After identifying the optimal number of clusters, we apply the k-means algorithm and visualize the clusters.
+
+```{r}
+set.seed(123)
+kmeans_resultados <- kmeans(sdf, centers = 4)  # Replace 4 with the optimal number of clusters
+
+# Visualization of clusters
+fviz_cluster(kmeans_resultados, data = sdf)
+```
+
+The results from k-means clustering provide insight into how the samples are grouped based on their genetic characteristics. Each cluster represents a group of samples that share similar traits, and the visualizations help in understanding the distribution of these clusters within the dataset.
+
+## Hierarchical Clustering
+
+**Hierarchical clustering** is another clustering technique that creates a hierarchy of clusters, which can be visualized as a tree or dendrogram. This method is particularly useful for visualizing the relationships between clusters and understanding the structure of the data.
+
+### Generating the Dendrogram
+
+We begin by calculating the distance matrix using the Euclidean distance and applying the hierarchical clustering algorithm using Ward’s method, which minimizes the variance within clusters.
+
+```{r, warning=FALSE, message=FALSE}
+library(dendextend)
+
+# Compute distance matrix
+distancias <- dist(sdf, method = "euclidean")
+
+# Perform hierarchical clustering
+res.hc <- hclust(d = distancias, method = "ward.D2")
+
+# Plot dendrogram
+plot(res.hc, cex = 0.6, hang = -1)
+
+# Cut the dendrogram to form clusters
+grupos <- cutree(res.hc, k = 4)  # Replace 4 with the desired number of clusters
+```
+
+The dendrogram allows us to visualize how the clusters are formed and how individual data points or groups of points merge as the level of clustering increases. By cutting the dendrogram at a particular height, we can extract a specific number of clusters that represent the underlying structure of the data.
+
+### Assessment and Visualization
+
+Different methods of hierarchical clustering can be compared to evaluate which method best captures the structure of the data. We then visualize the dendrogram with colored clusters for better interpretability.
+
+```{r}
+# Comparison of different linkage methods
+m <- c("average", "single", "complete", "ward")
+names(m) <- c("average", "single", "complete", "ward")
+
+ac <- function(x) {
+  agnes(sdf, method = x)$ac
+}
+
+map_dbl(m, ac)
+
+# Visualize dendrogram with colored clusters
+fviz_dend(res.hc, cex = 0.5, k = 4, 
+          rect = TRUE, 
+          k_colors = "jco", 
+          rect_border = "jco", 
+          rect_fill = TRUE)
+
+# Circular
+fviz_dend(res.hc, cex = 0.6, lwd = 0.7, k = 4,
+                 rect = TRUE,
+                 k_colors = "jco",
+                 rect_border = "jco",
+                 rect_fill = TRUE,
+                 type = "circular")
+```
+
+Here, we assess different linkage methods such as average, single, complete, and Ward’s method. The agglomerative coefficient (AC) is computed for each method, with higher values indicating a better fit. The final dendrogram is color-coded to represent the different clusters, providing a clear visual summary of the hierarchical structure.
+
+## Density-Based Clustering: DBSCAN
+
+**DBSCAN (Density-Based Spatial Clustering of Applications with Noise)** is a powerful clustering technique that identifies clusters based on density, allowing for the detection of outliers. Unlike k-means, DBSCAN does not require the number of clusters to be specified a priori, making it particularly useful for datasets with irregular cluster shapes.
+
+### Finding the Optimal Epsilon and Applying DBSCAN
+
+The epsilon parameter controls the neighborhood radius for density estimation. We begin by identifying an appropriate epsilon value through a k-NN distance plot.
+
+```{r, warning=FALSE, message=FALSE}
+library(dbscan)
+
+# Identify optimal epsilon using k-NN distance plot
+kNNdistplot(sdf, k = 5)
+abline(h = 0.5, col = "red")  # Adjust according to the plot
+
+# Apply DBSCAN algorithm
+dbscan_resultados <- dbscan(sdf, eps = 0.5, minPts = 5)
+
+# Visualize DBSCAN results
+fviz_cluster(dbscan_resultados, data = sdf)
+```
+
+The k-NN distance plot helps to identify a natural choice for epsilon by observing where the plot exhibits the most pronounced change in slope. The DBSCAN algorithm is then applied, and the results are visualized. Clusters are identified based on dense regions of points, with outliers being points that do not belong to any cluster.
+
+## Principal Component Analysis (PCA)
+
+**Principal Component Analysis (PCA)** is a dimensionality reduction technique that transforms the data into a set of orthogonal components, explaining the maximum variance with the fewest components. PCA is especially useful for visualizing high-dimensional data in two or three dimensions.
+
+### Performing PCA and Visualizing Results
+
+We perform PCA on the scaled data and visualize the results, focusing on the variance explained by each component and the relationship between variables and samples.
+
+```{r}
+# Perform PCA
+acp_resultados <- prcomp(sdf, center = TRUE, scale. = TRUE)
+
+# Summary of PCA results
+summary(acp_resultados)
+
+# Scree plot showing explained variance by each component
+fviz_eig(acp_resultados)
+
+# Plot of individuals in the space of the first two principal components
+fviz_pca_ind(acp_resultados, geom.ind = "point", pointshape = 21, pointsize = 2, fill.ind = "blue", col.ind = "black", repel = TRUE)
+
+# Plot of variables in the space of the first two principal components
+fviz_pca_var(acp_resultados, col.var = "contrib", gradient.cols = c("blue", "yellow", "red"), repel = TRUE)
+
+# Biplot showing both individuals and variables
+fviz_pca_biplot(acp_resultados, repel = TRUE)
+```
+
+The scree plot shows the proportion of variance explained by each principal component, aiding in the selection of the number of components to retain. The PCA biplots allow us to interpret the contribution of variables to the principal components and observe the distribution of samples along these components. This visualization is key to understanding the underlying structure of the data and the relationships between different genetic traits.
+
+## Multiple Factor Analysis (MFA)
+
+For datasets containing both quantitative and qualitative variables, **Multiple Factor Analysis (MFA)** is applied. MFA is an extension of PCA that can handle mixed data types and is particularly useful in genetics studies where both types of data are often present.
+
+### Performing MFA and Interpreting Results
+
+We perform MFA on the mixed dataset and visualize the results, focusing on the contributions of quantitative variables and the distribution of individuals across groups.
+
+```{r}
+# Convert character variables to factors
+df2 <-
+
+ db %>% 
+  column_to_rownames("codigo_colecta") %>% 
+  mutate_if(is.character, as.factor)
+
+library(FactoMineR)
+
+# Perform MFA
+res.famd <- FAMD(df2, graph = F)
+print(res.famd)
+
+# Scree plot showing the percentage of variance explained by each component
+fviz_screeplot(res.famd)
+
+# Plot showing the contribution of quantitative variables
+quanti.var <- get_famd_var(res.famd, "quanti.var")
+fviz_famd_var(res.famd, "quanti.var", repel = TRUE, col.var = "black")
+
+# Visualization of individuals by group with confidence ellipses
+fviz_mfa_ind(res.famd, 
+             habillage = "Departamento",
+             palette = c("#00AFBB", "#E7B800", "#FC4E07", "darkgreen"),
+             addEllipses = F, 
+             ellipse.type = "confidence", 
+             repel = TRUE,
+             label = "none"
+             )
+```
+
+The MFA analysis allows us to decompose the data into factors that explain the most variation, considering both types of variables. The scree plot helps determine how many factors to retain, while the visualizations provide insights into the contributions of individual variables and the grouping of samples based on both qualitative and quantitative characteristics.
+
+## Conclusion
+
+This workflow provides a comprehensive and detailed framework for conducting genetic diversity analysis in potato using various clustering and multivariate analysis techniques in R. By employing different methods, researchers can gain a deeper understanding of the genetic structure within their dataset, identify meaningful patterns of variation, and ultimately make informed decisions in breeding programs and conservation efforts. The choice of method depends on the specific nature of the data and the research objectives, whether it is to identify distinct genetic clusters, reduce data dimensionality, or both.
+
+
