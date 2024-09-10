@@ -28,6 +28,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/back-transformation/index.html",
       "/posts/conglomerados/index.html",
       "/posts/dca/index.html",
       "/posts/row_column_design/index.html",

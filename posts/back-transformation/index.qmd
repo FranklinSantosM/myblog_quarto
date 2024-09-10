@@ -1,0 +1,253 @@
+---
+title: "Back-transformations with emmeans() in R"
+description: |
+  Transformaciones inversas: Regresando a la escala original en el análisis de datos.
+categories: [R, Normalidad, Transformation]
+author:
+  - name: Franklin Santos
+    url: https://www.franklinsantosm.com
+    affiliation: Universidad Austral de Chile
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2024-08-06"
+image: fs.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+
+## Introducción 
+
+En el análisis de datos, especialmente en disciplinas como la estadística y el machine learning, es común aplicar transformaciones a los datos para mejorar la calidad de los análisis. Estas transformaciones ayudan a cumplir con supuestos estadísticos como la normalidad o la homogeneidad de varianzas, y a menudo permiten obtener modelos más robustos y precisos. Sin embargo, una vez que hemos realizado el análisis, surge la necesidad de interpretar los resultados en la escala original de los datos. Aquí es donde entran en juego las **transformaciones inversas**.
+
+Las transformaciones inversas son las operaciones matemáticas que revertimos para devolver los datos transformados a su forma original. Esto es crucial cuando queremos comunicar los hallazgos de manera que tengan sentido práctico y comprensible. Por ejemplo, si aplicamos una transformación logarítmica para estabilizar la varianza de un conjunto de datos, la transformación inversa —en este caso, la exponenciación— nos permite expresar los resultados en la misma escala en la que los datos fueron originalmente recolectados.
+
+Algunas de las transformaciones más comunes incluyen la logarítmica, la raíz cuadrada y la Box-Cox, cada una con su correspondiente transformación inversa. Estas técnicas son especialmente útiles en áreas como la biología, la economía y la ingeniería, donde los datos a menudo no cumplen con las distribuciones ideales para un análisis directo.
+
+## Tipos de transformación
+
+A continuación, te presento algunas de las transformaciones más comunes y sus inversas:
+
+### 1. **Transformación Logarítmica (log)**
+   - **Transformación**: Se utiliza para reducir la asimetría positiva o estabilizar la varianza cuando los datos tienen valores grandes.
+     - Fórmula: $y' = \log(y)$, generalmente en base natural ($\log_e$) o base 10.
+   - **Inversa**: La operación inversa es la exponenciación.
+     - Fórmula: $y = e^{y'}$ o $y = 10^{y'}$, dependiendo de la base logarítmica utilizada.
+
+### 2. **Transformación de Raíz Cuadrada**
+   - **Transformación**: Es útil cuando los datos tienen una distribución con una leve asimetría positiva o cuando se busca estabilizar la varianza.
+     - Fórmula: $y' = \sqrt{y}$
+   - **Inversa**: La inversa de esta transformación es elevar al cuadrado.
+     - Fórmula: $y = (y')^2$
+
+### 3. **Transformación Inversa (1/y)**
+   - **Transformación**: Se utiliza cuando los datos tienen una tendencia lineal negativa o para ajustar relaciones hiperbólicas.
+     - Fórmula: $y' = \frac{1}{y}$
+   - **Inversa**: La transformación inversa es la operación recíproca.
+     - Fórmula: $y = \frac{1}{y'}$
+
+### 4. **Transformación de Potencia (Box-Cox)**
+   - **Transformación**: Box-Cox es una familia de transformaciones que busca estabilizar la varianza y normalizar los datos. Se controla con un parámetro $\lambda$.
+     - Fórmula: $y' = \frac{y^\lambda - 1}{\lambda}$ (si $\lambda \neq 0$), o $y' = \log(y)$ (si $\lambda = 0$).
+   - **Inversa**: La inversa depende del valor de $\lambda$.
+     - Si $\lambda = 0$: $y = e^{y'}$
+     - Si $\lambda \neq 0$: $y = (y' \cdot \lambda + 1)^{1/\lambda}$
+
+### 5. **Transformación Logística**
+   - **Transformación**: Se utiliza en modelos de regresión logística, donde se transforma una probabilidad $p$ en el logit (logaritmo de las probabilidades).
+     - Fórmula: $y' = \log \left( \frac{p}{1-p} \right)$
+   - **Inversa**: La inversa se conoce como la función logística o sigmoide.
+     - Fórmula: $p = \frac{1}{1 + e^{-y'}}$
+
+### 6. **Transformación de Arcoseno (arcsin)**
+   - **Transformación**: Es usada comúnmente en proporciones o datos de frecuencia que están entre 0 y 1, para normalizarlos.
+     - Fórmula: $y' = \arcsin(\sqrt{y})$
+   - **Inversa**: La inversa es la función seno al cuadrado.
+     - Fórmula: $y = (\sin(y'))^2$
+
+### 7. **Transformación Log-Log**
+   - **Transformación**: Se utiliza cuando tanto la variable dependiente como la independiente están en una escala logarítmica.
+     - Fórmula: $y' = \log(y)$ y $x' = \log(x)$
+   - **Inversa**: La exponenciación de ambas variables devuelve a su escala original.
+     - Fórmula: $y = e^{y'}$, $x = e^{x'}$
+     
+## Back-transformations con emmeans()
+
+En el paquete `emmeans` de R, las **back-transformations** (transformaciones inversas) se utilizan para devolver las estimaciones de medias marginales de los efectos al espacio original de los datos después de que se haya aplicado una transformación en el modelo. Esto es útil cuando se ha ajustado un modelo con una transformación, como una transformación logarítmica o de raíz cuadrada, y deseas interpretar los resultados en la escala original de los datos.
+
+### ¿Cómo funciona?
+
+Cuando aplicas una transformación a los datos (por ejemplo, logaritmo), el modelo ajustado trabaja en la escala transformada, y por lo tanto, las estimaciones de medias marginales predichas estarán en esa misma escala. Sin embargo, `emmeans()` permite aplicar automáticamente la transformación inversa, devolviendo las medias estimadas a su escala original para una interpretación más fácil.
+
+El paquete `emmeans` detecta automáticamente si la transformación se usó en el modelo y aplica la transformación inversa al calcular los **Estimated Marginal Means** (EMMs). Esto se puede controlar utilizando el argumento `type = "response"` para realizar la transformación inversa al solicitar los EMMs.
+
+### Ejemplo de uso de `emmeans()` con back-transformations
+
+Supongamos que tienes un modelo lineal generalizado (GLM) con una transformación logarítmica aplicada a la variable de respuesta. A continuación te muestro cómo podrías aplicar una back-transformation usando `emmeans()`:
+
+#### Paso 1: Ajustar el modelo
+
+```r
+# Ejemplo de un GLM con transformación logarítmica
+modelo <- glm(y ~ tratamiento, family = gaussian(link = "log"), data = datos)
+```
+
+En este caso, `y` es la variable de respuesta transformada mediante un enlace logarítmico.
+
+#### Paso 2: Obtener los EMMs con la transformación inversa
+
+```r
+library(emmeans)
+
+# Obtener las medias marginales estimadas (EMMs) y aplicar back-transformation
+em_means <- emmeans(modelo, ~ tratamiento, type = "response")
+```
+
+- El argumento `type = "response"` le indica a `emmeans()` que aplique la transformación inversa (en este caso, exponenciación, ya que se usó una transformación logarítmica).
+- Si no se especifica `type = "response"`, `emmeans()` devolvería las estimaciones en la escala transformada (logarítmica en este caso).
+
+#### Paso 3: Interpretar los resultados
+
+```r
+# Mostrar los resultados back-transformados
+summary(em_means)
+```
+
+Esto te mostrará las estimaciones en la escala original de los datos, lo cual es más fácil de interpretar en términos del contexto del problema. Además, los intervalos de confianza también serán transformados inversamente.
+
+### Ejemplo con Transformación de Raíz Cuadrada
+
+Si usas una transformación de raíz cuadrada en lugar de logarítmica, la back-transformation consistirá en elevar al cuadrado los resultados.
+
+#### Paso 1: Ajustar el modelo
+
+```r
+modelo_sqrt <- lm(sqrt(y) ~ tratamiento, data = datos)
+```
+
+#### Paso 2: Obtener las medias marginales estimadas con la transformación inversa
+
+```r
+# Obtener las medias marginales estimadas con back-transformation (cuadrado)
+em_means_sqrt <- emmeans(modelo_sqrt, ~ tratamiento, type = "response")
+```
+
+En este caso, `emmeans()` elevará las medias estimadas al cuadrado para devolverlas a la escala original.
+
+#### Paso 3: Ver los resultados
+
+```r
+summary(em_means_sqrt)
+```
+
+Cuando usas el paquete `emmeans()` en R, puedes realizar back-transformations fácilmente con el argumento `type = "response"`. Este enfoque es útil cuando has ajustado un modelo con una transformación en la variable de respuesta y deseas interpretar las medias estimadas en la escala original de los datos.
+
+## Ejercicio practico
+
+```{r}
+library(emmeans)
+fileName <- "http://www.casaonofri.it/_datasets/insects.csv"
+dataset <- read.csv(fileName)
+dataset$Insecticide <- as.factor(dataset$Insecticide)
+dataset$Count <- as.numeric(dataset$Count)
+head(dataset)
+```
+
+```{r}
+model <- lm(log(Count) ~ Insecticide, data = dataset)
+emmeans(model, ~Insecticide, type = "response")
+```
+
+Desafortunadamente, no todas las transformaciones son autodetectadas; por ejemplo, consideremos el conjunto de datos 'Hours_to_failure.csv', donde tenemos el tiempo hasta el fallo (en horas) de un dispositivo, afectado por la temperatura de funcionamiento. Si consideramos la temperatura como un factor, podemos ajustar un modelo ANOVA; una comprobación con la función `boxcox()` del paquete `MASS` sugiere que este conjunto de datos podría requerir una transformación estabilizadora en el valor inverso.
+
+
+
+```{r}
+library(MASS)
+library(emmeans)
+fileName <- "http://www.casaonofri.it/_datasets/Hours_to_failure.csv"
+dataset <- read.csv(fileName)
+dataset$Temp <- factor(dataset$Temp)
+head(dataset)
+```
+```{r}
+model <- lm(Hours_to_failure ~ Temp, data = dataset)
+tp <- boxcox(model)
+```
+
+```{r}
+plot(model)
+```
+
+
+Como vemos a continuación, la transformación inversa no se detecta automáticamente.
+
+```{r}
+model2 <- lm(I(1/Hours_to_failure) ~ Temp, data = dataset)
+emmeans(model2, ~ Temp, type = "response")
+```
+
+
+En esta situación, hay que utilizar un enfoque alternativo. La transformación puede realizarse antes de ajustar el modelo; a continuación, tenemos que actualizar la «rejilla de referencia» del modelo, especificando qué tipo de transformación hemos realizado (`tran = "inverse"`). Por último, podemos pasar la rejilla actualizada a la función `emmeans()`. Y... ¡la transformación inversa está servida!
+
+```{r}
+dataset$invHours <- 1/dataset$Hours_to_failure
+model3 <- lm(invHours ~ Temp, data = dataset)
+updGrid <- update(ref_grid(model3), tran = "inverse")
+emmeans(updGrid, ~Temp, type = "response")
+```
+
+```{r}
+plot(model3)
+```
+
+A veces, necesito un extra de flexibilidad. Por ejemplo, si nos fijamos en el gráfico 'boxcox' anterior, vemos que la transformación inversa, aunque aceptable (el valor $-1$ está dentro de los límites de confianza para ($\lambda$) no es la mejor. De hecho, el valor de máxima verosimilitud es -0,62:
+
+```{r}
+tp$x[which.max(tp$y)]
+```
+
+Por lo tanto, podríamos utilizar la siguiente transformación, que está dentro de la familia 'boxcox':
+
+$$
+W = \frac{Y^{-0,62} - 1}{-0,62}
+$$
+
+Este tipo de transformación no es manejable con el código anterior y necesitamos utilizar la función `make.tran()`, especificando el valor de $\lambda$ (`alpha = -0.62`) y el valor del parámetro desplazamiento (`beta = 1`).
+
+
+```{r}
+dataset$bcHours <- (dataset$Hours_to_failure^(-0.62) - 1)/(-0.62)
+model4 <- lm(bcHours ~ Temp, data = dataset)
+updGrid <- update(ref_grid(model4), 
+                  tran = make.tran("boxcox", alpha = -0.62,
+                                   beta = 1))
+emmeans(updGrid, ~Temp, type = "response")
+
+```
+
+```{r}
+plot(model4)
+```
+
+
+
+La función `make.tran()` puede utilizarse para especificar otras funciones de transformación, como la transformación angular que se utiliza a menudo para porcentajes y proporciones. Puede obtener una lista completa buscando en help (`?make.tran`) desde dentro de R.
+
+## Conclusión 
+
+Las transformaciones estabilizadoras, a pesar de su antigüedad, pueden seguir siendo útiles para ajustar modelos heteroscedásticos; ¡no las infravalore sólo porque ya no estén de moda!
+
+
+
+
+
+
