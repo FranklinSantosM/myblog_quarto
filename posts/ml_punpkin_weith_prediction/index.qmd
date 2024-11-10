@@ -245,3 +245,6 @@ Los términos spline son, con mucho, los más importantes, pero se observan indi
 ### Conclusión
 
 El análisis predictivo de peso de calabazas gigantes usando `tidymodels` permite una comparación robusta de múltiples modelos y una visualización clara del desempeño. Este flujo de trabajo facilita tanto la elección del modelo adecuado como la interpretación de los factores que afectan la variable de respuesta. ¡Explorar estos modelos en sus propios datos puede ser un ejercicio valioso para mejorar la comprensión de las herramientas de `tidymodels`!
+
+
+Fuente: Julia Silge

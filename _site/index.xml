@@ -786,6 +786,7 @@ font-style: inherit;">abs</span>(estimate))</span></code></pre></div>
 <section id="conclusión" class="level3">
 <h3 class="anchored" data-anchor-id="conclusión">Conclusión</h3>
 <p>El análisis predictivo de peso de calabazas gigantes usando <code>tidymodels</code> permite una comparación robusta de múltiples modelos y una visualización clara del desempeño. Este flujo de trabajo facilita tanto la elección del modelo adecuado como la interpretación de los factores que afectan la variable de respuesta. ¡Explorar estos modelos en sus propios datos puede ser un ejercicio valioso para mejorar la comprensión de las herramientas de <code>tidymodels</code>!</p>
+<p>Fuente: Julia Silge</p>
 
 
 </section>
