@@ -28,6 +28,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/ml_punpkin_weith_prediction/index.html",
       "/posts/back-transformation/index.html",
       "/posts/conglomerados/index.html",
       "/posts/dca/index.html",

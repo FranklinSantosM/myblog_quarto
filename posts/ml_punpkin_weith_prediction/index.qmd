@@ -1,0 +1,247 @@
+---
+title: "Análisis predictivo usando tidymodels"
+description: |
+  Cómo utilizar tidymodels para construir y evaluar modelos predictivos que estimen el peso de calabazas gigantes.
+categories: [AI, Machine Learning, Model]
+author:
+  - name: Franklin Santos
+    url: https://www.franklinsantosm.com
+    affiliation: Universidad Austral de Chile
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2024-09-29"
+image: fs.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+## Introducción
+
+En este post, exploraremos cómo utilizar `tidymodels` para construir y evaluar modelos predictivos que estimen el peso de calabazas gigantes. Además, agregaremos visualizaciones clave para analizar la correlación entre variables predictoras, el desempeño del modelo en validación cruzada, y la precisión de las predicciones.
+
+### Carga y Preparación de Datos
+
+Primero, cargamos los datos y seleccionamos las variables de interés, asegurándonos de que estén limpias y en un formato adecuado para el modelado.
+
+```{r, message=FALSE, warning=FALSE}
+# Cargar librerías
+library(tidymodels)
+library(tidyverse)
+```
+
+
+```{r}
+# Cargar y preparar datos
+pumpkins_raw <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-19/pumpkins.csv")
+
+pumpkins <-
+  pumpkins_raw %>%
+  separate(id, into = c("year", "type")) %>%
+  mutate(across(c(year, weight_lbs, ott, place), parse_number)) %>%
+  filter(type == "P") %>%
+  select(weight_lbs, year, place, ott, gpc_site, country)
+
+pumpkins
+```
+
+
+
+
+
+```{r}
+# Dividir datos en conjunto de entrenamiento y prueba
+set.seed(123)
+data_split <- initial_split(pumpkins, prop = 0.8)
+pumpkin_train <- training(data_split)
+pumpkin_test <- testing(data_split)
+```
+
+
+### Análisis Exploratorio
+
+La relación principal aquí es entre el volumen/tamaño de la calabaza y el peso.
+
+```{r}
+pumpkins %>%
+  filter(ott > 20, ott < 1e3) %>%
+  ggplot(aes(ott, weight_lbs, color = place)) +
+  geom_point(alpha = 0.2, size = 1.1) +
+  labs(x = "over-the-top inches", y = "weight (lbs)") +
+  scale_color_viridis_c()
+```
+
+  >Las calabazas grandes y pesadas se colocaban más cerca de ganar en los concursos, ¡naturalmente!
+
+¿Se ha producido algún cambio en esta relación con el paso del tiempo?
+
+
+```{r}
+pumpkins %>%
+  filter(ott > 20, ott < 1e3) %>%
+  ggplot(aes(ott, weight_lbs)) +
+  geom_point(alpha = 0.2, size = 1.1, color = "gray60") +
+  geom_smooth(aes(color = factor(year)),
+    method = lm, formula = y ~ splines::bs(x, 3),
+    se = FALSE, size = 1.5, alpha = 0.6
+  ) +
+  labs(x = "over-the-top inches", y = "weight (lbs)", color = NULL) +
+  scale_color_viridis_d()
+```
+
+  >Creo que es difícil de decir.
+
+
+¿Qué países producían calabazas más o menos grandes?
+
+
+```{r}
+pumpkins %>%
+  mutate(
+    country = fct_lump(country, n = 10),
+    country = fct_reorder(country, weight_lbs)
+  ) %>%
+  ggplot(aes(country, weight_lbs, color = country)) +
+  geom_boxplot(outlier.colour = NA) +
+  geom_jitter(alpha = 0.1, width = 0.15) +
+  labs(x = NULL, y = "weight (lbs)") +
+  theme(legend.position = "none")
+```
+
+### Construir y ajustar un conjunto de flujo de trabajo
+
+Empecemos nuestro modelado estableciendo nuestro «presupuesto de datos». Estratificaremos por nuestro resultado `weight_lbs`
+
+
+```{r}
+set.seed(123)
+pumpkin_split <- pumpkins %>%
+  filter(ott > 20, ott < 1e3) %>%
+  initial_split(strata = weight_lbs)
+
+pumpkin_train <- training(pumpkin_split)
+pumpkin_test <- testing(pumpkin_split)
+
+set.seed(234)
+pumpkin_folds <- vfold_cv(pumpkin_train, strata = weight_lbs)
+pumpkin_folds
+```
+
+A continuación, vamos a crear tres recetas de preprocesamiento de datos: una que sólo agrupa los niveles de los factores utilizados con poca frecuencia, otra que también crea variables indicadoras y, por último, otra que también crea términos spline para las pulgadas de más.
+
+
+```{r}
+base_rec <-
+  recipe(weight_lbs ~ ott + year + country + gpc_site,
+    data = pumpkin_train
+  ) %>%
+  step_other(country, gpc_site, threshold = 0.02)
+
+ind_rec <-
+  base_rec %>%
+  step_dummy(all_nominal_predictors())
+
+spline_rec <-
+  ind_rec %>%
+  step_bs(ott)
+```
+
+
+A continuación, vamos a crear tres especificaciones de modelo: un modelo de random forest, un modelo MARS y un modelo lineal.
+
+```{r}
+rf_spec <-
+  rand_forest(trees = 1e3) %>%
+  set_mode("regression") %>%
+  set_engine("ranger")
+
+mars_spec <-
+  mars() %>%
+  set_mode("regression") %>%
+  set_engine("earth")
+
+lm_spec <- linear_reg()
+```
+
+Ahora es el momento de juntar el preprocesamiento y los modelos en un `workflow_set()`.
+
+```{r}
+pumpkin_set <-
+  workflow_set(
+    list(base_rec, ind_rec, spline_rec),
+    list(rf_spec, mars_spec, lm_spec),
+    cross = FALSE
+  )
+
+pumpkin_set
+```
+
+Utilizamos `cross = FALSE` porque no queremos todas las combinaciones de estos componentes, sólo tres opciones para probar. Vamos a ajustar estos posibles candidatos a nuestras remuestreos para ver cuál de ellos funciona mejor.
+
+
+### Entrenamiento y Selección del Mejor Modelo
+
+Usamos `workflow_map` para evaluar los modelos en cada pliegue de validación cruzada y extraemos el mejor modelo según la raíz del error cuadrático medio (RMSE).
+
+```{r}
+#doParallel::registerDoParallel()
+set.seed(2021)
+
+pumpkin_rs <-
+  workflow_map(
+    pumpkin_set,
+    "fit_resamples",
+    resamples = pumpkin_folds
+  )
+
+pumpkin_rs
+
+```
+
+
+
+### Evaluar el conjunto de flujos de trabajo
+
+How did our three candidates do?
+
+```{r}
+autoplot(pumpkin_rs)
+```
+
+No hay mucha diferencia entre las tres opciones, y si acaso, nuestro modelo lineal con ingeniería de rasgos spline quizás lo hizo mejor. ¡Esto es bueno porque es un modelo más simple!
+
+
+```{r}
+collect_metrics(pumpkin_rs)
+```
+
+Podemos extraer el flujo de trabajo que queremos utilizar y ajustarlo a nuestros datos de entrenamiento.
+
+
+```{r}
+final_fit <-
+  extract_workflow(pumpkin_rs, "recipe_3_linear_reg") %>%
+  fit(pumpkin_train)
+```
+
+
+Podemos utilizar un objeto como este para predecir, por ejemplo en los datos de prueba como `predict(final_fit, pumpkin_test)`, o podemos examinar los parámetros del modelo.
+
+```{r}
+tidy(final_fit) %>%
+  arrange(-abs(estimate))
+```
+
+Los términos spline son, con mucho, los más importantes, pero se observan indicios de que determinados lugares y países predicen el peso (ya sea hacia arriba o hacia abajo), así como una pequeña tendencia de calabazas más pesadas con el año.
+
+
+### Conclusión
+
+El análisis predictivo de peso de calabazas gigantes usando `tidymodels` permite una comparación robusta de múltiples modelos y una visualización clara del desempeño. Este flujo de trabajo facilita tanto la elección del modelo adecuado como la interpretación de los factores que afectan la variable de respuesta. ¡Explorar estos modelos en sus propios datos puede ser un ejercicio valioso para mejorar la comprensión de las herramientas de `tidymodels`!
