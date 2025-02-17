@@ -1,0 +1,30 @@
+---
+title: "ANOVA - Medidas repetidas"
+description: |
+  Medidas repetidas en un analisis de varianza.
+categories: [R, Normalidad, Transformation]
+author:
+  - name: Franklin Santos
+    url: https://www.franklinsantosm.com
+    affiliation: Universidad Austral de Chile
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2025-01-06"
+image: fs.png
+citation: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+
+## Introducción 
+
+
+
