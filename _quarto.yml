@@ -3,9 +3,15 @@ project:
 
 website:
   title: "Franklin Santos"
-  site-url: https://franklinsantosm.com
-  description: "Data Scientis"
+  site-url: https://franklinsantos.com
+  description: "Data scientist for plant breeding and agronomy | Bioinformatic"
+  
+  open-graph: true
+    
+  favicon: logo.png
+    
   navbar:
+    search: true
     right:
       - text: "About"
         href: about.html
@@ -21,18 +27,31 @@ website:
         href: https://scholar.google.com/citations?hl=en&user=e0Tt_lAAAAAJ
       - icon: github
         href: https://github.com/FranklinSantosM
-      - icon: twitter
-        href: https://twitter.com/FranklinSantosM
+      - icon: linkedin
+        href: https://www.linkedin.com/in/franklinsantosm/
       - icon: rss
         href: index.xml
+  
+  page-footer: 
+    left: "© 2026 Franklin Santos"
+    right: 
+      - icon: github
+        href: https://github.com/FranklinSantosM
+      - icon: linkedin
+        href: https://www.linkedin.com/in/franklinsantosm/
+      
 format:
   html:
     theme: 
       light: flatly
       dark: darkly
     css: styles.css
+    toc: true
+    code-copy: true
+
 rss:
   full_content: true
+
 collections:
   posts:
     share: [twitter, facebook, linkedin]
