@@ -1,16 +1,16 @@
 ---
 title: "ANOVA - Medidas repetidas"
 description: |
-  Medidas repetidas en un analisis de varianza.
-categories: [R, Normalidad, Transformation]
+  El ANOVA de medidas repetidas se utiliza cuando realizas múltiples observaciones sobre la **misma unidad experimental** (la misma planta, la misma parcela, el mismo fruto).
+categories: [R, ANOVA, Repeated Measures]
 author:
   - name: Franklin Santos
-    url: https://www.franklinsantosm.com
+    url: https://www.franklinsantos.com
     affiliation: Universidad Austral de Chile
     orcid: 0000-0002-7509-2910
     email: franklin25santos@gmail.com
 date: "2025-01-06"
-image: fs.png
+image: plot.png
 citation: true
 editor_options: 
   chunk_output_type: console

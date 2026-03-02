@@ -312,11 +312,11 @@ Santos, Franklin. 2025. <span>“ANOVA - Medidas Repetidas.”</span>
 January 6, 2025. <a href="https://franklinsantos.com/posts/anova_repeated/">https://franklinsantos.com/posts/anova_repeated/</a>.
 </div></div></section></div> ]]></description>
   <category>R</category>
-  <category>Normalidad</category>
-  <category>Transformation</category>
+  <category>ANOVA</category>
+  <category>Repeated Measures</category>
   <guid>https://franklinsantos.com/posts/anova_repeated/</guid>
   <pubDate>Mon, 06 Jan 2025 04:00:00 GMT</pubDate>
-  <media:content url="https://franklinsantos.com/posts/anova_repeated/fs.png" medium="image" type="image/png"/>
+  <media:content url="https://franklinsantos.com/posts/anova_repeated/plot.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>Análisis predictivo usando tidymodels</title>
