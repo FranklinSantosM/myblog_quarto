@@ -23,41 +23,41 @@ about:
       href: https://www.facebook.com/franklinsantosm
 ---
 
-
 ::: {style="text-align: justify"}
-
 ## **Biography**
 
-**Franklin Santos** is a Plant Sciences scholar at the **Austral University of Chile**, specializing in the intersection of **quantitative genetics** and **crop physiology**. 
+**Franklin Santos** is a Plant Sciences scholar at the **Austral University of Chile**, specializing in the intersection of **quantitative genetics** and **crop physiology**.
 
 Affiliated with the **GEM (Genotype x Environment x Management)** lab, his current research focuses on developing **hybrid predictive frameworks** that combine **APSIM simulation** with **Genomic Selection** models. His objective is to improve the accuracy of phenological predictions under diverse environmental scenarios, providing data-driven insights for breeding programs and climate resilience in modern agriculture.
 
 ## **Education**
 
-* **Plant Sciences, M.Sc.** | 2026
-    * Austral University of Chile (UACh)
-* **Agronomist Engineer, B.Sc.** | 2017
-    * El Alto Public University (UPEA)
-* **Data Science Specialization** | 2020
-    * Johns Hopkins University | [Verify](http://coursera.org/verify/specialization/RYJW3XRY9FYD)
-* **Statistics with R** | 2020
-    * Duke University | [Verify](http://coursera.org/verify/specialization/S4SMJQVSK3FV)
-* **Animal Breeding and Genetics** | 2020
-    * Wageningen University & Research | [Verify](https://credentials.edx.org/credentials/4988fa30ecac452593dfd51f9a0ab994/)
+-   **Plant Sciences, M.Sc.** \| 2026
+    -   Austral University of Chile (UACh)
+-   **Agronomist Engineer, B.Sc.** \| 2017
+    -   El Alto Public University (UPEA)
+-   **Data Science Specialization** \| 2020
+    -   Johns Hopkins University \| [Verify](http://coursera.org/verify/specialization/RYJW3XRY9FYD)
+-   **Statistics with R** \| 2020
+    -   Duke University \| [Verify](http://coursera.org/verify/specialization/S4SMJQVSK3FV)
+-   **Animal Breeding and Genetics** \| 2020
+    -   Wageningen University & Research \| [Verify](https://credentials.edx.org/credentials/4988fa30ecac452593dfd51f9a0ab994/)
 
 ## **Experience**
 
-* **INIAF** | Research and Technology Generation Professional | Feb 2023 - Dec 2023
-* **INIAF** | Technical Extensionist | May 2022 - Dec 2022
-* **INIAF** | Research Technician | Jan 2018 - June 2020
-* **GAM-Licoma** | Director of Agricultural Development | June 2016 - Dec 2017
-* **INE** | Municipal Census Chief | Aug 2013 - Nov 2013
+-   **INIAF** \| Research and Technology Generation Professional \| Feb 2023 - Dec 2023
+-   **INIAF** \| Technical Extensionist \| May 2022 - Dec 2022
+-   **INIAF** \| Research Technician \| Jan 2018 - June 2020
+-   **GAM-Licoma** \| Director of Agricultural Development \| June 2016 - Dec 2017
+-   **INE** \| Municipal Census Chief \| Aug 2013 - Nov 2013
 
 ## **Interests**
 
-* **GxExM Modeling**
-* **Flowering Time Prediction**
-* **Data Science & Machine Learning**
-* **R Programming & Reproducible Research**
-
+- **QTL & Genomics** (GWAS & Genomic prediction)
+- **Bioinformatic**  
+- **GxExM Modeling** (APSIM-NG)
+- **Experimental Design** (RCBD, Row-Column, Alpha Lattice)
+- **Flowering Time Prediction**
+- **Data Science & Machine Learning**
+- **R Programming & Reproducible Research**
 :::
