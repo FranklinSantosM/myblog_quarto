@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -77,6 +112,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="ANOVA - Medidas repetidas – Franklin Santos">
@@ -369,6 +433,18 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#qué-es-y-por-qué-debería-importarte" id="toc-qué-es-y-por-qué-debería-importarte" class="nav-link" data-scroll-target="#qué-es-y-por-qué-debería-importarte">¿Qué es y por qué debería importarte?</a>
+  <ul class="collapse">
+  <li><a href="#la-anatomía-del-modelo" id="toc-la-anatomía-del-modelo" class="nav-link" data-scroll-target="#la-anatomía-del-modelo">La anatomía del modelo</a></li>
+  </ul></li>
+  <li><a href="#el-coco-de-las-medidas-repetidas-la-esfericidad" id="toc-el-coco-de-las-medidas-repetidas-la-esfericidad" class="nav-link" data-scroll-target="#el-coco-de-las-medidas-repetidas-la-esfericidad">El “coco” de las medidas repetidas: La Esfericidad</a></li>
+  <li><a href="#implementación-en-r-caso-práctico" id="toc-implementación-en-r-caso-práctico" class="nav-link" data-scroll-target="#implementación-en-r-caso-práctico">Implementación en R: Caso Práctico</a>
+  <ul class="collapse">
+  <li><a href="#preparación-de-datos" id="toc-preparación-de-datos" class="nav-link" data-scroll-target="#preparación-de-datos">1. Preparación de datos</a></li>
+  <li><a href="#visualización-de-la-interacción" id="toc-visualización-de-la-interacción" class="nav-link" data-scroll-target="#visualización-de-la-interacción">2. Visualización de la Interacción</a></li>
+  <li><a href="#análisis-estadístico" id="toc-análisis-estadístico" class="nav-link" data-scroll-target="#análisis-estadístico">3. Análisis Estadístico</a></li>
+  </ul></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a></li>
   </ul>
 </nav>
     </div>
@@ -386,6 +462,126 @@ text-align: justify}
 </style>
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>En el mundo del <strong>fitomejoramiento</strong> y la <strong>agronomía</strong>, el tiempo no es solo una variable; es el escenario donde ocurre la magia (y el estrés). Si estás midiendo la altura de la misma planta de maíz cada semana, o evaluando la severidad de una enfermedad en el mismo lote durante un mes, no puedes usar un ANOVA convencional.</p>
+<p><strong>¿Por qué?</strong> Porque tus datos están “emparentados”. Aquí es donde entra el <strong>ANOVA de Medidas Repetidas (RM-ANOVA)</strong>.</p>
+<hr>
+</section>
+<section id="qué-es-y-por-qué-debería-importarte" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-y-por-qué-debería-importarte">¿Qué es y por qué debería importarte?</h2>
+<p>A diferencia del ANOVA de una vía, donde comparas grupos independientes, el ANOVA de medidas repetidas se utiliza cuando realizas múltiples observaciones sobre la <strong>misma unidad experimental</strong> (la misma planta, la misma parcela, el mismo fruto).</p>
+<p>En estadística, decimos que las mediciones están correlacionadas. Si una planta de soja es genéticamente vigorosa en la semana 1, es muy probable que siga siendo vigorosa en la semana 2. Ignorar esta correlación es un pecado capital en la ciencia de datos agrícolas, ya que estarías desperdiciando información valiosa y aumentando el error experimental.</p>
+<section id="la-anatomía-del-modelo" class="level3">
+<h3 class="anchored" data-anchor-id="la-anatomía-del-modelo">La anatomía del modelo</h3>
+<p>En un diseño de medidas repetidas, el modelo lineal se descompone de una manera especial para separar la variabilidad individual de la variabilidad del tratamiento:</p>
+<p><span class="math display">\[Y_{ij} = \mu + \pi_i + \tau_j + \epsilon_{ij}\]</span></p>
+<p>Donde:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span>: Media general.</li>
+<li><span class="math inline">\(\pi_i\)</span>: El efecto del <strong>sujeto</strong> (tu planta o parcela), tratado como factor aleatorio.</li>
+<li><span class="math inline">\(\tau_j\)</span>: El efecto del <strong>tiempo</strong> o tratamiento (factor intra-sujeto).</li>
+<li><span class="math inline">\(\epsilon_{ij}\)</span>: El error residual.</li>
+</ul>
+<p><strong>La ventaja competitiva:</strong> Al extraer la variabilidad “entre plantas” (<span class="math inline">\(\pi_i\)</span>), el RM-ANOVA es mucho más sensible para detectar diferencias pequeñas en los tratamientos. Es como limpiar el ruido de fondo para escuchar mejor la señal.</p>
+<hr>
+</section>
+</section>
+<section id="el-coco-de-las-medidas-repetidas-la-esfericidad" class="level2">
+<h2 class="anchored" data-anchor-id="el-coco-de-las-medidas-repetidas-la-esfericidad">El “coco” de las medidas repetidas: La Esfericidad</h2>
+<p>Si el ANOVA tiene la homogeneidad de varianzas, el RM-ANOVA tiene la <strong>Esfericidad</strong>. Para que los resultados sean válidos, las varianzas de las diferencias entre todos los pares posibles de medidas repetidas deben ser iguales.</p>
+<blockquote class="blockquote">
+<p><strong>Tip Pro:</strong> Si tu prueba de Mauchly dice que no hay esfericidad, usa las correcciones de <strong>Greenhouse-Geisser</strong> o <strong>Huynh-Feldt</strong>. Son el “seguro de vida” de tu análisis.</p>
+</blockquote>
+<hr>
+</section>
+<section id="implementación-en-r-caso-práctico" class="level2">
+<h2 class="anchored" data-anchor-id="implementación-en-r-caso-práctico">Implementación en R: Caso Práctico</h2>
+<p>Imagina que probamos 2 fertilizantes y medimos el <strong>Índice de Área Foliar (IAF)</strong> en 3 momentos clave.</p>
+<section id="preparación-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="preparación-de-datos">1. Preparación de datos</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'rstatix'
+
+The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>datos_agronomia <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fertilizante =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Nitrogenado"</span>, <span class="st">"Organico"</span>), <span class="at">each =</span> <span class="dv">15</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tiempo =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"T1_Inicio"</span>, <span class="st">"T2_Floracion"</span>, <span class="st">"T3_Llenado"</span>), <span class="dv">10</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">iaf =</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="dv">15</span>, <span class="fl">1.2</span>, <span class="fl">2.5</span>), <span class="fu">runif</span>(<span class="dv">15</span>, <span class="fl">1.5</span>, <span class="fl">4.0</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>datos_agronomia<span class="sc">$</span>tiempo <span class="ot">&lt;-</span> <span class="fu">factor</span>(datos_agronomia<span class="sc">$</span>tiempo, </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"T1_Inicio"</span>, <span class="st">"T2_Floracion"</span>, <span class="st">"T3_Llenado"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualización-de-la-interacción" class="level3">
+<h3 class="anchored" data-anchor-id="visualización-de-la-interacción">2. Visualización de la Interacción</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggline</span>(datos_agronomia, <span class="at">x =</span> <span class="st">"tiempo"</span>, <span class="at">y =</span> <span class="st">"iaf"</span>, <span class="at">color =</span> <span class="st">"fertilizante"</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">add =</span> <span class="fu">c</span>(<span class="st">"mean_se"</span>, <span class="st">"dotplot"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">palette =</span> <span class="st">"jco"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Evolución del IAF por Tratamiento"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Etapa Fenológica"</span>, <span class="at">ylab =</span> <span class="st">"IAF (m²/m²)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bin width defaults to 1/30 of the range of the data. Pick better value with
+`binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="análisis-estadístico" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-estadístico">3. Análisis Estadístico</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>res.aov <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> datos_agronomia, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dv =</span> iaf, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">wid =</span> id, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">within =</span> tiempo, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">between =</span> fertilizante</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">get_anova_table</span>(res.aov)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ANOVA Table (type II tests)
+
+               Effect  DFn  DFd      F     p p&lt;.05   ges
+1        fertilizante 1.00 8.00 19.780 0.002     * 0.462
+2              tiempo 1.24 9.92  1.190 0.316       0.089
+3 fertilizante:tiempo 1.24 9.92  0.677 0.461       0.052</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
+<p>El ANOVA de medidas repetidas es una herramienta quirúrgica para el agrónomo moderno. Te permite entender no solo qué tratamiento fue mejor, sino cuándo empezó a serlo. Deja de tratar tus datos como si fueran fotos aisladas y empieza a ver la película completa.</p>
 
 
 </section>

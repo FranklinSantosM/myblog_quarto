@@ -28,6 +28,274 @@ text-align: justify}
 </style>
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>En el mundo del <strong>fitomejoramiento</strong> y la <strong>agronomía</strong>, el tiempo no es solo una variable; es el escenario donde ocurre la magia (y el estrés). Si estás midiendo la altura de la misma planta de maíz cada semana, o evaluando la severidad de una enfermedad en el mismo lote durante un mes, no puedes usar un ANOVA convencional.</p>
+<p><strong>¿Por qué?</strong> Porque tus datos están “emparentados”. Aquí es donde entra el <strong>ANOVA de Medidas Repetidas (RM-ANOVA)</strong>.</p>
+<hr>
+</section>
+<section id="qué-es-y-por-qué-debería-importarte" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-y-por-qué-debería-importarte">¿Qué es y por qué debería importarte?</h2>
+<p>A diferencia del ANOVA de una vía, donde comparas grupos independientes, el ANOVA de medidas repetidas se utiliza cuando realizas múltiples observaciones sobre la <strong>misma unidad experimental</strong> (la misma planta, la misma parcela, el mismo fruto).</p>
+<p>En estadística, decimos que las mediciones están correlacionadas. Si una planta de soja es genéticamente vigorosa en la semana 1, es muy probable que siga siendo vigorosa en la semana 2. Ignorar esta correlación es un pecado capital en la ciencia de datos agrícolas, ya que estarías desperdiciando información valiosa y aumentando el error experimental.</p>
+<section id="la-anatomía-del-modelo" class="level3">
+<h3 class="anchored" data-anchor-id="la-anatomía-del-modelo">La anatomía del modelo</h3>
+<p>En un diseño de medidas repetidas, el modelo lineal se descompone de una manera especial para separar la variabilidad individual de la variabilidad del tratamiento:</p>
+<p><img src="https://latex.codecogs.com/png.latex?Y_%7Bij%7D%20=%20%5Cmu%20+%20%5Cpi_i%20+%20%5Ctau_j%20+%20%5Cepsilon_%7Bij%7D"></p>
+<p>Donde:</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmu">: Media general.</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cpi_i">: El efecto del <strong>sujeto</strong> (tu planta o parcela), tratado como factor aleatorio.</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Ctau_j">: El efecto del <strong>tiempo</strong> o tratamiento (factor intra-sujeto).</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cepsilon_%7Bij%7D">: El error residual.</li>
+</ul>
+<p><strong>La ventaja competitiva:</strong> Al extraer la variabilidad “entre plantas” (<img src="https://latex.codecogs.com/png.latex?%5Cpi_i">), el RM-ANOVA es mucho más sensible para detectar diferencias pequeñas en los tratamientos. Es como limpiar el ruido de fondo para escuchar mejor la señal.</p>
+<hr>
+</section>
+</section>
+<section id="el-coco-de-las-medidas-repetidas-la-esfericidad" class="level2">
+<h2 class="anchored" data-anchor-id="el-coco-de-las-medidas-repetidas-la-esfericidad">El “coco” de las medidas repetidas: La Esfericidad</h2>
+<p>Si el ANOVA tiene la homogeneidad de varianzas, el RM-ANOVA tiene la <strong>Esfericidad</strong>. Para que los resultados sean válidos, las varianzas de las diferencias entre todos los pares posibles de medidas repetidas deben ser iguales.</p>
+<blockquote class="blockquote">
+<p><strong>Tip Pro:</strong> Si tu prueba de Mauchly dice que no hay esfericidad, usa las correcciones de <strong>Greenhouse-Geisser</strong> o <strong>Huynh-Feldt</strong>. Son el “seguro de vida” de tu análisis.</p>
+</blockquote>
+<hr>
+</section>
+<section id="implementación-en-r-caso-práctico" class="level2">
+<h2 class="anchored" data-anchor-id="implementación-en-r-caso-práctico">Implementación en R: Caso Práctico</h2>
+<p>Imagina que probamos 2 fertilizantes y medimos el <strong>Índice de Área Foliar (IAF)</strong> en 3 momentos clave.</p>
+<section id="preparación-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="preparación-de-datos">1. Preparación de datos</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(rstatix)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'rstatix'
+
+The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggpubr)</span>
+<span id="cb5-2"></span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">123</span>)</span>
+<span id="cb5-4">datos_agronomia <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb5-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">id =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>),</span>
+<span id="cb5-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fertilizante =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Nitrogenado"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Organico"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>),</span>
+<span id="cb5-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tiempo =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T1_Inicio"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T2_Floracion"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T3_Llenado"</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>),</span>
+<span id="cb5-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">iaf =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.2</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span>), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runif</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.0</span>))</span>
+<span id="cb5-9">)</span>
+<span id="cb5-10"></span>
+<span id="cb5-11">datos_agronomia<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>tiempo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(datos_agronomia<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>tiempo, </span>
+<span id="cb5-12">                                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T1_Inicio"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T2_Floracion"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T3_Llenado"</span>))</span></code></pre></div></div>
+</div>
+</section>
+<section id="visualización-de-la-interacción" class="level3">
+<h3 class="anchored" data-anchor-id="visualización-de-la-interacción">2. Visualización de la Interacción</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggline</span>(datos_agronomia, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tiempo"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"iaf"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fertilizante"</span>,</span>
+<span id="cb6-2">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">add =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mean_se"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dotplot"</span>),</span>
+<span id="cb6-3">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">palette =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"jco"</span>,</span>
+<span id="cb6-4">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Evolución del IAF por Tratamiento"</span>,</span>
+<span id="cb6-5">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Etapa Fenológica"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"IAF (m²/m²)"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bin width defaults to 1/30 of the range of the data. Pick better value with
+`binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantos.com/posts/anova_repeated/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="análisis-estadístico" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-estadístico">3. Análisis Estadístico</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">res.aov <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">anova_test</span>(</span>
+<span id="cb8-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> datos_agronomia, </span>
+<span id="cb8-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dv =</span> iaf, </span>
+<span id="cb8-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">wid =</span> id, </span>
+<span id="cb8-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">within =</span> tiempo, </span>
+<span id="cb8-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">between =</span> fertilizante</span>
+<span id="cb8-7">)</span>
+<span id="cb8-8"></span>
+<span id="cb8-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_anova_table</span>(res.aov)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ANOVA Table (type II tests)
+
+               Effect  DFn  DFd      F     p p&lt;.05   ges
+1        fertilizante 1.00 8.00 19.780 0.002     * 0.462
+2              tiempo 1.24 9.92  1.190 0.316       0.089
+3 fertilizante:tiempo 1.24 9.92  0.677 0.461       0.052</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
+<p>El ANOVA de medidas repetidas es una herramienta quirúrgica para el agrónomo moderno. Te permite entender no solo qué tratamiento fue mejor, sino cuándo empezó a serlo. Deja de tratar tus datos como si fueran fotos aisladas y empieza a ver la película completa.</p>
 
 
 </section>

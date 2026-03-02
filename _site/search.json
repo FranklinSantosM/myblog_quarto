@@ -1041,5 +1041,47 @@
     "title": "Franklin Santos",
     "section": "",
     "text": "GxExM Modeling\nFlowering Time Prediction\nData Science & Machine Learning\nR Programming & Reproducible Research"
+  },
+  {
+    "objectID": "posts/anova_repeated/index.html",
+    "href": "posts/anova_repeated/index.html",
+    "title": "ANOVA - Medidas repetidas",
+    "section": "",
+    "text": "En el mundo del fitomejoramiento y la agronomía, el tiempo no es solo una variable; es el escenario donde ocurre la magia (y el estrés). Si estás midiendo la altura de la misma planta de maíz cada semana, o evaluando la severidad de una enfermedad en el mismo lote durante un mes, no puedes usar un ANOVA convencional.\n¿Por qué? Porque tus datos están “emparentados”. Aquí es donde entra el ANOVA de Medidas Repetidas (RM-ANOVA)."
+  },
+  {
+    "objectID": "posts/anova_repeated/index.html#introducción",
+    "href": "posts/anova_repeated/index.html#introducción",
+    "title": "ANOVA - Medidas repetidas",
+    "section": "",
+    "text": "En el mundo del fitomejoramiento y la agronomía, el tiempo no es solo una variable; es el escenario donde ocurre la magia (y el estrés). Si estás midiendo la altura de la misma planta de maíz cada semana, o evaluando la severidad de una enfermedad en el mismo lote durante un mes, no puedes usar un ANOVA convencional.\n¿Por qué? Porque tus datos están “emparentados”. Aquí es donde entra el ANOVA de Medidas Repetidas (RM-ANOVA)."
+  },
+  {
+    "objectID": "posts/anova_repeated/index.html#qué-es-y-por-qué-debería-importarte",
+    "href": "posts/anova_repeated/index.html#qué-es-y-por-qué-debería-importarte",
+    "title": "ANOVA - Medidas repetidas",
+    "section": "¿Qué es y por qué debería importarte?",
+    "text": "¿Qué es y por qué debería importarte?\nA diferencia del ANOVA de una vía, donde comparas grupos independientes, el ANOVA de medidas repetidas se utiliza cuando realizas múltiples observaciones sobre la misma unidad experimental (la misma planta, la misma parcela, el mismo fruto).\nEn estadística, decimos que las mediciones están correlacionadas. Si una planta de soja es genéticamente vigorosa en la semana 1, es muy probable que siga siendo vigorosa en la semana 2. Ignorar esta correlación es un pecado capital en la ciencia de datos agrícolas, ya que estarías desperdiciando información valiosa y aumentando el error experimental.\n\nLa anatomía del modelo\nEn un diseño de medidas repetidas, el modelo lineal se descompone de una manera especial para separar la variabilidad individual de la variabilidad del tratamiento:\n\\[Y_{ij} = \\mu + \\pi_i + \\tau_j + \\epsilon_{ij}\\]\nDonde:\n\n\\(\\mu\\): Media general.\n\\(\\pi_i\\): El efecto del sujeto (tu planta o parcela), tratado como factor aleatorio.\n\\(\\tau_j\\): El efecto del tiempo o tratamiento (factor intra-sujeto).\n\\(\\epsilon_{ij}\\): El error residual.\n\nLa ventaja competitiva: Al extraer la variabilidad “entre plantas” (\\(\\pi_i\\)), el RM-ANOVA es mucho más sensible para detectar diferencias pequeñas en los tratamientos. Es como limpiar el ruido de fondo para escuchar mejor la señal."
+  },
+  {
+    "objectID": "posts/anova_repeated/index.html#el-coco-de-las-medidas-repetidas-la-esfericidad",
+    "href": "posts/anova_repeated/index.html#el-coco-de-las-medidas-repetidas-la-esfericidad",
+    "title": "ANOVA - Medidas repetidas",
+    "section": "El “coco” de las medidas repetidas: La Esfericidad",
+    "text": "El “coco” de las medidas repetidas: La Esfericidad\nSi el ANOVA tiene la homogeneidad de varianzas, el RM-ANOVA tiene la Esfericidad. Para que los resultados sean válidos, las varianzas de las diferencias entre todos los pares posibles de medidas repetidas deben ser iguales.\n\nTip Pro: Si tu prueba de Mauchly dice que no hay esfericidad, usa las correcciones de Greenhouse-Geisser o Huynh-Feldt. Son el “seguro de vida” de tu análisis."
+  },
+  {
+    "objectID": "posts/anova_repeated/index.html#implementación-en-r-caso-práctico",
+    "href": "posts/anova_repeated/index.html#implementación-en-r-caso-práctico",
+    "title": "ANOVA - Medidas repetidas",
+    "section": "Implementación en R: Caso Práctico",
+    "text": "Implementación en R: Caso Práctico\nImagina que probamos 2 fertilizantes y medimos el Índice de Área Foliar (IAF) en 3 momentos clave.\n\n1. Preparación de datos\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(rstatix)\n\n\nAttaching package: 'rstatix'\n\nThe following object is masked from 'package:stats':\n\n    filter\n\nlibrary(ggpubr)\n\nset.seed(123)\ndatos_agronomia &lt;- data.frame(\n  id = rep(1:10, each = 3),\n  fertilizante = rep(c(\"Nitrogenado\", \"Organico\"), each = 15),\n  tiempo = rep(c(\"T1_Inicio\", \"T2_Floracion\", \"T3_Llenado\"), 10),\n  iaf = c(runif(15, 1.2, 2.5), runif(15, 1.5, 4.0))\n)\n\ndatos_agronomia$tiempo &lt;- factor(datos_agronomia$tiempo, \n                                 levels = c(\"T1_Inicio\", \"T2_Floracion\", \"T3_Llenado\"))\n\n\n\n2. Visualización de la Interacción\n\nggline(datos_agronomia, x = \"tiempo\", y = \"iaf\", color = \"fertilizante\",\n       add = c(\"mean_se\", \"dotplot\"),\n       palette = \"jco\",\n       title = \"Evolución del IAF por Tratamiento\",\n       xlab = \"Etapa Fenológica\", ylab = \"IAF (m²/m²)\")\n\nBin width defaults to 1/30 of the range of the data. Pick better value with\n`binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n3. Análisis Estadístico\n\nres.aov &lt;- anova_test(\n  data = datos_agronomia, \n  dv = iaf, \n  wid = id, \n  within = tiempo, \n  between = fertilizante\n)\n\nget_anova_table(res.aov)\n\nANOVA Table (type II tests)\n\n               Effect  DFn  DFd      F     p p&lt;.05   ges\n1        fertilizante 1.00 8.00 19.780 0.002     * 0.462\n2              tiempo 1.24 9.92  1.190 0.316       0.089\n3 fertilizante:tiempo 1.24 9.92  0.677 0.461       0.052"
+  },
+  {
+    "objectID": "posts/anova_repeated/index.html#conclusión",
+    "href": "posts/anova_repeated/index.html#conclusión",
+    "title": "ANOVA - Medidas repetidas",
+    "section": "Conclusión",
+    "text": "Conclusión\nEl ANOVA de medidas repetidas es una herramienta quirúrgica para el agrónomo moderno. Te permite entender no solo qué tratamiento fue mejor, sino cuándo empezó a serlo. Deja de tratar tus datos como si fueran fotos aisladas y empieza a ver la película completa."
   }
 ]
