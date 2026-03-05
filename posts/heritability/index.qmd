@@ -1,5 +1,5 @@
 ---
-title: "Heredabilidad: El Puente entre el fenotipo y el exito en el fitomejoramiento"
+title: "Heredabilidad: El puente entre el fenotipo y el éxito en el fitomejoramiento"
 description: |
   Cómo separar la 'señal' genética del 'ruido' ambiental para maximizar la ganancia genética.
 categories: [R, Heritability, MET]

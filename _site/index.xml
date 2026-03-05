@@ -12,7 +12,7 @@
 <generator>quarto-1.8.25</generator>
 <lastBuildDate>Wed, 04 Mar 2026 04:00:00 GMT</lastBuildDate>
 <item>
-  <title>Heredabilidad: El Puente entre el fenotipo y el exito en el fitomejoramiento</title>
+  <title>Heredabilidad: El puente entre el fenotipo y el éxito en el fitomejoramiento</title>
   <dc:creator>Franklin Santos</dc:creator>
   <link>https://franklinsantos.com/posts/heritability/</link>
   <description><![CDATA[ 
@@ -404,15 +404,15 @@ van Rossum, Bart-Jan. 2025. <em>statgenSTA: Single Trial Analysis (STA) of Field
 </div>
 </div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2026,
   author = {Santos, Franklin},
-  title = {Heredabilidad: {El} {Puente} Entre El Fenotipo y El Exito En
-    El Fitomejoramiento},
+  title = {Heredabilidad: {El} Puente Entre El Fenotipo y El Éxito En El
+    Fitomejoramiento},
   date = {2026-03-04},
   url = {https://franklinsantos.com/posts/heritability/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2026" class="csl-entry quarto-appendix-citeas">
 Santos, Franklin. 2026. <span>“Heredabilidad: El Puente Entre El
-Fenotipo y El Exito En El Fitomejoramiento.”</span> March 4, 2026. <a href="https://franklinsantos.com/posts/heritability/">https://franklinsantos.com/posts/heritability/</a>.
+Fenotipo y El Éxito En El Fitomejoramiento.”</span> March 4, 2026. <a href="https://franklinsantos.com/posts/heritability/">https://franklinsantos.com/posts/heritability/</a>.
 </div></div></section></div> ]]></description>
   <category>R</category>
   <category>Heritability</category>
