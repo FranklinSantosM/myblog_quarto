@@ -33,6 +33,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/heritability/index.html",
       "/posts/anova_repeated/index.html",
       "/posts/ml_punpkin_weith_prediction/index.html",
       "/posts/back-transformation/index.html",

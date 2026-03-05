@@ -1,0 +1,187 @@
+---
+title: "Heredabilidad: El Puente entre el fenotipo y el exito en el fitomejoramiento"
+description: |
+  Cómo separar la 'señal' genética del 'ruido' ambiental para maximizar la ganancia genética.
+categories: [R, Heritability, MET]
+author:
+  - name: Franklin Santos
+    url: https://www.franklinsantos.com
+    affiliation: Universidad Austral de Chile
+    orcid: 0000-0002-7509-2910
+    email: franklin25santos@gmail.com
+date: "2026-03-04"
+image: plot_here.png
+citation: true
+bibliography: references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+
+
+## Introducción
+
+En el fitomejoramiento, el objetivo central es identificar y seleccionar genotipos superiores para mejorar sus valores fenotípicos. Sin embargo, dado que el ambiente también afecta al fenotipo, no existe una correspondencia perfecta entre lo que vemos en el campo y la carga genética real de la planta. Cuando realizamos ensayos en múltiples localidades y años (MET), el reto no es solo ver qué variedad rindió más, sino entender **qué parte de ese rendimiento se debe realmente a la genética** y qué parte fue simple "ruido" ambiental. Aquí es donde entra la **Heredabilidad ($H^2$)**.
+
+Si alguna vez has tenido dudas sobre qué fórmula usar o cómo interpretar un valor bajo, este post desglosa los conceptos y métodos esenciales para llevar tus análisis al siguiente nivel.
+
+
+
+## 1. ¿Qué es realmente la Heredabilidad?
+
+La heredabilidad cuantifica cuánto de la variación que observamos en el campo (Varianza Fenotípica) se debe realmente a las diferencias genéticas entre las plantas. La heredabilidad expresa el grado de correspondencia entre el valor fenotípico y el genotípico. Técnicamente, es el porcentaje de la varianza fenotípica que se puede atribuir a las diferencias en el valor genotípico entre los individuos [@psselibrary2026].
+
+
+Matemáticamente, heredabilidad en sentido amplio, se define como la proporción de la varianza genotípica respecto a la varianza fenotípica total:
+
+$$H^2 = \frac{\sigma^2_G}{\sigma^2_P}$$
+
+**Donde:**
+
+* $\sigma^2_G$: Varianza Genotípica.
+* $\sigma^2_P$: Varianza Fenotípica total.
+
+> **Nota Práctica:** Si obtienes un valor de $H^2 = 0.70$, significa que el 70% de las diferencias que observas en tu ensayo son estadísticamente heredables. El 30% restante corresponde a factores ambientales o error de medición.
+
+### ¿Qué estamos midiendo realmente?
+
+Aunque existen muchas definiciones, todas convergen en un punto: **cuantificar la señal genética a partir de las mediciones del fenotipo**. En términos prácticos, la heredabilidad nos dice qué proporción de la diferencia que observamos en el campo es atribuible a los genotipos.
+Es el motor de la **ganancia genética**: sin una comprensión clara de la heredabilidad, es imposible desarrollar variedades de manera oportuna que satisfagan las necesidades de agricultores y consumidores.
+
+
+## 2. Impacto en la Selección: ¿Por qué es tu brújula?
+
+La facilidad para mejorar un rasgo agronómico depende de qué tan "limpia" sea su señal genética. 
+
+### Comparativa de Rasgos (Ejemplo en Maíz)
+
+| Tipo de Rasgo | Ejemplo Práctico | Heredabilidad Esperada | Facilidad de Selección |
+| :--- | :--- | :--- | :--- |
+| **Cualitativo** | Color de flor o grano | Muy Alta (> 0.90) | Muy Fácil (Selección visual) |
+| **Cuantitativo Simple** | Días a floración | Alta (0.50 - 0.70) | Moderada |
+| **Cuantitativo Complejo**| Rendimiento de grano | Baja (< 0.30) | Difícil (Requiere METs rigurosos) |
+
+Si intentas seleccionar por rendimiento basándote en la evaluación visual de una sola planta en una única localidad, estás apostando a la lotería ambiental.
+
+
+## 3. Derribando Mitos: Lo que la Heredabilidad NO es
+
+Para aplicar este concepto correctamente en tu programa, debemos evitar estos cuatro sesgos comunes:
+
+1. **"Indica qué porcentaje del rasgo es genético":** Falso. Una $H^2$ de 0.40 significa que el 40% de la *variación* en la población se debe a los genes, no que el 40% de la anatomía de la planta sea "genética".
+2. **"Baja heredabilidad significa ausencia de control genético":** Error. Un rasgo puede estar 100% controlado por genes, pero si no hay variación genética en tu población (todas las plantas tienen los mismos alelos para ese rasgo), la heredabilidad será 0.
+3. **"Es un valor fijo y universal":** No. Depende estrictamente de cómo se mide el rasgo, en qué ambiente se mide y qué germoplasma se evalúa. Debe reestimarse a intervalos regulares.
+4. **"Heredabilidad baja implica diferencias genéticas pequeñas":** No necesariamente. Puede deberse simplemente a que el error ambiental de tu ensayo fue masivo (mala nivelación del terreno, plagas descontroladas, etc.).
+
+
+## 4. Métodos de Cálculo: De la Teoría a la Práctica
+
+En los Ensayos Multi-ambientales (MET), los datos rara vez son perfectos. Suele haber parcelas perdidas o genotipos que no se sembraron en todas las localidades. 
+
+### El Método Cullis (Recomendado por EiB)
+
+Es el estándar de oro actual para programas de mejoramiento modernos. Maneja de forma excelente los **datos desbalanceados** (comunes cuando se pierden parcelas o no todos los genotipos están en todas las localidades) utilizando la varianza de los **BLUPs** (Mejores Predictores Lineales Insesgados) y su error estándar promedio para aproximar la variación no genética [@covarrubias2019].
+
+La fórmula de Cullis ajusta la heredabilidad en función de la precisión real de las comparaciones:
+
+$$H^2_{Cullis} = 1 - \frac{\bar{\nu}^{BLUP}_{\Delta}}{2*\sigma^2_g}$$
+
+**Donde:**
+
+* $\bar{\nu}^{BLUP}_{\Delta}$: Promedio de la varianza de la diferencia entre los BLUPs.
+* $\sigma^2_g$: Varianza Genotípica estimada por el modelo mixto.
+
+
+
+
+## Guía Técnica en R
+
+**statgenSTA** es un paquete de R que proporciona funciones para el análisis fenotípico de ensayos agrícolas de campo utilizando modelos mixtos con y sin componentes espaciales [@stat].
+
+
+```{r}
+#| label: statgenSTA-heredabilidad
+#| echo: true
+#| message: false
+#| warning: false
+
+# 1. Cargar la librería
+# Si no la tienes instalada, ejecuta antes: install.packages("statgenSTA")
+library(statgenSTA)
+
+# 2. Cargar los datos de prueba incluidos en el paquete
+data("dropsRaw")
+
+# 3. Crear el objeto TD (Trial Data)
+# Este paso es clave: mapea las columnas de tu Excel/CSV a la nomenclatura estándar del paquete
+dropsTD <- createTD(data = dropsRaw,
+                    genotype = "Variety_ID",
+                    trial = "Experiment",
+                    repId = "Replicate",   # Repeticiones
+                    subBlock = "block",    # Bloques incompletos
+                    rowCoord = "Row",      # Coordenadas espaciales de fila
+                    colCoord = "Column")   # Coordenadas espaciales de columna
+
+
+## Plot the layout for Gai12W, show raw data for grain yield.
+plot(dropsTD, 
+     trials = "Gai12W", 
+     traits = "grain.yield")
+
+
+# 4. Ajustar el Modelo Mixto para un ensayo específico (ej. la localidad 'Gai12W')
+# ATENCIÓN: Para calcular la heredabilidad, el genotipo DEBE ajustarse como aleatorio (what = "random")
+# Usaremos 'SpATS', el motor espacial por excelencia para suavizar la heterogeneidad del campo.
+modelo_ensayo <- fitTD(TD = dropsTD, 
+                       trials = "Gai12W",
+                       design = "res.rowcol",      # Diseño fila-columna
+                       traits = "grain.yield",     # Rasgo a analizar: Rendimiento de grano
+#                       what = "random",            # Genotipos como efecto aleatorio
+                       engine = "SpATS")
+
+## Spatial plot for the model with genotype fitted as fixed effect.
+## Display the spatial trend as a percentage.
+plot(modelo_ensayo, 
+     plotType = "spatial", 
+     spaTrend = "percentage")
+
+# 5. Extraer la Heredabilidad
+# Con esta única función, el paquete aplica el método de Cullis sobre los BLUPs generados.
+resultados_heredabilidad <- extractSTA(modelo_ensayo, 
+                                       what = "heritability")
+
+# 6. Mostrar el resultado
+cat("\nLa Heredabilidad generalizada (Cullis) para el rendimiento en el ensayo Gai12W es:\n")
+print(resultados_heredabilidad)
+
+## Set nBest to 5 to limit the output to the best 5 genotypes.
+summary(modelo_ensayo, 
+        nBest = 5)
+```
+
+
+### Otros Métodos
+
+- **Método de Piepho**: Ideal cuando trabajas con BLUEs (estimadores de efectos fijos). Requiere ajustar dos modelos (uno fijo y uno aleatorio) para obtener la varianza genética y el error estándar promedio.
+- **Método Estándar**: Asume datos perfectamente balanceados ($H^2 = \sigma^2_G / (\sigma^2_G + \sigma^2_E / r)$). Tiende a sobreestimar el valor si hay datos faltantes, por lo que su uso está decayendo en ensayos reales.
+
+## Conclusión
+
+La heredabilidad no es solo un número para publicar; es la métrica que valida la calidad de tu manejo agronómico y tu capacidad de selección. Por tanto, entender la heredabilidad es entender la **precisión** de tu programa de mejoramiento. Al adoptar métodos estadísticos robustos como el de **Cullis**, te aseguras de que tus decisiones de selección no sean un espejismo ambiental, sino una **señal genética real** que se traducirá en mejores variedades para los agricultores.
+
+
+
+
+
+
+
+
+
+
+

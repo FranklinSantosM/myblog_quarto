@@ -10,7 +10,417 @@
 <atom:link href="https://franklinsantos.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Data scientist for plant breeding and agronomy | Bioinformatic</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Mon, 06 Jan 2025 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 04 Mar 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Heredabilidad: El Puente entre el fenotipo y el exito en el fitomejoramiento</title>
+  <dc:creator>Franklin Santos</dc:creator>
+  <link>https://franklinsantos.com/posts/heritability/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>En el fitomejoramiento, el objetivo central es identificar y seleccionar genotipos superiores para mejorar sus valores fenotípicos. Sin embargo, dado que el ambiente también afecta al fenotipo, no existe una correspondencia perfecta entre lo que vemos en el campo y la carga genética real de la planta. Cuando realizamos ensayos en múltiples localidades y años (MET), el reto no es solo ver qué variedad rindió más, sino entender <strong>qué parte de ese rendimiento se debe realmente a la genética</strong> y qué parte fue simple “ruido” ambiental. Aquí es donde entra la <strong>Heredabilidad (<img src="https://latex.codecogs.com/png.latex?H%5E2">)</strong>.</p>
+<p>Si alguna vez has tenido dudas sobre qué fórmula usar o cómo interpretar un valor bajo, este post desglosa los conceptos y métodos esenciales para llevar tus análisis al siguiente nivel.</p>
+</section>
+<section id="qué-es-realmente-la-heredabilidad" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-realmente-la-heredabilidad">1. ¿Qué es realmente la Heredabilidad?</h2>
+<p>La heredabilidad cuantifica cuánto de la variación que observamos en el campo (Varianza Fenotípica) se debe realmente a las diferencias genéticas entre las plantas. La heredabilidad expresa el grado de correspondencia entre el valor fenotípico y el genotípico. Técnicamente, es el porcentaje de la varianza fenotípica que se puede atribuir a las diferencias en el valor genotípico entre los individuos <span class="citation" data-cites="psselibrary2026">(Plant &amp; Soil Sciences eLibrary 2026)</span>.</p>
+<p>Matemáticamente, heredabilidad en sentido amplio, se define como la proporción de la varianza genotípica respecto a la varianza fenotípica total:</p>
+<p><img src="https://latex.codecogs.com/png.latex?H%5E2%20=%20%5Cfrac%7B%5Csigma%5E2_G%7D%7B%5Csigma%5E2_P%7D"></p>
+<p><strong>Donde:</strong></p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2_G">: Varianza Genotípica.</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2_P">: Varianza Fenotípica total.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Nota Práctica:</strong> Si obtienes un valor de <img src="https://latex.codecogs.com/png.latex?H%5E2%20=%200.70">, significa que el 70% de las diferencias que observas en tu ensayo son estadísticamente heredables. El 30% restante corresponde a factores ambientales o error de medición.</p>
+</blockquote>
+<section id="qué-estamos-midiendo-realmente" class="level3">
+<h3 class="anchored" data-anchor-id="qué-estamos-midiendo-realmente">¿Qué estamos midiendo realmente?</h3>
+<p>Aunque existen muchas definiciones, todas convergen en un punto: <strong>cuantificar la señal genética a partir de las mediciones del fenotipo</strong>. En términos prácticos, la heredabilidad nos dice qué proporción de la diferencia que observamos en el campo es atribuible a los genotipos. Es el motor de la <strong>ganancia genética</strong>: sin una comprensión clara de la heredabilidad, es imposible desarrollar variedades de manera oportuna que satisfagan las necesidades de agricultores y consumidores.</p>
+</section>
+</section>
+<section id="impacto-en-la-selección-por-qué-es-tu-brújula" class="level2">
+<h2 class="anchored" data-anchor-id="impacto-en-la-selección-por-qué-es-tu-brújula">2. Impacto en la Selección: ¿Por qué es tu brújula?</h2>
+<p>La facilidad para mejorar un rasgo agronómico depende de qué tan “limpia” sea su señal genética.</p>
+<section id="comparativa-de-rasgos-ejemplo-en-maíz" class="level3">
+<h3 class="anchored" data-anchor-id="comparativa-de-rasgos-ejemplo-en-maíz">Comparativa de Rasgos (Ejemplo en Maíz)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo de Rasgo</th>
+<th style="text-align: left;">Ejemplo Práctico</th>
+<th style="text-align: left;">Heredabilidad Esperada</th>
+<th style="text-align: left;">Facilidad de Selección</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Cualitativo</strong></td>
+<td style="text-align: left;">Color de flor o grano</td>
+<td style="text-align: left;">Muy Alta (&gt; 0.90)</td>
+<td style="text-align: left;">Muy Fácil (Selección visual)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Cuantitativo Simple</strong></td>
+<td style="text-align: left;">Días a floración</td>
+<td style="text-align: left;">Alta (0.50 - 0.70)</td>
+<td style="text-align: left;">Moderada</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Cuantitativo Complejo</strong></td>
+<td style="text-align: left;">Rendimiento de grano</td>
+<td style="text-align: left;">Baja (&lt; 0.30)</td>
+<td style="text-align: left;">Difícil (Requiere METs rigurosos)</td>
+</tr>
+</tbody>
+</table>
+<p>Si intentas seleccionar por rendimiento basándote en la evaluación visual de una sola planta en una única localidad, estás apostando a la lotería ambiental.</p>
+</section>
+</section>
+<section id="derribando-mitos-lo-que-la-heredabilidad-no-es" class="level2">
+<h2 class="anchored" data-anchor-id="derribando-mitos-lo-que-la-heredabilidad-no-es">3. Derribando Mitos: Lo que la Heredabilidad NO es</h2>
+<p>Para aplicar este concepto correctamente en tu programa, debemos evitar estos cuatro sesgos comunes:</p>
+<ol type="1">
+<li><strong>“Indica qué porcentaje del rasgo es genético”:</strong> Falso. Una <img src="https://latex.codecogs.com/png.latex?H%5E2"> de 0.40 significa que el 40% de la <em>variación</em> en la población se debe a los genes, no que el 40% de la anatomía de la planta sea “genética”.</li>
+<li><strong>“Baja heredabilidad significa ausencia de control genético”:</strong> Error. Un rasgo puede estar 100% controlado por genes, pero si no hay variación genética en tu población (todas las plantas tienen los mismos alelos para ese rasgo), la heredabilidad será 0.</li>
+<li><strong>“Es un valor fijo y universal”:</strong> No.&nbsp;Depende estrictamente de cómo se mide el rasgo, en qué ambiente se mide y qué germoplasma se evalúa. Debe reestimarse a intervalos regulares.</li>
+<li><strong>“Heredabilidad baja implica diferencias genéticas pequeñas”:</strong> No necesariamente. Puede deberse simplemente a que el error ambiental de tu ensayo fue masivo (mala nivelación del terreno, plagas descontroladas, etc.).</li>
+</ol>
+</section>
+<section id="métodos-de-cálculo-de-la-teoría-a-la-práctica" class="level2">
+<h2 class="anchored" data-anchor-id="métodos-de-cálculo-de-la-teoría-a-la-práctica">4. Métodos de Cálculo: De la Teoría a la Práctica</h2>
+<p>En los Ensayos Multi-ambientales (MET), los datos rara vez son perfectos. Suele haber parcelas perdidas o genotipos que no se sembraron en todas las localidades.</p>
+<section id="el-método-cullis-recomendado-por-eib" class="level3">
+<h3 class="anchored" data-anchor-id="el-método-cullis-recomendado-por-eib">El Método Cullis (Recomendado por EiB)</h3>
+<p>Es el estándar de oro actual para programas de mejoramiento modernos. Maneja de forma excelente los <strong>datos desbalanceados</strong> (comunes cuando se pierden parcelas o no todos los genotipos están en todas las localidades) utilizando la varianza de los <strong>BLUPs</strong> (Mejores Predictores Lineales Insesgados) y su error estándar promedio para aproximar la variación no genética <span class="citation" data-cites="covarrubias2019">(Covarrubias-Pazaran 2019)</span>.</p>
+<p>La fórmula de Cullis ajusta la heredabilidad en función de la precisión real de las comparaciones:</p>
+<p><img src="https://latex.codecogs.com/png.latex?H%5E2_%7BCullis%7D%20=%201%20-%20%5Cfrac%7B%5Cbar%7B%5Cnu%7D%5E%7BBLUP%7D_%7B%5CDelta%7D%7D%7B2*%5Csigma%5E2_g%7D"></p>
+<p><strong>Donde:</strong></p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cbar%7B%5Cnu%7D%5E%7BBLUP%7D_%7B%5CDelta%7D">: Promedio de la varianza de la diferencia entre los BLUPs.</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2_g">: Varianza Genotípica estimada por el modelo mixto.</li>
+</ul>
+</section>
+</section>
+<section id="guía-técnica-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="guía-técnica-en-r">Guía Técnica en R</h2>
+<p><strong>statgenSTA</strong> es un paquete de R que proporciona funciones para el análisis fenotípico de ensayos agrícolas de campo utilizando modelos mixtos con y sin componentes espaciales <span class="citation" data-cites="stat">(van Rossum 2025)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1. Cargar la librería</span></span>
+<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Si no la tienes instalada, ejecuta antes: install.packages("statgenSTA")</span></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(statgenSTA)</span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2. Cargar los datos de prueba incluidos en el paquete</span></span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dropsRaw"</span>)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 3. Crear el objeto TD (Trial Data)</span></span>
+<span id="cb1-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Este paso es clave: mapea las columnas de tu Excel/CSV a la nomenclatura estándar del paquete</span></span>
+<span id="cb1-10">dropsTD <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">createTD</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dropsRaw,</span>
+<span id="cb1-11">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">genotype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Variety_ID"</span>,</span>
+<span id="cb1-12">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">trial =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Experiment"</span>,</span>
+<span id="cb1-13">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repId =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Replicate"</span>,   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Repeticiones</span></span>
+<span id="cb1-14">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subBlock =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"block"</span>,    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Bloques incompletos</span></span>
+<span id="cb1-15">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rowCoord =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Row"</span>,      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Coordenadas espaciales de fila</span></span>
+<span id="cb1-16">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colCoord =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Column"</span>)   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Coordenadas espaciales de columna</span></span>
+<span id="cb1-17"></span>
+<span id="cb1-18"></span>
+<span id="cb1-19"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Plot the layout for Gai12W, show raw data for grain yield.</span></span>
+<span id="cb1-20"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(dropsTD, </span>
+<span id="cb1-21">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">trials =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Gai12W"</span>, </span>
+<span id="cb1-22">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">traits =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grain.yield"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantos.com/posts/heritability/index_files/figure-html/statgenSTA-heredabilidad-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 4. Ajustar el Modelo Mixto para un ensayo específico (ej. la localidad 'Gai12W')</span></span>
+<span id="cb2-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># ATENCIÓN: Para calcular la heredabilidad, el genotipo DEBE ajustarse como aleatorio (what = "random")</span></span>
+<span id="cb2-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Usaremos 'SpATS', el motor espacial por excelencia para suavizar la heterogeneidad del campo.</span></span>
+<span id="cb2-4">modelo_ensayo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fitTD</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">TD =</span> dropsTD, </span>
+<span id="cb2-5">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">trials =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Gai12W"</span>,</span>
+<span id="cb2-6">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">design =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"res.rowcol"</span>,      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Diseño fila-columna</span></span>
+<span id="cb2-7">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">traits =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grain.yield"</span>,     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Rasgo a analizar: Rendimiento de grano</span></span>
+<span id="cb2-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#                       what = "random",            # Genotipos como efecto aleatorio</span></span>
+<span id="cb2-9">                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">engine =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SpATS"</span>)</span>
+<span id="cb2-10"></span>
+<span id="cb2-11"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Spatial plot for the model with genotype fitted as fixed effect.</span></span>
+<span id="cb2-12"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Display the spatial trend as a percentage.</span></span>
+<span id="cb2-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(modelo_ensayo, </span>
+<span id="cb2-14">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plotType =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"spatial"</span>, </span>
+<span id="cb2-15">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">spaTrend =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"percentage"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://franklinsantos.com/posts/heritability/index_files/figure-html/statgenSTA-heredabilidad-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 5. Extraer la Heredabilidad</span></span>
+<span id="cb3-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Con esta única función, el paquete aplica el método de Cullis sobre los BLUPs generados.</span></span>
+<span id="cb3-3">resultados_heredabilidad <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">extractSTA</span>(modelo_ensayo, </span>
+<span id="cb3-4">                                       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">what =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"heritability"</span>)</span>
+<span id="cb3-5"></span>
+<span id="cb3-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 6. Mostrar el resultado</span></span>
+<span id="cb3-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">La Heredabilidad generalizada (Cullis) para el rendimiento en el ensayo Gai12W es:</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+La Heredabilidad generalizada (Cullis) para el rendimiento en el ensayo Gai12W es:</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(resultados_heredabilidad)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   trial grain.yield
+1 Gai12W        0.84</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Set nBest to 5 to limit the output to the best 5 genotypes.</span></span>
+<span id="cb7-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(modelo_ensayo, </span>
+<span id="cb7-3">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nBest =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary statistics 
+==================
+
+Summary statistics for grain.yield in Gai12W  
+
+                         grain.yield
+Number of observations         483.0
+Number of missing values        19.0
+Mean                           11.23
+Median                         11.22
+Min                             6.71
+Max                            14.68
+First quantile                 10.38
+Third quantile                 12.09
+Variance                       1.845
+
+
+Estimated heritability 
+======================
+
+Heritability: 0.84 
+
+Predicted means (BLUEs &amp; BLUPs) 
+===============================
+Best 5 genotypes
+           BLUEs       SE    BLUPs     SE
+Lo1261  13.98285  0.47144 13.65848 0.4329
+Lo1253  13.88760  0.47244 13.44540 0.4350
+Lo1223  13.71634  0.47173 13.28001 0.4337
+DKMBST  13.63513  0.47242 13.23844 0.4345
+HMV5422 13.56305  0.68282 13.02194 0.5785</code></pre>
+</div>
+</div>
+<section id="otros-métodos" class="level3">
+<h3 class="anchored" data-anchor-id="otros-métodos">Otros Métodos</h3>
+<ul>
+<li><strong>Método de Piepho</strong>: Ideal cuando trabajas con BLUEs (estimadores de efectos fijos). Requiere ajustar dos modelos (uno fijo y uno aleatorio) para obtener la varianza genética y el error estándar promedio.</li>
+<li><strong>Método Estándar</strong>: Asume datos perfectamente balanceados (<img src="https://latex.codecogs.com/png.latex?H%5E2%20=%20%5Csigma%5E2_G%20/%20(%5Csigma%5E2_G%20+%20%5Csigma%5E2_E%20/%20r)">). Tiende a sobreestimar el valor si hay datos faltantes, por lo que su uso está decayendo en ensayos reales.</li>
+</ul>
+</section>
+</section>
+<section id="conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
+<p>La heredabilidad no es solo un número para publicar; es la métrica que valida la calidad de tu manejo agronómico y tu capacidad de selección. Por tanto, entender la heredabilidad es entender la <strong>precisión</strong> de tu programa de mejoramiento. Al adoptar métodos estadísticos robustos como el de <strong>Cullis</strong>, te aseguras de que tus decisiones de selección no sean un espejismo ambiental, sino una <strong>señal genética real</strong> que se traducirá en mejores variedades para los agricultores.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-covarrubias2019" class="csl-entry">
+Covarrubias-Pazaran, Giovanny E. 2019. <em>Heritability: Meaning and Computation</em>. Edited by Valentin Wimmer, Emily Ziemke, Johannes Martini, and Sam Storr. CGIAR Excellence in Breeding Platform (EiB). <a href="https://excellenceinbreeding.org/toolbox/tools/heritability">https://excellenceinbreeding.org/toolbox/tools/heritability</a>.
+</div>
+<div id="ref-psselibrary2026" class="csl-entry">
+Plant &amp; Soil Sciences eLibrary. 2026. <span>“The Concept of Heritability.”</span> Lesson: Corn Breeding: Introduction to Concepts in Quantitative Genetics. <a href="https://passel2.unl.edu/view/lesson/862d22b0709b/6">https://passel2.unl.edu/view/lesson/862d22b0709b/6</a>.
+</div>
+<div id="ref-stat" class="csl-entry">
+van Rossum, Bart-Jan. 2025. <em>statgenSTA: Single Trial Analysis (STA) of Field Trials</em>. <a href="https://biometris.github.io/statgenSTA/index.html">https://biometris.github.io/statgenSTA/index.html</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2026,
+  author = {Santos, Franklin},
+  title = {Heredabilidad: {El} {Puente} Entre El Fenotipo y El Exito En
+    El Fitomejoramiento},
+  date = {2026-03-04},
+  url = {https://franklinsantos.com/posts/heritability/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2026" class="csl-entry quarto-appendix-citeas">
+Santos, Franklin. 2026. <span>“Heredabilidad: El Puente Entre El
+Fenotipo y El Exito En El Fitomejoramiento.”</span> March 4, 2026. <a href="https://franklinsantos.com/posts/heritability/">https://franklinsantos.com/posts/heritability/</a>.
+</div></div></section></div> ]]></description>
+  <category>R</category>
+  <category>Heritability</category>
+  <category>MET</category>
+  <guid>https://franklinsantos.com/posts/heritability/</guid>
+  <pubDate>Wed, 04 Mar 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://franklinsantos.com/posts/heritability/plot_here.png" medium="image" type="image/png" height="79" width="144"/>
+</item>
 <item>
   <title>ANOVA - Medidas repetidas</title>
   <dc:creator>Franklin Santos</dc:creator>
@@ -8066,338 +8476,6 @@ Santos, Franklin. 2023. <span>“Mapas de Bolivia.”</span> February 1,
   <guid>https://franklinsantos.com/posts/maps/</guid>
   <pubDate>Wed, 01 Feb 2023 04:00:00 GMT</pubDate>
   <media:content url="https://franklinsantos.com/posts/maps/map.png" medium="image" type="image/png" height="112" width="144"/>
-</item>
-<item>
-  <title>Análisis de datos experimentales agrícolas</title>
-  <dc:creator>Franklin Santos</dc:creator>
-  <link>https://franklinsantos.com/posts/agridata/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<style>
-body {
-text-align: justify}
-</style>
-<section id="introducción" class="level1">
-<h1>Introducción</h1>
-<p>El análisis de datos es una etapa esencial en el proceso de investigación y consiste en examinar y analizar los datos recopilados de manera detallada para extraer información y obtener conclusiones relevantes en función a los objetivos de la investigación. Para realizar el análisis de datos, se pueden utilizar diferentes herramientas y técnicas, generalmente se construyen tablas y figuras. Estos resultados son usados para tomar decisiones y formular conclusiones sobre los datos, y también pueden ser utilizados para mejorar y optimizar procesos y sistemas. El análisis de datos es importante ya que permite a los investigadores obtener una visión más profunda y detallada de los datos y tomar decisiones más informadas y precisas.</p>
-<p>La etapa de análisis de datos puede resultar un reto difícil para un recien egresado o tesista. Esto debido a la falta de experiencia o conocimiento en el uso de herramientas y técnicas de análisis de datos. Debido a ello, queremos facilitar algunas herramientas de análisis, al mismo tiempo, se pretende que los interesados puedan entrenarse en el uso de R. Ya que esta herramienta estadística ofrece un sin fin de paquetes que nos ayudan a realizar los análisis de manera sencilla pero de mucha categoría científica.</p>
-</section>
-<section id="análisis-de-datos" class="level1">
-<h1>Análisis de datos</h1>
-<section id="librerias" class="level2">
-<h2 class="anchored" data-anchor-id="librerias">Librerias</h2>
-</section>
-<section id="base-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="base-de-datos">Base de datos</h2>
-<p>Para esta oportunidad daremos uso de la base de datos de <code>iris</code>. Estos datos estarán disponibles al momento de instalar R.</p>
-</section>
-<section id="análisis-descriptivo" class="level2">
-<h2 class="anchored" data-anchor-id="análisis-descriptivo">Análisis descriptivo</h2>
-<p>Generalmente se puede presentar en una tabla los resultados descriptivos.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="lightable-classic caption-top table table-sm table-striped small">
-<caption>Análisis descriptivo</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">se</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">kurt</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">skew</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">max</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Petal.Length</td>
-<td style="text-align: right;">3.76</td>
-<td style="text-align: right;">0.14</td>
-<td style="text-align: right;">-1.40</td>
-<td style="text-align: right;">-0.27</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">6.9</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Petal.Width</td>
-<td style="text-align: right;">1.20</td>
-<td style="text-align: right;">0.06</td>
-<td style="text-align: right;">-1.34</td>
-<td style="text-align: right;">-0.10</td>
-<td style="text-align: right;">0.1</td>
-<td style="text-align: right;">2.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Sepal.Length</td>
-<td style="text-align: right;">5.84</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">-0.55</td>
-<td style="text-align: right;">0.31</td>
-<td style="text-align: right;">4.3</td>
-<td style="text-align: right;">7.9</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Sepal.Width</td>
-<td style="text-align: right;">3.06</td>
-<td style="text-align: right;">0.04</td>
-<td style="text-align: right;">0.23</td>
-<td style="text-align: right;">0.32</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">4.4</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>La otra opción podría ser una figura <code>boxplot</code></p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://franklinsantos.com/posts/agridata/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="análisis-de-varianza" class="level2">
-<h2 class="anchored" data-anchor-id="análisis-de-varianza">Análisis de varianza</h2>
-<p>Generalmente en la mayoría de las tesis se presenta cada ANOVA para cada variable, la cual no es muy redundante en todo el documento. Además, en las revistas científicas de impacto, este tipo de tablas no es permitido si se tiene varias variables.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: Sepal.Width
-           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-Species     2 11.345  5.6725   49.16 &lt; 2.2e-16 ***
-Residuals 147 16.962  0.1154                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-<p>Sin embargo, se podría resumir de esta manera. En la tabla solamente se presenta aquellas variables con significancia estadística.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="lightable-classic caption-top table table-sm table-striped small">
-<caption>Análisis de varianza</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">FV</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">DF</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Sepal.Length</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Sepal.Width</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Petal.Length</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Petal.Width</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Species</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">31.61 **</td>
-<td style="text-align: left;">5.67 **</td>
-<td style="text-align: left;">218.55 **</td>
-<td style="text-align: left;">40.21 **</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Residuals</td>
-<td style="text-align: right;">147</td>
-<td style="text-align: left;">0.27</td>
-<td style="text-align: left;">0.12</td>
-<td style="text-align: left;">0.19</td>
-<td style="text-align: left;">0.04</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Una vez identificada las diferencias estadisticas se procede a realizar pruebas de promedio para seleccionar genotipos sobresalientes.</p>
-<p>Hay otra manera de representar comparaciones graficamente</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://franklinsantos.com/posts/agridata/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="1056"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Tambien existe otra opción con el paquete <code>AgroR</code></p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://franklinsantos.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
------------------------------------------------------------------
-Normality of errors
------------------------------------------------------------------
-                         Method Statistic   p.value
- Shapiro-Wilk normality test(W) 0.9878974 0.2188639
-
-
------------------------------------------------------------------
-Homogeneity of Variances
------------------------------------------------------------------
-                              Method Statistic      p.value
- Bartlett test(Bartlett's K-squared)   16.0057 0.0003345076
-
-
------------------------------------------------------------------
-Independence from errors
------------------------------------------------------------------
-                 Method Statistic   p.value
- Durbin-Watson test(DW)  2.043002 0.5401261
-
-
------------------------------------------------------------------
-Additional Information
------------------------------------------------------------------
-
-CV (%) =  8.81
-MStrat/MST =  0.99
-Mean =  5.8433
-Median =  5.8
-Possible outliers =  107
-
------------------------------------------------------------------
-Analysis of Variance
------------------------------------------------------------------
-           Df   Sum Sq    Mean.Sq  F value        Pr(F)
-trat        2 63.21213 31.6060667 119.2645 1.669669e-31
-Residuals 147 38.95620  0.2650082                      
-
-
-
-
------------------------------------------------------------------
-Multiple Comparison Test: Tukey HSD
------------------------------------------------------------------
-            resp groups
-virginica  6.588      a
-versicolor 5.936      b
-setosa     5.006      c</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://franklinsantos.com/posts/agridata/index_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="análisis-multivariado" class="level2">
-<h2 class="anchored" data-anchor-id="análisis-multivariado">Análisis multivariado</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
--------------------------------------------------------------------------------
-Principal Component Analysis
--------------------------------------------------------------------------------
-# A tibble: 22 × 4
-   PC    Eigenvalues `Variance (%)` `Cum. variance (%)`
-   &lt;chr&gt;       &lt;dbl&gt;          &lt;dbl&gt;               &lt;dbl&gt;
- 1 PC1         14.2            64.4                64.4
- 2 PC2          5.24           23.8                88.2
- 3 PC3          2.58           11.8               100  
- 4 PC4          0               0                 100  
- 5 PC5          0               0                 100  
- 6 PC6          0               0                 100  
- 7 PC7          0               0                 100  
- 8 PC8          0               0                 100  
- 9 PC9          0               0                 100  
-10 PC10         0               0                 100  
-# … with 12 more rows
--------------------------------------------------------------------------------
-Factor Analysis - factorial loadings after rotation-
--------------------------------------------------------------------------------
-# A tibble: 22 × 6
-   VAR     FA1   FA2   FA3 Communality Uniquenesses
-   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
- 1 NNCF  -0.72 -0.67 -0.17           1            0
- 2 WNCF  -0.65 -0.75 -0.14           1            0
- 3 AWNCF  0.63  0.49  0.6            1            0
- 4 WUE    1     0.04  0.03           1            0
- 5 NDBF  -0.11  0.07 -0.99           1            0
- 6 NDFF  -0.16 -0.24 -0.96           1            0
- 7 NDBH  -0.17  0.07 -0.98           1            0
- 8 PHYL   0.6   0.79 -0.12           1            0
- 9 TA     0.84  0.1   0.54           1            0
-10 NCF   -0.84 -0.42 -0.35           1            0
-# … with 12 more rows
--------------------------------------------------------------------------------
-Comunalit Mean: 1 
--------------------------------------------------------------------------------
-Selection differential 
--------------------------------------------------------------------------------
-# A tibble: 22 × 8
-   VAR    Factor       Xo       Xs        SD  SDperc sense     goal
-   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
- 1 NNCF   FA1        7.20     7.86    0.650    9.02  increase   100
- 2 AWNCF  FA1        8.74     8.70   -0.0425  -0.486 increase     0
- 3 WUE    FA1      116.     101.    -15.0    -12.9   increase     0
- 4 TA     FA1        1.42     1.35   -0.0700  -4.93  increase     0
- 5 NCF    FA1       23.5     25.0     1.52     6.48  increase   100
- 6 TNF    FA1       30.7     32.8     2.16     7.04  increase   100
- 7 WCF    FA1      359.     395.     36.9     10.3   increase   100
- 8 TWF    FA1      413.     442.     29.1      7.05  increase   100
- 9 FY     FA1    30957.   33137.   2180.       7.04  increase   100
-10 TSS_TA FA1        5.39     5.66    0.268    4.96  increase   100
-# … with 12 more rows
-------------------------------------------------------------------------------
-Selected genotypes
--------------------------------------------------------------------------------
-NAC_CAM IMP_ALB
--------------------------------------------------------------------------------</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Joining, by = "VAR"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://franklinsantos.com/posts/agridata/index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="1056"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-</section>
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{santos2023,
-  author = {Santos, Franklin},
-  title = {Análisis de Datos Experimentales Agrícolas},
-  date = {2023-01-01},
-  url = {https://franklinsantos.com/posts/agridata/},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-santos2023" class="csl-entry quarto-appendix-citeas">
-Santos, Franklin. 2023. <span>“Análisis de Datos Experimentales
-Agrícolas.”</span> January 1, 2023. <a href="https://franklinsantos.com/posts/agridata/">https://franklinsantos.com/posts/agridata/</a>.
-</div></div></section></div> ]]></description>
-  <category>agridata</category>
-  <category>data science</category>
-  <category>bioinformatic</category>
-  <guid>https://franklinsantos.com/posts/agridata/</guid>
-  <pubDate>Sun, 01 Jan 2023 04:00:00 GMT</pubDate>
-  <media:content url="https://franklinsantos.com/posts/agridata/pic.png" medium="image" type="image/png" height="65" width="144"/>
 </item>
 </channel>
 </rss>
